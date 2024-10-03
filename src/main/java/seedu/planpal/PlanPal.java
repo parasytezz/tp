@@ -1,21 +1,31 @@
 package seedu.planpal;
 
+import seedu.planpal.PlanPalExceptions.PlanPalExceptions;
+import seedu.planpal.Utility.Functions;
+import seedu.planpal.Utility.Parser;
+import seedu.planpal.Utility.Ui;
+
 import java.util.Scanner;
 
-public class PlanPal {
+
+public class PlanPal implements Functions<String> {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                    + "|  _ \\ _   _| | _____ \n"
-                    + "| | | | | | | |/ / _ \\\n"
-                    + "| |_| | |_| |   <  __/\n"
-                    + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("What is your name?");
-
+        Ui ui = new Ui();
+        Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
-        System.out.println("Hello " + in.nextLine());
+        ui.printWelcomeMessage();
+
+        while (true) {
+            try {
+                String input = in.nextLine();
+                parser.processCommand(input);
+            } catch (PlanPalExceptions e) {
+                Functions.print(e.getMessage());
+            }
+        }
+
     }
 }
