@@ -1,4 +1,4 @@
-package seedu.planpal.PlanPalExceptions;
+package seedu.planpal.exceptions;
 
 /**
  * Represents an exception that is thrown when the user

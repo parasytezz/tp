@@ -1,4 +1,4 @@
-package seedu.planpal.PlanPalExceptions;
+package seedu.planpal.exceptions;
 
 public class PlanPalExceptions extends Exception {
 

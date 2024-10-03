@@ -1,9 +1,9 @@
 package seedu.planpal;
 
-import seedu.planpal.PlanPalExceptions.PlanPalExceptions;
-import seedu.planpal.Utility.Functions;
-import seedu.planpal.Utility.Parser;
-import seedu.planpal.Utility.Ui;
+import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.Functions;
+import seedu.planpal.utility.Parser;
+import seedu.planpal.utility.Ui;
 
 import java.util.Scanner;
 

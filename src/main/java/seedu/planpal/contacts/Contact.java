@@ -1,4 +1,4 @@
-package seedu.planpal.Contacts;
+package seedu.planpal.contacts;
 
 /**
  * Represents a contact in the PlanPal application.

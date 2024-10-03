@@ -1,9 +1,9 @@
-package seedu.planpal.Utility;
+package seedu.planpal.utility;
 
-import seedu.planpal.Contacts.ContactManager;
-import seedu.planpal.PlanPalExceptions.EmptyDescriptionException;
-import seedu.planpal.PlanPalExceptions.IllegalCommandException;
-import seedu.planpal.PlanPalExceptions.PlanPalExceptions;
+import seedu.planpal.contacts.ContactManager;
+import seedu.planpal.exceptions.EmptyDescriptionException;
+import seedu.planpal.exceptions.IllegalCommandException;
+import seedu.planpal.exceptions.PlanPalExceptions;
 
 /**
  * Parses user input and executes commands within the PlanPal application.

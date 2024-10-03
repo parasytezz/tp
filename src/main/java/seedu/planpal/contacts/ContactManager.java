@@ -1,8 +1,8 @@
-package seedu.planpal.Contacts;
+package seedu.planpal.contacts;
 
-import seedu.planpal.PlanPalExceptions.EmptyDescriptionException;
-import seedu.planpal.PlanPalExceptions.PlanPalExceptions;
-import seedu.planpal.Utility.Functions;
+import seedu.planpal.exceptions.EmptyDescriptionException;
+import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.Functions;
 
 import java.util.ArrayList;
 

@@ -1,6 +1,4 @@
-package seedu.planpal.Utility;
-
-import seedu.planpal.Contacts.Contact;
+package seedu.planpal.utility;
 
 import java.util.ArrayList;
 

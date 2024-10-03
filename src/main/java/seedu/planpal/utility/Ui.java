@@ -1,4 +1,4 @@
-package seedu.planpal.Utility;
+package seedu.planpal.utility;
 
 /**
  * Provides user interface functionalities for the PlanPal application.
