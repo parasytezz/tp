@@ -5,6 +5,9 @@ import seedu.planpal.PlanPalExceptions.EmptyDescriptionException;
 import seedu.planpal.PlanPalExceptions.IllegalCommandException;
 import seedu.planpal.PlanPalExceptions.PlanPalExceptions;
 
+/**
+ * Parses user input and executes commands within the PlanPal application.
+ */
 public class Parser implements Functions<String>{
 
     private static final String ADD_COMMAND = "add";
@@ -18,6 +21,12 @@ public class Parser implements Functions<String>{
     Ui ui = new Ui();
     ContactManager contactManager = new ContactManager();
 
+    /**
+     * Processes user commands by splitting the input into command and description.
+     *
+     * @param input User input string that contains a command followed by description.
+     * @throws PlanPalExceptions If an invalid command is provided or the description is empty.
+     */
     public void processCommand(String input) throws PlanPalExceptions {
         try {
             String[] inputParts = input.split(" ", INPUT_SEGMENTS);
