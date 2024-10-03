@@ -29,6 +29,10 @@ public class Parser implements Functions<String>{
                 contactManager.addContact(description);
                 break;
 
+            case LIST_COMMAND:
+                contactManager.viewContactList();
+                break;
+
             case BYE_COMMAND:
                 ui.printByeMessage();
                 System.exit(0);

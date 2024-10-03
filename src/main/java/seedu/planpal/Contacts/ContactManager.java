@@ -16,4 +16,8 @@ public class ContactManager implements Functions<Contact> {
         }
         addToList(contactList, new Contact(description));
     }
+
+    public void viewContactList(){
+        viewList(contactList);
+    }
 }

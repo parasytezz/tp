@@ -17,6 +17,6 @@ public class Contact {
 
     @Override
     public String toString() {
-        return "Contact [name=" + name + "]";
+        return "[Name = " + name + "]";
     }
 }
