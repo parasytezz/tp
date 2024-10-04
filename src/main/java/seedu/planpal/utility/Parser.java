@@ -42,6 +42,17 @@ public class Parser implements Functions<String>{
                 contactManager.viewContactList();
                 break;
 
+            case EDIT_COMMAND:
+                try {
+                    String[] editParts = inputParts[1].trim().split(" ", 2);
+                    int index = Integer.parseInt(editParts[0].trim());
+                    String newName = editParts[1].trim();
+                    contactManager.editContact(index, newName);
+                } catch (NumberFormatException e) {
+                    throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
+                }
+                break;
+
             case BYE_COMMAND:
                 ui.printByeMessage();
                 System.exit(0);
