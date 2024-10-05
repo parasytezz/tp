@@ -1,6 +1,7 @@
 package seedu.planpal.utility;
 
 import java.util.ArrayList;
+import seedu.planpal.contacts.Contact;
 
 /**
  * A utility interface providing generic list operations
@@ -52,4 +53,38 @@ public interface Functions<T> {
         }
         System.out.println(LINE_SEPARATOR);
     }
+
+    /**
+     * Searches for contacts in the provided list that match any of the specified elements.
+     * It prints the matching contacts along with their respective indices.
+     *
+     * @param list The list of contacts to search in. This should not be null.
+     * @param elements The array of contact names to search for. This must not be null and should contain at least one name.
+     */
+    default void findInList(ArrayList<Contact> list, String[] elements){
+        System.out.println(LINE_SEPARATOR);
+
+        ArrayList<Contact> matchingContacts = new ArrayList<>();
+
+        for (Contact contact : list) {
+            for (String name : elements) {
+                if (contact.contains(new Contact(name))) {
+                    matchingContacts.add(contact);
+                    break;
+                }
+            }
+        }
+
+        if (matchingContacts.isEmpty()) {
+            System.out.println("No Contacts found");
+        } else {
+            System.out.println("Here is what I found:");
+            for (int j = 0; j < matchingContacts.size(); j++) {
+                System.out.println((j + 1) + ". " + matchingContacts.get(j).toString());
+            }
+        }
+
+        System.out.println(LINE_SEPARATOR);
+    }
 }
+

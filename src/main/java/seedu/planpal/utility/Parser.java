@@ -53,6 +53,11 @@ public class Parser implements Functions<String>{
                 }
                 break;
 
+            case FIND_COMMAND:
+                String query = inputParts[1].trim();
+                contactManager.findContact(query);
+                break;
+
             case BYE_COMMAND:
                 ui.printByeMessage();
                 System.exit(0);

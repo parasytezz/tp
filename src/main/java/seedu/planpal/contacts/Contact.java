@@ -34,6 +34,16 @@ public class Contact {
     }
 
     /**
+     * Checks if this contact's name contains the name of another contact.
+     *
+     * @param other The other contact to compare with.
+     * @return True if this contact's name contains the other contact's name; false otherwise.
+     */
+    public boolean contains(Contact other) {
+        return this.name.toLowerCase().contains(other.getName().toLowerCase());
+    }
+
+    /**
      * Returns a string representation of the contact.
      * This representation includes the name of the contact formatted in a readable form.
      *

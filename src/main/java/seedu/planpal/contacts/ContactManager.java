@@ -57,4 +57,22 @@ public class ContactManager implements Functions<Contact> {
         contactToEdit.setName(newName);
         Functions.print("Contact successfully updated.");
     }
+
+    /**
+     * Finds contacts in the contact list based on the provided description.
+     * The description can contain multiple names separated by spaces.
+     * If matching contacts are found, they are displayed to the user.
+     *
+     * @param description The description of the contacts to find. This must not be empty.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
+     */
+    public void findContact(String description) throws PlanPalExceptions {
+        if (description.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+        String[] descriptionParts = description.split("\\s+");
+        findInList(contactList, descriptionParts);
+    }
+
 }
+
