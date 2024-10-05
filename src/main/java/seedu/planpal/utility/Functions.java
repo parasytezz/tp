@@ -59,7 +59,7 @@ public interface Functions<T> {
      * It prints the matching contacts along with their respective indices.
      *
      * @param list The list of contacts to search in. This should not be null.
-     * @param elements The array of contact names to search for. This must not be null and should contain at least one name.
+     * @param elements The array of contact names to search for. This should not be null.
      */
     default void findInList(ArrayList<Contact> list, String[] elements){
         System.out.println(LINE_SEPARATOR);
