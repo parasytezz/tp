@@ -51,7 +51,9 @@ public class FileManager {
     private void loadData(String line, Parser parser) {
         try {
             parser.processCommand(line, null);
-        } catch (PlanPalExceptions ignore) {}
+        } catch (PlanPalExceptions ignore) {
+            return;
+        }
     }
 
     /**
