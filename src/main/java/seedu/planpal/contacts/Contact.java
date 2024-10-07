@@ -1,9 +1,12 @@
 package seedu.planpal.contacts;
 
+import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.Editable;
+
 /**
  * Represents a contact in the PlanPal application.
  */
-public class Contact {
+public class Contact implements Editable {
     private String name;
 
     /**
@@ -43,6 +46,20 @@ public class Contact {
         return this.name.toLowerCase().contains(other.getName().toLowerCase());
     }
 
+    @Override
+    public void processEditFunction(String input) throws PlanPalExceptions {
+        String[] inputParts = input.split(":");
+        if (inputParts.length < 2) {
+            throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
+        }
+        String category = inputParts[0].trim();
+        String valueToEdit = inputParts[1].trim();
+        if (category.equals("name")) {
+            setName(valueToEdit);
+        } else {
+            System.out.println(category + " is not a valid category");
+        }
+    }
     /**
      * Returns a string representation of the contact.
      * This representation includes the name of the contact formatted in a readable form.

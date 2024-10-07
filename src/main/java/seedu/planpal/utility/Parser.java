@@ -44,10 +44,8 @@ public class Parser implements Functions<String>{
 
             case EDIT_COMMAND:
                 try {
-                    String[] editParts = inputParts[1].trim().split(" ", 2);
-                    int index = Integer.parseInt(editParts[0].trim());
-                    String newName = editParts[1].trim();
-                    contactManager.editContact(index, newName);
+                    String query = inputParts[1].trim();
+                    contactManager.editContact(query);
                 } catch (NumberFormatException e) {
                     throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
                 }

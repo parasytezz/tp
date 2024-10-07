@@ -1,6 +1,7 @@
 package seedu.planpal.utility;
 
 import java.util.ArrayList;
+import seedu.planpal.exceptions.PlanPalExceptions;
 
 /**
  * A utility interface providing generic list operations
@@ -53,6 +54,35 @@ public interface Functions<T> {
         System.out.println(LINE_SEPARATOR);
     }
 
+    /**
+     * Edits an element in the provided list based on the query input.
+     * The query specifies the index of the element to edit and the new values.
+     * If the element supports editing, the changes are applied, and a success message is printed.
+     *
+     * @param list the list containing the element to be edited
+     * @param query the query containing the index and new values to apply
+     * @throws PlanPalExceptions if the index is out of bounds
+     */
+    default void editList(ArrayList<T> list, String query) throws PlanPalExceptions {
+        String[] toEdit = query.split("\\s+", 2);
+        int index = Integer.parseInt(toEdit[0].trim());
+        String[] newValues = toEdit[1].split("/");
+
+        if (index < 1 || index > list.size()) {
+            throw new PlanPalExceptions(
+                    "Invalid index. The are " + list.size() + " items."
+            );
+        }
+
+        T element = list.get(index - 1);
+
+        if (element instanceof Editable) {
+            for (int i = 1; i < newValues.length; i++) {
+                ((Editable) element).processEditFunction(newValues[i]);
+            }
+        }
+        print("Edited successfully!");
+    }
     /**
      * Searches for items in the provided list that match any of the specified elements.
      * It prints the matching contacts along with their respective indices.
