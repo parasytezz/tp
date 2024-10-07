@@ -1,5 +1,6 @@
 package seedu.planpal.contacts;
 
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 
@@ -7,15 +8,24 @@ import seedu.planpal.utility.Editable;
  * Represents a contact in the PlanPal application.
  */
 public class Contact implements Editable {
+    private static final String CATEGORY_SEPARATOR = "/";
+    private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String name;
 
     /**
-     * Constructs a new Contact with the specified name.
+     * Constructs a new Contact object by parsing the given description string. The description
+     * string is split using the CATEGORY_SEPARATOR, and for each category (starting from
+     * the second item in the array), it processes the category using the {@link #processEditFunction(String)} method.
      *
-     * @param name The name of the contact. This should not be null.
+     * @param description A string containing the description of the contact, with different
+     *                    categories separated by a CATEGORY_SEPARATOR.
+     * @throws PlanPalExceptions If an error occurs while processing the categories.
      */
-    public Contact(String name) {
-        this.name = name;
+    public Contact(String description) throws PlanPalExceptions {
+        String[] categories = description.split(CATEGORY_SEPARATOR);
+        for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
+            processEditFunction(categories[categoryIndex]);
+        }
     }
 
     /**
@@ -48,7 +58,7 @@ public class Contact implements Editable {
 
     @Override
     public void processEditFunction(String input) throws PlanPalExceptions {
-        String[] inputParts = input.split(":");
+        String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
         }
@@ -58,6 +68,7 @@ public class Contact implements Editable {
             setName(valueToEdit);
         } else {
             System.out.println(category + " is not a valid category");
+            throw new IllegalCommandException();
         }
     }
     /**
