@@ -41,6 +41,24 @@ public interface Functions<T> {
     }
 
     /**
+     * Removes an element from the provided list and prints a success message.
+     *
+     * @param list the list to which the element should be removed
+     * @param index the index of element to be removed from the list
+     * @throws PlanPalExceptions if index is out of bounds
+     */
+    default void deleteList(ArrayList<T> list, String index) throws PlanPalExceptions {
+        int listIndex = Integer.parseInt(index);
+        if (listIndex < 1 || listIndex > list.size()) {
+            throw new PlanPalExceptions(
+                "Invalid index. Please input a valid number."
+            );
+        }
+        list.remove(listIndex);
+        print("Deleted successfully!");
+    }
+
+    /**
      * Displays all elements in the provided list, each prefixed by its index in the list.
      *
      * @param list the list whose contents are to be displayed
