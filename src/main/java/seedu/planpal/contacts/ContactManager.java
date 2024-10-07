@@ -36,26 +36,15 @@ public class ContactManager implements Functions<Contact> {
     }
 
     /**
-     * Edits an existing contact in the contact list.
+     * Edits a contact in the contact list based on the provided query.
+     * The query should contain the index of the contact to be edited, followed by the fields to update.
      *
-     * @param index The index of the contact in the list. It must be within the valid range of the contact list.
-     * @param newName The new name of the contact. This must not be empty.
-     * @throws PlanPalExceptions If the index does not exist.
-     * @throws EmptyDescriptionException If the new name is empty.
+     * @param query The query containing the index and new values for the contact.
+     *              The format should be "<index> /<field1>:<value1> /<field2>:<value2>...".
+     * @throws PlanPalExceptions If the index is out of bounds or other editing errors occur.
      */
-    public void editContact(int index, String newName) throws PlanPalExceptions {
-        if (index < 1 || index > contactList.size()) {
-            throw new PlanPalExceptions(
-                    "Invalid index. The are " + contactList.size() + " contacts."
-            );
-        }
-        if (newName.isEmpty()){
-            throw new EmptyDescriptionException();
-        }
-
-        Contact contactToEdit = contactList.get(index - 1);
-        contactToEdit.setName(newName);
-        Functions.print("Contact successfully updated.");
+    public void editContact(String query) throws PlanPalExceptions {
+        editList(contactList, query);
     }
 
     /**
@@ -73,6 +62,5 @@ public class ContactManager implements Functions<Contact> {
         String[] descriptionParts = description.split("\\s+");
         findInList(contactList, descriptionParts);
     }
-
 }
 
