@@ -41,6 +41,14 @@ public class Parser implements Functions<String>{
                 }
                 break;
 
+            case DELETE_COMMAND:
+                description = inputParts[1].trim();
+                contactManager.deleteContact(description);
+                if (fileManager != null) {
+                    fileManager.save(DELETE_COMMAND, description);
+                }
+                break;
+
             case LIST_COMMAND:
                 contactManager.viewContactList();
                 break;

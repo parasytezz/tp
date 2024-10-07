@@ -28,6 +28,20 @@ public class ContactManager implements Functions<Contact> {
     }
 
     /**
+     * Deletes an existing contact from the contact list.
+     * The contact is retrieved from its description.
+     *
+     * @param index The description of the contact to be deleted. This must not be empty.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} os thrown.
+     */
+    public void deleteContact(String index) throws PlanPalExceptions {
+        if (index.isEmpty()) {
+            throw new EmptyDescriptionException();
+        }
+        deleteList(contactList, index);
+    }
+
+    /**
      * Displays the entire list of contacts.
      * Each contact is printed with an index number for easy reference.
      */
