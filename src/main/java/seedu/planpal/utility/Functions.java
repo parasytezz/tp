@@ -84,37 +84,35 @@ public interface Functions<T> {
         }
         print("Edited successfully!");
     }
-
     /**
-     * Searches for contacts in the provided list that match any of the specified elements.
+     * Searches for items in the provided list that match any of the specified elements.
      * It prints the matching contacts along with their respective indices.
      *
-     * @param list The list of contacts to search in. This should not be null.
-     * @param elements The array of contact names to search for. This should not be null.
+     * @param list The list of items to search in. This should not be null.
+     * @param query The query string containing one or more keywords to search for. This should not be null.
      */
-    default void findInList(ArrayList<Contact> list, String[] elements){
+    default void findInList(ArrayList<T> list, String query){
+        String[] toFind = query.split("\\s+");
         System.out.println(LINE_SEPARATOR);
+        ArrayList<T> matchedList = new ArrayList<>();
 
-        ArrayList<Contact> matchingContacts = new ArrayList<>();
-
-        for (Contact contact : list) {
-            for (String name : elements) {
-                if (contact.contains(new Contact(name))) {
-                    matchingContacts.add(contact);
+        for (T value: list) {
+            for (String element : toFind) {
+                if (value.toString().contains(element)) {
+                    matchedList.add(value);
                     break;
                 }
             }
         }
 
-        if (matchingContacts.isEmpty()) {
-            System.out.println("No Contacts found");
+        if (matchedList.isEmpty()) {
+            System.out.println("No matches found!");
         } else {
             System.out.println("Here is what I found:");
-            for (int j = 0; j < matchingContacts.size(); j++) {
-                System.out.println((j + 1) + ". " + matchingContacts.get(j).toString());
+            for (int i = 0; i < matchedList.size(); i++) {
+                System.out.println((i + 1) + ". " + matchedList.get(i).toString());
             }
         }
-
         System.out.println(LINE_SEPARATOR);
     }
 }

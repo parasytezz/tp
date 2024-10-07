@@ -55,11 +55,10 @@ public class ContactManager implements Functions<Contact> {
      * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
     public void findContact(String description) throws PlanPalExceptions {
-        if (description.isEmpty()){
+        if (description.isEmpty()) {
             throw new EmptyDescriptionException();
         }
-        String[] descriptionParts = description.split("\\s+");
-        findInList(contactList, descriptionParts);
+        findInList(contactList, description);
     }
 }
 
