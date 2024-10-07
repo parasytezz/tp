@@ -1,7 +1,6 @@
 package seedu.planpal.utility;
 
 import java.util.ArrayList;
-import seedu.planpal.contacts.Contact;
 import seedu.planpal.exceptions.PlanPalExceptions;
 
 /**
