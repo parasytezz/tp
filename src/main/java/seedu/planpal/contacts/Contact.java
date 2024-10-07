@@ -1,6 +1,5 @@
 package seedu.planpal.contacts;
 
-import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 

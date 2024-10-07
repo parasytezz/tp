@@ -40,7 +40,6 @@ public class ContactManager implements Functions<Contact> {
      * The query should contain the index of the contact to be edited, followed by the fields to update.
      *
      * @param query The query containing the index and new values for the contact.
-     *              The format should be "<index> /<field1>:<value1> /<field2>:<value2>...".
      * @throws PlanPalExceptions If the index is out of bounds or other editing errors occur.
      */
     public void editContact(String query) throws PlanPalExceptions {
