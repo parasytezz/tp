@@ -1,3 +1,7 @@
+Loading data from file...
+
+No data to be loaded.
+
 _________________________________________________________
 Hello! I'm PlanPal.
 How can I be of service?
