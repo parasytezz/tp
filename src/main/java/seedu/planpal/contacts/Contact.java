@@ -1,5 +1,6 @@
 package seedu.planpal.contacts;
 
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 
@@ -7,15 +8,14 @@ import seedu.planpal.utility.Editable;
  * Represents a contact in the PlanPal application.
  */
 public class Contact implements Editable {
+    private static final String CATEGORY_SEPARATOR = "/";
     private String name;
 
-    /**
-     * Constructs a new Contact with the specified name.
-     *
-     * @param name The name of the contact. This should not be null.
-     */
-    public Contact(String name) {
-        this.name = name;
+    public Contact(String description) throws PlanPalExceptions {
+        String[] categories = description.split(CATEGORY_SEPARATOR);
+        for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
+            processEditFunction(categories[categoryIndex]);
+        }
     }
 
     /**
@@ -58,6 +58,7 @@ public class Contact implements Editable {
             setName(valueToEdit);
         } else {
             System.out.println(category + " is not a valid category");
+            throw new IllegalCommandException();
         }
     }
     /**
