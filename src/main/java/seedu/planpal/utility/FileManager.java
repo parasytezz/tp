@@ -72,15 +72,7 @@ public class FileManager {
         try {
             fw = new FileWriter(directoryName + "/" + fileName, true);
             bw = new BufferedWriter(fw);
-            switch (commandType) {
-            case ADD_COMMAND:
-                bw.write("add " + description + "\n");
-                break;
-            case DELETE_COMMAND:
-                bw.write("edit " + description + "\n");
-                break;
-            default:
-            }
+            bw.write(commandType + " " + description + "\n");
             bw.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
