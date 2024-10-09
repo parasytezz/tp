@@ -4,10 +4,11 @@ import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 
+
 /**
  * Represents a contact in the PlanPal application.
  */
-public class Contact implements Editable {
+public class Contact implements Editable{
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String name;

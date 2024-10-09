@@ -82,13 +82,16 @@ public interface Functions<T> {
      * @throws PlanPalExceptions if the index is out of bounds
      */
     default void editList(ArrayList<T> list, String query) throws PlanPalExceptions {
+        if (query == null || query.trim().isEmpty()) {
+            throw new PlanPalExceptions("Description cannot be empty.");
+        }
         String[] toEdit = query.split("\\s+", 2);
         int index = Integer.parseInt(toEdit[0].trim());
         String[] newValues = toEdit[1].split("/");
 
         if (index < 1 || index > list.size()) {
             throw new PlanPalExceptions(
-                    "Invalid index. The are " + list.size() + " items."
+                    "Invalid index. There are " + list.size() + " items."
             );
         }
 
