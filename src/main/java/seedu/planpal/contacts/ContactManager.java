@@ -13,6 +13,14 @@ public class ContactManager implements Functions<Contact> {
     
     private ArrayList<Contact> contactList = new ArrayList<>();
 
+    public ArrayList<Contact> getContactList() {
+        return contactList;
+    }
+
+    protected Contact getContact(int index) {
+        return contactList.get(index);
+    }
+
     /**
      * Adds a new contact to the contact list.
      * The contact is created from the provided description.
