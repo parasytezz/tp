@@ -6,7 +6,7 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class ContactManagerTest {
+public class EditFunctionTest {
     @Test
     public void editContact_validIndex_success() {
         ContactManager manager = new ContactManager();
