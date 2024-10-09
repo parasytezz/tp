@@ -1,7 +1,7 @@
 package seedu.planpal;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.FileManager;
+import seedu.planpal.utility.filemanager.FileManager;
 import seedu.planpal.utility.Functions;
 import seedu.planpal.utility.Parser;
 import seedu.planpal.utility.Ui;

@@ -54,7 +54,7 @@ public interface Functions<T> {
                 "Invalid index. Please input a valid number."
             );
         }
-        list.remove(listIndex);
+        list.remove(listIndex - 1);
         print("Deleted successfully!");
     }
 

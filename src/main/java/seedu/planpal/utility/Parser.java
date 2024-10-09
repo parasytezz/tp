@@ -4,6 +4,7 @@ import seedu.planpal.contacts.ContactManager;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.filemanager.FileManager;
 
 /**
  * Parses user input and executes commands within the PlanPal application.

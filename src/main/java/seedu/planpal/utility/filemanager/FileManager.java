@@ -1,6 +1,7 @@
-package seedu.planpal.utility;
+package seedu.planpal.utility.filemanager;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.Parser;
 
 
 import java.io.BufferedWriter;

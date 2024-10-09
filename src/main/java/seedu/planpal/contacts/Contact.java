@@ -3,12 +3,13 @@ package seedu.planpal.contacts;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
+import seedu.planpal.utility.filemanager.Storeable;
 
 
 /**
  * Represents a contact in the PlanPal application.
  */
-public class Contact implements Editable{
+public class Contact implements Editable, Storeable {
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String name;
@@ -24,6 +25,9 @@ public class Contact implements Editable{
      */
     public Contact(String description) throws PlanPalExceptions {
         String[] categories = description.split(CATEGORY_SEPARATOR);
+        if (categories.length == 1) {
+            throw new IllegalCommandException();
+        }
         for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
             processEditFunction(categories[categoryIndex]);
         }
@@ -82,4 +86,6 @@ public class Contact implements Editable{
     public String toString() {
         return "[Name = " + name + "]";
     }
+
+
 }
