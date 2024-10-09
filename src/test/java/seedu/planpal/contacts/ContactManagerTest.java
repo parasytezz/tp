@@ -6,7 +6,46 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-public class EditFunctionTest {
+public class ContactManagerTest {
+    @Test
+    public void addContact_validFormat_success() {
+        ContactManager manager = new ContactManager();
+        try{
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
+            manager.addContact("/name:Charlie");
+            manager.addContact("/name:Johnny");
+            assertEquals("[Name = Alice]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Bob]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Charlie]", manager.getContactList().get(2).toString());
+            assertEquals("[Name = Johnny]", manager.getContactList().get(3).toString());
+        } catch (PlanPalExceptions e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void addContact_invalidFormat_fail() {
+        ContactManager manager = new ContactManager();
+        try{
+            manager.addContact("Alice");
+            fail();
+        } catch (PlanPalExceptions e) {
+            assertEquals("No such commands exist. Do check what I can do again", e.getMessage());
+        }
+    }
+
+    @Test
+    public void addContact_invalidCategory_fail() {
+        ContactManager manager = new ContactManager();
+        try{
+            manager.addContact("/name");
+            fail();
+        } catch (PlanPalExceptions e) {
+            assertEquals("The command is incomplete. Please provide a value for name", e.getMessage());
+        }
+    }
+
     @Test
     public void editContact_validIndex_success() {
         ContactManager manager = new ContactManager();
@@ -18,7 +57,7 @@ public class EditFunctionTest {
 
             assertEquals("Alex", manager.getContactList().get(0).getName());
         } catch (PlanPalExceptions e) {
-            e.printStackTrace();
+            fail(e.getMessage());
         }
     }
 
