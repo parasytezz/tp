@@ -3,14 +3,15 @@ package seedu.planpal.contacts;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Functions;
-
+import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
 
 /**
  * Manages the contact list within the PlanPal application.
  */
 public class ContactManager implements Functions<Contact> {
-    
+
+    FileManager<Contact> savedContacts = new FileManager<>(new Contact());
     private ArrayList<Contact> contactList = new ArrayList<>();
 
     public ArrayList<Contact> getContactList() {
@@ -33,6 +34,7 @@ public class ContactManager implements Functions<Contact> {
             throw new EmptyDescriptionException();
         }
         addToList(contactList, new Contact(description));
+        savedContacts.saveList(contactList);
     }
 
     /**
@@ -47,6 +49,7 @@ public class ContactManager implements Functions<Contact> {
             throw new EmptyDescriptionException();
         }
         deleteList(contactList, index);
+        savedContacts.saveList(contactList);
     }
 
     /**
@@ -66,6 +69,7 @@ public class ContactManager implements Functions<Contact> {
      */
     public void editContact(String query) throws PlanPalExceptions {
         editList(contactList, query);
+        savedContacts.saveList(contactList);
     }
 
     /**

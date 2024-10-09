@@ -11,8 +11,8 @@ public class ContactManagerTest {
     public void editContact_validIndex_success() {
         ContactManager manager = new ContactManager();
         try {
-            manager.addContact("Alice");
-            manager.addContact("Bob");
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
 
             manager.editContact("1 /name: Alex");
 
@@ -26,10 +26,10 @@ public class ContactManagerTest {
     public void editContact_invalidIndex_exceptionThrown() {
         ContactManager manager = new ContactManager();
         try {
-            manager.addContact("Alice");
-            manager.addContact("Bob");
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
 
-            manager.editContact(("3 /name Zoe"));
+            manager.editContact(("3 /name: Zoe"));
             fail(); // Test should not reach this line if exception is thrown
         } catch (PlanPalExceptions e) {
             assertEquals("Invalid index. There are 2 items.", e.getMessage());
@@ -40,7 +40,7 @@ public class ContactManagerTest {
     public void editContact_emptyQuery_exceptionThrown() {
         ContactManager manager = new ContactManager();
         try {
-            manager.addContact("Alice");
+            manager.addContact("/name:Alice");
 
             // Attempt to edit contact with empty query
             manager.editContact("");
