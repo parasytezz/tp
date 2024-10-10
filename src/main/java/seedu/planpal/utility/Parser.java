@@ -27,26 +27,21 @@ public class Parser implements Functions<String>{
      * @param input User input string that contains a command followed by description.
      * @throws PlanPalExceptions If an invalid command is provided or the description is empty.
      */
-    public void processCommand(String input, FileManager fileManager) throws PlanPalExceptions {
+    public void processCommand(String input) throws PlanPalExceptions {
         try {
             String[] inputParts = input.split(" ", INPUT_SEGMENTS);
             String command = inputParts[0];
+            String description;
 
             switch (command) {
             case ADD_COMMAND:
-                String description = inputParts[1].trim();
+                description = inputParts[1].trim();
                 contactManager.addContact(description);
-                if (fileManager != null) {
-                    fileManager.save(ADD_COMMAND, description);
-                }
                 break;
 
             case DELETE_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.deleteContact(description);
-                if (fileManager != null) {
-                    fileManager.save(DELETE_COMMAND, description);
-                }
                 break;
 
             case LIST_COMMAND:
@@ -57,9 +52,6 @@ public class Parser implements Functions<String>{
                 try {
                     String query = inputParts[1].trim();
                     contactManager.editContact(query);
-                    if (fileManager != null) {
-                        fileManager.save(EDIT_COMMAND, query);
-                    }
                 } catch (NumberFormatException e) {
                     throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
                 }

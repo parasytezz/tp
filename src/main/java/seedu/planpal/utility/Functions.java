@@ -12,8 +12,7 @@ import seedu.planpal.exceptions.PlanPalExceptions;
  * @param <T> the type of elements managed by this interface
  */
 public interface Functions<T> {
-    public static final String LINE_SEPARATOR = "_________________________________________________________";
-
+    String LINE_SEPARATOR = "_________________________________________________________";
     /**
      * Prints a series of messages enclosed between line separators.
      * This method is useful for clear and structured display of information in the console.
@@ -54,7 +53,7 @@ public interface Functions<T> {
                 "Invalid index. Please input a valid number."
             );
         }
-        list.remove(listIndex);
+        list.remove(listIndex - 1);
         print("Deleted successfully!");
     }
 
@@ -104,6 +103,7 @@ public interface Functions<T> {
         }
         print("Edited successfully!");
     }
+
     /**
      * Searches for items in the provided list that match any of the specified elements.
      * It prints the matching contacts along with their respective indices.
