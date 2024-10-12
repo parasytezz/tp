@@ -111,7 +111,7 @@ public interface Functions<T> {
      * @param list The list of items to search in. This should not be null.
      * @param query The query string containing one or more keywords to search for. This should not be null.
      */
-    default void findInList(ArrayList<T> list, String query){
+    default void findInList(ArrayList<T> list, String query) throws PlanPalExceptions {
         String[] toFind = query.split("\\s+");
         System.out.println(LINE_SEPARATOR);
         ArrayList<T> matchedList = new ArrayList<>();
@@ -126,7 +126,7 @@ public interface Functions<T> {
         }
 
         if (matchedList.isEmpty()) {
-            System.out.println("No matches found!");
+            throw new PlanPalExceptions("No matches found!");
         } else {
             System.out.println("Here is what I found:");
             for (int i = 0; i < matchedList.size(); i++) {

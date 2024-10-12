@@ -88,4 +88,65 @@ public class ContactManagerTest {
             assertEquals("Description cannot be empty.", e.getMessage());
         }
     }
+
+    @Test
+    public void findContact_validName_success() {
+        ContactManager manager = new ContactManager();
+        try {
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
+            manager.addContact("/name:Charlie");
+
+            manager.findContact("Alice");
+            assertEquals("[Name = Alice]", manager.getContactList().get(0).toString());
+
+        } catch (PlanPalExceptions e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void findContact_multipleMatches_success() {
+        ContactManager manager = new ContactManager();
+        try {
+            manager.addContact("/name:Alice Lim");
+            manager.addContact("/name:Alice Wong");
+            manager.addContact("/name:Bob");
+
+            manager.findContact("Alice Bob");
+            assertEquals("[Name = Alice Lim]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice Wong]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Bob]", manager.getContactList().get(2).toString());
+
+        } catch (PlanPalExceptions e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void findContact_noMatches_exceptionThrown() {
+        ContactManager manager = new ContactManager();
+        try {
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
+
+            manager.findContact("Charlie");
+            fail();
+
+        } catch (PlanPalExceptions e) {
+            assertEquals("No matches found!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void findContact_emptyDescription_exceptionThrown() {
+        ContactManager manager = new ContactManager();
+        try {
+            manager.findContact("");
+            fail();
+
+        } catch (PlanPalExceptions e) {
+            assertEquals("Description cannot be empty!", e.getMessage());
+        }
+    }
 }
