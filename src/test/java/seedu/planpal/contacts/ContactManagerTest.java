@@ -88,7 +88,7 @@ public class ContactManagerTest {
             manager.deleteContact("");
             fail();
         } catch (PlanPalExceptions e) {
-            assertEquals("Description cannot be empty.", e.getMessage());
+            assertEquals("Description cannot be empty!", e.getMessage());
         }
     }
 
