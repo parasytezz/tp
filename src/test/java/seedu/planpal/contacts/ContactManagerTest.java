@@ -47,6 +47,52 @@ public class ContactManagerTest {
     }
 
     @Test
+    public void deleteContact_validFormat_success() {
+        ContactManager manager = new ContactManager();
+        try {
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
+            manager.addContact("/name:Charlie");
+            manager.addContact("/name:Johnny");
+
+            manager.deleteContact("1");
+            assertEquals("[Name = Bob]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Charlie]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Johnny]", manager.getContactList().get(2).toString());
+        } catch (PlanPalExceptions e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void deleteContact_invalidIndex_exceptionThrown() {
+        ContactManager manager = new ContactManager();
+        try {
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
+
+            manager.deleteContact("0");
+            fail();
+        } catch (PlanPalExceptions e) {
+            assertEquals("Invalid index. Please input a valid number.", e.getMessage());
+        }
+    }
+
+    @Test
+    public void deleteContact_emptyInput_exceptionThrown() {
+        ContactManager manager = new ContactManager();
+        try {
+            manager.addContact("/name:Alice");
+            manager.addContact("/name:Bob");
+
+            manager.deleteContact("3");
+            fail();
+        } catch (PlanPalExceptions e) {
+            assertEquals("Description cannot be empty.", e.getMessage());
+        }
+    }
+
+    @Test
     public void editContact_validIndex_success() {
         ContactManager manager = new ContactManager();
         try {
