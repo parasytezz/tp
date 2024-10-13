@@ -12,8 +12,7 @@ import seedu.planpal.exceptions.PlanPalExceptions;
  * @param <T> the type of elements managed by this interface
  */
 public interface Functions<T> {
-    public static final String LINE_SEPARATOR = "_________________________________________________________";
-
+    String LINE_SEPARATOR = "_________________________________________________________";
     /**
      * Prints a series of messages enclosed between line separators.
      * This method is useful for clear and structured display of information in the console.
@@ -54,7 +53,7 @@ public interface Functions<T> {
                 "Invalid index. Please input a valid number."
             );
         }
-        list.remove(listIndex);
+        list.remove(listIndex - 1);
         print("Deleted successfully!");
     }
 
@@ -82,13 +81,16 @@ public interface Functions<T> {
      * @throws PlanPalExceptions if the index is out of bounds
      */
     default void editList(ArrayList<T> list, String query) throws PlanPalExceptions {
+        if (query == null || query.trim().isEmpty()) {
+            throw new PlanPalExceptions("Description cannot be empty.");
+        }
         String[] toEdit = query.split("\\s+", 2);
         int index = Integer.parseInt(toEdit[0].trim());
         String[] newValues = toEdit[1].split("/");
 
         if (index < 1 || index > list.size()) {
             throw new PlanPalExceptions(
-                    "Invalid index. The are " + list.size() + " items."
+                    "Invalid index. There are " + list.size() + " items."
             );
         }
 
@@ -101,6 +103,7 @@ public interface Functions<T> {
         }
         print("Edited successfully!");
     }
+
     /**
      * Searches for items in the provided list that match any of the specified elements.
      * It prints the matching contacts along with their respective indices.
@@ -108,7 +111,7 @@ public interface Functions<T> {
      * @param list The list of items to search in. This should not be null.
      * @param query The query string containing one or more keywords to search for. This should not be null.
      */
-    default void findInList(ArrayList<T> list, String query){
+    default void findInList(ArrayList<T> list, String query) throws PlanPalExceptions {
         String[] toFind = query.split("\\s+");
         System.out.println(LINE_SEPARATOR);
         ArrayList<T> matchedList = new ArrayList<>();
@@ -123,7 +126,7 @@ public interface Functions<T> {
         }
 
         if (matchedList.isEmpty()) {
-            System.out.println("No matches found!");
+            throw new PlanPalExceptions("No matches found!");
         } else {
             System.out.println("Here is what I found:");
             for (int i = 0; i < matchedList.size(); i++) {
