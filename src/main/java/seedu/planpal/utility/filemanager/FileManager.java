@@ -63,15 +63,17 @@ public class FileManager<T> {
      */
     public void saveList(ArrayList<T> list) {
         createDirectory();
-        if (list.get(0) instanceof Storeable) {
-            try(FileWriter writer = new FileWriter(pathToStorage)){
+        try (FileWriter writer = new FileWriter(pathToStorage)) {
+            if (!list.isEmpty() && list.get(0) instanceof Storeable) {
                 for (T item : list) {
                     String commandDescription = ((Storeable) item).getCommandDescription();
                     writer.write(ADD_COMMAND + " " + commandDescription + "\n");
                 }
-            } catch (IOException e) {
-                Functions.print("Error saving data!");
+            } else {
+                writer.write("");
             }
+        } catch (IOException e) {
+            Functions.print("Error saving data!");
         }
     }
 
