@@ -3,14 +3,13 @@ package seedu.planpal;
 import seedu.planpal.contacts.Contact;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.filemanager.FileManager;
-import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Parser;
 import seedu.planpal.utility.Ui;
 
 import java.util.Scanner;
 
 
-public class PlanPal implements ListFunctions<String> {
+public class PlanPal {
     /**
      * Main entry-point for the java.duke.Duke application.
      */
