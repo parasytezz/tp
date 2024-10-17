@@ -5,6 +5,8 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Manages the contact list within the PlanPal application.
@@ -13,6 +15,11 @@ public class ContactManager implements ListFunctions<Contact> {
 
     FileManager<Contact> savedContacts = new FileManager<>(new Contact());
     private ArrayList<Contact> contactList = new ArrayList<>();
+    private static final Logger CONTACT_LOGGER = Logger.getLogger(ContactManager.class.getName());
+
+    public ContactManager() {
+        CONTACT_LOGGER.setLevel(Level.SEVERE);
+    }
 
     public ArrayList<Contact> getContactList() {
         return contactList;
@@ -34,6 +41,7 @@ public class ContactManager implements ListFunctions<Contact> {
             throw new EmptyDescriptionException();
         }
         addToList(contactList, new Contact(description));
+        CONTACT_LOGGER.info("Added contact");
         savedContacts.saveList(contactList);
     }
 

@@ -1,7 +1,6 @@
 package seedu.planpal.utility.filemanager;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Parser;
 import seedu.planpal.utility.Ui;
 
@@ -24,7 +23,6 @@ import java.util.Scanner;
 public class FileManager<T> {
     private static final String ADD_COMMAND = "add";
     private String pathToStorage = "error/file.txt";
-
     /**
      * Constructs a FileManager for managing a specific type of file.
      * If the provided object implements {@link Storeable}, it will use
