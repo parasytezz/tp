@@ -1,8 +1,9 @@
 package seedu.planpal.utility.filemanager;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.Functions;
+import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Parser;
+import seedu.planpal.utility.Ui;
 
 
 import java.io.File;
@@ -73,7 +74,7 @@ public class FileManager<T> {
                 writer.write("");
             }
         } catch (IOException e) {
-            Functions.print("Error saving data!");
+            Ui.print("Error saving data!");
         }
     }
 
@@ -98,7 +99,7 @@ public class FileManager<T> {
                 parser.processCommand(scanner.nextLine());
             }
         } catch (FileNotFoundException | PlanPalExceptions e){
-            Functions.print(e.getMessage());
+            Ui.print(e.getMessage());
         }
 
         System.setOut(out);

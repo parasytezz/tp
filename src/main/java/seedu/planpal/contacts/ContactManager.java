@@ -2,14 +2,14 @@ package seedu.planpal.contacts;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.Functions;
+import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
 
 /**
  * Manages the contact list within the PlanPal application.
  */
-public class ContactManager implements Functions<Contact> {
+public class ContactManager implements ListFunctions<Contact> {
 
     FileManager<Contact> savedContacts = new FileManager<>(new Contact());
     private ArrayList<Contact> contactList = new ArrayList<>();
