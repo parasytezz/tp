@@ -65,6 +65,7 @@ public class ContactManager implements ListFunctions<Contact> {
             CONTACT_LOGGER.info("Deleted contact");
         } catch (PlanPalExceptions e) {
             CONTACT_LOGGER.severe("Failed to delete a contact: " + e.getMessage());
+            throw e;
         }
     }
 
