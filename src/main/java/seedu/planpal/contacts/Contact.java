@@ -68,12 +68,22 @@ public class Contact implements Editable, Storeable {
      */
     @Override
     public void processEditFunction(String input) throws PlanPalExceptions {
+        assert input != null : "Input cannot be null";
+        assert !input.trim().isEmpty() : "Input cannot be empty";
+
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
         }
+
+        assert inputParts.length >= 2 : "Input must contain category and value";
+
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
+
+        assert category != null && !category.isEmpty() : "Category cannot be null";
+        assert valueToEdit != null && !valueToEdit.isEmpty() : "Value cannot be null";
+
         if (category.equals("name")) {
             setName(valueToEdit);
         } else {

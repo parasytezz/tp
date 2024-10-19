@@ -76,8 +76,16 @@ public class ContactManager implements ListFunctions<Contact> {
      * @throws PlanPalExceptions If the index is out of bounds or other editing errors occur.
      */
     public void editContact(String query) throws PlanPalExceptions {
-        editList(contactList, query);
-        savedContacts.saveList(contactList);
+        CONTACT_LOGGER.info("Editing contact with query: " + query);
+
+        try {
+            editList(contactList, query);
+            savedContacts.saveList(contactList);
+            CONTACT_LOGGER.info("Edited contact successfully");
+        } catch (PlanPalExceptions e) {
+            CONTACT_LOGGER.severe("Failed to edit contact: " + e.getMessage());
+            throw e;
+        }
     }
 
     /**
