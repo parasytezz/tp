@@ -106,10 +106,23 @@ public class ContactManager implements ListFunctions<Contact> {
      * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
     public void findContact(String description) throws PlanPalExceptions {
+        CONTACT_LOGGER.info("Searching for contacts with description: " + description);
+
         if (description.isEmpty()) {
+            CONTACT_LOGGER.warning("Search description is empty. Throwing EmptyDescriptionException.");
             throw new EmptyDescriptionException();
         }
-        findInList(contactList, description);
+
+        assert description != null : "Description must not be null";
+        assert !description.isEmpty() : "Description must not be empty";
+
+        try {
+            findInList(contactList, description);
+            CONTACT_LOGGER.info("Search completed successfully.");
+        } catch (PlanPalExceptions e) {
+            CONTACT_LOGGER.severe("Failed to find contacts: " + e.getMessage());
+            throw e;
+        }
     }
 }
 
