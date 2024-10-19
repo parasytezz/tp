@@ -56,8 +56,16 @@ public class ContactManager implements ListFunctions<Contact> {
         if (index.isEmpty()) {
             throw new EmptyDescriptionException();
         }
-        deleteList(contactList, index);
-        savedContacts.saveList(contactList);
+        assert index.length() != 0 : "Input must not be empty";
+
+        CONTACT_LOGGER.info("Deleting contact with the index: " + index);
+        try {
+            deleteList(contactList, index);
+            savedContacts.saveList(contactList);
+            CONTACT_LOGGER.info("Deleted contact");
+        } catch (PlanPalExceptions e) {
+            CONTACT_LOGGER.severe("Failed to delete a contact: " + e.getMessage());
+        }
     }
 
     /**
