@@ -37,12 +37,15 @@ public interface ListFunctions<T> {
         if (index.isEmpty()) {
             throw new PlanPalExceptions("Description cannot be empty!");
         }
+        assert index.length() != 0 : "Input index must not be empty";
         int listIndex = Integer.parseInt(index);
         if (listIndex < 1 || listIndex > list.size()) {
             throw new PlanPalExceptions(
                 "Invalid index. Please input a valid number."
             );
         }
+        assert listIndex > 0 && listIndex <= list.size() : ":Input index must be valid and " +
+            "within the bounds of list";
         list.remove(listIndex - 1);
         Ui.print("Deleted successfully!");
     }
