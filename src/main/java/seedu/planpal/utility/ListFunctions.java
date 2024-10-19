@@ -105,6 +105,11 @@ public interface ListFunctions<T> {
      * @param query The query string containing one or more keywords to search for. This should not be null.
      */
     default void findInList(ArrayList<T> list, String query) throws PlanPalExceptions {
+
+        assert list != null : "List should not be null";
+        assert query != null : "Query should not be null";
+        assert !query.trim().isEmpty() : "Query should not be empty";
+
         String[] toFind = query.split("\\s+");
         System.out.println(LINE_SEPARATOR);
         ArrayList<T> matchedList = new ArrayList<>();
@@ -117,6 +122,8 @@ public interface ListFunctions<T> {
                 }
             }
         }
+
+        assert matchedList != null : "Matched list should not be null";
 
         if (matchedList.isEmpty()) {
             throw new PlanPalExceptions("No matches found!");
