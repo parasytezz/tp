@@ -108,13 +108,13 @@ public class ContactManager implements ListFunctions<Contact> {
     public void findContact(String description) throws PlanPalExceptions {
         CONTACT_LOGGER.info("Searching for contacts with description: " + description);
 
-        assert description != null : "Description must not be null";
-        assert !description.isEmpty() : "Description must not be empty";
-
         if (description.isEmpty()) {
             CONTACT_LOGGER.warning("Search description is empty. Throwing EmptyDescriptionException.");
             throw new EmptyDescriptionException();
         }
+
+        assert description != null : "Description must not be null";
+        assert !description.isEmpty() : "Description must not be empty";
 
         try {
             findInList(contactList, description);
