@@ -120,7 +120,7 @@ public class ContactManager implements ListFunctions<Contact> {
             findInList(contactList, description);
             CONTACT_LOGGER.info("Search completed successfully.");
         } catch (PlanPalExceptions e) {
-            CONTACT_LOGGER.severe("Failed to find contacts: " + e.getMessage());
+            CONTACT_LOGGER.warning("Failed to find contacts: " + e.getMessage());
             throw e;
         }
     }

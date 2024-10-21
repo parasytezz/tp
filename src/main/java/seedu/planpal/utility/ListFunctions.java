@@ -111,7 +111,6 @@ public interface ListFunctions<T> {
         assert !query.trim().isEmpty() : "Query should not be empty";
 
         String[] toFind = query.split("\\s+");
-        System.out.println(LINE_SEPARATOR);
         ArrayList<T> matchedList = new ArrayList<>();
 
         for (T value: list) {
@@ -128,12 +127,13 @@ public interface ListFunctions<T> {
         if (matchedList.isEmpty()) {
             throw new PlanPalExceptions("No matches found!");
         } else {
+            System.out.println(LINE_SEPARATOR);
             System.out.println("Here is what I found:");
             for (int i = 0; i < matchedList.size(); i++) {
                 System.out.println((i + 1) + ". " + matchedList.get(i).toString());
             }
+            System.out.println(LINE_SEPARATOR);
         }
-        System.out.println(LINE_SEPARATOR);
     }
 }
 
