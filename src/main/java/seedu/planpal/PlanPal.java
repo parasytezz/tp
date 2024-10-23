@@ -14,12 +14,12 @@ public class PlanPal {
      * Main entry-point for the java.duke.Duke application.
      */
     public static void main(String[] args) {
-        Parser parser = new Parser();
         Scanner in = new Scanner(System.in);
 
         // Start up everything required
+        var fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        Parser parser = new Parser(fileManager);
         Ui.printWelcomeMessage();
-        var fileManager = new FileManager<>(new Contact());
         fileManager.loadList(parser);
 
         while (true) {

@@ -13,11 +13,12 @@ import java.util.logging.Logger;
  */
 public class ContactManager implements ListFunctions<Contact> {
     private static final Logger CONTACT_LOGGER = Logger.getLogger(ContactManager.class.getName());
-    FileManager<Contact> savedContacts = new FileManager<>(new Contact());
+    FileManager savedContacts;
     private ArrayList<Contact> contactList = new ArrayList<>();
 
 
-    public ContactManager() {
+    public ContactManager(FileManager fileManager) {
+        savedContacts = fileManager;
         CONTACT_LOGGER.setLevel(Level.SEVERE);
     }
 
