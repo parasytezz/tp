@@ -15,7 +15,7 @@ public class ContactManager implements ListFunctions<Contact> {
     private static final Logger CONTACT_LOGGER = Logger.getLogger(ContactManager.class.getName());
     FileManager<Contact> savedContacts = new FileManager<>(new Contact());
     private ArrayList<Contact> contactList = new ArrayList<>();
-    public static final String[] informationCategories = {"name", "phoneNumber", "email"};
+    public static final String[] INFORMATIONCATEGORIES = {"name", "phoneNumber", "email"};
 
 
     public ContactManager() {
@@ -126,4 +126,3 @@ public class ContactManager implements ListFunctions<Contact> {
         }
     }
 }
-

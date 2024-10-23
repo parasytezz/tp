@@ -15,10 +15,11 @@ public class ContactManagerTest {
             manager.addContact("/name:Bob");
             manager.addContact("/name:Charlie");
             manager.addContact("/name:Johnny");
-            assertEquals("[Name = Alice, Phone Number = null, Email = null]", manager.getContactList().get(0).toString());
-            assertEquals("[Name = Bob, Phone Number = null, Email = null]", manager.getContactList().get(1).toString());
-            assertEquals("[Name = Charlie, Phone Number = null, Email = null]", manager.getContactList().get(2).toString());
-            assertEquals("[Name = Johnny, Phone Number = null, Email = null]", manager.getContactList().get(3).toString());
+            String expectedFormat = "[Name = %s, Phone Number = null, Email = null]";
+            assertEquals(String.format(expectedFormat, "Alice"), manager.getContactList().get(0).toString());
+            assertEquals(String.format(expectedFormat, "Bob"), manager.getContactList().get(1).toString());
+            assertEquals(String.format(expectedFormat, "Charlie"), manager.getContactList().get(2).toString());
+            assertEquals(String.format(expectedFormat, "Johnny"), manager.getContactList().get(3).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
