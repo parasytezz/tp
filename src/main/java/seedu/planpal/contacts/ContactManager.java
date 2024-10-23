@@ -12,8 +12,8 @@ import java.util.logging.Logger;
  * Manages the contact list within the PlanPal application.
  */
 public class ContactManager implements ListFunctions<Contact> {
-    private static final Logger CONTACT_LOGGER = Logger.getLogger(ContactManager.class.getName());
     public static final String[] INFORMATIONCATEGORIES = {"name", "phone", "email"};
+    private static final Logger CONTACT_LOGGER = Logger.getLogger(ContactManager.class.getName());
     FileManager<Contact> savedContacts = new FileManager<>(new Contact());
     private ArrayList<Contact> contactList = new ArrayList<>();
 
