@@ -17,7 +17,7 @@ public class ContactManager implements ListFunctions<Contact> {
     private ArrayList<Contact> contactList = new ArrayList<>();
     public static final String[] INFORMATIONCATEGORIES = {"name", "phoneNumber", "email"};
 
-
+    
     public ContactManager() {
         CONTACT_LOGGER.setLevel(Level.SEVERE);
     }
