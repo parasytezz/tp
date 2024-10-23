@@ -127,7 +127,7 @@ public class Contact implements Editable, Storeable {
      */
     private void setCommandDescription(String contactCategory, String value) throws PlanPalExceptions, IllegalCommandException {
         boolean isCategory = false;
-        for (String category : ContactManager.informationCategories) {
+        for (String category : ContactManager.INFORMATIONCATEGORIES) {
             if (contactCategory.equals(category)) {
                 isCategory = true;
                 if (contactCategory.equals("email") && !value.contains("@")) {
