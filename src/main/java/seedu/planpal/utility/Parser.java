@@ -8,7 +8,7 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 /**
  * Parses user input and executes commands within the PlanPal application.
  */
-public class Parser implements Functions<String>{
+public class Parser implements ListFunctions<String> {
 
     private static final String ADD_COMMAND = "add";
     private static final String DELETE_COMMAND = "delete";
@@ -31,11 +31,17 @@ public class Parser implements Functions<String>{
         try {
             String[] inputParts = input.split(" ", INPUT_SEGMENTS);
             String command = inputParts[0];
+            String description;
 
             switch (command) {
             case ADD_COMMAND:
-                String description = inputParts[1].trim();
+                description = inputParts[1].trim();
                 contactManager.addContact(description);
+                break;
+
+            case DELETE_COMMAND:
+                description = inputParts[1].trim();
+                contactManager.deleteContact(description);
                 break;
 
             case LIST_COMMAND:

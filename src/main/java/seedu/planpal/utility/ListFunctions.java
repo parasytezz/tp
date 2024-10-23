@@ -11,22 +11,8 @@ import seedu.planpal.exceptions.PlanPalExceptions;
  *
  * @param <T> the type of elements managed by this interface
  */
-public interface Functions<T> {
-    public static final String LINE_SEPARATOR = "_________________________________________________________";
-
-    /**
-     * Prints a series of messages enclosed between line separators.
-     * This method is useful for clear and structured display of information in the console.
-     *
-     * @param messages an array of messages to be printed; each message is printed on a new line
-     */
-    static void print(String... messages){
-        System.out.println(LINE_SEPARATOR);
-        for (String message : messages) {
-            System.out.println(message);
-        }
-        System.out.println(LINE_SEPARATOR);
-    }
+public interface ListFunctions<T> {
+    String LINE_SEPARATOR = "_________________________________________________________";
 
     /**
      * Adds an element to the provided list and prints a success message.
@@ -37,7 +23,31 @@ public interface Functions<T> {
      */
     default void addToList(ArrayList<T> list, T element){
         list.add(element);
-        print("Added successfully!");
+        Ui.print("Added successfully!");
+    }
+
+    /**
+     * Removes an element from the provided list and prints a success message.
+     *
+     * @param list the list to which the element should be removed
+     * @param index the index of element to be removed from the list
+     * @throws PlanPalExceptions if index is out of bounds
+     */
+    default void deleteList(ArrayList<T> list, String index) throws PlanPalExceptions {
+        if (index.isEmpty()) {
+            throw new PlanPalExceptions("Description cannot be empty!");
+        }
+        assert index.length() != 0 : "Input index must not be empty";
+        int listIndex = Integer.parseInt(index);
+        if (listIndex < 1 || listIndex > list.size()) {
+            throw new PlanPalExceptions(
+                "Invalid index. Please input a valid number."
+            );
+        }
+        assert listIndex > 0 && listIndex <= list.size() : ":Input index must be valid and " +
+            "within the bounds of list";
+        list.remove(listIndex - 1);
+        Ui.print("Deleted successfully!");
     }
 
     /**
@@ -64,13 +74,16 @@ public interface Functions<T> {
      * @throws PlanPalExceptions if the index is out of bounds
      */
     default void editList(ArrayList<T> list, String query) throws PlanPalExceptions {
+        if (query == null || query.trim().isEmpty()) {
+            throw new PlanPalExceptions("Description cannot be empty.");
+        }
         String[] toEdit = query.split("\\s+", 2);
         int index = Integer.parseInt(toEdit[0].trim());
         String[] newValues = toEdit[1].split("/");
 
         if (index < 1 || index > list.size()) {
             throw new PlanPalExceptions(
-                    "Invalid index. The are " + list.size() + " items."
+                    "Invalid index. There are " + list.size() + " items."
             );
         }
 
@@ -81,8 +94,9 @@ public interface Functions<T> {
                 ((Editable) element).processEditFunction(newValues[i]);
             }
         }
-        print("Edited successfully!");
+        Ui.print("Edited successfully!");
     }
+
     /**
      * Searches for items in the provided list that match any of the specified elements.
      * It prints the matching contacts along with their respective indices.
@@ -90,9 +104,13 @@ public interface Functions<T> {
      * @param list The list of items to search in. This should not be null.
      * @param query The query string containing one or more keywords to search for. This should not be null.
      */
-    default void findInList(ArrayList<T> list, String query){
+    default void findInList(ArrayList<T> list, String query) throws PlanPalExceptions {
+
+        assert list != null : "List should not be null";
+        assert query != null : "Query should not be null";
+        assert !query.trim().isEmpty() : "Query should not be empty";
+
         String[] toFind = query.split("\\s+");
-        System.out.println(LINE_SEPARATOR);
         ArrayList<T> matchedList = new ArrayList<>();
 
         for (T value: list) {
@@ -104,15 +122,18 @@ public interface Functions<T> {
             }
         }
 
+        assert matchedList != null : "Matched list should not be null";
+
         if (matchedList.isEmpty()) {
-            System.out.println("No matches found!");
+            throw new PlanPalExceptions("No matches found!");
         } else {
+            System.out.println(LINE_SEPARATOR);
             System.out.println("Here is what I found:");
             for (int i = 0; i < matchedList.size(); i++) {
                 System.out.println((i + 1) + ". " + matchedList.get(i).toString());
             }
+            System.out.println(LINE_SEPARATOR);
         }
-        System.out.println(LINE_SEPARATOR);
     }
 }
 
