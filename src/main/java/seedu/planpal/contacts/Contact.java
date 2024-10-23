@@ -15,6 +15,8 @@ public class Contact implements Editable, Storeable {
     private static final String STORAGE_PATH = "./data/contacts.txt";
     private String name;
     private String commandDescription;
+    private String phoneNumber;
+    private String email;
 
     /**
      * Default constructor for Contact.
@@ -86,6 +88,10 @@ public class Contact implements Editable, Storeable {
 
         if (category.equals("name")) {
             setName(valueToEdit);
+        } else if (category.equals("phone")) {
+            setPhoneNumber(valueToEdit);
+        } else if (category.equals("email")) {
+            setEmail(valueToEdit);
         } else {
             System.out.println(category + " is not a valid category");
             throw new IllegalCommandException();
@@ -96,7 +102,7 @@ public class Contact implements Editable, Storeable {
     // A string representation of a Contact
     @Override
     public String toString() {
-        return "[Name = " + name + "]";
+        return "[Name = " + name + ", Phone Number = "+ phoneNumber + ", Email = "+ email + "]";
     }
 
     @Override
@@ -138,7 +144,19 @@ public class Contact implements Editable, Storeable {
         return name;
     }
 
-    public void setName(String name) {
+    private void setName(String name) {
         this.name = name;
+    }
+
+    private void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    private void setEmail(String email) throws PlanPalExceptions {
+        if (email.contains("@")) {
+            this.email = email;
+        } else {
+            throw new PlanPalExceptions("email address is not valid");
+        }
     }
 }
