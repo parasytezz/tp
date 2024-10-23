@@ -9,7 +9,7 @@ import seedu.planpal.utility.filemanager.FileManager;
 /**
  * Parses user input and executes commands within the PlanPal application.
  */
-public class Parser implements ListFunctions<String> {
+public class Parser implements ListFunctions {
 
     private static final String ADD_COMMAND = "add";
     private static final String DELETE_COMMAND = "delete";
@@ -19,7 +19,6 @@ public class Parser implements ListFunctions<String> {
     private static final String BYE_COMMAND = "bye";
     private static final int INPUT_SEGMENTS = 2;
 
-    Ui ui = new Ui();
     ContactManager contactManager;
 
     public Parser(FileManager fileManager) {
@@ -68,7 +67,7 @@ public class Parser implements ListFunctions<String> {
                 break;
 
             case BYE_COMMAND:
-                ui.printByeMessage();
+                Ui.printByeMessage();
                 System.exit(0);
                 break;
 

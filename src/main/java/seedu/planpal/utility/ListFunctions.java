@@ -9,9 +9,8 @@ import seedu.planpal.exceptions.PlanPalExceptions;
  * The methods are designed to be generic to enable
  * reuse across different types of data.
  *
- * @param <T> the type of elements managed by this interface
  */
-public interface ListFunctions<T> {
+public interface ListFunctions {
     String LINE_SEPARATOR = "_________________________________________________________";
 
     /**
@@ -21,7 +20,7 @@ public interface ListFunctions<T> {
      * @param list the list to which the element should be added
      * @param element the element to be added to the list
      */
-    default void addToList(ArrayList<T> list, T element){
+    default <T> void addToList(ArrayList<T> list, T element){
         list.add(element);
         Ui.print("Added successfully!");
     }
@@ -33,7 +32,7 @@ public interface ListFunctions<T> {
      * @param index the index of element to be removed from the list
      * @throws PlanPalExceptions if index is out of bounds
      */
-    default void deleteList(ArrayList<T> list, String index) throws PlanPalExceptions {
+    default <T> void deleteList(ArrayList<T> list, String index) throws PlanPalExceptions {
         if (index.isEmpty()) {
             throw new PlanPalExceptions("Description cannot be empty!");
         }
@@ -55,7 +54,7 @@ public interface ListFunctions<T> {
      *
      * @param list the list whose contents are to be displayed
      */
-    default void viewList(ArrayList<T> list){
+    default <T> void viewList(ArrayList<T> list){
         System.out.println(LINE_SEPARATOR);
         System.out.println("Below is the list:");
         for (int i = 0; i < list.size(); i++) {
@@ -73,7 +72,7 @@ public interface ListFunctions<T> {
      * @param query the query containing the index and new values to apply
      * @throws PlanPalExceptions if the index is out of bounds
      */
-    default void editList(ArrayList<T> list, String query) throws PlanPalExceptions {
+    default <T> void editList(ArrayList<T> list, String query) throws PlanPalExceptions {
         if (query == null || query.trim().isEmpty()) {
             throw new PlanPalExceptions("Description cannot be empty.");
         }
@@ -104,7 +103,7 @@ public interface ListFunctions<T> {
      * @param list The list of items to search in. This should not be null.
      * @param query The query string containing one or more keywords to search for. This should not be null.
      */
-    default void findInList(ArrayList<T> list, String query) throws PlanPalExceptions {
+    default <T> void findInList(ArrayList<T> list, String query) throws PlanPalExceptions {
 
         assert list != null : "List should not be null";
         assert query != null : "Query should not be null";

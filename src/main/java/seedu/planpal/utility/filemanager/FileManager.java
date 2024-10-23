@@ -21,41 +21,21 @@ import java.util.Scanner;
  */
 public class FileManager {
     private static final String ADD_COMMAND = "add";
-    private final String contactClass = "Contact";
-    private final String activityClass = "Activity";
-    private final String expenseClass = "Expense";
-    private String pathToStorage;
-    private String pathToContacts;
-    private String pathToActivities;
-    private String pathToExpenses;
-
-    /**
-     * Constructs a FileManager for managing saving and loading of all file.
-     * If the provided object implements {@link Storeable}, it will use
-     * the object's storage path for file operations.
-     * Each object implements {@link Storeable} will have a file for storing data
-     *
-     * @param storagePath the directory for storage
-     * @param contactsPath the path to file from storagePath for storing Contacts
-     * @param activitiesPath the path to file from storagePath for storing Activities
-     * @param expensesPath the path to file from storagePath for storing Expenses
-     */
-    public FileManager(String storagePath, String contactsPath, String activitiesPath, String expensesPath) {
-        pathToStorage = storagePath;
-        pathToContacts = contactsPath;
-        pathToActivities = activitiesPath;
-        pathToExpenses = expensesPath;
-    }
 
     /**
      * Ensures that the directory for the storage path exists.
      * If the directory does not exist, it creates it.
      */
-    private void createDirectory(){
-        File directory = new File(pathToStorage);
+    private void createDirectory(String storagePath){
+        File file = new File(storagePath);
+        File directory = file.getParentFile();
 
         if (!directory.exists()){
-            directory.mkdir();
+            if (directory.mkdirs()){
+                System.out.println("Directory created");
+            } else {
+                System.out.println("Directory could not be created");
+            }
         }
     }
 
@@ -67,28 +47,18 @@ public class FileManager {
      * @param list The list of objects to be saved. Each object must implement {@link Storeable}.
      */
     public <T> void saveList(ArrayList<T> list) {
-        createDirectory();
-        if (!list.isEmpty() && list.get(0) instanceof Storeable) {
-            switch (list.get(0).getClass().getSimpleName()) {
-            case contactClass:
-                try (FileWriter writer = new FileWriter(pathToStorage+ "/" + pathToContacts)) {
-                    for (T item : list) {
-                        String commandDescription = ((Storeable) item).getCommandDescription();
-                        writer.write(ADD_COMMAND + " " + commandDescription + "\n");
-                    }
-                } catch (IOException e) {
-                    Ui.print("Error saving data!");
+        T listElement = list.get(0);
+        if (listElement instanceof Storeable) {
+            String storagePath = ((Storeable)listElement).getStoragePath();
+            createDirectory(storagePath);
+            try(FileWriter writer = new FileWriter(storagePath)){
+                for (T item : list) {
+                    String commandDescription = ((Storeable) item).getCommandDescription();
+                    writer.write(ADD_COMMAND + " " + commandDescription + "\n");
                 }
-                break;
-            case activityClass:
-                break;
-            case expenseClass:
-                break;
-            default:
-                Ui.print("Does not recognize object");
+            } catch (IOException e) {
+                Ui.print("Error saving data!");
             }
-        } else {
-            Ui.print("Empty list!");
         }
     }
 
@@ -98,8 +68,8 @@ public class FileManager {
      *
      * @param parser A {@link Parser} object used to process each line of the file.
      */
-    public void loadList(Parser parser) {
-        File directory = new File(pathToStorage);
+    public void loadLists(Parser parser, String directoryName) {
+        File directory = new File(directoryName);
         if (!directory.exists()){
             return;
         }

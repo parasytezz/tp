@@ -16,10 +16,10 @@ public class PlanPal {
         Scanner in = new Scanner(System.in);
 
         // Start up everything required
-        var fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        FileManager fileManager = new FileManager();
         Parser parser = new Parser(fileManager);
         Ui.printWelcomeMessage();
-        fileManager.loadList(parser);
+        fileManager.loadLists(parser, "data");
 
         while (true) {
             try {
