@@ -13,9 +13,9 @@ import java.util.logging.Logger;
  */
 public class ContactManager implements ListFunctions<Contact> {
     private static final Logger CONTACT_LOGGER = Logger.getLogger(ContactManager.class.getName());
+    public static final String[] INFORMATIONCATEGORIES = {"name", "phone", "email"};
     FileManager<Contact> savedContacts = new FileManager<>(new Contact());
     private ArrayList<Contact> contactList = new ArrayList<>();
-    public static final String[] INFORMATIONCATEGORIES = {"name", "phoneNumber", "email"};
 
     
     public ContactManager() {

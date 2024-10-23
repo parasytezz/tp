@@ -15,7 +15,7 @@ public class Contact implements Editable, Storeable {
     private static final String STORAGE_PATH = "./data/contacts.txt";
     private String name;
     private String commandDescription;
-    private String phoneNumber;
+    private String phone;
     private String email;
 
     /**
@@ -92,7 +92,7 @@ public class Contact implements Editable, Storeable {
     // A string representation of a Contact
     @Override
     public String toString() {
-        return "[Name = " + name + ", Phone Number = "+ phoneNumber + ", Email = "+ email + "]";
+        return "[Name = " + name + " Phone = "+ phone + " Email = "+ email + "]";
     }
 
     @Override
