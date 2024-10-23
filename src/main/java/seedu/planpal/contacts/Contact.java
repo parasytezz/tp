@@ -12,7 +12,6 @@ import seedu.planpal.utility.filemanager.Storeable;
 public class Contact implements Editable, Storeable {
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
-    private static final String STORAGE_PATH = "./data/contacts.txt";
     private String name;
     private String commandDescription;
 
@@ -127,11 +126,6 @@ public class Contact implements Editable, Storeable {
     @Override
     public String getCommandDescription() {
         return commandDescription;
-    }
-
-    @Override
-    public String getStoragePath() {
-        return STORAGE_PATH;
     }
 
     public String getName() {

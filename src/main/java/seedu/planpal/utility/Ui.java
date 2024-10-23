@@ -35,4 +35,8 @@ public class Ui {
     public static void printByeMessage() {
         print("Bye. Hope to see you again!");
     }
+
+    public static void printCreateStorage(String pathToStorage) {
+        print("Created a new storage at ", pathToStorage);
+    }
 }
