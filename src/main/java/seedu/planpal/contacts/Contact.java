@@ -4,7 +4,7 @@ import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
-
+import java.lang.reflect.Field;
 
 /**
  * Represents a contact in the PlanPal application.
@@ -86,16 +86,6 @@ public class Contact implements Editable, Storeable {
         assert category != null && !category.isEmpty() : "Category cannot be null";
         assert valueToEdit != null && !valueToEdit.isEmpty() : "Value cannot be null";
 
-        if (category.equals("name")) {
-            setName(valueToEdit);
-        } else if (category.equals("phone")) {
-            setPhoneNumber(valueToEdit);
-        } else if (category.equals("email")) {
-            setEmail(valueToEdit);
-        } else {
-            System.out.println(category + " is not a valid category");
-            throw new IllegalCommandException();
-        }
         setCommandDescription(category, valueToEdit);
     }
 
@@ -108,26 +98,6 @@ public class Contact implements Editable, Storeable {
     @Override
     public void setCommandDescription(String description) {
         this.commandDescription = description;
-    }
-
-    /**
-     * Updates the command description by modifying the value of the specified category.
-     * The method splits the current command description into its categories and updates the
-     * category with the new value, if it exists.
-     *
-     * @param categoryToChange The category whose value needs to be updated (e.g., "name").
-     * @param newValue The new value for the specified category.
-     */
-    public void setCommandDescription(String categoryToChange, String newValue) {
-        String newCommandDescription = "";
-        String[] categoryParts = commandDescription.split(CATEGORY_SEPARATOR);
-        for (int i = 1; i < categoryParts.length; i++) {
-            if (categoryParts[i].startsWith(categoryToChange)) {
-                categoryParts[i] = categoryToChange + CATEGORY_VALUE_SEPARATOR + newValue;
-            }
-            newCommandDescription += CATEGORY_SEPARATOR + categoryParts[i] + " ";
-        }
-        setCommandDescription(newCommandDescription);
     }
 
     @Override
@@ -144,19 +114,37 @@ public class Contact implements Editable, Storeable {
         return name;
     }
 
-    private void setName(String name) {
-        this.name = name;
-    }
-
-    private void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    private void setEmail(String email) throws PlanPalExceptions {
-        if (email.contains("@")) {
-            this.email = email;
-        } else {
-            throw new PlanPalExceptions("email address is not valid");
+    /**
+     * Updates the command description by modifying the value of the specified category.
+     * The method splits the current command description into its categories and updates the
+     * category with the new value, if it exists.
+     *
+     * @param contactCategory The category whose value needs to be updated (e.g., "name").
+     * @param value The new value for the specified category.
+     *
+     * @throws PlanPalExceptions If the input is incomplete or improperly formatted.
+     * @throws IllegalCommandException If the specified category is not recognized.
+     */
+    private void setCommandDescription(String contactCategory, String value) throws PlanPalExceptions, IllegalCommandException {
+        boolean isCategory = false;
+        for (String category : ContactManager.informationCategories) {
+            if (contactCategory.equals(category)) {
+                isCategory = true;
+                if (contactCategory.equals("email") && !value.contains("@")) {
+                    throw new PlanPalExceptions("email address is not valid");
+                }
+                try {
+                    Field field = this.getClass().getDeclaredField(category);
+                    field.setAccessible(true);
+                    field.set(this, value);
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    throw new PlanPalExceptions(e.getMessage());
+                }
+            }
+        }
+        if (!isCategory) {
+            throw new IllegalCommandException();
         }
     }
+
 }
