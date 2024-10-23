@@ -58,6 +58,39 @@ public class Contact implements Editable, Storeable {
     }
 
     /**
+     * Updates the command description by modifying the value of the specified category.
+     * The method splits the current command description into its categories and updates the
+     * category with the new value, if it exists.
+     *
+     * @param contactCategory The category whose value needs to be updated (e.g., "name").
+     * @param value The new value for the specified category.
+     *
+     * @throws PlanPalExceptions If the input is incomplete or improperly formatted.
+     * @throws IllegalCommandException If the specified category is not recognized.
+     */
+    private void setCommandDescription(String contactCategory, String value) throws PlanPalExceptions, IllegalCommandException {
+        boolean isCategory = false;
+        for (String category : ContactManager.INFORMATIONCATEGORIES) {
+            if (contactCategory.equals(category)) {
+                isCategory = true;
+                if (contactCategory.equals("email") && !value.contains("@")) {
+                    throw new PlanPalExceptions("email address is not valid");
+                }
+                try {
+                    Field field = this.getClass().getDeclaredField(category);
+                    field.setAccessible(true);
+                    field.set(this, value);
+                } catch (NoSuchFieldException | IllegalAccessException e) {
+                    throw new PlanPalExceptions(e.getMessage());
+                }
+            }
+        }
+        if (!isCategory) {
+            throw new IllegalCommandException();
+        }
+    }
+
+    /**
      * Processes an edit command for the contact. This method parses the input string
      * to extract the category and the new value, then applies the change to the contact.
      * Currently, only the "name" category is supported.
@@ -114,37 +147,5 @@ public class Contact implements Editable, Storeable {
         return name;
     }
 
-    /**
-     * Updates the command description by modifying the value of the specified category.
-     * The method splits the current command description into its categories and updates the
-     * category with the new value, if it exists.
-     *
-     * @param contactCategory The category whose value needs to be updated (e.g., "name").
-     * @param value The new value for the specified category.
-     *
-     * @throws PlanPalExceptions If the input is incomplete or improperly formatted.
-     * @throws IllegalCommandException If the specified category is not recognized.
-     */
-    private void setCommandDescription(String contactCategory, String value) throws PlanPalExceptions, IllegalCommandException {
-        boolean isCategory = false;
-        for (String category : ContactManager.INFORMATIONCATEGORIES) {
-            if (contactCategory.equals(category)) {
-                isCategory = true;
-                if (contactCategory.equals("email") && !value.contains("@")) {
-                    throw new PlanPalExceptions("email address is not valid");
-                }
-                try {
-                    Field field = this.getClass().getDeclaredField(category);
-                    field.setAccessible(true);
-                    field.set(this, value);
-                } catch (NoSuchFieldException | IllegalAccessException e) {
-                    throw new PlanPalExceptions(e.getMessage());
-                }
-            }
-        }
-        if (!isCategory) {
-            throw new IllegalCommandException();
-        }
-    }
 
 }

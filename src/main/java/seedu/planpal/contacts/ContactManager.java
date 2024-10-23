@@ -125,4 +125,5 @@ public class ContactManager implements ListFunctions<Contact> {
             throw e;
         }
     }
+
 }
