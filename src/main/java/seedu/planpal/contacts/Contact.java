@@ -69,18 +69,18 @@ public class Contact implements Editable, Storeable {
      * @throws PlanPalExceptions If the input is incomplete or improperly formatted.
      * @throws IllegalCommandException If the specified category is not recognized.
      */
-    private void setCommandDescription(String category, String value) throws PlanPalExceptions, IllegalCommandException {
+    private void setCommandDescription(String category, String val) throws PlanPalExceptions, IllegalCommandException {
         boolean isCategory = false;
         for (String cat : ContactManager.INFORMATIONCATEGORIES) {
             if (category.equals(cat)) {
                 isCategory = true;
-                if (category.equals("email") && !value.contains("@")) {
+                if (category.equals("email") && !val.contains("@")) {
                     throw new PlanPalExceptions("email address is not valid");
                 }
                 try {
                     Field field = this.getClass().getDeclaredField(category);
                     field.setAccessible(true);
-                    field.set(this, value);
+                    field.set(this, val);
                 } catch (NoSuchFieldException | IllegalAccessException e) {
                     throw new PlanPalExceptions(e.getMessage());
                 }
