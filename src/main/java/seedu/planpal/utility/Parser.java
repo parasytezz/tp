@@ -4,6 +4,7 @@ import seedu.planpal.contacts.ContactManager;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.filemanager.FileManager;
 
 /**
  * Parses user input and executes commands within the PlanPal application.
@@ -19,7 +20,11 @@ public class Parser implements ListFunctions<String> {
     private static final int INPUT_SEGMENTS = 2;
 
     Ui ui = new Ui();
-    ContactManager contactManager = new ContactManager();
+    ContactManager contactManager;
+
+    public Parser(FileManager fileManager) {
+        contactManager = new ContactManager(fileManager);
+    }
 
     /**
      * Processes user commands by splitting the input into command and description.

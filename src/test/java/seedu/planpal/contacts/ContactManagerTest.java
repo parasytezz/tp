@@ -2,6 +2,8 @@ package seedu.planpal.contacts;
 
 import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.filemanager.FileManager;
+
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -9,7 +11,8 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class ContactManagerTest {
     @Test
     public void addContact_validFormat_success() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try{
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -26,7 +29,8 @@ public class ContactManagerTest {
 
     @Test
     public void addContact_invalidFormat_fail() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try{
             manager.addContact("Alice");
             fail();
@@ -37,7 +41,8 @@ public class ContactManagerTest {
 
     @Test
     public void addContact_invalidCategory_fail() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try{
             manager.addContact("/name");
             fail();
@@ -48,7 +53,8 @@ public class ContactManagerTest {
 
     @Test
     public void deleteContact_validFormat_success() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -66,7 +72,8 @@ public class ContactManagerTest {
 
     @Test
     public void deleteContact_invalidIndex_exceptionThrown() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -80,7 +87,8 @@ public class ContactManagerTest {
 
     @Test
     public void deleteContact_emptyInput_exceptionThrown() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -94,7 +102,8 @@ public class ContactManagerTest {
 
     @Test
     public void editContact_validIndex_success() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -109,7 +118,8 @@ public class ContactManagerTest {
 
     @Test
     public void editContact_invalidIndex_exceptionThrown() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -123,7 +133,8 @@ public class ContactManagerTest {
 
     @Test
     public void editContact_emptyQuery_exceptionThrown() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
 
@@ -137,7 +148,8 @@ public class ContactManagerTest {
 
     @Test
     public void findContact_validName_success() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -153,7 +165,8 @@ public class ContactManagerTest {
 
     @Test
     public void findContact_multipleMatches_success() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice Lim");
             manager.addContact("/name:Alice Wong");
@@ -171,7 +184,8 @@ public class ContactManagerTest {
 
     @Test
     public void findContact_noMatches_exceptionThrown() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
@@ -186,7 +200,8 @@ public class ContactManagerTest {
 
     @Test
     public void findContact_emptyDescription_exceptionThrown() {
-        ContactManager manager = new ContactManager();
+        FileManager fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
+        ContactManager manager = new ContactManager(fileManager);
         try {
             manager.findContact("");
             fail();
