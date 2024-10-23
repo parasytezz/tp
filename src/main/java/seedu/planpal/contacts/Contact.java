@@ -69,12 +69,12 @@ public class Contact implements Editable, Storeable {
      * @throws PlanPalExceptions If the input is incomplete or improperly formatted.
      * @throws IllegalCommandException If the specified category is not recognized.
      */
-    private void set(String contactCategory, String value) throws PlanPalExceptions, IllegalCommandException {
+    private void setCommandDescription(String category, String value) throws PlanPalExceptions, IllegalCommandException {
         boolean isCategory = false;
-        for (String category : ContactManager.INFORMATIONCATEGORIES) {
-            if (contactCategory.equals(category)) {
+        for (String cat : ContactManager.INFORMATIONCATEGORIES) {
+            if (category.equals(cat)) {
                 isCategory = true;
-                if (contactCategory.equals("email") && !value.contains("@")) {
+                if (category.equals("email") && !value.contains("@")) {
                     throw new PlanPalExceptions("email address is not valid");
                 }
                 try {
@@ -92,7 +92,7 @@ public class Contact implements Editable, Storeable {
     }
 
     @Override
-    public void set(String description) {
+    public void setCommandDescription(String description) {
         this.commandDescription = description;
     }
 
@@ -125,7 +125,7 @@ public class Contact implements Editable, Storeable {
         assert category != null && !category.isEmpty() : "Category cannot be null";
         assert valueToEdit != null && !valueToEdit.isEmpty() : "Value cannot be null";
 
-        set(category, valueToEdit);
+        setCommandDescription(category, valueToEdit);
     }
 
     // A string representation of a Contact
