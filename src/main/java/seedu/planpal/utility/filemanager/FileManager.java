@@ -1,6 +1,5 @@
 package seedu.planpal.utility.filemanager;
 
-import seedu.planpal.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Parser;
 import seedu.planpal.utility.Ui;
