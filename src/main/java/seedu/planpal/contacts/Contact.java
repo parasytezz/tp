@@ -13,10 +13,11 @@ public class Contact implements Editable, Storeable {
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private static final String STORAGE_PATH = "./data/contacts.txt";
+
     private String name;
-    private String commandDescription;
     private String phone;
     private String email;
+    private String commandDescription;
 
     /**
      * Default constructor for Contact.
@@ -90,6 +91,11 @@ public class Contact implements Editable, Storeable {
         }
     }
 
+    @Override
+    public void setCommandDescription(String description) {
+        this.commandDescription = description;
+    }
+
     /**
      * Processes an edit command for the contact. This method parses the input string
      * to extract the category and the new value, then applies the change to the contact.
@@ -128,10 +134,6 @@ public class Contact implements Editable, Storeable {
         return "[Name = " + name + " Phone = "+ phone + " Email = "+ email + "]";
     }
 
-    @Override
-    public void setCommandDescription(String description) {
-        this.commandDescription = description;
-    }
 
     @Override
     public String getCommandDescription() {
