@@ -22,9 +22,9 @@ import java.util.Scanner;
  */
 public class FileManager {
     private static final String ADD_COMMAND = "add";
-    private final String CONTACT_CLASS = "Contact";
-    private final String ACTIVITY_CLASS = "Activity";
-    private final String EXPENSE_CLASS = "Expense";
+    private final String contactClass = "Contact";
+    private final String activityClass = "Activity";
+    private final String expenseClass = "Expense";
     private String pathToStorage;
     private String pathToContacts;
     private String pathToActivities;
@@ -71,23 +71,23 @@ public class FileManager {
         createDirectory();
         if (!list.isEmpty() && list.get(0) instanceof Storeable) {
             switch (list.get(0).getClass().getSimpleName()) {
-                case CONTACT_CLASS:
-                    try (FileWriter writer = new FileWriter(pathToStorage+ "/" + pathToContacts)) {
-                        for (T item : list) {
-                            String commandDescription = ((Storeable) item).getCommandDescription();
-                            writer.write(ADD_COMMAND + " " + commandDescription + "\n");
-                        }
-                    } catch (IOException e) {
-                        Ui.print("Error saving data!");
+            case contactClass:
+                try (FileWriter writer = new FileWriter(pathToStorage+ "/" + pathToContacts)) {
+                    for (T item : list) {
+                        String commandDescription = ((Storeable) item).getCommandDescription();
+                        writer.write(ADD_COMMAND + " " + commandDescription + "\n");
                     }
-                    break;
-                case ACTIVITY_CLASS:
-                    break;
-                case EXPENSE_CLASS:
-                    break;
-                default:
-                    Ui.print("Does not recognize object");
+                } catch (IOException e) {
+                    Ui.print("Error saving data!");
                 }
+                break;
+            case activityClass:
+                break;
+            case expenseClass:
+                break;
+            default:
+                Ui.print("Does not recognize object");
+            }
         } else {
             Ui.print("Empty list!");
         }
