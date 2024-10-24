@@ -1,5 +1,6 @@
 package seedu.planpal.utility.parser;
 
+import seedu.planpal.activities.ActivityManager;
 import seedu.planpal.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.expenses.ExpenseManager;
@@ -20,6 +21,7 @@ public class Parser {
     protected static final String EXIT_MODE_COMMAND = "exit";
     private static final String CONTACT_MANAGER = "1";
     private static final String EXPENSE_MANAGER = "2";
+    private static final String ACTIVITY_MANAGER = "3";
 
     private String getCommand(String currentMode){
         Scanner in = new Scanner(System.in);
@@ -51,6 +53,15 @@ public class Parser {
                 fileManager.loadList(expenseManager, "expenses.txt");
                 ExpenseParser expenseParser = new ExpenseParser(expenseManager);
                 isProcessing = expenseParser.processCommand(commandForExpense);
+                break;
+
+            case ACTIVITY_MANAGER:
+                // do something
+                String commandForActivity = getCommand("ACTIVITY_MANAGER");
+                ActivityManager activityManager = new ActivityManager();
+                fileManager.loadList(activityManager, "activities.txt");
+                ActivityParser activityParser = new ActivityParser(activityManager);
+                isProcessing = activityParser.processCommand(commandForActivity);
                 break;
 
             case BYE_COMMAND:
