@@ -5,6 +5,7 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 
 /**
  * Represents a contact in the PlanPal application.
@@ -17,7 +18,8 @@ public class Contact implements Editable, Storeable {
     private String phone;
     private String email;
     private String commandDescription;
-
+    private ArrayList<String> categories;
+    
     /**
      * Constructs a new Contact object by parsing the given description string. The description
      * string is split using the CATEGORY_SEPARATOR, and for each category (starting from
@@ -138,5 +140,18 @@ public class Contact implements Editable, Storeable {
     @Override
     public String getStoragePath() {
         return STORAGE_PATH;
+    }
+
+    public void clearCategories() {
+        if (categories != null) {
+            categories.clear();
+        }
+    }
+
+    public void editCategory(String category) {
+        if (categories == null) {
+            categories = new ArrayList<>();
+        }
+        categories.add(category);
     }
 }

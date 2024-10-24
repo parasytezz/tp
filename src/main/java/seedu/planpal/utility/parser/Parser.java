@@ -12,6 +12,8 @@ public class Parser {
     protected static final String BYE_COMMAND = "bye";
     protected static final String ADD_COMMAND = "add";
     protected static final String DELETE_COMMAND = "delete";
+    protected static final String SET_CATEGORY_COMMAND = "category";
+    protected static final String SEARCH_CATEGORY_COMMAND = "search";
     protected static final String EDIT_COMMAND = "edit";
     protected static final String FIND_COMMAND = "find";
     protected static final String LIST_COMMAND = "list";
