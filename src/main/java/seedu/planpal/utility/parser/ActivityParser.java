@@ -26,6 +26,12 @@ public class ActivityParser extends Parser {
                 return true;
                 // fall through
 
+            case Parser.DELETE_COMMAND:
+                description = inputParts[1].trim();
+                activityManager.deleteActivity(description);
+                return true;
+                // fall through
+
             case Parser.EXIT_MODE_COMMAND:
                 break;
 
