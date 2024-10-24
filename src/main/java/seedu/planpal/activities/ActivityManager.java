@@ -3,7 +3,7 @@ package seedu.planpal.activities;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.ListFunctions;
-import seedu.planpal.utility.Ui;
+// import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
 
 import java.util.ArrayList;

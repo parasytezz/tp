@@ -15,7 +15,7 @@ public class Activity implements Editable, Storeable {
     private String commandDescription;
     private String name;
 
-    public Activity(String description) throws PlanPalExceptions{
+    public Activity(String description) throws PlanPalExceptions {
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
         if (categories.length == 1) {
