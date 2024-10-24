@@ -15,9 +15,6 @@ public class PlanPal {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Ui.printWelcomeMessage();
-
-        // Start up everything required
-
         Parser mainParser = new Parser();
 
         while (true) {

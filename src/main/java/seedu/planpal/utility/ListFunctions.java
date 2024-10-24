@@ -2,6 +2,7 @@ package seedu.planpal.utility;
 
 import java.util.ArrayList;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.filemanager.FileManager;
 
 /**
  * A utility interface providing generic list operations
@@ -45,7 +46,12 @@ public interface ListFunctions {
         }
         assert listIndex > 0 && listIndex <= list.size() : ":Input index must be valid and " +
             "within the bounds of list";
-        list.remove(listIndex - 1);
+
+        // Prevent deletion of last item to stop bug
+        if (listIndex != 1){
+            list.remove(listIndex - 1);
+        }
+
         Ui.print("Deleted successfully!");
     }
 

@@ -43,15 +43,19 @@ public class FileManager {
      *
      * @param list The list of objects to be saved. Each object must implement {@link Storeable}.
      */
-    public <T> void saveList(ArrayList<T> list) {
+    public <T> void saveList(ArrayList<T> list, boolean isAfterDelete) {
         T listElement = list.get(0);
         if (listElement instanceof Storeable) {
             String storagePath = ((Storeable)listElement).getStoragePath();
             createDirectory(storagePath);
             try(FileWriter writer = new FileWriter(storagePath)){
-                for (T item : list) {
-                    String commandDescription = ((Storeable) item).getCommandDescription();
-                    writer.write(ADD_COMMAND + " " + commandDescription + "\n");
+                if (list.size() > 1 || !isAfterDelete) {
+                    for (T item : list) {
+                        String commandDescription = ((Storeable) item).getCommandDescription();
+                        writer.write(ADD_COMMAND + " " + commandDescription + "\n");
+                    }
+                } else {
+                    writer.write("");
                 }
             } catch (IOException e) {
                 Ui.print("Error saving data!");
@@ -59,6 +63,10 @@ public class FileManager {
         }
     }
 
+    // Overloaded
+    public <T> void saveList(ArrayList<T> list) {
+        saveList(list, false);
+    }
 
     /**
      * Loads and processes data from a specified file using the given manager.
