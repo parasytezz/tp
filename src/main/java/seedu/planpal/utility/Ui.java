@@ -59,6 +59,9 @@ public class Ui {
         print("Created a new storage at ", pathToStorage);
     }
 
+    /**
+     * Displays functions of category
+     */
     public static String getSetCategory() {
         System.out.println("Category options : ## currently do not support loading and saving ##");
         System.out.println("1. add Category type (e.g. add close friend)");
@@ -70,6 +73,9 @@ public class Ui {
         return in.nextLine();
     }
 
+    /**
+     * Displays list of categories
+     */
     public static void printCategoryList(ArrayList<String> categoryList) {
         System.out.println(LINE_SEPARATOR);
         for (String category : categoryList) {
@@ -78,6 +84,13 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
+    /**
+     * Displays contacts of particular type of category
+     *
+     * @param cat category to search
+     * @param listByCat 2d ArrayList of Contact where i-th element in listByCat is the contacts in category of index i
+     * @param catList ArrayList of Categories and their corresponding position in this array is their index
+     */
     public static void printCat(String cat, ArrayList<ArrayList<Contact>> listByCat, ArrayList<String> catList) {
         System.out.println("Contacts in category: " + cat);
         if (listByCat.get(catList.indexOf(cat)).isEmpty()) {
@@ -92,6 +105,9 @@ public class Ui {
         }
     }
 
+    /**
+     * Displays when category is not found
+     */
     public static void printCategoryNotFound() {
         System.out.println("Category not found.");
         System.out.println(LINE_SEPARATOR);

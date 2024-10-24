@@ -128,6 +128,12 @@ public class ContactManager implements ListFunctions {
         }
     }
 
+    /**
+     * handle category commands of contacts
+     *
+     * @param description The description of the command
+     * @return true if continue to handle category commands. Otherwise, false.
+     */
     public boolean handleCategory(String description) {
         try {
             if (description.startsWith("add ")) {
@@ -158,6 +164,12 @@ public class ContactManager implements ListFunctions {
         }
     }
 
+    /**
+     * Helper function to handle adding of category
+     *
+     * @param description The description of the command
+     * @throws EmptyDescriptionException If the description is empty, an {@link EmptyDescriptionException} is thrown.
+     */
     private void addCategory(String description) throws EmptyDescriptionException {
         String newCategory = description.replace("add ", "").trim();
         Ui.print(description);
@@ -171,6 +183,12 @@ public class ContactManager implements ListFunctions {
         }
     }
 
+    /**
+     * Helper function to handle removal of category
+     *
+     * @param description The description of the command
+     * @throws PlanPalExceptions If the input is invalid
+     */
     private void removeCategory(String description) throws PlanPalExceptions {
         String removingCategory = description.replace("remove ", "").trim();
         if (removingCategory.isEmpty()) {
@@ -186,6 +204,12 @@ public class ContactManager implements ListFunctions {
         }
     }
 
+    /**
+     * Helper function to handle editing of categories of a contact
+     *
+     * @param description The description of the command
+     * @throws PlanPalExceptions If the input is invalid
+     */
     private void editCategory(String description) throws PlanPalExceptions {
         try {
             String descriptionToEdit = description.replace("edit ", "").trim();
@@ -208,6 +232,14 @@ public class ContactManager implements ListFunctions {
         }
     }
 
+    /**
+     * Helper function to validate editing categories of a contact
+     *
+     * @param categories array of new categories of the contact
+     * @param contactId index of Contact in contactList
+     * @return contact with index equals contactId
+     * @throws PlanPalExceptions If the command is invalid
+     */
     private Contact validateEdit(String[] categories, int contactId) throws PlanPalExceptions {
         if (contactId >= contactList.size() || contactId < 0) {
             throw new PlanPalExceptions("Invalid contact id");
@@ -224,6 +256,12 @@ public class ContactManager implements ListFunctions {
         return contactList.get(contactId);
     }
 
+    /**
+     * Helper function to update categories of a contact
+     *
+     * @param editingContact The contact whose categories are to be edited
+     * @param categories array of new categories of the contact
+     */
     private void updateCategory(Contact editingContact, String[] categories) {
         editingContact.clearCategories();
         if (categories == null) {
@@ -239,6 +277,11 @@ public class ContactManager implements ListFunctions {
         }
     }
 
+    /**
+     * Search contacts of a category
+     *
+     * @param description The category to be found
+     */
     public void searchCategory(String description) {
         for (String category : categoryList) {
             if (category.equals(description)) {
