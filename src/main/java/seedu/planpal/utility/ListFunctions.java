@@ -2,7 +2,6 @@ package seedu.planpal.utility;
 
 import java.util.ArrayList;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.filemanager.FileManager;
 
 /**
  * A utility interface providing generic list operations
