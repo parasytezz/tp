@@ -11,12 +11,6 @@ import seedu.planpal.utility.Ui;
  */
 public class ContactParser extends Parser {
 
-    private static final String ADD_COMMAND = "add";
-    private static final String DELETE_COMMAND = "delete";
-    private static final String EDIT_COMMAND = "edit";
-    private static final String FIND_COMMAND = "find";
-    private static final String LIST_COMMAND = "list";
-    private static final String EXIT_MODE_COMMAND = "exit";
     private static final int INPUT_SEGMENTS = 2;
 
     ContactManager contactManager;
@@ -39,24 +33,24 @@ public class ContactParser extends Parser {
             String description;
 
             switch (command) {
-            case ADD_COMMAND:
+            case Parser.ADD_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.addContact(description);
                 return true;
                 // fallthrough
 
-            case DELETE_COMMAND:
+            case Parser.DELETE_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.deleteContact(description);
                 return true;
                 // fallthrough
 
-            case LIST_COMMAND:
+            case Parser.LIST_COMMAND:
                 contactManager.viewContactList();
                 return true;
                 // fallthrough
 
-            case EDIT_COMMAND:
+            case Parser.EDIT_COMMAND:
                 try {
                     String query = inputParts[1].trim();
                     contactManager.editContact(query);
@@ -66,13 +60,13 @@ public class ContactParser extends Parser {
                 return true;
                 // fallthrough
 
-            case FIND_COMMAND:
+            case Parser.FIND_COMMAND:
                 String query = inputParts[1].trim();
                 contactManager.findContact(query);
                 return true;
                 // fallthrough
 
-            case EXIT_MODE_COMMAND:
+            case Parser.EXIT_MODE_COMMAND:
                 break;
 
             case Parser.BYE_COMMAND:
