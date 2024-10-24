@@ -76,11 +76,12 @@ public class FileManager {
         PrintStream out = System.out;
 
         // Redirect System.out to a dummy steam (solution from gpt)
+        System.setOut(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) {}
+        }));
+
         for (File file : directory.listFiles()) {
-            System.setOut(new PrintStream(new OutputStream() {
-                @Override
-                public void write(int b) {}
-            }));
             try (Scanner scanner = new Scanner(file)) {
                 while (scanner.hasNext()) {
                     parser.processCommand(scanner.nextLine());
@@ -88,9 +89,9 @@ public class FileManager {
             } catch (FileNotFoundException | PlanPalExceptions e){
                 Ui.print(e.getMessage());
             }
-            System.setOut(out);
+
             Ui.print("data loaded from " + file.getName());
         }
-
+        System.setOut(out);
     }
 }
