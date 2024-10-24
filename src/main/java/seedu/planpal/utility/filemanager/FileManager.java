@@ -1,8 +1,9 @@
 package seedu.planpal.utility.filemanager;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.Parser;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.parser.Parser;
+import seedu.planpal.utility.parser.ParserFactory;
 
 
 import java.io.File;
@@ -21,6 +22,7 @@ import java.util.Scanner;
  */
 public class FileManager {
     private static final String ADD_COMMAND = "add";
+    private static final String LIST_DIRECTORY = "./data/";
 
     /**
      * Ensures that the directory for the storage path exists.
@@ -29,13 +31,8 @@ public class FileManager {
     private void createDirectory(String storagePath){
         File file = new File(storagePath);
         File directory = file.getParentFile();
-
         if (!directory.exists()){
-            if (directory.mkdirs()){
-                System.out.println("Directory created");
-            } else {
-                System.out.println("Directory could not be created");
-            }
+            directory.mkdirs();
         }
     }
 
@@ -62,17 +59,20 @@ public class FileManager {
         }
     }
 
+
     /**
-     * Loads a list of objects from each corresponding file in storage.
-     * The file is parsed line by line, and each command is processed using the provided {@link Parser}.
+     * Loads and processes data from a specified file using the given manager.
+     * This method reads the file line by line, utilizing a parser appropriate for the file's content,
+     * which is determined by the file's name. System output during processing is suppressed to prevent
+     * clutter during command execution.
      *
-     * @param parser A {@link Parser} object used to process each line of the file.
+     * @param <T> The type of the manager used to handle commands derived from the file's data.
+     * @param manager The manager instance for processing the commands.
+     * @param fileName The name of the file.
      */
-    public void loadLists(Parser parser, String directoryName) {
-        File directory = new File(directoryName);
-        if (!directory.exists()){
-            return;
-        }
+    public <T> void loadList(T manager, String fileName) {
+        File file = new File(LIST_DIRECTORY + fileName);
+
         PrintStream out = System.out;
 
         // Redirect System.out to a dummy steam (solution from gpt)
@@ -81,16 +81,13 @@ public class FileManager {
             public void write(int b) {}
         }));
 
-        for (File file : directory.listFiles()) {
-            try (Scanner scanner = new Scanner(file)) {
-                while (scanner.hasNext()) {
-                    parser.processCommand(scanner.nextLine());
-                }
-            } catch (FileNotFoundException | PlanPalExceptions e){
-                Ui.print(e.getMessage());
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                Parser parser = ParserFactory.getParser(file.getName(), manager);
+                parser.processCommand(scanner.nextLine());
             }
-
-            Ui.print("data loaded from " + file.getName());
+        } catch (FileNotFoundException | PlanPalExceptions e){
+            Ui.print(e.getMessage());
         }
         System.setOut(out);
     }

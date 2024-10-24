@@ -1,15 +1,15 @@
-package seedu.planpal.utility;
+package seedu.planpal.utility.parser;
 
 import seedu.planpal.contacts.ContactManager;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.filemanager.FileManager;
+import seedu.planpal.utility.Ui;
 
 /**
  * Parses user input and executes commands within the PlanPal application.
  */
-public class Parser implements ListFunctions {
+public class ContactParser extends Parser {
 
     private static final String ADD_COMMAND = "add";
     private static final String DELETE_COMMAND = "delete";
@@ -21,8 +21,8 @@ public class Parser implements ListFunctions {
 
     ContactManager contactManager;
 
-    public Parser(FileManager fileManager) {
-        contactManager = new ContactManager(fileManager);
+    public ContactParser(ContactManager contactManager) {
+        this.contactManager = contactManager;
     }
 
     /**
@@ -31,6 +31,7 @@ public class Parser implements ListFunctions {
      * @param input User input string that contains a command followed by description.
      * @throws PlanPalExceptions If an invalid command is provided or the description is empty.
      */
+    @Override
     public void processCommand(String input) throws PlanPalExceptions {
         try {
             String[] inputParts = input.split(" ", INPUT_SEGMENTS);
