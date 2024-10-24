@@ -48,7 +48,7 @@ public interface ListFunctions {
             "within the bounds of list";
 
         // Prevent deletion of last item to stop bug
-        if (listIndex != 1){
+        if (list.size() != 1){
             list.remove(listIndex - 1);
         }
 
