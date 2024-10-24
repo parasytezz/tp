@@ -54,6 +54,7 @@ public class ContactParser extends Parser {
             case Parser.SEARCH_CATEGORY_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.searchCategory(description);
+                return true;
 
             case Parser.LIST_COMMAND:
                 contactManager.viewContactList();
