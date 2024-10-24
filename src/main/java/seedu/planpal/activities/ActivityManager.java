@@ -5,8 +5,6 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.ListFunctions;
 // import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import java.util.ArrayList;
 
@@ -14,7 +12,6 @@ public class ActivityManager implements ListFunctions {
 
     FileManager savedActivities = new FileManager();
     private ArrayList<Activity> activityList = new ArrayList<>();
-    private static final Logger ACTIVITY_LOGGER = Logger.getLogger(ActivityManager.class.getName());
 
     public ArrayList<Activity> getActivityList() { return activityList; }
 
