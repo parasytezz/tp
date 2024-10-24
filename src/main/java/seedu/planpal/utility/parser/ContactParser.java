@@ -16,7 +16,7 @@ public class ContactParser extends Parser {
     private static final String EDIT_COMMAND = "edit";
     private static final String FIND_COMMAND = "find";
     private static final String LIST_COMMAND = "list";
-    private static final String BYE_COMMAND = "bye";
+    private static final String EXIT_MODE_COMMAND = "exit";
     private static final int INPUT_SEGMENTS = 2;
 
     ContactManager contactManager;
@@ -32,7 +32,7 @@ public class ContactParser extends Parser {
      * @throws PlanPalExceptions If an invalid command is provided or the description is empty.
      */
     @Override
-    public void processCommand(String input) throws PlanPalExceptions {
+    public boolean processCommand(String input) throws PlanPalExceptions {
         try {
             String[] inputParts = input.split(" ", INPUT_SEGMENTS);
             String command = inputParts[0];
@@ -42,16 +42,19 @@ public class ContactParser extends Parser {
             case ADD_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.addContact(description);
-                break;
+                return true;
+                // fallthrough
 
             case DELETE_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.deleteContact(description);
-                break;
+                return true;
+                // fallthrough
 
             case LIST_COMMAND:
                 contactManager.viewContactList();
-                break;
+                return true;
+                // fallthrough
 
             case EDIT_COMMAND:
                 try {
@@ -60,14 +63,19 @@ public class ContactParser extends Parser {
                 } catch (NumberFormatException e) {
                     throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
                 }
-                break;
+                return true;
+                // fallthrough
 
             case FIND_COMMAND:
                 String query = inputParts[1].trim();
                 contactManager.findContact(query);
+                return true;
+                // fallthrough
+
+            case EXIT_MODE_COMMAND:
                 break;
 
-            case BYE_COMMAND:
+            case Parser.BYE_COMMAND:
                 Ui.printByeMessage();
                 System.exit(0);
                 break;
@@ -78,5 +86,6 @@ public class ContactParser extends Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new EmptyDescriptionException();
         }
+        return false;
     }
 }

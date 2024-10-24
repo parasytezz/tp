@@ -1,7 +1,53 @@
 package seedu.planpal.utility.parser;
 
+import seedu.planpal.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.filemanager.FileManager;
+
+import java.util.Scanner;
 
 public class Parser {
-    public void processCommand(String input) throws PlanPalExceptions {};
+    protected static final String BYE_COMMAND = "bye";
+    private static final String CONTACT_MANAGER = "1";
+    private static final String EXPENSE_MANAGER = "2";
+
+    private String getCommand(String currentMode){
+        Scanner in = new Scanner(System.in);
+        System.out.println("Current Mode: " + currentMode);
+        System.out.print("Enter command: ");
+        return in.nextLine();
+    }
+
+    public boolean processCommand(String modeInput) throws PlanPalExceptions {
+        boolean isProcessing = true;
+
+        while (isProcessing) {
+
+            FileManager fileManager = new FileManager();
+
+            switch (modeInput){
+            case CONTACT_MANAGER:
+                String command = getCommand("CONTACT_MANAGER");
+                ContactManager contactManager = new ContactManager();
+                fileManager.loadList(contactManager, "contacts.txt");
+                ContactParser contactParser = new ContactParser(contactManager);
+                isProcessing = contactParser.processCommand(command);
+                break;
+
+            case EXPENSE_MANAGER:
+                // do something
+                break;
+
+            case BYE_COMMAND:
+                Ui.printByeMessage();
+                System.exit(0);
+                break;
+
+            default:
+                throw new PlanPalExceptions("Invalid mode");
+            }
+        }
+        return false;
+    };
 }

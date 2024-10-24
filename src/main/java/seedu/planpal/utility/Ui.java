@@ -29,6 +29,16 @@ public class Ui {
         );
     }
 
+    public static void printAvailableModes(){
+        print(
+                "Currently, I am able to manage the following:",
+                "   1. Contacts",
+                "   2. Expenses",
+                "What would you like me to manage?",
+                "To select, type in the index! (Eg. To manage Contacts, type 1)"
+        );
+    }
+
     /**
      * Displays a goodbye message to the user upon exiting the application.
      */
