@@ -8,7 +8,6 @@ import seedu.planpal.utility.Ui;
 
 public class ExpenseParser extends Parser {
     private static final int INPUT_SEGMENTS = 2;
-    private static final String BUDGET_COMMAND = "budget";
     ExpenseManager expenseManager;
 
     public ExpenseParser(ExpenseManager expenseManager) {
@@ -31,12 +30,6 @@ public class ExpenseParser extends Parser {
 
             case Parser.LIST_COMMAND:
                 expenseManager.viewExpenseList();
-                return true;
-                // fallthrough
-
-            case BUDGET_COMMAND:
-                description = inputParts[1].trim();
-                expenseManager.setBudget(description);
                 return true;
                 // fallthrough
 

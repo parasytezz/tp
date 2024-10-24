@@ -29,6 +29,10 @@ public class Ui {
         );
     }
 
+    public static void printLine() {
+        System.out.println(LINE_SEPARATOR);
+    }
+
     public static void printAvailableModes(){
         print(
                 "Currently, I am able to manage the following:",

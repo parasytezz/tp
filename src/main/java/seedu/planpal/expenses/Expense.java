@@ -75,7 +75,15 @@ public class Expense implements Editable, Storeable {
         return STORAGE_PATH;
     }
 
-    public void setCost(String cost) {
+    public void setCost(String cost) throws PlanPalExceptions {
+        double costValue = Double.parseDouble(cost);
+        if (costValue < 0) {
+            throw new PlanPalExceptions("Cost cannot be negative");
+        }
         this.cost = cost;
+    }
+
+    public String getCost(){
+        return cost;
     }
 }
