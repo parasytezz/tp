@@ -44,6 +44,17 @@ public class ContactParser extends Parser {
                 contactManager.deleteContact(description);
                 return true;
                 // fallthrough
+            case Parser.SET_CATEGORY_COMMAND:
+                boolean inCategory = true;
+                while (inCategory) {
+                    inCategory = contactManager.handleCategory(Ui.getSetCategory().trim());
+                }
+                return true;
+
+            case Parser.SEARCH_CATEGORY_COMMAND:
+                description = inputParts[1].trim();
+                contactManager.searchCategory(description);
+                return true;
 
             case Parser.LIST_COMMAND:
                 contactManager.viewContactList();
