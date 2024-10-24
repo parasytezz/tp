@@ -11,14 +11,13 @@ import java.util.logging.Logger;
 /**
  * Manages the contact list within the PlanPal application.
  */
-public class ContactManager implements ListFunctions<Contact> {
-    public static final String[] INFORMATIONCATEGORIES = {"name", "phone", "email"};
+public class ContactManager implements ListFunctions {
+    public static final String[] INFORMATION_CATEGORIES = {"name", "phone", "email"};
     private static final Logger CONTACT_LOGGER = Logger.getLogger(ContactManager.class.getName());
-    FileManager savedContacts;
+    FileManager savedContacts = new FileManager();
     private ArrayList<Contact> contactList = new ArrayList<>();
 
-    public ContactManager(FileManager fileManager) {
-        savedContacts = fileManager;
+    public ContactManager() {
         CONTACT_LOGGER.setLevel(Level.SEVERE);
     }
 
@@ -62,7 +61,7 @@ public class ContactManager implements ListFunctions<Contact> {
         CONTACT_LOGGER.info("Deleting contact with the index: " + index);
         try {
             deleteList(contactList, index);
-            savedContacts.saveList(contactList);
+            savedContacts.saveList(contactList, true);
             CONTACT_LOGGER.info("Deleted contact");
         } catch (PlanPalExceptions e) {
             CONTACT_LOGGER.severe("Failed to delete a contact: " + e.getMessage());

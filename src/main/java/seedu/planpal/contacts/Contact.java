@@ -12,19 +12,11 @@ import java.lang.reflect.Field;
 public class Contact implements Editable, Storeable {
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
-
+    private static final String STORAGE_PATH = "./data/contacts.txt";
     private String name;
     private String phone;
     private String email;
     private String commandDescription;
-
-    /**
-     * Default constructor for Contact.
-     * Primarily used as an identifier for retrieving the storage path in the FileManager class.
-     */
-    public Contact() {
-        // do nothing (used as an identifier for the fileManager class to get storagePath)
-    }
 
     /**
      * Constructs a new Contact object by parsing the given description string. The description
@@ -62,15 +54,15 @@ public class Contact implements Editable, Storeable {
      * The method splits the current command description into its categories and updates the
      * category with the new value, if it exists.
      *
-     * @param contactCategory The category whose value needs to be updated (e.g., "name").
-     * @param value The new value for the specified category.
+     * @param category The category whose value needs to be updated (e.g., "name").
+     * @param val The new value for the specified category.
      *
      * @throws PlanPalExceptions If the input is incomplete or improperly formatted.
      * @throws IllegalCommandException If the specified category is not recognized.
      */
-    private void setCommandDescription(String category, String val) throws PlanPalExceptions, IllegalCommandException {
+    private void setCommandDescription(String category, String val) throws PlanPalExceptions {
         boolean isCategory = false;
-        for (String cat : ContactManager.INFORMATIONCATEGORIES) {
+        for (String cat : ContactManager.INFORMATION_CATEGORIES) {
             if (category.equals(cat)) {
                 isCategory = true;
                 if (category.equals("email") && !val.contains("@")) {
@@ -143,5 +135,8 @@ public class Contact implements Editable, Storeable {
         return name;
     }
 
-
+    @Override
+    public String getStoragePath() {
+        return STORAGE_PATH;
+    }
 }

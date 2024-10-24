@@ -1,9 +1,9 @@
 package seedu.planpal;
 
+
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.filemanager.FileManager;
-import seedu.planpal.utility.Parser;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.parser.Parser;
 
 import java.util.Scanner;
 
@@ -14,17 +14,14 @@ public class PlanPal {
      */
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
-
-        // Start up everything required
-        var fileManager = new FileManager("data", "contacts.txt", "activities.txt", "expenses.txt");
-        Parser parser = new Parser(fileManager);
         Ui.printWelcomeMessage();
-        fileManager.loadList(parser);
+        Parser mainParser = new Parser();
 
         while (true) {
             try {
-                String input = in.nextLine();
-                parser.processCommand(input);
+                Ui.printAvailableModes();
+                String modeInput = in.nextLine();
+                mainParser.processCommand(modeInput);
             } catch (PlanPalExceptions e) {
                 Ui.print(e.getMessage());
             }

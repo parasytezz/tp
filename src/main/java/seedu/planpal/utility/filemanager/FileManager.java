@@ -1,8 +1,9 @@
 package seedu.planpal.utility.filemanager;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.utility.Parser;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.parser.Parser;
+import seedu.planpal.utility.parser.ParserFactory;
 
 
 import java.io.File;
@@ -14,6 +15,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+//@@author anlamm
 /**
  * Manages the loading and saving of data for contacts or other objects that implement
  * the {@link Storeable} interface within the PlanPal application.
@@ -21,41 +23,17 @@ import java.util.Scanner;
  */
 public class FileManager {
     private static final String ADD_COMMAND = "add";
-    private final String contactClass = "Contact";
-    private final String activityClass = "Activity";
-    private final String expenseClass = "Expense";
-    private String pathToStorage;
-    private String pathToContacts;
-    private String pathToActivities;
-    private String pathToExpenses;
-
-    /**
-     * Constructs a FileManager for managing saving and loading of all file.
-     * If the provided object implements {@link Storeable}, it will use
-     * the object's storage path for file operations.
-     * Each object implements {@link Storeable} will have a file for storing data
-     *
-     * @param storagePath the directory for storage
-     * @param contactsPath the path to file from storagePath for storing Contacts
-     * @param activitiesPath the path to file from storagePath for storing Activities
-     * @param expensesPath the path to file from storagePath for storing Expenses
-     */
-    public FileManager(String storagePath, String contactsPath, String activitiesPath, String expensesPath) {
-        pathToStorage = storagePath;
-        pathToContacts = contactsPath;
-        pathToActivities = activitiesPath;
-        pathToExpenses = expensesPath;
-    }
+    private static final String LIST_DIRECTORY = "./data/";
 
     /**
      * Ensures that the directory for the storage path exists.
      * If the directory does not exist, it creates it.
      */
-    private void createDirectory(){
-        File directory = new File(pathToStorage);
-
+    private void createDirectory(String storagePath){
+        File file = new File(storagePath);
+        File directory = file.getParentFile();
         if (!directory.exists()){
-            directory.mkdir();
+            directory.mkdirs();
         }
     }
 
@@ -66,61 +44,60 @@ public class FileManager {
      *
      * @param list The list of objects to be saved. Each object must implement {@link Storeable}.
      */
-    public <T> void saveList(ArrayList<T> list) {
-        createDirectory();
-        if (!list.isEmpty() && list.get(0) instanceof Storeable) {
-            switch (list.get(0).getClass().getSimpleName()) {
-            case contactClass:
-                try (FileWriter writer = new FileWriter(pathToStorage+ "/" + pathToContacts)) {
+    public <T> void saveList(ArrayList<T> list, boolean isAfterDelete) {
+        T listElement = list.get(0);
+        if (listElement instanceof Storeable) {
+            String storagePath = ((Storeable)listElement).getStoragePath();
+            createDirectory(storagePath);
+            try(FileWriter writer = new FileWriter(storagePath)){
+                if (list.size() > 1 || !isAfterDelete) {
                     for (T item : list) {
                         String commandDescription = ((Storeable) item).getCommandDescription();
                         writer.write(ADD_COMMAND + " " + commandDescription + "\n");
                     }
-                } catch (IOException e) {
-                    Ui.print("Error saving data!");
+                } else {
+                    writer.write("");
                 }
-                break;
-            case activityClass:
-                break;
-            case expenseClass:
-                break;
-            default:
-                Ui.print("Does not recognize object");
+            } catch (IOException e) {
+                Ui.print("Error saving data!");
             }
-        } else {
-            Ui.print("Empty list!");
         }
     }
 
+    // Overloaded
+    public <T> void saveList(ArrayList<T> list) {
+        saveList(list, false);
+    }
+
     /**
-     * Loads a list of objects from each corresponding file in storage.
-     * The file is parsed line by line, and each command is processed using the provided {@link Parser}.
+     * Loads and processes data from a specified file using the given manager.
+     * This method reads the file line by line, utilizing a parser appropriate for the file's content,
+     * which is determined by the file's name. System output during processing is suppressed to prevent
+     * clutter during command execution.
      *
-     * @param parser A {@link Parser} object used to process each line of the file.
+     * @param <T> The type of the manager used to handle commands derived from the file's data.
+     * @param manager The manager instance for processing the commands.
+     * @param fileName The name of the file.
      */
-    public void loadList(Parser parser) {
-        File directory = new File(pathToStorage);
-        if (!directory.exists()){
-            return;
-        }
+    public <T> void loadList(T manager, String fileName) {
+        File file = new File(LIST_DIRECTORY + fileName);
+
         PrintStream out = System.out;
 
         // Redirect System.out to a dummy steam (solution from gpt)
-        for (File file : directory.listFiles()) {
-            System.setOut(new PrintStream(new OutputStream() {
-                @Override
-                public void write(int b) {}
-            }));
-            try (Scanner scanner = new Scanner(file)) {
-                while (scanner.hasNext()) {
-                    parser.processCommand(scanner.nextLine());
-                }
-            } catch (FileNotFoundException | PlanPalExceptions e){
-                Ui.print(e.getMessage());
-            }
-            System.setOut(out);
-            Ui.print("data loaded from " + file.getName());
-        }
+        System.setOut(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) {}
+        }));
 
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                Parser parser = ParserFactory.getParser(file.getName(), manager);
+                parser.processCommand(scanner.nextLine());
+            }
+        } catch (FileNotFoundException | PlanPalExceptions e){
+            Ui.print(e.getMessage());
+        }
+        System.setOut(out);
     }
 }

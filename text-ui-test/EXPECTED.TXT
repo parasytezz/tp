@@ -3,5 +3,12 @@ Hello! I'm PlanPal.
 How can I be of service?
 _________________________________________________________
 _________________________________________________________
+Currently, I am able to manage the following:
+   1. Contacts
+   2. Expenses
+What would you like me to manage?
+To select, type in the index! (Eg. To manage Contacts, type 1)
+_________________________________________________________
+_________________________________________________________
 Bye. Hope to see you again!
 _________________________________________________________
