@@ -96,8 +96,7 @@ public class Ui {
         if (listByCat.get(catList.indexOf(cat)).isEmpty()) {
             System.out.println("There is no contact in " + cat);
             System.out.println(LINE_SEPARATOR);
-        }
-        else {
+        } else {
             for (Contact contact : listByCat.get(catList.indexOf(cat))) {
                 System.out.println(contact);
             }
