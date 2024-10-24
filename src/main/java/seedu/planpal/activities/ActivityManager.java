@@ -18,10 +18,6 @@ public class ActivityManager implements ListFunctions {
 
     public ArrayList<Activity> getActivityList() { return activityList; }
 
-    public ActivityManager() {
-        ACTIVITY_LOGGER.setLevel(Level.SEVERE);
-    }
-
     /**
      * Adds a new activity to the activity list.
      * The activity is created from the provided description.
@@ -51,14 +47,7 @@ public class ActivityManager implements ListFunctions {
         }
         assert index.length() != 0 : "Input must not be empty";
 
-        ACTIVITY_LOGGER.info("Deleting contact with the index: " + index);
-        try {
-            deleteList(activityList, index);
-            savedActivities.saveList(activityList, true);
-            ACTIVITY_LOGGER.info("Deleted contact");
-        } catch (PlanPalExceptions e) {
-            ACTIVITY_LOGGER.severe("Failed to delete a contact: " + e.getMessage());
-            throw e;
-        }
+        deleteList(activityList, index);
+        savedActivities.saveList(activityList, true);
     }
 }
