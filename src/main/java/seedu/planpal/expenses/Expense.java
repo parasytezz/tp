@@ -11,6 +11,7 @@ public class Expense implements Editable, Storeable {
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;
     private String cost;
+    private String name;
 
     public Expense(String description) throws PlanPalExceptions {
         setCommandDescription(description);
@@ -19,14 +20,14 @@ public class Expense implements Editable, Storeable {
             throw new IllegalCommandException();
         }
         assert categories.length >= 2: "Illegal command executed in expenses";
-        for (int catagoryIndex = 1; catagoryIndex < categories.length; catagoryIndex++) {
-            processEditFunction(categories[catagoryIndex]);
+        for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
+            processEditFunction(categories[categoryIndex]);
         }
     }
 
     @Override
     public String toString() {
-        return "[Cost = " + cost + "]";
+        return "[" + name + ", Cost = " + cost + "]";
     }
 
     @Override
@@ -40,7 +41,9 @@ public class Expense implements Editable, Storeable {
         String valueToEdit = inputParts[1].trim();
         if (category.equals("cost")){
             setCost(valueToEdit);
-        } else {
+        } else if (category.equals("name")){
+            name = valueToEdit;
+        }else {
             System.out.println(category + " is not a valid category");
             throw new IllegalCommandException();
         }
@@ -73,6 +76,17 @@ public class Expense implements Editable, Storeable {
     @Override
     public String getStoragePath() {
         return STORAGE_PATH;
+    }
+
+    public void setName(String name) throws PlanPalExceptions {
+        if (name == null || name.isEmpty()) {
+            throw new PlanPalExceptions("Name cannot be empty");
+        }
+        this.name = name;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setCost(String cost) throws PlanPalExceptions {
