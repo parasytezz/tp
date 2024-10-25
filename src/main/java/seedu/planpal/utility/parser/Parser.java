@@ -32,16 +32,16 @@ public class Parser {
 
     public boolean processCommand(String modeInput) throws PlanPalExceptions {
         boolean isProcessing = true;
+        FileManager fileManager = new FileManager();
+        ContactManager contactManager = new ContactManager();
+        fileManager.loadList(contactManager, "contacts.txt");
 
         while (isProcessing) {
 
-            FileManager fileManager = new FileManager();
 
             switch (modeInput){
             case CONTACT_MANAGER:
                 String commandForContact = getCommand("CONTACT_MANAGER");
-                ContactManager contactManager = new ContactManager();
-                fileManager.loadList(contactManager, "contacts.txt");
                 ContactParser contactParser = new ContactParser(contactManager);
                 isProcessing = contactParser.processCommand(commandForContact);
                 break;

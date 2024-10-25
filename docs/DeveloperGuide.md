@@ -16,6 +16,8 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
    - [Contact]()
      - [Add and Remove Command]()
      - [Edit Command]()
+     - [category Command]()
+     - [search Command]()
    - [Activities]()
    - [Budget]()
    - [Storage feature]()
@@ -133,6 +135,178 @@ _________________________________________________________
 Here is what I found:
 1. [Name = David Phone = null Email = null]
 2. [Name = Alice Phone = null Email = null]
+_________________________________________________________
+```
+---
+
+
+## category Command
+The 'category' command allows users to customize category in contacts. 
+Currently, category does not support loading and saving, which means data will be lost once program is exit.
+
+### Usage:
+```
+category
+```
+### Expected Output:
+```
+Category not found.
+_________________________________________________________
+```
+### Expected Output if no contacts in category:
+```
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### 1. add category
+### Example:
+```
+add friend
+```
+### Expected output:
+```
+_________________________________________________________
+add friend
+_________________________________________________________
+_________________________________________________________
+successfully added Category : 'friend'
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 2. remove category
+### Example:
+```
+remove friend
+```
+### Expected output if friend is not a category:
+```
+_________________________________________________________
+friend is not a category
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### Expected output if friend is a category:
+```
+_________________________________________________________
+successfully deleted Category : 'friend'
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 3. edit categories of contact
+### Example:
+```
+edit 1 friend
+```
+### Expected output if contact id is invalid:
+```
+_________________________________________________________
+Invalid contact id
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### Expected output if friend is not a category:
+```
+_________________________________________________________
+friend is not a valid category
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### Expected output for successfully edit:
+```
+_________________________________________________________
+successfully assigned categories to Contact id : 0
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 4. view categories
+### Example:
+```
+view
+```
+### Expected output:
+```
+_________________________________________________________
+friend
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 5. quit category
+### Example:
+```
+quit
+```
+---
+
+
+## search contacts in a category
+The 'search' command allows users to search contacts belonging to user-defined categories
+
+### Usage:
+```
+search <query>
+```
+### Example 1:
+```
+search friend
+```
+### Expected Output if category not defined:
+```
+Category not found.
+_________________________________________________________
+```
+### Expected Output if no contacts in category:
+```
+Contacts in category: friend
+There is no contact in friend
+_________________________________________________________
+```
+### Expected Output if there exists contacts in category:
+```
+Contacts in category: friend
+[Name = andy Phone = null Email = null]
 _________________________________________________________
 ```
 ---
