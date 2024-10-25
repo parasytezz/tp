@@ -114,12 +114,13 @@ public interface ListFunctions {
         assert query != null : "Query should not be null";
         assert !query.trim().isEmpty() : "Query should not be empty";
 
-        String[] toFind = query.split("\\s+");
+        String[] toFind = query.toLowerCase().split("\\s+");
         ArrayList<T> matchedList = new ArrayList<>();
 
         for (T value: list) {
+            String valueString = value.toString().toLowerCase();
             for (String element : toFind) {
-                if (value.toString().contains(element)) {
+                if (valueString.contains(element)) {
                     matchedList.add(value);
                     break;
                 }
