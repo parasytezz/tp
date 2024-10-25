@@ -41,6 +41,14 @@ public class ExpenseManager implements ListFunctions {
         return totalCost;
     }
 
+    /**
+     * Finds expense in the expense list based on the provided description.
+     * The description can contain multiple names separated by spaces.
+     * If matching contacts are found, they are displayed to the user.
+     *
+     * @param description The description of the expense to find. This must not be empty.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
+     */
     public void findExpense(String description) throws PlanPalExceptions {
 
         if (description.isEmpty()) {
