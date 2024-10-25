@@ -80,6 +80,9 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 
 {Give instructions on how to do a manual product testing e.g., how to load sample data to be used for testing}
 ---
+
+# Contact Manager Features
+
 ## Adding Contact
 The `add` command allows users to add a contact with various categories
 
@@ -100,3 +103,36 @@ _________________________________________________________
 
 ---
 
+
+## Finding a Contact
+The `find` command allows users to find a contact from the list
+
+### Usage:
+```
+find <query>
+```
+### Example 1:
+```
+find johnny
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = johnny Phone = null Email = null]
+_________________________________________________________
+```
+
+### Example 2:
+```
+find Alice David
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = David Phone = null Email = null]
+2. [Name = Alice Phone = null Email = null]
+_________________________________________________________
+```
+---
