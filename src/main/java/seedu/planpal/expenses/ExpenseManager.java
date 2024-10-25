@@ -40,4 +40,20 @@ public class ExpenseManager implements ListFunctions {
         }
         return totalCost;
     }
+
+    public void findExpense(String description) throws PlanPalExceptions {
+
+        if (description.isEmpty()) {
+            throw new EmptyDescriptionException();
+        }
+
+        assert description != null : "Description must not be null";
+        assert !description.isEmpty() : "Description must not be empty";
+
+        try {
+            findInList(expenseList, description);
+        } catch (PlanPalExceptions e) {
+            throw e;
+        }
+    }
 }

@@ -42,16 +42,6 @@ public class Contact implements Editable, Storeable {
     }
 
     /**
-     * Checks if this contact's name contains the name of another contact.
-     *
-     * @param other The other contact to compare with.
-     * @return True if this contact's name contains the other contact's name; false otherwise.
-     */
-    public boolean contains(Contact other) {
-        return this.name.toLowerCase().contains(other.getName().toLowerCase());
-    }
-
-    /**
      * Updates the command description by modifying the value of the specified category.
      * The method splits the current command description into its categories and updates the
      * category with the new value, if it exists.

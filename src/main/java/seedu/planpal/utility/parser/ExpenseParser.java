@@ -26,12 +26,15 @@ public class ExpenseParser extends Parser {
                 description = inputParts[1].trim();
                 expenseManager.addExpense(description);
                 return true;
-                // fallthrough
 
             case Parser.LIST_COMMAND:
                 expenseManager.viewExpenseList();
                 return true;
-                // fallthrough
+
+            case Parser.FIND_COMMAND:
+                description = inputParts[1].trim();
+                expenseManager.findExpense(description);
+                return true;
 
             case Parser.EXIT_MODE_COMMAND:
                 break;
