@@ -22,16 +22,9 @@ public class Activity implements Editable, Storeable {
      * @param description The command description containing name and activityType separated by categories.
      * @throws PlanPalExceptions If the description is invalid or incomplete.
      */
-    public Activity(String description) throws PlanPalExceptions {
-        setCommandDescription(description);
-        String[] categories = description.split(CATEGORY_SEPARATOR);
-        if (categories.length == 1) {
-            throw new IllegalCommandException();
-        }
-        assert categories.length >= 2: "Illegal command executed in expenses";
-        for (int catagoryIndex = 1; catagoryIndex < categories.length; catagoryIndex++) {
-            processEditFunction(categories[catagoryIndex]);
-        }
+    public Activity(String name, String activityType) throws PlanPalExceptions {
+        setName(name);
+        setActivityType(activityType);
     }
 
     /**
@@ -59,15 +52,16 @@ public class Activity implements Editable, Storeable {
 
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
-        if (category.equals("name")) {
-            setName(valueToEdit);
-        } else if (category.equals("type")) {
-            setActivityType(valueToEdit);
-        } else {
-            System.out.println(category + " is not a valid category");
-            throw new IllegalCommandException();
+        switch (category) {
+            case "name":
+                setName(valueToEdit);
+                break;
+            case "type":
+                setActivityType(valueToEdit);
+                break;
+            default:
+                throw new PlanPalExceptions("Invalid category: " + category);
         }
-        setCommandDescription(category, valueToEdit);
     }
 
     /**
