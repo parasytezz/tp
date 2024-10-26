@@ -15,11 +15,15 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
    - [Common classes]()
 4. [Implementation]()
    - [Contact]()
-     - [Add and Remove Command]()
+     - [Add and delete Command]()
      - [Edit Command]()
      - [category Command]()
      - [search Command]()
    - [Activities]()
+     - Add and delete activity
+     - Edit an activity
+     - List activities
+     - Search for activities
    - [Budget]()
    - [Storage feature]()
 5. [Documentation, logging, testing, configuration, dev-ops]()
@@ -61,6 +65,7 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 ### Target user profile
 
 {Describe the target user profile}
+As an international student in NUS, I want to be able to...
 
 ### Value proposition
 
@@ -106,6 +111,26 @@ add /name: johnny
 ```
 _________________________________________________________
 Added successfully!
+_________________________________________________________
+```
+## Deleting Contact
+The `delete` command allows users to delete an existing contact in the contact list.
+
+### Usage
+```
+delete <index of the contact in the list> 
+```
+
+### Example
+The user wants to delete a contact that has an index of '2' in the contact list.
+```
+delete 2
+```
+
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
 _________________________________________________________
 ```
 
