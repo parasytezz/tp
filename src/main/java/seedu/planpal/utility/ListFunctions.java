@@ -109,7 +109,6 @@ public interface ListFunctions {
      * @param query The query string containing one or more keywords to search for. This should not be null.
      */
     default <T> void findInList(ArrayList<T> list, String query) throws PlanPalExceptions {
-
         assert list != null : "List should not be null";
         assert query != null : "Query should not be null";
         assert !query.trim().isEmpty() : "Query should not be empty";

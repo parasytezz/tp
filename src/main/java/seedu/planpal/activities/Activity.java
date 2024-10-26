@@ -1,6 +1,5 @@
 package seedu.planpal.activities;
 
-import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
@@ -22,16 +21,9 @@ public class Activity implements Editable, Storeable {
      * @param description The command description containing name and activityType separated by categories.
      * @throws PlanPalExceptions If the description is invalid or incomplete.
      */
-    public Activity(String description) throws PlanPalExceptions {
-        setCommandDescription(description);
-        String[] categories = description.split(CATEGORY_SEPARATOR);
-        if (categories.length == 1) {
-            throw new IllegalCommandException();
-        }
-        assert categories.length >= 2: "Illegal command executed in expenses";
-        for (int catagoryIndex = 1; catagoryIndex < categories.length; catagoryIndex++) {
-            processEditFunction(categories[catagoryIndex]);
-        }
+    public Activity(String name, String activityType) throws PlanPalExceptions {
+        setName(name);
+        setActivityType(activityType);
     }
 
     /**
@@ -59,15 +51,16 @@ public class Activity implements Editable, Storeable {
 
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
-        if (category.equals("name")) {
+        switch (category) {
+        case "name":
             setName(valueToEdit);
-        } else if (category.equals("type")) {
+            break;
+        case "type":
             setActivityType(valueToEdit);
-        } else {
-            System.out.println(category + " is not a valid category");
-            throw new IllegalCommandException();
+            break;
+        default:
+            throw new PlanPalExceptions("Invalid category: " + category);
         }
-        setCommandDescription(category, valueToEdit);
     }
 
     /**
@@ -136,13 +129,17 @@ public class Activity implements Editable, Storeable {
      *
      * @return name The name of the activity
      */
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     /**
      * Gets the type of the activity
      *
      * @return activityType The type of the activity
      */
-    public String getActivityType() { return activityType; }
+    public String getActivityType() {
+        return activityType;
+    }
 }
 
