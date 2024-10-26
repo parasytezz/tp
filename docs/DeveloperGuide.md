@@ -1,5 +1,6 @@
 # Developer Guide
 
+---
 Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the behind-the-scenes work of our product. We hope this document proves informative and useful for your work!
 
 ## Table of Contents
@@ -33,6 +34,8 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
    - [Create a contact]()
    - [Create an activity]()
    - [Create a budget]()
+   
+---
 
 ## Acknowledgements
 
@@ -63,6 +66,8 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 
 {Describe the value proposition: what problem does it solve?}
 
+---
+
 ## User Stories
 
 |Version| As a ... | I want to ... | So that I can ...|
@@ -70,6 +75,7 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 |v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
 |v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
 
+---
 ## Non-Functional Requirements
 
 {Give non-functional requirements}
@@ -105,7 +111,6 @@ _________________________________________________________
 
 ---
 
-
 ## Finding a Contact
 The `find` command allows users to find a contact from the list
 
@@ -139,6 +144,24 @@ _________________________________________________________
 ```
 ---
 
+## Editing a Contact
+The `edit` command allows users to find a contact from the list
+
+### Usage:
+```
+edit <index> /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
+```
+### Example 1:
+```
+edit 1 /name: Cassie
+```
+### Expected Output:
+```
+_________________________________________________________
+Edited successfully!
+_________________________________________________________
+```
+---
 
 ## category Command
 The 'category' command allows users to customize category in contacts. 
