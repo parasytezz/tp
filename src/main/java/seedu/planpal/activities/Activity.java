@@ -1,6 +1,5 @@
 package seedu.planpal.activities;
 
-import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
@@ -53,14 +52,14 @@ public class Activity implements Editable, Storeable {
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
         switch (category) {
-            case "name":
-                setName(valueToEdit);
-                break;
-            case "type":
-                setActivityType(valueToEdit);
-                break;
-            default:
-                throw new PlanPalExceptions("Invalid category: " + category);
+        case "name":
+            setName(valueToEdit);
+            break;
+        case "type":
+            setActivityType(valueToEdit);
+            break;
+        default:
+            throw new PlanPalExceptions("Invalid category: " + category);
         }
     }
 
@@ -130,13 +129,17 @@ public class Activity implements Editable, Storeable {
      *
      * @return name The name of the activity
      */
-    public String getName() { return name; }
+    public String getName() {
+        return name;
+    }
 
     /**
      * Gets the type of the activity
      *
      * @return activityType The type of the activity
      */
-    public String getActivityType() { return activityType; }
+    public String getActivityType() {
+        return activityType;
+    }
 }
 

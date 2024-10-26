@@ -11,7 +11,9 @@ public class ActivityParser extends Parser {
     private static final int ADD_SEGMENTS = 2;
     private final ActivityManager activityManager;
 
-    public ActivityParser(ActivityManager activityManager) { this.activityManager = activityManager; }
+    public ActivityParser(ActivityManager activityManager) {
+        this.activityManager = activityManager;
+    }
 
     @Override
     public boolean processCommand(String input) throws PlanPalExceptions {

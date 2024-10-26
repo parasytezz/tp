@@ -11,13 +11,19 @@ public class ActivityManager implements ListFunctions {
     FileManager savedActivities = new FileManager();
     private final ArrayList<Activity> activityList = new ArrayList<>();
 
-    public ArrayList<Activity> getActivityList() { return activityList; }
-
+    public ArrayList<Activity> getActivityList() {
+        return activityList;
+    }
 
     /**
-     * @param name
-     * @param activityType
-     * @throws PlanPalExceptions
+     * Adds a new activity to the activity list.
+     * This method creates a new Activity instance with the specified name
+     * and activity type, then adds it to the activityList. If either the
+     * name or the activity type is empty, a PlanPalExceptions will be thrown.
+     *
+     * @param name the name of the activity to be added
+     * @param activityType the type of the activity to be added
+     * @throws PlanPalExceptions if the name or activity type is empty
      */
     public void addActivity(String name, String activityType) throws PlanPalExceptions {
         if (name.isEmpty() || activityType.isEmpty()) {
@@ -47,7 +53,7 @@ public class ActivityManager implements ListFunctions {
 
     /**
      * Displays the entire list of activities.
-     * Each activity is printed with an index number for easy reference.
+     * Each activity is printed with an index number.
      */
     public void viewActivityList() {
         System.out.println("Viewing activity list. Current list size: " + activityList.size());
@@ -76,6 +82,16 @@ public class ActivityManager implements ListFunctions {
         }
     }
 
+    /**
+     * Edits an existing activity in the activity list.
+     * This method retrieves the activity at the specified index from the
+     * activityList and applies the provided query to modify it.
+     * If the index is out of bounds, a PlanPalExceptions will be thrown.
+     *
+     * @param index the index of the activity to be edited (1-based index)
+     * @param query the query string used to modify the activity
+     * @throws PlanPalExceptions if the index is invalid (out of range)
+     */
     public void editActivity(int index, String query) throws PlanPalExceptions {
         if (index < 1 || index > activityList.size()) {
             throw new PlanPalExceptions("Invalid index. Please provide a valid number.");
