@@ -43,6 +43,7 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
 
 ## Acknowledgements
 
+
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Setting up, getting started
@@ -56,11 +57,23 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 
 ## Design
 
+---
 ### Architecture
+![Architecture.drawio.png](Images%2FArchitecture.drawio.png)
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+The **Architecture Diagram** given above explains the high-level design of the program. Given below is a quick overview of the main components.
 
+### Main Components
+- `PlanPal`: Main entry of the program, initialises and connects the components
+- `UI`: In charge of printing messages
+- `Logic`: Determines the command to execute
+- `Storage`: Read and write data from hard disk
+- `Command`: Specific commands for execution
 
+### Program Flow
+- The `PlanPal` controls access to the `UI`, `Parser`, and `FileManager` (Storage) components of the app.
+- The user will send input to `PlanPal`.
+- `PlanPal` will parse the input to produce a `Command`, which will hook back into `PlanPal` to gain access to the other components when running
 ## Product scope
 ### Target user profile
 
@@ -75,10 +88,14 @@ As an international student in NUS, I want to be able to...
 
 ## User Stories
 
-|Version| As a ... | I want to ... | So that I can ...|
-|--------|----------|---------------|------------------|
-|v1.0|new user|see usage instructions|refer to them when I forget how to use the application|
-|v2.0|user|find a to-do item by name|locate a to-do without having to go through the entire list|
+|Version| As a ... | I want to ...             | So that I can ...                                                              |
+|--------|----------|---------------------------|--------------------------------------------------------------------------------|
+|v1.0|NUS international student| see my list of contacts   | easily call home or look for emergency contacts when needed                    |
+|v1.0|NUS international student| add a contact             | expand my list of useful contacts                                              |
+|v1.0|NUS international student| delete a contact          | remove a contact if I no longer need it                                        |
+|v1.0|NUS international student| edit a contact            | amend any mistakes when creating the contact or if the number has been changed |
+|v1.0|NUS international student| save my contacts          | my contacts are still there when I exit and enter the app again                |                                                       |
+|v2.0||  |                     |
 
 ---
 ## Non-Functional Requirements
@@ -96,6 +113,8 @@ As an international student in NUS, I want to be able to...
 
 # Contact Manager Features
 
+The sequence diagram below illustrates the process for resolving the "edit" command.
+![EditContact.drawio.png](Images%2FEditContact.drawio.png)
 ## Adding Contact
 The `add` command allows users to add a contact with various categories
 
@@ -123,6 +142,8 @@ delete <index of the contact in the list>
 
 ### Example
 The user wants to delete a contact that has an index of '2' in the contact list.
+
+
 ```
 delete 2
 ```
@@ -169,24 +190,6 @@ _________________________________________________________
 ```
 ---
 
-## Editing a Contact
-The `edit` command allows users to find a contact from the list
-
-### Usage:
-```
-edit <index> /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
-```
-### Example 1:
-```
-edit 1 /name: Cassie
-```
-### Expected Output:
-```
-_________________________________________________________
-Edited successfully!
-_________________________________________________________
-```
----
 
 ## category Command
 The 'category' command allows users to customize category in contacts. 
