@@ -43,6 +43,7 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
 
 ## Acknowledgements
 
+
 {list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
 
 ## Setting up, getting started
@@ -56,11 +57,23 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 
 ## Design
 
+---
 ### Architecture
+![Architecture.drawio.png](Images%2FArchitecture.drawio.png)
 
-{Describe the design and implementation of the product. Use UML diagrams and short code snippets where applicable.}
+The **Architecture Diagram** given above explains the high-level design of the program. Given below is a quick overview of the main components.
 
+### Main Components
+- `PlanPal`: Main entry of the program, initialises and connects the components
+- `UI`: In charge of printing messages
+- `Logic`: Determines the command to execute
+- `Storage`: Read and write data from hard disk
+- `Command`: Specific commands for execution
 
+### Program Flow
+- The `PlanPal` controls access to the `UI`, `Parser`, and `FileManager` (Storage) components of the app.
+- The user will send input to `PlanPal`.
+- `PlanPal` will parse the input to produce a `Command`, which will hook back into `PlanPal` to gain access to the other components when running
 ## Product scope
 ### Target user profile
 
@@ -169,24 +182,6 @@ _________________________________________________________
 ```
 ---
 
-## Editing a Contact
-The `edit` command allows users to find a contact from the list
-
-### Usage:
-```
-edit <index> /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
-```
-### Example 1:
-```
-edit 1 /name: Cassie
-```
-### Expected Output:
-```
-_________________________________________________________
-Edited successfully!
-_________________________________________________________
-```
----
 
 ## category Command
 The 'category' command allows users to customize category in contacts. 
