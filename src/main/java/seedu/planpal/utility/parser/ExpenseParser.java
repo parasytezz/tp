@@ -46,6 +46,10 @@ public class ExpenseParser extends Parser {
                 expenseManager.viewExpenseList();
                 return true;
 
+            case Parser.DELETE_COMMAND:
+                expenseManager.deleteExpense(inputParts[1].trim());
+                return true;
+
             case Parser.FIND_COMMAND:
                 description = inputParts[1].trim();
                 expenseManager.findExpense(description);

@@ -42,6 +42,28 @@ public class ExpenseManager implements ListFunctions {
     }
 
     /**
+     * Deletes an existing expense from the contact list.
+     * The expense is retrieved from its description.
+     *
+     * @param index The description of the expense to be deleted. This must not be empty.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} os thrown.
+     */
+    public void deleteExpense(String index) throws PlanPalExceptions {
+        if (index.isEmpty()) {
+            throw new EmptyDescriptionException();
+        }
+        assert index.length() != 0 : "Input must not be empty";
+
+        try {
+            deleteList(expenseList, index);
+            savedExpenses.saveList(expenseList, true);
+        } catch (PlanPalExceptions e) {
+            System.out.println ("Failed to delete an expense: " + e.getMessage());
+            throw e;
+        }
+    }
+
+    /**
      * Finds expense in the expense list based on the provided description.
      * The description can contain multiple names separated by spaces.
      * If matching contacts are found, they are displayed to the user.
