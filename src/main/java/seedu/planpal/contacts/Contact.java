@@ -72,6 +72,16 @@ public class Contact implements Editable, Storeable {
         if (!isCategory) {
             throw new IllegalCommandException();
         }
+        commandDescription = "";
+        if (name != null) {
+            commandDescription += CATEGORY_SEPARATOR + "name" + CATEGORY_VALUE_SEPARATOR + name + " ";
+        }
+        if (phone != null) {
+            commandDescription += CATEGORY_SEPARATOR + "phone" + CATEGORY_VALUE_SEPARATOR + phone + " ";
+        }
+        if (email != null) {
+            commandDescription += CATEGORY_SEPARATOR + "email" + CATEGORY_VALUE_SEPARATOR + email + " ";
+        }
     }
 
     @Override

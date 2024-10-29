@@ -52,6 +52,7 @@ public class FileManager {
             try(FileWriter writer = new FileWriter(storagePath)){
                 if (list.size() > 1 || !isAfterDelete) {
                     for (T item : list) {
+                        System.out.println(item.toString());
                         String commandDescription = ((Storeable) item).getCommandDescription();
                         writer.write(ADD_COMMAND + " " + commandDescription + "\n");
                     }
