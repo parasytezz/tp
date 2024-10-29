@@ -56,6 +56,9 @@ The sequence diagram below illustrates the process for resolving the "add" comma
 The sequence diagram below illustrates the process for resolving the "edit" command.
 ![EditContact.drawio.png](Images%2FEditContact.drawio.png)
 
+### Set Category Command
+The sequence diagram below illustrates the process for resolving the "category" command.
+![SetCategory.drawio.png](Images%2FSetCategory.drawio.png)
 ---
 ## Product scope
 ### Target user profile
