@@ -54,10 +54,24 @@ Currently, only the contact features have been illustrated.
 The sequence diagram below illustrates the process for resolving the "add" command.
 ![AddContact.drawio.png](Images%2FAddContact.drawio.png)
 
+Explanation: 
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
+- When command "add /name: john" is sent, the processCommand function is executed.
+- Since the command is "add", addContact function is executed using the description "/name: john". 
+- This creates a new contact and is then added to the list of contacts
+- Finally, contact file is saved in the savedContacts FileManager.
+
 ### List Command
 The sequence diagram below illustrates the process for resolving the "list" command.
 
 ![ViewContact.drawio.png](Images%2FViewContact.drawio.png)
+
+Explanation:
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
+- When command "list" is sent, the processCommand function is executed.
+- Since the command is "add", viewContactList command is executed, printing all the contacts in the list.
 
 ### Edit Command
 The sequence diagram below illustrates the process for resolving the "edit" command.
@@ -66,6 +80,12 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 ### Set Category Command
 The sequence diagram below illustrates the process for resolving the "category" command.
 ![SetCategory.drawio.png](Images%2FSetCategory.drawio.png)
+
+## Expense Manager Features
+### Add Command
+
+For the expense manager, the add function works similar to the contact manager. The only difference being the names of the objects and the classes.
+
 ---
 ## Product scope
 ### Target user profile
