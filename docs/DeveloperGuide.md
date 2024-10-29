@@ -44,13 +44,20 @@ The **Architecture Diagram** given above explains the high-level design of the p
 
 ---
 ## Implementation
-
 ---
+Currently, only the contact features have been illustrated.
+{to add other implementations for expense and activity managers}
+
 ## Contact Manager Features
 
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.
 ![AddContact.drawio.png](Images%2FAddContact.drawio.png)
+
+### List Command
+The sequence diagram below illustrates the process for resolving the "list" command.
+
+![ViewContact.drawio.png](Images%2FViewContact.drawio.png)
 
 ### Edit Command
 The sequence diagram below illustrates the process for resolving the "edit" command.
