@@ -32,8 +32,6 @@ public class ActivityManager implements ListFunctions {
         Activity newActivity = new Activity(name, activityType);
         addToList(activityList, newActivity);
         savedActivities.saveList(activityList);
-        System.out.println("Activity added. Current list size: " + activityList.size());
-        System.out.println(activityList);
     }
 
     /**
@@ -56,7 +54,6 @@ public class ActivityManager implements ListFunctions {
      * Each activity is printed with an index number.
      */
     public void viewActivityList() {
-        System.out.println("Viewing activity list. Current list size: " + activityList.size());
         viewList(activityList);
     }
 
