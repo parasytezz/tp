@@ -34,7 +34,9 @@ public class Parser {
         boolean isProcessing = true;
         FileManager fileManager = new FileManager();
         ContactManager contactManager = new ContactManager();
+        ActivityManager activityManager = new ActivityManager();
         fileManager.loadList(contactManager, "contacts.txt");
+        fileManager.loadList(activityManager, "activities.txt");
 
         while (isProcessing) {
 
@@ -58,8 +60,6 @@ public class Parser {
             case ACTIVITY_MANAGER:
                 // do something
                 String commandForActivity = getCommand("ACTIVITY_MANAGER");
-                ActivityManager activityManager = new ActivityManager();
-                fileManager.loadList(activityManager, "activities.txt");
                 ActivityParser activityParser = new ActivityParser(activityManager);
                 isProcessing = activityParser.processCommand(commandForActivity);
                 break;
