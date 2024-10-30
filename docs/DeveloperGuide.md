@@ -45,6 +45,11 @@ The **Architecture Diagram** given above explains the high-level design of the p
 ---
 ## Implementation
 ---
+
+The class diagram below represents the contact book system
+
+![ContactClassDiagram.jpg](Images/ContactClassDiagram.jpg)
+
 Currently, only the contact features have been illustrated.
 {to add other implementations for expense and activity managers}
 
@@ -80,6 +85,11 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 ### Set Category Command
 The sequence diagram below illustrates the process for resolving the "category" command.
 ![SetCategory.drawio.png](Images%2FSetCategory.drawio.png)
+
+### Find Command
+The sequence diagram below illustrates the process for resolving the "find" command.
+
+![FindContact.jpg](Images/FindContact.jpg)
 
 ## Expense Manager Features
 ### Add Command
