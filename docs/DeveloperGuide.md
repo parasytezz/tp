@@ -24,7 +24,7 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 
 ---
 ### Architecture
-![Architecture.drawio.png](Images%2FArchitecture.drawio.png)
+![Architecture.drawio.png](Images%28DG%29%2FArchitecture.drawio.png)
 
 The **Architecture Diagram** given above explains the high-level design of the program. Given below is a quick overview of the main components.
 
@@ -37,8 +37,8 @@ The **Architecture Diagram** given above explains the high-level design of the p
 
 ### Program Flow
 The sequence diagram below describes how the components interacts with one another when the user issues a command.
-For simplicity, the 3 different modes will be classified as `:Mode`.
-![MainProgramFlowDiagram.drawio.png](Images%2FMainProgramFlowDiagram.drawio.png)
+For simplicity, the 3 different modes will be classified as `:Mode`.  
+![MainProgramFlowDiagram.drawio.png](Images%28DG%29%2FMainProgramFlowDiagram.drawio.png)
 
 ## Ui
 <u>Overview</u>  
@@ -68,7 +68,7 @@ Consolidating all the print methods that are repeated reduces repetition in code
 This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.
 
 <u>Class Diagram for Parser Component:</u>  
-![ParserClassDiagram.drawio.png](Images%2FParserClassDiagram.drawio.png)
+![ParserClassDiagram.drawio.png](Images%28DG%29%2FParserClassDiagram.drawio.png)
 
 <u>Design Considerations</u>  
 The Parser class follows this structure as there are common commands between the different modes. Using inheritance prevents the repetition of code. Additionally, different parsers were created since different modes require different functionalities.
@@ -77,7 +77,7 @@ The Parser class follows this structure as there are common commands between the
 The class diagram below represents the contact book system
 
 <u>Class Diagram</u>  
-![ContactClassDiagram.jpg](Images/ContactClassDiagram.jpg)
+![ContactClassDiagram.jpg](Images(DG)/ContactClassDiagram.jpg)
 
 <u>Methods</u>  
 
@@ -91,7 +91,7 @@ The class diagram below represents the contact book system
 
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.
-![AddContact.drawio.png](Images%2FAddContact.drawio.png)  
+![AddContact.drawio.png](Images%28DG%29%2FAddContact.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -108,7 +108,7 @@ The sequence diagram below illustrates the process for resolving the "add" comma
 
 ### List Command
 The sequence diagram below illustrates the process for resolving the "list" command.  
-![ViewContact.drawio.png](Images%2FViewContact.drawio.png)
+![ViewContact.drawio.png](Images%28DG%29%2FViewContact.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -124,7 +124,7 @@ The sequence diagram below illustrates the process for resolving the "list" comm
 
 ### Edit Command
 The sequence diagram below illustrates the process for resolving the "edit" command.
-![EditContact.drawio.png](Images%2FEditContact.drawio.png)
+![EditContact.drawio.png](Images%28DG%29%2FEditContact.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -141,12 +141,12 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 
 ### Set Category Command
 The sequence diagram below illustrates the process for resolving the "category" command.
-![SetCategory.drawio.png](Images%2FSetCategory.drawio.png)
+![SetCategory.drawio.png](Images%28DG%29%2FSetCategory.drawio.png)
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
 
-![FindContact.jpg](Images/FindContact.jpg)
+![FindContact.jpg](Images%28DG%29%2FFindContact.jpg)
 
 ## Mode: Expense Manager
 The class diagram below represents the Expense Manager system.
@@ -154,8 +154,8 @@ The class diagram below represents the Expense Manager system.
 {insert class diagram}
 
 ### Add Command
-The sequence diagram below illustrates the process for resolving the "add" command.
-![AddExpense.drawio.png](Images%2FAddExpense.drawio.png)
+The sequence diagram below illustrates the process for resolving the "add" command.  
+![AddExpense.drawio.png](Images%28DG%29%2FAddExpense.drawio.png)
 
 <u>Components Breakdown:</u>  
 - For simplicity, the `Ui` component has been taken out

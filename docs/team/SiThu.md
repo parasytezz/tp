@@ -1,4 +1,4 @@
-# John Doe - Project Portfolio Page
+# Si Thu Lin Aung - Project Portfolio Page
 
 ## Overview
 
