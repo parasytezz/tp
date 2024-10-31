@@ -21,6 +21,7 @@ insert SS of release page
 Click on `PlanPal.jar` to automatically download the file. Place the file in a folder your choice.
 
 ## Design & Implementation
+
 ---
 ### Architecture
 ![Architecture.drawio.png](Images%2FArchitecture.drawio.png)
@@ -119,11 +120,24 @@ The sequence diagram below illustrates the process for resolving the "list" comm
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
 - When command "list" is sent, the processCommand function is executed.
-- Since the command is "add", viewContactList command is executed, printing all the contacts in the list.
+- Since the command is "list", viewContactList command is executed, printing all the contacts in the list.
 
 ### Edit Command
 The sequence diagram below illustrates the process for resolving the "edit" command.
 ![EditContact.drawio.png](Images%2FEditContact.drawio.png)
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ContactParser` class is the `Parser` component
+- `ContactManager` class is the `Mode` component
+
+<u>Explanation:</u>
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
+- When command "edit" is sent, the processCommand function is executed.
+- Since the command is "edit", editList command is executed using the description 1 /name: Bob.
+- The editList function edits the category at the stated index
+- Finally, contact file is saved in the savedContacts FileManager.
 
 ### Set Category Command
 The sequence diagram below illustrates the process for resolving the "category" command.
