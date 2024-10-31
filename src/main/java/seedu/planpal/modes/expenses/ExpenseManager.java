@@ -1,4 +1,4 @@
-package seedu.planpal.models.expenses;
+package seedu.planpal.modes.expenses;
 
 
 import seedu.planpal.exceptions.EmptyDescriptionException;

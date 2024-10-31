@@ -1,6 +1,6 @@
 package seedu.planpal.utility.parser;
 
-import seedu.planpal.models.activities.ActivityManager;
+import seedu.planpal.modes.activities.ActivityManager;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;

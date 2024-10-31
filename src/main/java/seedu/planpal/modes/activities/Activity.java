@@ -1,47 +1,39 @@
-package seedu.planpal.models.expenses;
+package seedu.planpal.modes.activities;
 
-import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
 
 /**
- * Represents an expense in the PlanPal application.
+ * Represents an activity in the PlanPal application.
  */
-public class Expense implements Editable, Storeable {
-    private static final String STORAGE_PATH = "./data/expenses.txt";
+public class Activity implements Editable, Storeable {
+    private static final String STORAGE_PATH = "./data/activities.txt";
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;
-    private String cost;
     private String name;
+    private String activityType;
 
     /**
-     * Constructs an Expense object from a command description.
+     * Constructs an Activity object from a command description.
      *
-     * @param description The command description containing name and cost separated by categories.
+     * @param description The command description containing name and activityType separated by categories.
      * @throws PlanPalExceptions If the description is invalid or incomplete.
      */
-    public Expense(String description) throws PlanPalExceptions {
-        setCommandDescription(description);
-        String[] categories = description.split(CATEGORY_SEPARATOR);
-        if (categories.length == 1) {
-            throw new IllegalCommandException();
-        }
-        assert categories.length >= 2: "Illegal command executed in expenses";
-        for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
-            processEditFunction(categories[categoryIndex]);
-        }
+    public Activity(String name, String activityType) throws PlanPalExceptions {
+        setName(name);
+        setActivityType(activityType);
     }
 
     /**
-     * Returns a string representation of the expense.
+     * Returns a string representation of the activity.
      *
-     * @return A string in the format: [name, Cost = cost].
+     * @return A string in the format: [Activity: name (activityType)]
      */
     @Override
     public String toString() {
-        return "[" + name + ", cost = $" + cost + "]";
+        return "[Activity: " + name + " (" + activityType + ")]";
     }
 
     /**
@@ -59,15 +51,16 @@ public class Expense implements Editable, Storeable {
 
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
-        if (category.equals("cost")){
-            setCost(valueToEdit);
-        } else if (category.equals("name")){
+        switch (category) {
+        case "name":
             setName(valueToEdit);
-        }else {
-            System.out.println(category + " is not a valid category");
-            throw new IllegalCommandException();
+            break;
+        case "type":
+            setActivityType(valueToEdit);
+            break;
+        default:
+            throw new PlanPalExceptions("Invalid category: " + category);
         }
-        setCommandDescription(category, valueToEdit);
     }
 
     /**
@@ -77,11 +70,11 @@ public class Expense implements Editable, Storeable {
      * @param newValue The new value for the category.
      * @throws PlanPalExceptions If there is an error updating the command description.
      */
-    // Overloaded function
+    // Overloading function
     public void setCommandDescription(String categoryToChange, String newValue) throws PlanPalExceptions {
         String newCommandDescription = "";
         String[] categoryParts = commandDescription.split(CATEGORY_SEPARATOR);
-        for (int i = 1; i < categoryParts.length; i++) {
+        for (int i = 0; i < categoryParts.length; i++) {
             if (categoryParts[i].startsWith(categoryToChange)) {
                 categoryParts[i] = categoryToChange + CATEGORY_VALUE_SEPARATOR + newValue;
             }
@@ -106,51 +99,47 @@ public class Expense implements Editable, Storeable {
     }
 
     /**
-     * Sets the name of the expense.
+     * Sets the name of the activity.
      *
-     * @param name The name of the expense.
+     * @param name The name of the activity.
      * @throws PlanPalExceptions If the name is null or empty.
      */
     public void setName(String name) throws PlanPalExceptions {
         if (name == null || name.isEmpty()) {
-            throw new PlanPalExceptions("Name cannot be empty");
+            throw new PlanPalExceptions("Name cannot be blank.");
         }
         this.name = name;
     }
 
     /**
-     * Gets the name of the expense.
+     * Sets the name of the activity.
      *
-     * @return The name of the expense.
+     * @param activityType The type of the activity.
+     * @throws PlanPalExceptions If the activityType is null or empty.
+     */
+    public void setActivityType(String activityType) throws PlanPalExceptions {
+        if (activityType == null || activityType.isEmpty()) {
+            throw new PlanPalExceptions("Activity type cannot be blank.");
+        }
+        this.activityType = activityType;
+    }
+
+    /**
+     * Gets the name of the activity
+     *
+     * @return name The name of the activity
      */
     public String getName() {
         return name;
     }
 
     /**
-     * Sets the cost of the expense.
+     * Gets the type of the activity
      *
-     * @param cost The cost as a string.
-     * @throws PlanPalExceptions If the cost is negative or invalid.
+     * @return activityType The type of the activity
      */
-    public void setCost(String cost) throws PlanPalExceptions {
-        try {
-            double costValue = Double.parseDouble(cost);
-            if (costValue < 0) {
-                throw new PlanPalExceptions("Cost cannot be negative");
-            }
-            this.cost = cost;
-        } catch (NumberFormatException e) {
-            throw new PlanPalExceptions("The cost value cannot be evaluated!");
-        }
-    }
-
-    /**
-     * Gets the cost of the expense.
-     *
-     * @return The cost of the expense.
-     */
-    public String getCost(){
-        return cost;
+    public String getActivityType() {
+        return activityType;
     }
 }
+

@@ -1,6 +1,6 @@
 package seedu.planpal.utility.parser;
 
-import seedu.planpal.models.contacts.ContactManager;
+import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
@@ -12,8 +12,7 @@ import seedu.planpal.utility.Ui;
 public class ContactParser extends Parser {
 
     private static final int INPUT_SEGMENTS = 2;
-
-    ContactManager contactManager;
+    private ContactManager contactManager;
 
     public ContactParser(ContactManager contactManager) {
         this.contactManager = contactManager;
