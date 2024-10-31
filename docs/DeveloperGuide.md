@@ -20,10 +20,7 @@ insert SS of release page
 
 Click on `PlanPal.jar` to automatically download the file. Place the file in a folder your choice.
 
-
-
-## Design
-
+## Design & Implementation
 ---
 ### Architecture
 ![Architecture.drawio.png](Images%2FArchitecture.drawio.png)
@@ -31,35 +28,76 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 The **Architecture Diagram** given above explains the high-level design of the program. Given below is a quick overview of the main components.
 
 ### Main Components
-- `PlanPal`: Main entry of the program, initialises and connects the components
-- `UI`: In charge of printing messages
-- `Logic`: Determines the command to execute
-- `Storage`: Read and write data from hard disk
-- `Command`: Specific commands for execution
+- `PlanPal`: Main entry of the program, initialises and connects to the Ui
+- `Ui`: In charge of printing messages
+- `Parser`: Determines the command to execute
+- `Modes`: Determines the group of functionalities that the user wants to use.
+- `FileManager`: Read and write data from hard disk
 
 ### Program Flow
-- The `PlanPal` controls access to the `UI`, `Parser`, and `FileManager` (Storage) components of the app.
-- The user will send input to `PlanPal`.
-- `PlanPal` will parse the input to produce a `Command`, which will hook back into `PlanPal` to gain access to the other components when running
+The sequence diagram below describes how the components interacts with one another when the user issues a command.
+For simplicity, the 3 different modes will be classified as `:Mode`.
+![MainProgramFlowDiagram.drawio.png](Images%2FMainProgramFlowDiagram.drawio.png)
 
----
-## Implementation
----
+## Ui
+<u>Overview</u>  
+The `Ui` component handles operations that displays messages for the user to read as an instruction.  
+Additionally, it is also used to capture user inputs in certain functions.
 
+<u>Methods</u>  
+The `Ui` component has the following key methods:
+
+| Method                | Description                                                          |
+|-----------------------|----------------------------------------------------------------------|
+| printWelcomeMessage   | Prints the welcome message                                           |
+| printAvailableModes   | Print all modes that are currently available in PlanPal              |
+| printByeMessage       | Prints the good bye message                                          |
+| printCreateStorage    | Prints the path to the storage that is created                       |
+| getSetCategory        | Capture user input when using the category function in certain modes |
+| printCat              | Prints the categories available in certain modes                     |
+| printCategoryNotFound | Prints when category is not found                                    |
+| print                 | Custom print function that accepts multiple strings                  |
+
+<u>Design Considerations</u>  
+This component was created as functionalities such as printing will be used in most of the classes in the PlanPal Application.  
+Consolidating all the print methods that are repeated reduces repetition in code and makes it easier to update when necessary.
+
+## Parser
+<u>Overview</u>
+This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.
+
+<u>Class Diagram for Parser Component:</u>  
+![ParserClassDiagram.drawio.png](Images%2FParserClassDiagram.drawio.png)
+
+<u>Design Considerations</u>  
+The Parser class follows this structure as there are common commands between the different modes. Using inheritance prevents the repetition of code. Additionally, different parsers were created since different modes require different functionalities.
+
+## Mode: Contact Manager
 The class diagram below represents the contact book system
 
+<u>Class Diagram</u>  
 ![ContactClassDiagram.jpg](Images/ContactClassDiagram.jpg)
 
-Currently, only the contact features have been illustrated.
-{to add other implementations for expense and activity managers}
+<u>Methods</u>  
 
-## Contact Manager Features
+| Method          | Description                           |
+|-----------------|---------------------------------------|
+| addContact      | Adds a contact to the contact list    |
+| deleteContact   | Deletes a contact in the contact list |
+| viewContactList | View the current contact list         |
+| editContact     | Edit a contact in the list            |
+| findContact     | Find a contact in the contact list    |
 
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.
-![AddContact.drawio.png](Images%2FAddContact.drawio.png)
+![AddContact.drawio.png](Images%2FAddContact.drawio.png)  
 
-Explanation: 
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ContactParser` class is the `Parser` component
+- `ContactManager` class is the `Mode` component
+
+<u>Explanation:</u> 
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
 - When command "add /name: john" is sent, the processCommand function is executed.
@@ -68,11 +106,16 @@ Explanation:
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### List Command
-The sequence diagram below illustrates the process for resolving the "list" command.
-
+The sequence diagram below illustrates the process for resolving the "list" command.  
 ![ViewContact.drawio.png](Images%2FViewContact.drawio.png)
 
-Explanation:
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ContactParser` class is the `Parser` component
+- `ContactManager` class is the `Mode` component
+- There is no need for saving for list here.
+
+<u>Explanation:</u>
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
 - When command "list" is sent, the processCommand function is executed.
@@ -91,10 +134,23 @@ The sequence diagram below illustrates the process for resolving the "find" comm
 
 ![FindContact.jpg](Images/FindContact.jpg)
 
-## Expense Manager Features
-### Add Command
+## Mode: Expense Manager
+The class diagram below represents the Expense Manager system.
 
-For the expense manager, the add function works similar to the contact manager. The only difference being the names of the objects and the classes.
+{insert class diagram}
+
+### Add Command
+The sequence diagram below illustrates the process for resolving the "add" command.
+![AddExpense.drawio.png](Images%2FAddExpense.drawio.png)
+
+<u>Components Breakdown:</u>  
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+
+<u>Explanation:</u>  
+The way the add command works for expense manager is similar to how it works for contact manager, with the only difference being the names used.
+
 
 ---
 ## Product scope

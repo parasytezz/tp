@@ -1,9 +1,9 @@
 package seedu.planpal.utility.parser;
 
-import seedu.planpal.activities.ActivityManager;
-import seedu.planpal.contacts.ContactManager;
+import seedu.planpal.modes.activities.ActivityManager;
+import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.expenses.ExpenseManager;
+import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
 
@@ -22,6 +22,23 @@ public class Parser {
     private static final String CONTACT_MANAGER = "1";
     private static final String EXPENSE_MANAGER = "2";
     private static final String ACTIVITY_MANAGER = "3";
+    protected FileManager fileManager;
+    protected ContactManager contactManager;
+    protected ExpenseManager expenseManager;
+    protected ActivityManager activityManager;
+
+    public Parser(){
+        this.fileManager = new FileManager();
+        this.contactManager = new ContactManager();
+        this.expenseManager = new ExpenseManager();
+        this.activityManager = new ActivityManager();
+    }
+
+    private void loadFiles(){
+        fileManager.loadList(contactManager, "contacts.txt");
+        fileManager.loadList(expenseManager, "expenses.txt");
+        fileManager.loadList(activityManager, "activities.txt");
+    }
 
     private String getCommand(String currentMode){
         Scanner in = new Scanner(System.in);
@@ -32,15 +49,8 @@ public class Parser {
 
     public boolean processCommand(String modeInput) throws PlanPalExceptions {
         boolean isProcessing = true;
-        FileManager fileManager = new FileManager();
-        ContactManager contactManager = new ContactManager();
-        ActivityManager activityManager = new ActivityManager();
-        fileManager.loadList(contactManager, "contacts.txt");
-        fileManager.loadList(activityManager, "activities.txt");
-
+        loadFiles();
         while (isProcessing) {
-
-
             switch (modeInput){
             case CONTACT_MANAGER:
                 String commandForContact = getCommand("CONTACT_MANAGER");
@@ -51,8 +61,6 @@ public class Parser {
             case EXPENSE_MANAGER:
                 // do something
                 String commandForExpense = getCommand("EXPENSE_MANAGER");
-                ExpenseManager expenseManager = new ExpenseManager();
-                fileManager.loadList(expenseManager, "expenses.txt");
                 ExpenseParser expenseParser = new ExpenseParser(expenseManager);
                 isProcessing = expenseParser.processCommand(commandForExpense);
                 break;
@@ -74,5 +82,5 @@ public class Parser {
             }
         }
         return false;
-    };
+    }
 }

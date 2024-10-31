@@ -1,4 +1,4 @@
-package seedu.planpal.expenses;
+package seedu.planpal.modes.expenses;
 
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
@@ -134,11 +134,15 @@ public class Expense implements Editable, Storeable {
      * @throws PlanPalExceptions If the cost is negative or invalid.
      */
     public void setCost(String cost) throws PlanPalExceptions {
-        double costValue = Double.parseDouble(cost);
-        if (costValue < 0) {
-            throw new PlanPalExceptions("Cost cannot be negative");
+        try {
+            double costValue = Double.parseDouble(cost);
+            if (costValue < 0) {
+                throw new PlanPalExceptions("Cost cannot be negative");
+            }
+            this.cost = cost;
+        } catch (NumberFormatException e) {
+            throw new PlanPalExceptions("The cost value cannot be evaluated!");
         }
-        this.cost = cost;
     }
 
     /**

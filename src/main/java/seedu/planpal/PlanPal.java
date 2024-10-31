@@ -15,12 +15,12 @@ public class PlanPal {
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
         Ui.printWelcomeMessage();
-        Parser mainParser = new Parser();
 
         while (true) {
             try {
                 Ui.printAvailableModes();
                 String modeInput = in.nextLine();
+                Parser mainParser = new Parser();
                 mainParser.processCommand(modeInput);
             } catch (PlanPalExceptions e) {
                 Ui.print(e.getMessage());

@@ -1,9 +1,9 @@
 package seedu.planpal.utility.parser;
 
-import seedu.planpal.activities.ActivityManager;
-import seedu.planpal.contacts.ContactManager;
+import seedu.planpal.modes.activities.ActivityManager;
+import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.expenses.ExpenseManager;
+import seedu.planpal.modes.expenses.ExpenseManager;
 
 public class ParserFactory {
 

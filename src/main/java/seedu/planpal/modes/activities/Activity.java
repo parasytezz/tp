@@ -1,4 +1,4 @@
-package seedu.planpal.activities;
+package seedu.planpal.modes.activities;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;

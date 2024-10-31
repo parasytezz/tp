@@ -3,7 +3,7 @@ package seedu.planpal.utility.parser;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.expenses.ExpenseManager;
+import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
 
 /**
@@ -11,7 +11,7 @@ import seedu.planpal.utility.Ui;
  */
 public class ExpenseParser extends Parser {
     private static final int INPUT_SEGMENTS = 2;
-    ExpenseManager expenseManager;
+    private ExpenseManager expenseManager;
 
     /**
      * Constructs an ExpenseParser with a given ExpenseManager.
