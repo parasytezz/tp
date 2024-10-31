@@ -178,7 +178,8 @@ The class diagram below represents the Expense Manager system.
 **Work in progress for v2.0**
 
 ### Add Command
-The sequence diagram below illustrates the process for resolving the "add" command.
+The sequence diagram below illustrates the process for resolving the "add" command.]
+
 ![AddExpense.drawio.png](Images%2FAddExpense.drawio.png)
 
 <u>Components Breakdown:</u>  

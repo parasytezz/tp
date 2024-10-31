@@ -3,7 +3,8 @@
 ## Introduction
 
 ---
-{Give a product intro}
+PlanPal is a desktop application designed for international students studying in NUS. It functions as an all-in-one organizational tool, enabling users to manage contacts, track expenses, and schedule activities. The user interacts with the application using a CLI and is written in Java 17.
+
 
 
 ## Purpose of User Guide
