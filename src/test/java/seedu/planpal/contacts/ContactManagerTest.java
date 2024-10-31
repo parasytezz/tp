@@ -2,6 +2,7 @@ package seedu.planpal.contacts;
 
 import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.models.contacts.ContactManager;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

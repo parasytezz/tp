@@ -1,9 +1,9 @@
 package seedu.planpal.utility.parser;
 
-import seedu.planpal.activities.ActivityManager;
-import seedu.planpal.contacts.ContactManager;
+import seedu.planpal.models.activities.ActivityManager;
+import seedu.planpal.models.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.expenses.ExpenseManager;
+import seedu.planpal.models.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
 
@@ -34,8 +34,10 @@ public class Parser {
         boolean isProcessing = true;
         FileManager fileManager = new FileManager();
         ContactManager contactManager = new ContactManager();
+        ExpenseManager expenseManager = new ExpenseManager();
         ActivityManager activityManager = new ActivityManager();
         fileManager.loadList(contactManager, "contacts.txt");
+        fileManager.loadList(expenseManager, "expenses.txt");
         fileManager.loadList(activityManager, "activities.txt");
 
         while (isProcessing) {
@@ -51,8 +53,6 @@ public class Parser {
             case EXPENSE_MANAGER:
                 // do something
                 String commandForExpense = getCommand("EXPENSE_MANAGER");
-                ExpenseManager expenseManager = new ExpenseManager();
-                fileManager.loadList(expenseManager, "expenses.txt");
                 ExpenseParser expenseParser = new ExpenseParser(expenseManager);
                 isProcessing = expenseParser.processCommand(commandForExpense);
                 break;

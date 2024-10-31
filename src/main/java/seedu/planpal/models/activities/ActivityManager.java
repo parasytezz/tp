@@ -1,4 +1,4 @@
-package seedu.planpal.activities;
+package seedu.planpal.models.activities;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;

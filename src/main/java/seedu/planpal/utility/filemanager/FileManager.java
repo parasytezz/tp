@@ -12,6 +12,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintStream;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -70,6 +72,7 @@ public class FileManager {
         saveList(list, false);
     }
 
+    //@@author c2linaung
     /**
      * Loads and processes data from a specified file using the given manager.
      * This method reads the file line by line, utilizing a parser appropriate for the file's content,
@@ -81,24 +84,49 @@ public class FileManager {
      * @param fileName The name of the file.
      */
     public <T> void loadList(T manager, String fileName) {
-        File file = new File(LIST_DIRECTORY + fileName);
-
         PrintStream out = System.out;
 
         // Redirect System.out to a dummy steam (solution from gpt)
         System.setOut(new PrintStream(new OutputStream() {
             @Override
-            public void write(int b) {}
+            public void write(int b) {
+            }
         }));
 
+        File file = new File(LIST_DIRECTORY + fileName);
+        File backupFile = new File(LIST_DIRECTORY + "backup_" + fileName);
+
+        try {
+            Files.copy(file.toPath(), backupFile.toPath());
+        } catch (IOException e) {
+            Ui.print("Error creating backup file!");
+        }
+
+        int lineNumber = 0;
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
+                lineNumber++;
                 Parser parser = ParserFactory.getParser(file.getName(), manager);
                 parser.processCommand(scanner.nextLine());
             }
-        } catch (FileNotFoundException | PlanPalExceptions e){
-            Ui.print(e.getMessage());
+        } catch (PlanPalExceptions e) {
+            System.setOut(out);
+            Ui.print(
+                    "ERROR DETECTED: FILE IS CORRUPTED!!!",
+                    "ERROR OCCURRED IN LINE " + lineNumber,
+                    "Type of error: " + e.getMessage(),
+                    "Restart the application and check the data file to prevent errors!"
+            );
+
+            try {
+                Files.copy(backupFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            } catch (IOException ex) {
+                Ui.print("Error creating backup file!");
+            }
+        } catch (FileNotFoundException e) {
+            Ui.print("FILE NOT FOUND!");
         }
+        backupFile.delete();
         System.setOut(out);
     }
 }

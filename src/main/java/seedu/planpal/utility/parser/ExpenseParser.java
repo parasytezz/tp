@@ -3,7 +3,7 @@ package seedu.planpal.utility.parser;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.expenses.ExpenseManager;
+import seedu.planpal.models.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
 
 /**

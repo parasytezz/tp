@@ -1,6 +1,6 @@
 package seedu.planpal.utility.parser;
 
-import seedu.planpal.contacts.ContactManager;
+import seedu.planpal.models.contacts.ContactManager;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;

@@ -1,4 +1,4 @@
-package seedu.planpal.expenses;
+package seedu.planpal.models.expenses;
 
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
@@ -36,7 +36,11 @@ public class ExpenseManager implements ListFunctions {
     public double getTotalCost(){
         double totalCost = 0.0;
         for (Expense expense : expenseList){
-            totalCost += Double.parseDouble(expense.getCost());
+            String costInString = expense.getCost();
+            if (costInString == null){
+                costInString = "0";
+            }
+            totalCost += Double.parseDouble(costInString);
         }
         return totalCost;
     }

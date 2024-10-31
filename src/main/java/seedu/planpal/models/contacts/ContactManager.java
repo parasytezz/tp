@@ -1,4 +1,4 @@
-package seedu.planpal.contacts;
+package seedu.planpal.models.contacts;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
