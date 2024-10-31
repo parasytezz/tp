@@ -90,7 +90,7 @@ The class diagram below represents the contact book system
 | findContact     | Find a contact in the contact list    |
 
 ### Add Command
-The sequence diagram below illustrates the process for resolving the "add" command.
+The sequence diagram below illustrates the process for resolving the "add" command.  
 ![AddContact.drawio.png](Images%28DG%29%2FAddContact.drawio.png)
 
 <u>Components Breakdown:</u>
@@ -123,7 +123,7 @@ The sequence diagram below illustrates the process for resolving the "list" comm
 - Since the command is "list", viewContactList command is executed, printing all the contacts in the list.
 
 ### Edit Command
-The sequence diagram below illustrates the process for resolving the "edit" command.
+The sequence diagram below illustrates the process for resolving the "edit" command.  
 ![EditContact.drawio.png](Images%28DG%29%2FEditContact.drawio.png)
 
 <u>Components Breakdown:</u>
@@ -140,7 +140,7 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Set Category Command
-The sequence diagram below illustrates the process for resolving the "category" command.
+The sequence diagram below illustrates the process for resolving the "category" command.  
 ![SetCategory.drawio.png](Images%28DG%29%2FSetCategory.drawio.png)
 
 ### Find Command

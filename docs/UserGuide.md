@@ -3,7 +3,8 @@
 ## Introduction
 
 ---
-PlanPal is the ultimate companion designed to ease the transition for international students by offering a seamless way to organize contacts, manage expenses and integrate fully into a new environment.
+
+
 
 
 ## Purpose of User Guide
