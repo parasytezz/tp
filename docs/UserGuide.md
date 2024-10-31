@@ -118,6 +118,26 @@ Edited successfully!
 _________________________________________________________
 ```
 ---
+## Finding a Contact
+The `find` command allows users to find a contact from the list
+
+### Usage:
+```
+find john
+```
+### Example 1:
+```
+find alice david
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = David Phone = null Email = null]
+2. [Name = Alice Phone = null Email = null]
+_________________________________________________________
+```
+---
 ## Expense Manager
 PlanPal will assist you in tracking your expenses in your planner. The guide below will show you how to make use of the expense manager commands.
 
@@ -158,6 +178,8 @@ _________________________________________________________
 Total cost of all expenses is: $10.0
 _________________________________________________________
 ```
+---
+
 ---
 
 ## FAQ
