@@ -78,6 +78,16 @@ The class diagram below represents the contact book system
 <u>Class Diagram</u>  
 ![ContactClassDiagram.jpg](Images/ContactClassDiagram.jpg)
 
+<u>Methods</u>  
+
+| Method          | Description                           |
+|-----------------|---------------------------------------|
+| addContact      | Adds a contact to the contact list    |
+| deleteContact   | Deletes a contact in the contact list |
+| viewContactList | View the current contact list         |
+| editContact     | Edit a contact in the list            |
+| findContact     | Find a contact in the contact list    |
+
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.
 ![AddContact.drawio.png](Images%2FAddContact.drawio.png)  
