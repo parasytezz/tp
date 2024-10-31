@@ -72,7 +72,27 @@ Edited successfully!
 _________________________________________________________
 ```
 ---
-### Adding a contact: `todo`
+## Finding a Contact
+The `find` command allows users to find a contact from the list
+
+### Usage:
+```
+find john
+```
+### Example 1:
+```
+find alice david
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = David Phone = null Email = null]
+2. [Name = Alice Phone = null Email = null]
+_________________________________________________________
+```
+---
+## Adding a contact: `todo`
 Adds a new item to the list of todo items.
 
 Format: `todo n/TODO_NAME d/DEADLINE`
@@ -85,6 +105,8 @@ Example of usage:
 `todo n/Write the rest of the User Guide d/next week`
 
 `todo n/Refactor the User Guide to remove passive voice d/13/04/2020`
+
+---
 
 ## FAQ
 
