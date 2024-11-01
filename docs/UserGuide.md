@@ -48,7 +48,7 @@ This section will focus on some of the key features of PlanPal and explain their
     - [Add contact](#adding-a-contact)
     - [List contact](#viewing-the-contact-list)
     - [Edit contact](#Editing-a-contact)
-    - Delete contact
+    - [Delete contact](#deleting-a-contact)
     - [Setting category](#Setting-category)
     - [Search contacts by category](#Search-contacts-in-a-category)
     - [Find contact](#finding-a-contact)
@@ -101,6 +101,27 @@ list
 _________________________________________________________
 Below is the list:
 1. [Name = johnny Phone = 12345678 Email = johnny@gmail.com]
+_________________________________________________________
+```
+---
+## Deleting a Contact
+The `delete` command allows users to delete an existing contact in the contact list.
+
+### Usage
+```
+delete <index> 
+```
+
+### Example
+The user wants to delete an existing contact that has an index of '2' in the contact list.
+```
+delete 2
+```
+
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
 _________________________________________________________
 ```
 ---
