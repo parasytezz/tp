@@ -13,6 +13,7 @@ public class ExpenseManager implements ListFunctions {
 
     FileManager savedExpenses = new FileManager();
     private ArrayList<Expense> expenseList = new ArrayList<>();
+    private String budget;
 
     public ArrayList<Expense> getExpenseList() {
         return expenseList;
@@ -90,5 +91,22 @@ public class ExpenseManager implements ListFunctions {
         } catch (PlanPalExceptions e) {
             throw e;
         }
+    }
+
+    public void setBudget(String budget) throws PlanPalExceptions{
+        try {
+            double budgetValue = Double.parseDouble(budget);
+            if (budgetValue < 0){
+                throw new PlanPalExceptions("Budget cannot be negative");
+            }
+            this.budget = budget;
+            Ui.print("Budget has been set to: $" + getBudget());
+        } catch (NumberFormatException e) {
+            throw new PlanPalExceptions("The budget value cannot be evaluated! Make sure it is a double type!");
+        }
+    }
+
+    public String getBudget() {
+        return budget;
     }
 }
