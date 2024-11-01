@@ -59,14 +59,12 @@ public class Parser {
                 break;
 
             case EXPENSE_MANAGER:
-                // do something
                 String commandForExpense = getCommand("EXPENSE_MANAGER");
                 ExpenseParser expenseParser = new ExpenseParser(expenseManager);
                 isProcessing = expenseParser.processCommand(commandForExpense);
                 break;
 
             case ACTIVITY_MANAGER:
-                // do something
                 String commandForActivity = getCommand("ACTIVITY_MANAGER");
                 ActivityParser activityParser = new ActivityParser(activityManager);
                 isProcessing = activityParser.processCommand(commandForActivity);

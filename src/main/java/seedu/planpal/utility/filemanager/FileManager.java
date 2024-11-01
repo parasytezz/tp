@@ -46,19 +46,24 @@ public class FileManager {
      *
      * @param list The list of objects to be saved. Each object must implement {@link Storeable}.
      */
-    public <T> void saveList(ArrayList<T> list, boolean isAfterDelete) {
+    public <T> void saveList(ArrayList<T> list, boolean hasTwoBeforeDelete) {
         T listElement = list.get(0);
         if (listElement instanceof Storeable) {
             String storagePath = ((Storeable)listElement).getStoragePath();
             createDirectory(storagePath);
             try(FileWriter writer = new FileWriter(storagePath)){
-                if (list.size() > 1 || !isAfterDelete) {
+                if (list.size() > 1 || hasTwoBeforeDelete) {
+                    System.out.println("Currently in list:");
+                    int i = 0;
                     for (T item : list) {
-                        System.out.println(item.toString());
+                        i++;
+                        System.out.println(i + ". " + item.toString());
                         String commandDescription = ((Storeable) item).getCommandDescription();
                         writer.write(ADD_COMMAND + " " + commandDescription + "\n");
                     }
+                    Ui.printLine();
                 } else {
+                    list.remove(0);
                     writer.write("");
                 }
             } catch (IOException e) {
@@ -69,7 +74,7 @@ public class FileManager {
 
     // Overloaded
     public <T> void saveList(ArrayList<T> list) {
-        saveList(list, false);
+        saveList(list, true);
     }
 
     //@@author c2linaung

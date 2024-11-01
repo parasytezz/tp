@@ -59,8 +59,9 @@ public class ExpenseManager implements ListFunctions {
         assert index.length() != 0 : "Input must not be empty";
 
         try {
+            boolean hasTwoBeforeDelete = (expenseList.size() == 2);
             deleteList(expenseList, index);
-            savedExpenses.saveList(expenseList, true);
+            savedExpenses.saveList(expenseList, hasTwoBeforeDelete);
         } catch (PlanPalExceptions e) {
             System.out.println ("Failed to delete an expense: " + e.getMessage());
             throw e;
