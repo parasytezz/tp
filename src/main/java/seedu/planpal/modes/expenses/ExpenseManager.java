@@ -20,6 +20,13 @@ public class ExpenseManager implements ListFunctions {
     }
 
     public void addExpense(String description) throws PlanPalExceptions {
+        if (budget == null) {
+            throw new PlanPalExceptions(
+                    "You have not set your budget! \n" +
+                    "To do so, type: budget <value> \n" +
+                    "Example: budget 100");
+        }
+
         if (description.isEmpty()){
             throw new EmptyDescriptionException();
         }
@@ -30,7 +37,13 @@ public class ExpenseManager implements ListFunctions {
 
     public void viewExpenseList(){
         viewList(expenseList);
-        System.out.println("Total cost of all expenses is: $" + getTotalCost());
+        double budgetValue = Double.parseDouble(getBudget());
+        System.out.println("Total budget: $" + getBudget());
+        System.out.println("Total cost: $" + getTotalCost());
+        System.out.println("Remaining budget: $" + (budgetValue - getTotalCost()));
+        if (budgetValue < getTotalCost()){
+            System.out.println("It's time to readjust your spending habits!");
+        }
         Ui.printLine();
     }
 
