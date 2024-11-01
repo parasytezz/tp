@@ -57,12 +57,12 @@ This section will focus on some of the key features of PlanPal and explain their
     - [List expenses](#viewing-the-expense-list)
     - [Delete expenses](#deleting-an-expense)
     - [Find expenses](#finding-an-expense)
-  - Activity Manager
+  - [Activity Manager](#activity-manager)
     - Add activity
-    - List activity
+    - [List activity](#viewing-the-activities-list)
     - Edit activity
     - Delete activity
-    - Find activity
+    - [Find activity](#finding-an-activity)
 
 ---
 ## Contact Manager
@@ -420,6 +420,49 @@ _________________________________________________________
 Here is what I found:
 1. [utown lunch, cost = $5]
 2. [PGP lunch, cost = $4]
+_________________________________________________________
+```
+---
+
+## Activity Manager
+PlanPal will assist you in tracking your activities in your planner. The guide below will show you how to make use of the activity manager commands.
+
+---
+## Viewing the Activities list
+The `list` command allows users to view all their current expenses
+
+### Usage:
+```
+list
+```
+### Expected Output:
+```
+_________________________________________________________
+Below is the list:
+1. [Activity: running (exercise)]
+2. [Activity: swimming (exercise)]
+3. [Activity: groceries (necessities)]
+_________________________________________________________
+```
+---
+
+## Finding an Activity
+The `find` command allows users to find an expense from the list
+
+### Usage:
+```
+find <value>
+```
+### Example 1:
+```
+find exercise
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Activity: running (exercise)]
+2. [Activity: swimming (exercise)]
 _________________________________________________________
 ```
 ---
