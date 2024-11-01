@@ -155,13 +155,38 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
 - When command "edit" is sent, the processCommand function is executed.
 - Since the command is "edit", editList command is executed using the description 1 /name: Bob.
-- The editList function edits the category at the stated index
+- The editList function edits the field at the stated index
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Set Category Command
 The sequence diagram below illustrates the process for resolving the "category" command.  
 
 ![SetCategory.drawio.png](Images%28DG%29%2FSetCategory.drawio.png)
+<u>Components Breakdown:</u>
+- `ContactParser` class is the `Parser` component
+- `ContactManager` class is the `Mode` component
+
+<u>Explanation:</u>
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
+- When command "category" is sent, the processCommand function is executed.
+- Since the command is "category", a list of available functions about category setting will be shown
+- "add {category}" can be used to add new category
+- "remove {category}" can be used to remove existing category
+- "edit {contact id} {category}" can be used to assign category to contact with specified id
+- "view" is executed to show all existing categories
+- "quit" is executed to quit setting category mode
+- Finally, contact file is saved in the savedContacts FileManager.
+
+### Search Command
+The 'search' command allows users to search contacts belonging to user-defined categories
+
+<u>Explanation:</u>
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
+- When command "search {category}" is sent, the processCommand function is executed.
+- Since the command is "search {category}", a list of contacts that is assigned with the category is shown
+
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.

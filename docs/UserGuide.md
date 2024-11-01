@@ -49,6 +49,8 @@ This section will focus on some of the key features of PlanPal and explain their
     - [List contact](#viewing-the-contact-list)
     - [Edit contact](#Editing-a-contact)
     - Delete contact
+    - [Setting category](#Setting-category)
+    - [Search contacts by category](#Search-contacts-in-a-category)
     - [Find contact](#finding-a-contact)
   - [Expense Manager](#expense-manager)
     - [Add expenses](#adding-an-expense)
@@ -139,6 +141,177 @@ Here is what I found:
 2. [Name = Alice Phone = null Email = null]
 _________________________________________________________
 ```
+
+## Setting category
+The 'category' command allows users to customize category in contacts.
+Currently, category does not support loading and saving, which means data will be lost once program is exit.
+
+### Usage:
+```
+category
+```
+### Expected Output:
+```
+Category not found.
+_________________________________________________________
+```
+### Expected Output if no contacts in category:
+```
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### 1. add category
+### Example:
+```
+add friend
+```
+### Expected output:
+```
+_________________________________________________________
+add friend
+_________________________________________________________
+_________________________________________________________
+successfully added Category : 'friend'
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 2. remove category
+### Example:
+```
+remove friend
+```
+### Expected output if friend is not a category:
+```
+_________________________________________________________
+friend is not a category
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### Expected output if friend is a category:
+```
+_________________________________________________________
+successfully deleted Category : 'friend'
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 3. edit categories of contact
+### Example:
+```
+edit 1 friend
+```
+### Expected output if contact id is invalid:
+```
+_________________________________________________________
+Invalid contact id
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### Expected output if friend is not a category:
+```
+_________________________________________________________
+friend is not a valid category
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+### Expected output for successfully edit:
+```
+_________________________________________________________
+successfully assigned categories to Contact id : 0
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 4. view categories
+### Example:
+```
+view
+```
+### Expected output:
+```
+_________________________________________________________
+friend
+_________________________________________________________
+Category options : ## currently do not support loading and saving ##
+1. add Category type (e.g. add close friend)
+2. remove Category type (e.g. remove emergency)
+3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
+4. view Category lists (e.g. view)
+5. quit
+```
+
+### 5. quit category
+### Example:
+```
+quit
+```
+---
+
+
+## Search contacts in a category
+The 'search' command allows users to search contacts belonging to user-defined categories
+
+### Usage:
+```
+search <query>
+```
+### Example 1:
+```
+search friend
+```
+### Expected Output if category not defined:
+```
+Category not found.
+_________________________________________________________
+```
+### Expected Output if no contacts in category:
+```
+Contacts in category: friend
+There is no contact in friend
+_________________________________________________________
+```
+### Expected Output if there exists contacts in category:
+```
+Contacts in category: friend
+[Name = andy Phone = null Email = null]
+_________________________________________________________
+```
+---
 ---
 ## Expense Manager
 PlanPal will assist you in tracking your expenses in your planner. The guide below will show you how to make use of the expense manager commands.
