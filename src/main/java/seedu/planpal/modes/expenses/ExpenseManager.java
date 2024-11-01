@@ -111,7 +111,7 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
-    public void setBudget(String budget) throws PlanPalExceptions{
+    public void setBudget(String budget, boolean isDefault) throws PlanPalExceptions{
         try {
             double budgetValue = Double.parseDouble(budget);
             if (budgetValue < 0){
@@ -119,10 +119,18 @@ public class ExpenseManager implements ListFunctions {
             }
             this.budget = budget;
             savedExpenses.saveValue("budget.txt", budget);
-            Ui.print("Budget has been set to: $" + getBudget());
+            if (isDefault) {
+                Ui.print("Budget has been set to: $" + getBudget());
+            }
+
         } catch (NumberFormatException e) {
             throw new PlanPalExceptions("The budget value cannot be evaluated! Make sure it is a double type!");
         }
+    }
+
+    // Override setBudget function to print value by default
+    public void setBudget(String budget) throws PlanPalExceptions{
+        setBudget(budget, true);
     }
 
     public String getBudget() {

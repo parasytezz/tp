@@ -9,7 +9,6 @@ import seedu.planpal.utility.filemanager.FileManager;
 import seedu.planpal.utility.parser.modeparsers.ActivityParser;
 import seedu.planpal.utility.parser.modeparsers.ContactParser;
 import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
-
 import java.util.Scanner;
 
 public class Parser {
@@ -38,7 +37,7 @@ public class Parser {
     }
 
     private void loadFiles() throws PlanPalExceptions {
-        expenseManager.setBudget(fileManager.loadValue("budget.txt"));
+        expenseManager.setBudget(fileManager.loadValue("budget.txt"), false);
         fileManager.loadList(contactManager, "contacts.txt");
         fileManager.loadList(expenseManager, "expenses.txt");
         fileManager.loadList(activityManager, "activities.txt");
@@ -57,21 +56,33 @@ public class Parser {
         while (isProcessing) {
             switch (modeInput){
             case CONTACT_MANAGER:
-                String commandForContact = getCommand("CONTACT_MANAGER");
-                ContactParser contactParser = new ContactParser(contactManager);
-                isProcessing = contactParser.processCommand(commandForContact);
+                try {
+                    String commandForContact = getCommand("CONTACT_MANAGER");
+                    ContactParser contactParser = new ContactParser(contactManager);
+                    isProcessing = contactParser.processCommand(commandForContact);
+                } catch (PlanPalExceptions e) {
+                    Ui.print(e.getMessage());
+                }
                 break;
 
             case EXPENSE_MANAGER:
-                String commandForExpense = getCommand("EXPENSE_MANAGER");
-                ExpenseParser expenseParser = new ExpenseParser(expenseManager);
-                isProcessing = expenseParser.processCommand(commandForExpense);
+                try {
+                    String commandForExpense = getCommand("EXPENSE_MANAGER");
+                    ExpenseParser expenseParser = new ExpenseParser(expenseManager);
+                    isProcessing = expenseParser.processCommand(commandForExpense);
+                } catch (PlanPalExceptions e) {
+                    Ui.print(e.getMessage());
+                }
                 break;
 
             case ACTIVITY_MANAGER:
-                String commandForActivity = getCommand("ACTIVITY_MANAGER");
-                ActivityParser activityParser = new ActivityParser(activityManager);
-                isProcessing = activityParser.processCommand(commandForActivity);
+                try {
+                    String commandForActivity = getCommand("ACTIVITY_MANAGER");
+                    ActivityParser activityParser = new ActivityParser(activityManager);
+                    isProcessing = activityParser.processCommand(commandForActivity);
+                } catch (PlanPalExceptions e) {
+                    Ui.print(e.getMessage());
+                }
                 break;
 
             case BYE_COMMAND:
