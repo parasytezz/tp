@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -91,13 +90,7 @@ public class FileManager {
      */
     public <T> void loadList(T manager, String fileName) {
         PrintStream out = System.out;
-
-        // Redirect System.out to a dummy steam (solution from gpt)
-        System.setOut(new PrintStream(new OutputStream() {
-            @Override
-            public void write(int b) {
-            }
-        }));
+        Ui.setDummyStream();
 
         File file = new File(DATA_DIRECTORY + fileName);
         File backupFile = new File(DATA_DIRECTORY + "backup_" + fileName);
@@ -116,7 +109,7 @@ public class FileManager {
                 parser.processCommand(scanner.nextLine());
             }
         } catch (PlanPalExceptions e) {
-            System.setOut(out);
+            Ui.setMainStream(out);
             Ui.print(
                     "ERROR DETECTED: FILE IS CORRUPTED!!!",
                     "ERROR OCCURRED IN LINE " + lineNumber,
@@ -133,7 +126,7 @@ public class FileManager {
             Ui.print("FILE NOT FOUND!");
         }
         backupFile.delete();
-        System.setOut(out);
+        Ui.setMainStream(out);
     }
 
     public void saveValue(String fileName, String value){
@@ -149,13 +142,7 @@ public class FileManager {
     public String loadValue(String fileName, String value){
         String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
         PrintStream out = System.out;
-
-        // Redirect System.out to a dummy steam (solution from gpt)
-        System.setOut(new PrintStream(new OutputStream() {
-            @Override
-            public void write(int b) {
-            }
-        }));
+        Ui.setDummyStream();
 
         File file = new File(storagePath);
 
@@ -165,7 +152,7 @@ public class FileManager {
                 try (FileWriter writer = new FileWriter(file)){
                     writer.write(value);
                 }
-                System.setOut(out);
+                Ui.setMainStream(out);
                 return value;
             }
 
@@ -178,7 +165,7 @@ public class FileManager {
             Ui.print("Error loading data!");
         }
 
-        System.setOut(out);
+        Ui.setMainStream(out);
         return value;
     }
 

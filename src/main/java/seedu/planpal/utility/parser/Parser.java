@@ -6,6 +6,9 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
+import seedu.planpal.utility.parser.modeparsers.ActivityParser;
+import seedu.planpal.utility.parser.modeparsers.ContactParser;
+import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 
 import java.util.Scanner;
 

@@ -1,10 +1,11 @@
-package seedu.planpal.utility.parser;
+package seedu.planpal.utility.parser.modeparsers;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.parser.Parser;
 
 /**
  * Parses user commands and delegates them to the appropriate methods in {@link ExpenseManager}.
