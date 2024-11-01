@@ -63,8 +63,9 @@ public class ContactManager implements ListFunctions {
 
         CONTACT_LOGGER.info("Deleting contact with the index: " + index);
         try {
+            boolean hasTwoBeforeDelete = (contactList.size() == 2);
             deleteList(contactList, index);
-            savedContacts.saveList(contactList, true);
+            savedContacts.saveList(contactList, hasTwoBeforeDelete);
             CONTACT_LOGGER.info("Deleted contact");
         } catch (PlanPalExceptions e) {
             CONTACT_LOGGER.severe("Failed to delete a contact: " + e.getMessage());

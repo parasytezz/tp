@@ -45,8 +45,9 @@ public class ActivityManager implements ListFunctions {
         if (index < 1 || index > activityList.size()) {
             throw new PlanPalExceptions("Invalid index");
         }
+        boolean hasTwoBeforeDelete = (activityList.size() == 2);
         deleteList(activityList, String.valueOf(index));
-        savedActivities.saveList(activityList, true);
+        savedActivities.saveList(activityList, hasTwoBeforeDelete);
     }
 
     /**

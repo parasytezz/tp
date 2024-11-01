@@ -17,10 +17,10 @@ public class ContactManagerTest {
             manager.addContact("/name:Bob");
             manager.addContact("/name:Charlie");
             manager.addContact("/name:Johnny");
-            assertEquals("[Name = Alice Phone = null Email = null]", manager.getContactList().get(0).toString());
-            assertEquals("[Name = Bob Phone = null Email = null]", manager.getContactList().get(1).toString());
-            assertEquals("[Name = Charlie Phone = null Email = null]", manager.getContactList().get(2).toString());
-            assertEquals("[Name = Johnny Phone = null Email = null]", manager.getContactList().get(3).toString());
+            assertEquals("[Name = Alice, Phone = null, Email = null]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Charlie, Phone = null, Email = null]", manager.getContactList().get(2).toString());
+            assertEquals("[Name = Johnny, Phone = null, Email = null]", manager.getContactList().get(3).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -58,9 +58,9 @@ public class ContactManagerTest {
             manager.addContact("/name:Johnny");
 
             manager.deleteContact("1");
-            assertEquals("[Name = Bob Phone = null Email = null]", manager.getContactList().get(0).toString());
-            assertEquals("[Name = Charlie Phone = null Email = null]", manager.getContactList().get(1).toString());
-            assertEquals("[Name = Johnny Phone = null Email = null]", manager.getContactList().get(2).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Charlie, Phone = null, Email = null]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Johnny, Phone = null, Email = null]", manager.getContactList().get(2).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -146,7 +146,7 @@ public class ContactManagerTest {
             manager.addContact("/name:Charlie");
 
             manager.findContact("Alice");
-            assertEquals("[Name = Alice Phone = null Email = null]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice, Phone = null, Email = null]", manager.getContactList().get(0).toString());
 
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -162,9 +162,9 @@ public class ContactManagerTest {
             manager.addContact("/name:Bob");
 
             manager.findContact("Alice Bob");
-            assertEquals("[Name = Alice Lim Phone = null Email = null]", manager.getContactList().get(0).toString());
-            assertEquals("[Name = Alice Wong Phone = null Email = null]", manager.getContactList().get(1).toString());
-            assertEquals("[Name = Bob Phone = null Email = null]", manager.getContactList().get(2).toString());
+            assertEquals("[Name = Alice Lim, Phone = null, Email = null]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice Wong, Phone = null, Email = null]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null]", manager.getContactList().get(2).toString());
 
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());

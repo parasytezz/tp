@@ -85,7 +85,9 @@ add /name: johnny /phone:12345678 /email:johnny@gmail.com
 _________________________________________________________
 Added successfully!
 _________________________________________________________
-[Name = johnny Phone = 12345678 Email = johnny@gmail.com]
+Currently in list:
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
+_________________________________________________________
 ```
 ---
 ## Viewing the Contact List
@@ -100,7 +102,7 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = johnny Phone = 12345678 Email = johnny@gmail.com]
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
 _________________________________________________________
 ```
 ---
@@ -123,6 +125,9 @@ delete 2
 _________________________________________________________
 Deleted successfully!
 _________________________________________________________
+Currently in list:
+1. [Name = Johnny, Phone = 12345678, Email = johnny@gmail.com]
+_________________________________________________________
 ```
 ---
 ## Editing a Contact
@@ -141,6 +146,9 @@ edit 1 /name: Cassie
 _________________________________________________________
 Edited successfully!
 _________________________________________________________
+Currently in list:
+1. [Name = Cassie, Phone = 12345678, Email = johnny@gmail.com]
+_________________________________________________________
 ```
 ---
 ## Finding a Contact
@@ -158,8 +166,8 @@ find alice david
 ```
 _________________________________________________________
 Here is what I found:
-1. [Name = David Phone = null Email = null]
-2. [Name = Alice Phone = null Email = null]
+1. [Name = David, Phone = null, Email = null]
+2. [Name = Alice, Phone = null, Email = null]
 _________________________________________________________
 ```
 
@@ -354,7 +362,9 @@ add /name: transport /cost: 10
 _________________________________________________________
 Added successfully!
 _________________________________________________________
-[transport, cost = $10]
+Currently in list:
+1. [transport, cost = $10]
+_________________________________________________________
 ```
 ---
 ## Viewing the Expense List
