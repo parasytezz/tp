@@ -24,9 +24,8 @@ Click on `PlanPal.jar` to automatically download the file. Place the file in a f
 ## Design & Implementation
 
 ### Architecture
-A high-level overview of the system is shown in the **Architecture Diagram** below.
-
-![Architecture.drawio.png](Images%2FArchitecture.drawio.png)
+A high-level overview of the system is shown in the **Architecture Diagram** below.  
+![Architecture.drawio.png](Images%28DG%29%2FArchitecture.drawio.png)
 
 ### Main Components
 - `PlanPal`: Main entry of the program, initialises and connects to the Ui
@@ -37,10 +36,12 @@ A high-level overview of the system is shown in the **Architecture Diagram** bel
 
 ### Program Flow
 The sequence diagram below describes how the components interacts with one another when the user issues a command.
+
 For simplicity, the 3 different modes will be classified as `:Mode`.
 
-<u>Sequence Diagram for PlanPal</u>
-![MainProgramFlowDiagram.drawio.png](Images%2FMainProgramFlowDiagram.drawio.png)
+<u>Sequence Diagram for PlanPal</u>  
+![MainProgramFlowDiagram.drawio.png](Images%28DG%29%2FMainProgramFlowDiagram.drawio.png)
+
 
 ## Ui
 
@@ -68,10 +69,10 @@ Consolidating all the print methods that are repeated reduces repetition in code
 
 ## Parser
 <u>Overview</u>
-This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.
+This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.  
 
-<u>Class Diagram for Parser Component</u>
-![ParserClassDiagram.drawio.png](Images%2FParserClassDiagram.drawio.png)
+<u>Class Diagram for Parser Component</u>  
+![ParserClassDiagram.drawio.png](Images%28DG%29%2FParserClassDiagram.drawio.png)
 
 <u>Design Considerations</u>  
 The Parser class follows this structure as there are common commands between the different modes. Using inheritance prevents the repetition of code. Additionally, different parsers were created since different modes require different functionalities.
@@ -80,7 +81,8 @@ The Parser class follows this structure as there are common commands between the
 The class diagram below represents the contact book system
 
 <u>Class Diagram for Contact Manager</u>  
-![ContactClassDiagram.jpg](Images/ContactClassDiagram.jpg)
+![ContactClassDiagram.jpg](Images(DG)/ContactClassDiagram.jpg)
+
 
 The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the Editable and Storeable interfaces, enabling contacts to be modified and stored.
 
@@ -105,9 +107,8 @@ The `Storeable` interface standardizes essential storage-related functionalities
 ## Commands
 
 ### Add Command
-The sequence diagram below illustrates the process for resolving the "add" command.
-
-![AddContact.drawio.png](Images%2FAddContact.drawio.png)  
+The sequence diagram below illustrates the process for resolving the "add" command.  
+![AddContact.drawio.png](Images%28DG%29%2FAddContact.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -124,8 +125,8 @@ The sequence diagram below illustrates the process for resolving the "add" comma
 
 ### List Command
 The sequence diagram below illustrates the process for resolving the "list" command.  
+![ViewContact.drawio.png](Images%28DG%29%2FViewContact.drawio.png)
 
-![ViewContact.drawio.png](Images%2FViewContact.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -140,9 +141,22 @@ The sequence diagram below illustrates the process for resolving the "list" comm
 - Since the command is "list", viewContactList command is executed, printing all the contacts in the list.
 
 ### Edit Command
-The sequence diagram below illustrates the process for resolving the "edit" command.
+The sequence diagram below illustrates the process for resolving the "edit" command.  
+![EditContact.drawio.png](Images%28DG%29%2FEditContact.drawio.png)
 
-![EditContact.drawio.png](Images%2FEditContact.drawio.png)
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ContactParser` class is the `Parser` component
+- `ContactManager` class is the `Mode` component
+
+<u>Explanation:</u>
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
+- When command "edit" is sent, the processCommand function is executed.
+- Since the command is "edit", editList command is executed using the description 1 /name: Bob.
+- The editList function edits the category at the stated index
+- Finally, contact file is saved in the savedContacts FileManager.
 
 ### Set Category Command
 The sequence diagram below illustrates the process for resolving the "category" command.
@@ -152,7 +166,7 @@ The sequence diagram below illustrates the process for resolving the "category" 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
 
-![FindContact.jpg](Images/FindContact.jpg)
+![FindContact.jpg](Images%28DG%29%2FFindContact.jpg)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -178,9 +192,8 @@ The class diagram below represents the Expense Manager system.
 **Work in progress for v2.0**
 
 ### Add Command
-The sequence diagram below illustrates the process for resolving the "add" command.]
-
-![AddExpense.drawio.png](Images%2FAddExpense.drawio.png)
+The sequence diagram below illustrates the process for resolving the "add" command.  
+![AddExpense.drawio.png](Images%28DG%29%2FAddExpense.drawio.png)
 
 <u>Components Breakdown:</u>  
 - For simplicity, the `Ui` component has been taken out
