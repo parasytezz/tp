@@ -1,4 +1,4 @@
-# Developer Guide
+z# Developer Guide
 
 ---
 Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the behind-the-scenes work of our product. We hope this document proves informative and useful for your work!
@@ -159,9 +159,9 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Set Category Command
-The sequence diagram below illustrates the process for resolving the "category" command.
+The sequence diagram below illustrates the process for resolving the "category" command.  
 
-![SetCategory.drawio.png](Images%2FSetCategory.drawio.png)
+![SetCategory.drawio.png](Images%28DG%29%2FSetCategory.drawio.png)
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
