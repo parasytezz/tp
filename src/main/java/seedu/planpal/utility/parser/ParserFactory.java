@@ -4,6 +4,9 @@ import seedu.planpal.modes.activities.ActivityManager;
 import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
+import seedu.planpal.utility.parser.modeparsers.ActivityParser;
+import seedu.planpal.utility.parser.modeparsers.ContactParser;
+import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 
 public class ParserFactory {
 

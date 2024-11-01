@@ -41,7 +41,7 @@ public class Expense implements Editable, Storeable {
      */
     @Override
     public String toString() {
-        return "[" + name + ", cost = $" + cost + "]";
+        return "[Name = " + name + ", Cost = $" + cost + "]";
     }
 
     /**
@@ -75,10 +75,9 @@ public class Expense implements Editable, Storeable {
      *
      * @param categoryToChange The category that needs to be updated.
      * @param newValue The new value for the category.
-     * @throws PlanPalExceptions If there is an error updating the command description.
      */
     // Overloaded function
-    public void setCommandDescription(String categoryToChange, String newValue) throws PlanPalExceptions {
+    public void setCommandDescription(String categoryToChange, String newValue) {
         String newCommandDescription = "";
         String[] categoryParts = commandDescription.split(CATEGORY_SEPARATOR);
         for (int i = 1; i < categoryParts.length; i++) {

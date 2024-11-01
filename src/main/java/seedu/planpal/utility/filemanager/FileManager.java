@@ -10,7 +10,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.io.PrintStream;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
@@ -25,7 +24,8 @@ import java.util.Scanner;
  */
 public class FileManager {
     private static final String ADD_COMMAND = "add";
-    private static final String LIST_DIRECTORY = "./data/";
+    private static final String DATA_DIRECTORY = "./data/";
+    private static final String VALUE_DIRECTORY = "values/";
 
     /**
      * Ensures that the directory for the storage path exists.
@@ -90,16 +90,10 @@ public class FileManager {
      */
     public <T> void loadList(T manager, String fileName) {
         PrintStream out = System.out;
+        Ui.setDummyStream();
 
-        // Redirect System.out to a dummy steam (solution from gpt)
-        System.setOut(new PrintStream(new OutputStream() {
-            @Override
-            public void write(int b) {
-            }
-        }));
-
-        File file = new File(LIST_DIRECTORY + fileName);
-        File backupFile = new File(LIST_DIRECTORY + "backup_" + fileName);
+        File file = new File(DATA_DIRECTORY + fileName);
+        File backupFile = new File(DATA_DIRECTORY + "backup_" + fileName);
 
         try {
             Files.copy(file.toPath(), backupFile.toPath());
@@ -115,10 +109,10 @@ public class FileManager {
                 parser.processCommand(scanner.nextLine());
             }
         } catch (PlanPalExceptions e) {
-            System.setOut(out);
+            Ui.setMainStream(out);
             Ui.print(
                     "ERROR DETECTED: FILE IS CORRUPTED!!!",
-                    "ERROR OCCURRED IN LINE " + lineNumber,
+                    "ERROR OCCURRED IN LINE " + lineNumber + " of " + file.getName() + " file",
                     "Type of error: " + e.getMessage(),
                     "Restart the application and check the data file to prevent errors!"
             );
@@ -132,6 +126,51 @@ public class FileManager {
             Ui.print("FILE NOT FOUND!");
         }
         backupFile.delete();
-        System.setOut(out);
+        Ui.setMainStream(out);
+    }
+
+    public void saveValue(String fileName, String value){
+        String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
+        createDirectory(storagePath);
+        try (FileWriter writer = new FileWriter(storagePath)){
+            writer.write(value);
+        } catch (IOException e) {
+            Ui.print("Error saving data!");
+        }
+    }
+
+    public String loadValue(String fileName, String value){
+        String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
+        PrintStream out = System.out;
+        Ui.setDummyStream();
+
+        File file = new File(storagePath);
+
+        try {
+            if (!file.exists()){
+                createDirectory(storagePath);
+                try (FileWriter writer = new FileWriter(file)){
+                    writer.write(value);
+                }
+                Ui.setMainStream(out);
+                return value;
+            }
+
+            try (Scanner scanner = new Scanner(file)){
+                if (scanner.hasNextLine()){
+                    value = scanner.nextLine().trim();
+                }
+            }
+        } catch (IOException e) {
+            Ui.print("Error loading data!");
+        }
+
+        Ui.setMainStream(out);
+        return value;
+    }
+
+    // Overloaded loadValue function with a default 0 value.
+    public String loadValue(String fileName){
+        return loadValue(fileName, "0");
     }
 }

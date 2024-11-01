@@ -13,12 +13,20 @@ public class ExpenseManager implements ListFunctions {
 
     FileManager savedExpenses = new FileManager();
     private ArrayList<Expense> expenseList = new ArrayList<>();
+    private String budget;
 
-    public ArrayList<Expense> getContactList() {
+    public ArrayList<Expense> getExpenseList() {
         return expenseList;
     }
 
     public void addExpense(String description) throws PlanPalExceptions {
+        if (budget.equals("0")) {
+            throw new PlanPalExceptions(
+                    "You have not set your budget! \n" +
+                    "To do so, type: budget <value> \n" +
+                    "Example: budget 100");
+        }
+
         if (description.isEmpty()){
             throw new EmptyDescriptionException();
         }
@@ -29,7 +37,13 @@ public class ExpenseManager implements ListFunctions {
 
     public void viewExpenseList(){
         viewList(expenseList);
-        System.out.println("Total cost of all expenses is: $" + getTotalCost());
+        double budgetValue = Double.parseDouble(getBudget());
+        System.out.println("Total budget: $" + getBudget());
+        System.out.println("Total cost: $" + getTotalCost());
+        System.out.println("Remaining budget: $" + (budgetValue - getTotalCost()));
+        if (budgetValue < getTotalCost()){
+            System.out.println("It's time to readjust your spending habits!");
+        }
         Ui.printLine();
     }
 
@@ -43,6 +57,11 @@ public class ExpenseManager implements ListFunctions {
             totalCost += Double.parseDouble(costInString);
         }
         return totalCost;
+    }
+
+    public void editExpense(String query) throws PlanPalExceptions {
+        editList(expenseList, query);
+        savedExpenses.saveList(expenseList);
     }
 
     /**
@@ -90,5 +109,31 @@ public class ExpenseManager implements ListFunctions {
         } catch (PlanPalExceptions e) {
             throw e;
         }
+    }
+
+    public void setBudget(String budget, boolean isDefault) throws PlanPalExceptions{
+        try {
+            double budgetValue = Double.parseDouble(budget);
+            if (budgetValue < 0){
+                throw new PlanPalExceptions("Budget cannot be negative");
+            }
+            this.budget = budget;
+            savedExpenses.saveValue("budget.txt", budget);
+            if (isDefault) {
+                Ui.print("Budget has been set to: $" + getBudget());
+            }
+
+        } catch (NumberFormatException e) {
+            throw new PlanPalExceptions("The budget value cannot be evaluated! Make sure it is a double type!");
+        }
+    }
+
+    // Override setBudget function to print value by default
+    public void setBudget(String budget) throws PlanPalExceptions{
+        setBudget(budget, true);
+    }
+
+    public String getBudget() {
+        return budget;
     }
 }
