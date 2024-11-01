@@ -49,12 +49,12 @@ This section will focus on some of the key features of PlanPal and explain their
     - [List contact](#viewing-the-contact-list)
     - [Edit contact](#Editing-a-contact)
     - Delete contact
-    - Find contact
+    - [Find contact](#finding-a-contact)
   - [Expense Manager](#expense-manager)
     - [Add expenses](#adding-an-expense)
     - [List expenses](#viewing-the-expense-list)
-    - Delete expenses
-    - Find expenses
+    - [Delete expenses](#deleting-an-expense)
+    - [Find expenses](#finding-an-expense)
   - Activity Manager
     - Add activity
     - List activity
@@ -125,7 +125,7 @@ The `find` command allows users to find a contact from the list
 
 ### Usage:
 ```
-find john
+find <value>
 ```
 ### Example 1:
 ```
@@ -181,7 +181,43 @@ Total cost of all expenses is: $10.0
 _________________________________________________________
 ```
 ---
+## Deleting an Expense
+The `delete` command allows users to delete an expense from the list
 
+### Usage:
+```
+delete <index>
+```
+### Example 1:
+```
+delete 1
+```
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
+_________________________________________________________
+```
+---
+## Finding an Expense
+The `find` command allows users to find an expense from the list
+
+### Usage:
+```
+find <value>
+```
+### Example 1:
+```
+find lunch
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [utown lunch, cost = $5]
+2. [PGP lunch, cost = $4]
+_________________________________________________________
+```
 ---
 
 ## FAQ
