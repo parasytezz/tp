@@ -25,7 +25,7 @@ import java.util.Scanner;
  */
 public class FileManager {
     private static final String ADD_COMMAND = "add";
-    private static final String LIST_DIRECTORY = "./data/";
+    private static final String DATA_DIRECTORY = "./data/";
 
     /**
      * Ensures that the directory for the storage path exists.
@@ -98,8 +98,8 @@ public class FileManager {
             }
         }));
 
-        File file = new File(LIST_DIRECTORY + fileName);
-        File backupFile = new File(LIST_DIRECTORY + "backup_" + fileName);
+        File file = new File(DATA_DIRECTORY + fileName);
+        File backupFile = new File(DATA_DIRECTORY + "backup_" + fileName);
 
         try {
             Files.copy(file.toPath(), backupFile.toPath());
@@ -133,5 +133,56 @@ public class FileManager {
         }
         backupFile.delete();
         System.setOut(out);
+    }
+
+    public void saveValue(String fileName, String value){
+        String storagePath = DATA_DIRECTORY + fileName;
+        createDirectory(storagePath);
+        try (FileWriter writer = new FileWriter(storagePath)){
+            writer.write(value);
+        } catch (IOException e) {
+            Ui.print("Error saving data!");
+        }
+    }
+
+    public String loadValue(String fileName, String value){
+        String storagePath = DATA_DIRECTORY + fileName;
+        PrintStream out = System.out;
+
+        // Redirect System.out to a dummy steam (solution from gpt)
+        System.setOut(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) {
+            }
+        }));
+
+        File file = new File(storagePath);
+
+        try {
+            if (!file.exists()){
+                createDirectory(storagePath);
+                try (FileWriter writer = new FileWriter(file)){
+                    writer.write(value);
+                }
+                System.setOut(out);
+                return value;
+            }
+
+            try (Scanner scanner = new Scanner(file)){
+                if (scanner.hasNextLine()){
+                    value = scanner.nextLine().trim();
+                }
+            }
+        } catch (IOException e) {
+            Ui.print("Error loading data!");
+        }
+
+        System.setOut(out);
+        return value;
+    }
+
+    // Overloaded loadValue function with a default 0 value.
+    public String loadValue(String fileName){
+        return loadValue(fileName, "0");
     }
 }

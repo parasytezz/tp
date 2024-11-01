@@ -20,7 +20,7 @@ public class ExpenseManager implements ListFunctions {
     }
 
     public void addExpense(String description) throws PlanPalExceptions {
-        if (budget == null) {
+        if (budget.equals("0")) {
             throw new PlanPalExceptions(
                     "You have not set your budget! \n" +
                     "To do so, type: budget <value> \n" +
@@ -113,6 +113,7 @@ public class ExpenseManager implements ListFunctions {
                 throw new PlanPalExceptions("Budget cannot be negative");
             }
             this.budget = budget;
+            savedExpenses.saveValue("budget.txt", budget);
             Ui.print("Budget has been set to: $" + getBudget());
         } catch (NumberFormatException e) {
             throw new PlanPalExceptions("The budget value cannot be evaluated! Make sure it is a double type!");
