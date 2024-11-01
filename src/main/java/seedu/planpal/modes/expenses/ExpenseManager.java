@@ -14,7 +14,7 @@ public class ExpenseManager implements ListFunctions {
     FileManager savedExpenses = new FileManager();
     private ArrayList<Expense> expenseList = new ArrayList<>();
 
-    public ArrayList<Expense> getContactList() {
+    public ArrayList<Expense> getExpenseList() {
         return expenseList;
     }
 
