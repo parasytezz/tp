@@ -49,6 +49,8 @@ This section will focus on some of the key features of PlanPal and explain their
     - [List contact](#viewing-the-contact-list)
     - [Edit contact](#Editing-a-contact)
     - Delete contact
+    - [Setting category](#Setting-category)
+    - [Search contacts by category](#Search-contacts-in-a-category)
     - [Find contact](#finding-a-contact)
   - [Expense Manager](#expense-manager)
     - [Add expenses](#adding-an-expense)
@@ -281,7 +283,7 @@ quit
 ---
 
 
-## search contacts in a category
+## Search contacts in a category
 The 'search' command allows users to search contacts belonging to user-defined categories
 
 ### Usage:
