@@ -51,6 +51,15 @@ public class ExpenseParser extends Parser {
                 expenseManager.viewExpenseList();
                 return true;
 
+            case Parser.EDIT_COMMAND:
+                try {
+                    String query = inputParts[1].trim();
+                    expenseManager.editExpense(query);
+                } catch (NumberFormatException e) {
+                    throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
+                }
+                return true;
+
             case Parser.DELETE_COMMAND:
                 expenseManager.deleteExpense(inputParts[1].trim());
                 return true;

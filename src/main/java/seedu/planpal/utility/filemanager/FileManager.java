@@ -26,6 +26,7 @@ import java.util.Scanner;
 public class FileManager {
     private static final String ADD_COMMAND = "add";
     private static final String DATA_DIRECTORY = "./data/";
+    private static final String VALUE_DIRECTORY = "values/";
 
     /**
      * Ensures that the directory for the storage path exists.
@@ -136,7 +137,7 @@ public class FileManager {
     }
 
     public void saveValue(String fileName, String value){
-        String storagePath = DATA_DIRECTORY + fileName;
+        String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
         createDirectory(storagePath);
         try (FileWriter writer = new FileWriter(storagePath)){
             writer.write(value);
@@ -146,7 +147,7 @@ public class FileManager {
     }
 
     public String loadValue(String fileName, String value){
-        String storagePath = DATA_DIRECTORY + fileName;
+        String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
         PrintStream out = System.out;
 
         // Redirect System.out to a dummy steam (solution from gpt)

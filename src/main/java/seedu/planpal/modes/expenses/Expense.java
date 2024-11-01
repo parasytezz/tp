@@ -41,7 +41,7 @@ public class Expense implements Editable, Storeable {
      */
     @Override
     public String toString() {
-        return "[" + name + ", cost = $" + cost + "]";
+        return "[Name = " + name + ", Cost = $" + cost + "]";
     }
 
     /**

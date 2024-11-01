@@ -59,6 +59,11 @@ public class ExpenseManager implements ListFunctions {
         return totalCost;
     }
 
+    public void editExpense(String query) throws PlanPalExceptions {
+        editList(expenseList, query);
+        savedExpenses.saveList(expenseList);
+    }
+
     /**
      * Deletes an existing expense from the contact list.
      * The expense is retrieved from its description.
