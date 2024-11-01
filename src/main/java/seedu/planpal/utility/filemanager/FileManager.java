@@ -112,7 +112,7 @@ public class FileManager {
             Ui.setMainStream(out);
             Ui.print(
                     "ERROR DETECTED: FILE IS CORRUPTED!!!",
-                    "ERROR OCCURRED IN LINE " + lineNumber,
+                    "ERROR OCCURRED IN LINE " + lineNumber + " of " + file.getName() + " file",
                     "Type of error: " + e.getMessage(),
                     "Restart the application and check the data file to prevent errors!"
             );
