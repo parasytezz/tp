@@ -18,13 +18,10 @@ public class ActivityManager implements ListFunctions {
 
     /**
      * Adds a new activity to the activity list.
-     * This method creates a new Activity instance with the specified name
-     * and activity type, then adds it to the activityList. If either the
-     * name or the activity type is empty, a PlanPalExceptions will be thrown.
+     * The activity is created from the provided description.
      *
-     * @param name the name of the activity to be added
-     * @param activityType the type of the activity to be added
-     * @throws PlanPalExceptions if the name or activity type is empty
+     * @param description The description of the new activity. This must not be empty.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
     public void addActivity(String description) throws PlanPalExceptions {
         if (description.isEmpty()) {
@@ -39,7 +36,7 @@ public class ActivityManager implements ListFunctions {
      * The activity is retrieved from its description.
      *
      * @param index The description of the activity to be deleted. This must not be empty.
-     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} os thrown.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
     public void deleteActivity(String index) throws PlanPalExceptions {
         if (index.isEmpty()) {
@@ -87,14 +84,11 @@ public class ActivityManager implements ListFunctions {
     }
 
     /**
-     * Edits an existing activity in the activity list.
-     * This method retrieves the activity at the specified index from the
-     * activityList and applies the provided query to modify it.
-     * If the index is out of bounds, a PlanPalExceptions will be thrown.
+     * Edits an activity in the activity list based on the provided query.
+     * The query should contain the index of the activity to be edited, followed by the fields to update.
      *
-     * @param index the index of the activity to be edited (1-based index)
-     * @param query the query string used to modify the activity
-     * @throws PlanPalExceptions if the index is invalid (out of range)
+     * @param query The query containing the index and new values for the activity.
+     * @throws PlanPalExceptions If the index is out of bounds or other editing errors occur.
      */
     public void editActivity(String query) throws PlanPalExceptions {
         try {

@@ -2,7 +2,6 @@ package seedu.planpal.modes.activities;
 
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
 
@@ -40,7 +39,7 @@ public class Activity implements Editable, Storeable {
     /**
      * Returns a string representation of the activity.
      *
-     * @return A string in the format: [Activity: name (activityType)]
+     * @return A string in the format: [activity: name, activity type: activityType]
      */
     @Override
     public String toString() {
@@ -75,11 +74,15 @@ public class Activity implements Editable, Storeable {
     }
 
     /**
-     * Updates the command description when a specific category is modified.
+     * Updates the command description by modifying the value of the specified category.
+     * The method splits the current command description into its categories and updates the
+     * category with the new value, if it exists.
      *
-     * @param categoryToChange The category that needs to be updated.
-     * @param newValue The new value for the category.
-     * @throws PlanPalExceptions If there is an error updating the command description.
+     * @param category The category whose value needs to be updated (e.g., "name").
+     * @param val The new value for the specified category.
+     *
+     * @throws PlanPalExceptions If the input is incomplete or improperly formatted.
+     * @throws IllegalCommandException If the specified category is not recognized.
      */
     // Overloading function
     public void setCommandDescription(String category, String val) throws PlanPalExceptions {
@@ -137,7 +140,7 @@ public class Activity implements Editable, Storeable {
     }
 
     /**
-     * Sets the name of the activity.
+     * Sets the type of the activity.
      *
      * @param activityType The type of the activity.
      * @throws PlanPalExceptions If the activityType is null or empty.
