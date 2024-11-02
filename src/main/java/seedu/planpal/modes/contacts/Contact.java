@@ -124,7 +124,7 @@ public class Contact implements Editable, Storeable {
     // A string representation of a Contact
     @Override
     public String toString() {
-        return "[Name = " + name + ", Phone = "+ phone + ", Email = "+ email + "]";
+        return "[Name = " + name + ", Phone = " + phone + ", Email = "+ email + "]";
     }
 
 

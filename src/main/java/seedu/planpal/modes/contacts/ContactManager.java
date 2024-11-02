@@ -59,7 +59,7 @@ public class ContactManager implements ListFunctions {
         if (index.isEmpty()) {
             throw new EmptyDescriptionException();
         }
-        assert index.length() != 0 : "Input must not be empty";
+        assert index.length() != 0 : "Index must not be empty";
 
         CONTACT_LOGGER.info("Deleting contact with the index: " + index);
         try {

@@ -8,6 +8,7 @@ import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
 
 public class ActivityManager implements ListFunctions {
+    public static final String[] INFORMATION_CATEGORIES = {"name", "activityType"};
     FileManager savedActivities = new FileManager();
     private final ArrayList<Activity> activityList = new ArrayList<>();
 
@@ -17,20 +18,16 @@ public class ActivityManager implements ListFunctions {
 
     /**
      * Adds a new activity to the activity list.
-     * This method creates a new Activity instance with the specified name
-     * and activity type, then adds it to the activityList. If either the
-     * name or the activity type is empty, a PlanPalExceptions will be thrown.
+     * The activity is created from the provided description.
      *
-     * @param name the name of the activity to be added
-     * @param activityType the type of the activity to be added
-     * @throws PlanPalExceptions if the name or activity type is empty
+     * @param description The description of the new activity. This must not be empty.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
-    public void addActivity(String name, String activityType) throws PlanPalExceptions {
-        if (name.isEmpty() || activityType.isEmpty()) {
-            throw new PlanPalExceptions("Please provide both activity name and type, separated by a comma.");
+    public void addActivity(String description) throws PlanPalExceptions {
+        if (description.isEmpty()) {
+            throw new EmptyDescriptionException();
         }
-        Activity newActivity = new Activity(name, activityType);
-        addToList(activityList, newActivity);
+        addToList(activityList, new Activity(description));
         savedActivities.saveList(activityList);
     }
 
@@ -39,15 +36,21 @@ public class ActivityManager implements ListFunctions {
      * The activity is retrieved from its description.
      *
      * @param index The description of the activity to be deleted. This must not be empty.
-     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} os thrown.
+     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
-    public void deleteActivity(int index) throws PlanPalExceptions {
-        if (index < 1 || index > activityList.size()) {
-            throw new PlanPalExceptions("Invalid index");
+    public void deleteActivity(String index) throws PlanPalExceptions {
+        if (index.isEmpty()) {
+            throw new EmptyDescriptionException();
         }
-        boolean hasTwoBeforeDelete = (activityList.size() == 2);
-        deleteList(activityList, String.valueOf(index));
-        savedActivities.saveList(activityList, hasTwoBeforeDelete);
+        assert index.length() != 0: "Index should not be empty";
+
+        try {
+            boolean hasTwoBeforeDelete = (activityList.size() == 2);
+            deleteList(activityList, index);
+            savedActivities.saveList(activityList, hasTwoBeforeDelete);
+        } catch (PlanPalExceptions e) {
+            throw e;
+        }
     }
 
     /**
@@ -81,21 +84,18 @@ public class ActivityManager implements ListFunctions {
     }
 
     /**
-     * Edits an existing activity in the activity list.
-     * This method retrieves the activity at the specified index from the
-     * activityList and applies the provided query to modify it.
-     * If the index is out of bounds, a PlanPalExceptions will be thrown.
+     * Edits an activity in the activity list based on the provided query.
+     * The query should contain the index of the activity to be edited, followed by the fields to update.
      *
-     * @param index the index of the activity to be edited (1-based index)
-     * @param query the query string used to modify the activity
-     * @throws PlanPalExceptions if the index is invalid (out of range)
+     * @param query The query containing the index and new values for the activity.
+     * @throws PlanPalExceptions If the index is out of bounds or other editing errors occur.
      */
-    public void editActivity(int index, String query) throws PlanPalExceptions {
-        if (index < 1 || index > activityList.size()) {
-            throw new PlanPalExceptions("Invalid index. Please provide a valid number.");
+    public void editActivity(String query) throws PlanPalExceptions {
+        try {
+            editList(activityList, query);
+            savedActivities.saveList(activityList);
+        } catch (PlanPalExceptions e) {
+            throw e;
         }
-        Activity activity = activityList.get(index - 1);
-        activity.processEditFunction(query);
-        savedActivities.saveList(activityList);
     }
 }
