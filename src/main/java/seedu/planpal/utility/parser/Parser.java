@@ -1,5 +1,6 @@
 package seedu.planpal.utility.parser;
 
+import seedu.planpal.exceptions.InvalidModeException;
 import seedu.planpal.modes.activities.ActivityManager;
 import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
@@ -91,7 +92,7 @@ public class Parser {
                 break;
 
             default:
-                throw new PlanPalExceptions("Invalid mode");
+                throw new InvalidModeException();
             }
         }
         return false;

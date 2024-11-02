@@ -1,14 +1,26 @@
 package seedu.planpal.contacts;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.ContactManager;
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ContactManagerTest {
+    private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(OUTPUT_STREAM));
+        OUTPUT_STREAM.reset();
+    }
+
     @Test
     public void addContact_validFormat_success() {
         try{
@@ -76,7 +88,7 @@ public class ContactManagerTest {
             manager.deleteContact("0");
             fail();
         } catch (PlanPalExceptions e) {
-            assertEquals("Invalid index. Please input a valid number.", e.getMessage());
+            assertEquals("Invalid Index!", e.getMessage());
         }
     }
 
@@ -133,7 +145,7 @@ public class ContactManagerTest {
             manager.editContact("");
             fail(); // Test should not reach this line if exception is thrown
         } catch (PlanPalExceptions e) {
-            assertEquals("Description cannot be empty.", e.getMessage());
+            assertEquals("Description cannot be empty!", e.getMessage());
         }
     }
 
