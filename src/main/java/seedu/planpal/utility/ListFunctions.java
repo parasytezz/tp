@@ -2,6 +2,7 @@ package seedu.planpal.utility;
 
 import java.util.ArrayList;
 
+import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.InvalidIndexException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 
@@ -87,7 +88,7 @@ public interface ListFunctions {
      */
     default <T> void editList(ArrayList<T> list, String query) throws PlanPalExceptions {
         if (query == null || query.trim().isEmpty()) {
-            throw new PlanPalExceptions("Description cannot be empty.");
+            throw new EmptyDescriptionException();
         }
         String[] toEdit = query.split("\\s+", 2);
         int index = Integer.parseInt(toEdit[0].trim());

@@ -67,6 +67,7 @@ public class ExpenseManager implements ListFunctions {
 
     public void editExpense(String query) throws PlanPalExceptions {
         editList(expenseList, query);
+        printExceededBudgetMessage();
         savedExpenses.saveList(expenseList);
     }
 
