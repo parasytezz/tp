@@ -23,6 +23,7 @@ public class AddExpenseTest {
     public void setUp() {
         expenseManager = new ExpenseManager();
         System.setOut(new PrintStream(OUTPUT_STREAM));
+        OUTPUT_STREAM.reset();
     }
 
     @Test

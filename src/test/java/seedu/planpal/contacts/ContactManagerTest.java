@@ -18,6 +18,7 @@ public class ContactManagerTest {
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(OUTPUT_STREAM));
+        OUTPUT_STREAM.reset();
     }
 
     @Test

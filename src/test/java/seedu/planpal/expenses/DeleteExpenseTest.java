@@ -22,10 +22,11 @@ public class DeleteExpenseTest {
     public void setUp() {
         expenseManager = new ExpenseManager();
         System.setOut(new PrintStream(OUTPUT_STREAM));
+        OUTPUT_STREAM.reset();
     }
 
     @Test
-    public void deleteExpense_validIndex_success() {
+    public void validIndex_success() {
         try {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
@@ -39,7 +40,7 @@ public class DeleteExpenseTest {
     }
 
     @Test
-    public void deleteExpense_invalidIndex_throwsException() {
+    public void invalidIndex_throwsException() {
         try {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
@@ -50,12 +51,12 @@ public class DeleteExpenseTest {
     }
 
     @Test
-    public void deleteExpense_emptyExpenseList_throwsException() {
+    public void emptyExpenseList_throwsException() {
         assertThrows(PlanPalExceptions.class, () -> expenseManager.deleteExpense("1"));
     }
 
     @Test
-    public void deleteExpense_emptyDescription_throwsEmptyDescriptionException() {
+    public void emptyDescription_throwsEmptyDescriptionException() {
         try {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
@@ -66,7 +67,7 @@ public class DeleteExpenseTest {
     }
 
     @Test
-    public void deleteExpense_lastItemInList_success() {
+    public void lastItemInList_success() {
         try {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
@@ -79,7 +80,7 @@ public class DeleteExpenseTest {
     }
 
     @Test
-    public void deleteExpense_negativeIndex_throwsException() {
+    public void negativeIndex_throwsException() {
         try {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
@@ -90,7 +91,7 @@ public class DeleteExpenseTest {
     }
 
     @Test
-    public void deleteExpense_nonNumericIndex_throwsException() {
+    public void nonNumericIndex_throwsException() {
         try {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
