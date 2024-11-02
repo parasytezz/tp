@@ -88,7 +88,7 @@ public class ContactManagerTest {
             manager.deleteContact("0");
             fail();
         } catch (PlanPalExceptions e) {
-            assertEquals("Invalid index. Please input a valid number.", e.getMessage());
+            assertEquals("Invalid Index!", e.getMessage());
         }
     }
 
@@ -145,7 +145,7 @@ public class ContactManagerTest {
             manager.editContact("");
             fail(); // Test should not reach this line if exception is thrown
         } catch (PlanPalExceptions e) {
-            assertEquals("Description cannot be empty.", e.getMessage());
+            assertEquals("Description cannot be empty!", e.getMessage());
         }
     }
 
