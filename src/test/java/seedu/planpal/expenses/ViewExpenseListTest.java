@@ -24,7 +24,7 @@ public class ViewExpenseListTest {
     }
 
     @Test
-    public void viewExpenseList_withinBudget_success() {
+    public void withinBudget_success() {
         try {
             expenseManager.setBudget("1000");
             expenseManager.addExpense("/name:trial1 /cost:200");
@@ -38,7 +38,7 @@ public class ViewExpenseListTest {
     }
 
     @Test
-    public void viewExpenseList_exceedBudget_showsWarning() {
+    public void exceedBudget_showsWarning() {
         try {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:400");
