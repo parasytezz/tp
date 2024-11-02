@@ -22,6 +22,13 @@ public class ExpenseManager implements ListFunctions {
         return expenseList;
     }
 
+    public void printExceededBudgetMessage(){
+        double budgetValue = Double.parseDouble(getBudget());
+        if (budgetValue < getTotalCost()){
+            System.out.println("It's time to readjust your spending habits!");
+        }
+    }
+
     public void addExpense(String description) throws PlanPalExceptions {
         if (budget == null || budget.equals("0")) {
             throw new NoBudgetException();
@@ -32,6 +39,7 @@ public class ExpenseManager implements ListFunctions {
         }
 
         addToList(expenseList, new Expense(description));
+        printExceededBudgetMessage();
         savedExpenses.saveList(expenseList);
     }
 
@@ -41,9 +49,7 @@ public class ExpenseManager implements ListFunctions {
         System.out.println("Total budget: $" + getBudget());
         System.out.println("Total cost: $" + getTotalCost());
         System.out.println("Remaining budget: $" + (budgetValue - getTotalCost()));
-        if (budgetValue < getTotalCost()){
-            System.out.println("It's time to readjust your spending habits!");
-        }
+        printExceededBudgetMessage();
         Ui.printLine();
     }
 

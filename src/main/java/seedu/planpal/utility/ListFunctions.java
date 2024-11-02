@@ -1,6 +1,8 @@
 package seedu.planpal.utility;
 
 import java.util.ArrayList;
+
+import seedu.planpal.exceptions.InvalidIndexException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 
 /**
@@ -37,12 +39,18 @@ public interface ListFunctions {
             throw new PlanPalExceptions("Description cannot be empty!");
         }
         assert index.length() != 0 : "Input index must not be empty";
-        int listIndex = Integer.parseInt(index);
-        if (listIndex < 1 || listIndex > list.size()) {
-            throw new PlanPalExceptions(
-                "Invalid index. Please input a valid number."
-            );
+        int listIndex = 0;
+
+        try {
+            listIndex = Integer.parseInt(index);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
         }
+
+        if (listIndex < 1 || listIndex > list.size()) {
+            throw new InvalidIndexException();
+        }
+
         assert listIndex > 0 && listIndex <= list.size() : ":Input index must be valid and " +
             "within the bounds of list";
 
