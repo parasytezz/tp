@@ -21,27 +21,18 @@ public class ActivityParser extends Parser {
         try {
             String[] inputParts = input.split(" ", INPUT_SEGMENTS);
             String command = inputParts[0].trim();
+            String description;
 
             switch (command) {
             case Parser.ADD_COMMAND:
-                if (inputParts.length < 2) {
-                    throw new EmptyDescriptionException();
-                }
-                String[] activityParts = inputParts[1].split(",", ADD_SEGMENTS);
-                if (activityParts.length < 2) {
-                    throw new PlanPalExceptions("Please provide both activity name and type, separated by a comma.");
-                }
-
-                String activityName = activityParts[0].trim();
-                String activityType = activityParts[1].trim();
-
-                activityManager.addActivity(activityName, activityType);
+                description = inputParts[1].trim();
+                activityManager.addActivity(description);
                 return true;
                 // fall through
 
             case Parser.DELETE_COMMAND:
-                int deleteIndex = Integer.parseInt(inputParts[1].trim());
-                activityManager.deleteActivity(deleteIndex);
+                description = inputParts[1].trim();
+                activityManager.deleteActivity(description);
                 return true;
                 // fall through
 
@@ -51,10 +42,12 @@ public class ActivityParser extends Parser {
                 // fall through
 
             case Parser.EDIT_COMMAND:
-                String[] editParts = inputParts[1].split(",", 2);
-                int editIndex = Integer.parseInt(editParts[0].trim());
-                String editCommand = editParts[1].trim();
-                activityManager.editActivity(editIndex, editCommand);
+                try {
+                    String query = inputParts[1].trim();
+                    activityManager.editActivity(query);
+                } catch (NumberFormatException e) {
+                    throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
+                }
                 return true;
                 // fall through
 

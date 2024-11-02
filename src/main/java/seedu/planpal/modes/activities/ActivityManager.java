@@ -8,6 +8,7 @@ import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
 
 public class ActivityManager implements ListFunctions {
+    public static final String[] INFORMATION_CATEGORIES = {"name", "activityType"};
     FileManager savedActivities = new FileManager();
     private final ArrayList<Activity> activityList = new ArrayList<>();
 
@@ -25,12 +26,11 @@ public class ActivityManager implements ListFunctions {
      * @param activityType the type of the activity to be added
      * @throws PlanPalExceptions if the name or activity type is empty
      */
-    public void addActivity(String name, String activityType) throws PlanPalExceptions {
-        if (name.isEmpty() || activityType.isEmpty()) {
-            throw new PlanPalExceptions("Please provide both activity name and type, separated by a comma.");
+    public void addActivity(String description) throws PlanPalExceptions {
+        if (description.isEmpty()) {
+            throw new EmptyDescriptionException();
         }
-        Activity newActivity = new Activity(name, activityType);
-        addToList(activityList, newActivity);
+        addToList(activityList, new Activity(description));
         savedActivities.saveList(activityList);
     }
 
@@ -41,13 +41,19 @@ public class ActivityManager implements ListFunctions {
      * @param index The description of the activity to be deleted. This must not be empty.
      * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} os thrown.
      */
-    public void deleteActivity(int index) throws PlanPalExceptions {
-        if (index < 1 || index > activityList.size()) {
-            throw new PlanPalExceptions("Invalid index");
+    public void deleteActivity(String index) throws PlanPalExceptions {
+        if (index.isEmpty()) {
+            throw new EmptyDescriptionException();
         }
-        boolean hasTwoBeforeDelete = (activityList.size() == 2);
-        deleteList(activityList, String.valueOf(index));
-        savedActivities.saveList(activityList, hasTwoBeforeDelete);
+        assert index.length() != 0: "Index should not be empty";
+
+        try {
+            boolean hasTwoBeforeDelete = (activityList.size() == 2);
+            deleteList(activityList, index);
+            savedActivities.saveList(activityList, hasTwoBeforeDelete);
+        } catch (PlanPalExceptions e) {
+            throw e;
+        }
     }
 
     /**
@@ -90,12 +96,12 @@ public class ActivityManager implements ListFunctions {
      * @param query the query string used to modify the activity
      * @throws PlanPalExceptions if the index is invalid (out of range)
      */
-    public void editActivity(int index, String query) throws PlanPalExceptions {
-        if (index < 1 || index > activityList.size()) {
-            throw new PlanPalExceptions("Invalid index. Please provide a valid number.");
+    public void editActivity(String query) throws PlanPalExceptions {
+        try {
+            editList(activityList, query);
+            savedActivities.saveList(activityList);
+        } catch (PlanPalExceptions e) {
+            throw e;
         }
-        Activity activity = activityList.get(index - 1);
-        activity.processEditFunction(query);
-        savedActivities.saveList(activityList);
     }
 }
