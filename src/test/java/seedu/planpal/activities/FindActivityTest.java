@@ -8,7 +8,7 @@ import seedu.planpal.modes.activities.ActivityManager;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class FindActivityTest {
@@ -30,7 +30,8 @@ public class FindActivityTest {
             activityManager.addActivity("/name: groceries /activityType: necessity");
 
             activityManager.findActivity("swimming");
-            assertEquals("[activity = swimming, activity type = exercise]", activityManager.getActivityList().get(0).toString());
+            assertEquals("[activity = swimming, activity type = exercise]",
+                    activityManager.getActivityList().get(0).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -44,8 +45,10 @@ public class FindActivityTest {
             activityManager.addActivity("/name: groceries /activityType: necessity");
 
             activityManager.findActivity("exercise");
-            assertEquals("[activity = swimming, activity type = exercise]", activityManager.getActivityList().get(0).toString());
-            assertEquals("[activity = running, activity type = exercise]", activityManager.getActivityList().get(1).toString());
+            assertEquals("[activity = swimming, activity type = exercise]",
+                    activityManager.getActivityList().get(0).toString());
+            assertEquals("[activity = running, activity type = exercise]",
+                    activityManager.getActivityList().get(1).toString());
 
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
