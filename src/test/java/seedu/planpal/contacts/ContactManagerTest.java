@@ -1,14 +1,25 @@
 package seedu.planpal.contacts;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.ContactManager;
 
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class ContactManagerTest {
+    private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
+
+    @BeforeEach
+    public void setUp() {
+        System.setOut(new PrintStream(OUTPUT_STREAM));
+    }
+
     @Test
     public void addContact_validFormat_success() {
         try{

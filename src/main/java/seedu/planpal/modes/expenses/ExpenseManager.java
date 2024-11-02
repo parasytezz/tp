@@ -3,6 +3,9 @@ package seedu.planpal.modes.expenses;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.exceptions.expenses.InvalidBudgetException;
+import seedu.planpal.exceptions.expenses.NegativeBudgetException;
+import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
@@ -20,11 +23,8 @@ public class ExpenseManager implements ListFunctions {
     }
 
     public void addExpense(String description) throws PlanPalExceptions {
-        if (budget.equals("0")) {
-            throw new PlanPalExceptions(
-                    "You have not set your budget! \n" +
-                    "To do so, type: budget <value> \n" +
-                    "Example: budget 100");
+        if (budget == null || budget.equals("0")) {
+            throw new NoBudgetException();
         }
 
         if (description.isEmpty()){
@@ -115,7 +115,7 @@ public class ExpenseManager implements ListFunctions {
         try {
             double budgetValue = Double.parseDouble(budget);
             if (budgetValue < 0){
-                throw new PlanPalExceptions("Budget cannot be negative");
+                throw new NegativeBudgetException();
             }
             this.budget = budget;
             savedExpenses.saveValue("budget.txt", budget);
@@ -124,7 +124,7 @@ public class ExpenseManager implements ListFunctions {
             }
 
         } catch (NumberFormatException e) {
-            throw new PlanPalExceptions("The budget value cannot be evaluated! Make sure it is a double type!");
+            throw new InvalidBudgetException();
         }
     }
 
