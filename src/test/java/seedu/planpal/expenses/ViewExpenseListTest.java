@@ -26,11 +26,12 @@ public class ViewExpenseListTest {
     @Test
     public void withinBudget_success() {
         try {
-            expenseManager.setBudget("1000");
+            expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:trial1 /cost:200");
             expenseManager.addExpense("/name:trial2 /cost:300");
             expenseManager.viewExpenseList();
-            assertEquals(500.0, expenseManager.getTotalCost());
+            double totalCost = expenseManager.getTotalCost(expenseManager.getMonthlyExpenses());
+            assertEquals(500.0, totalCost);
             assertTrue(OUTPUT_STREAM.toString().contains("Remaining budget: $500.0"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -40,11 +41,12 @@ public class ViewExpenseListTest {
     @Test
     public void exceedBudget_showsWarning() {
         try {
-            expenseManager.setBudget("500");
+            expenseManager.getBudgetManager().setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:400");
             expenseManager.addExpense("/name:trial2 /cost:200");
             expenseManager.viewExpenseList();
-            assertEquals(600.0, expenseManager.getTotalCost());
+            double totalCost = expenseManager.getTotalCost(expenseManager.getMonthlyExpenses());
+            assertEquals(600.0, totalCost);
             assertTrue(OUTPUT_STREAM.toString().contains("It's time to readjust your spending habits!"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());

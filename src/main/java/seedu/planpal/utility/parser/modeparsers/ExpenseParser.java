@@ -40,7 +40,7 @@ public class ExpenseParser extends Parser {
 
             switch (command) {
             case BUDGET_COMMAND:
-                expenseManager.setBudget(inputParts[1].trim());
+                expenseManager.getBudgetManager().setBudget(inputParts[1].trim());
                 return true;
 
             case Parser.ADD_COMMAND:

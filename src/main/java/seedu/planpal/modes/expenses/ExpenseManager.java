@@ -1,39 +1,19 @@
 package seedu.planpal.modes.expenses;
 
-
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.exceptions.expenses.InvalidBudgetException;
-import seedu.planpal.exceptions.expenses.NegativeBudgetException;
 import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ExpenseManager implements ListFunctions {
-    private static final int BUDGET_SEGMENT = 2;
-    private static final String BUDGET_SEPARATOR = "budget_";
-    private static final String MONTH_SEPARATOR = "/month:";
-    private static final String TXT_SEPARATOR = ".txt";
-    private static final String NON_NUMERICS = "[^0-9-.]";
+public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     FileManager savedExpenses = new FileManager();
+    BudgetManager budgetManager = new BudgetManager(savedExpenses);
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
-    private Map<String, String> monthlyBudget = new HashMap<>();
-
-    /**
-     * Retrieves the current month in the "yyyy-MM" format.
-     *
-     * @return The current month as a string in "yyyy-MM" format.
-     */
-    private String getCurrentMonth(){
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
-    }
 
     /**
      * Prints a message advising to readjust spending habits if the total cost for the given month exceeds the budget.
@@ -41,8 +21,8 @@ public class ExpenseManager implements ListFunctions {
      * @param month The month for which the budget status is being checked.
      */
     public void printExceededBudgetMessage(String month){
-        double budgetValue = Double.parseDouble(monthlyBudget.get(month));
-        if (budgetValue < getTotalCost(month)){
+        double budgetValue = Double.parseDouble(budgetManager.getMonthlyBudget().get(month));
+        if (budgetValue < getTotalCost(month, monthlyExpenses)){
             System.out.println("It's time to readjust your spending habits!");
         }
     }
@@ -61,7 +41,8 @@ public class ExpenseManager implements ListFunctions {
 
         Expense newExpense = new Expense(description);
         String targetMonth = newExpense.getMonth();
-        if (!monthlyBudget.containsKey(targetMonth) || monthlyBudget.get(targetMonth).equals("0")){
+        if (!budgetManager.getMonthlyBudget().containsKey(targetMonth) ||
+                budgetManager.getMonthlyBudget().get(targetMonth).equals("0")){
             throw new NoBudgetException();
         }
 
@@ -77,7 +58,7 @@ public class ExpenseManager implements ListFunctions {
      * @param month The month for which expenses are being retrieved.
      * @return An ArrayList of expenses for the specified month.
      */
-    public ArrayList<Expense> getMonthlyExpenses(String month) {
+    public ArrayList<Expense> getMonthlyExpensesValues(String month) {
         return monthlyExpenses.getOrDefault(month, new ArrayList<>());
     }
 
@@ -86,8 +67,8 @@ public class ExpenseManager implements ListFunctions {
      *
      * @return An ArrayList of expenses for the current month.
      */
-    public ArrayList<Expense> getMonthlyExpenses() {
-        return getMonthlyExpenses(getCurrentMonth());
+    public ArrayList<Expense> getMonthlyExpensesValues() {
+        return getMonthlyExpensesValues(getCurrentMonth());
     }
 
     /**
@@ -99,17 +80,18 @@ public class ExpenseManager implements ListFunctions {
      */
     public void viewExpenseList(String input) throws PlanPalExceptions {
         String month = getMonth(input);
-        if (!monthlyBudget.containsKey(month) || monthlyBudget.get(month).equals("0")){
+        if (!budgetManager.getMonthlyBudget().containsKey(month) ||
+                budgetManager.getMonthlyBudget().get(month).equals("0")){
             throw new NoBudgetException();
         }
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         viewList(expenseList);
-        double budgetValue = Double.parseDouble(monthlyBudget.get(month));
+        double budgetValue = Double.parseDouble(budgetManager.getMonthlyBudget().get(month));
         System.out.println("For the month of " + month);
-        System.out.println("    Total budget: $" + monthlyBudget.get(month));
-        System.out.println("    Total cost: $" + getTotalCost(month));
-        System.out.println("    Remaining budget: $" + (budgetValue - getTotalCost(month)));
+        System.out.println("    Total budget: $" + budgetManager.getMonthlyBudget().get(month));
+        System.out.println("    Total cost: $" + getTotalCost(month, monthlyExpenses));
+        System.out.println("    Remaining budget: $" + (budgetValue - getTotalCost(month, monthlyExpenses)));
         Ui.printLine();
     }
 
@@ -121,34 +103,6 @@ public class ExpenseManager implements ListFunctions {
     public void viewExpenseList() throws PlanPalExceptions {
         String monthInput = MONTH_SEPARATOR + getCurrentMonth();
         viewExpenseList(monthInput);
-    }
-
-    /**
-     * Calculates the total cost of all expenses for a specified month.
-     *
-     * @param month The month for which the total cost is calculated.
-     * @return The total cost of expenses for the specified month.
-     */
-    public double getTotalCost(String month){
-        ArrayList<Expense> expenseList = monthlyExpenses.get(month);
-        double totalCost = 0.0;
-        for (Expense expense : expenseList){
-            String costInString = expense.getCost();
-            if (costInString == null){
-                costInString = "0";
-            }
-            totalCost += Double.parseDouble(costInString);
-        }
-        return totalCost;
-    }
-
-    /**
-     * Calculates the total cost of all expenses for the current month.
-     *
-     * @return The total cost of expenses for the current month.
-     */
-    public double getTotalCost(){
-        return getTotalCost(getCurrentMonth());
     }
 
     /**
@@ -231,110 +185,20 @@ public class ExpenseManager implements ListFunctions {
     }
 
     /**
-     * Sets the budget for a specific month. If the budget is negative or cannot be parsed, an exception is thrown.
+     * Retrieves the budget manager instance associated with this expense manager.
      *
-     * @param budget    The budget value to set.
-     * @param month     The month for which the budget is being set. Uses the current month if null.
-     * @param isDefault A flag indicating if the budget setting should print a confirmation message.
-     * @throws PlanPalExceptions If the budget value is invalid.
+     * @return The budget manager instance managing the budgets.
      */
-    public void setBudget(String budget, String month, boolean isDefault) throws PlanPalExceptions{
-        try {
-            String targetMonth;
-            if (month == null) {
-                targetMonth = getCurrentMonth();
-            } else {
-                targetMonth = month;
-            }
-
-            double budgetValue = Double.parseDouble(budget);
-            if (budgetValue < 0){
-                throw new NegativeBudgetException();
-            }
-
-            monthlyBudget.put(targetMonth, budget);
-            savedExpenses.saveValue("budgets/budget_" + targetMonth + ".txt", budget);
-            if (isDefault) {
-                Ui.print("For the month of " + targetMonth,
-                        "Budget has been set to: $" + monthlyBudget.get(targetMonth));
-            }
-
-        } catch (NumberFormatException e) {
-            throw new InvalidBudgetException();
-        }
+    public BudgetManager getBudgetManager(){
+        return budgetManager;
     }
 
     /**
-     * Sets the budget for a specific month using a formatted input string.
-     * Extracts month and budget from the input and sets them accordingly.
+     * Retrieves the map of monthly expenses managed by this expense manager.
      *
-     * @param input The input string containing the budget and month.
-     * @throws PlanPalExceptions If the input is invalid.
+     * @return A map where each key is the month and each value is a list of expenses for that month.
      */
-    public void setBudget(String input) throws PlanPalExceptions{
-        String month = getMonth(input);
-        if (month == null){
-            month = getCurrentMonth();
-        }
-        String budget = input.replaceAll(month,"").replaceAll(NON_NUMERICS, "").trim();
-        setBudget(budget, month, true);
-    }
-
-    /**
-     * Sets multiple budgets from a list of strings, each representing a budget for a month.
-     *
-     * @param budgetList The list of budget strings in the format "fileName: budget".
-     * @throws PlanPalExceptions If any budget setting encounters an error.
-     */
-    public void setAllBudget(ArrayList<String> budgetList) throws PlanPalExceptions{
-        try {
-            for (String budget : budgetList){
-                String[] budgetParts = budget.split(":", BUDGET_SEGMENT);
-                String fileName = budgetParts[0].trim();
-                String month = fileName.replace(BUDGET_SEPARATOR,"").replace(TXT_SEPARATOR, "").trim();
-                budget = budgetParts[1].trim();
-                setBudget(budget, month, false);
-            }
-        } catch (Exception e) {
-            throw new PlanPalExceptions(e.getMessage());
-        }
-    }
-
-    /**
-     * Retrieves the budget for a specific month.
-     *
-     * @param month The month for which the budget is retrieved.
-     * @return The budget for the specified month as a string.
-     */
-    public String getBudget(String month){
-        return monthlyBudget.get(month);
-    }
-
-    /**
-     * Retrieves the budget for the current month.
-     *
-     * @return The budget for the current month as a string.
-     */
-    public String getBudget() {
-        return getBudget(getCurrentMonth());
-    }
-
-    /**
-     * Extracts the month from the input string if it contains "/month:". If "/month:" is not found, returns null.
-     *
-     * @param input The input string potentially containing the month specification.
-     * @return The extracted month in "yyyy-MM" format or null if not found.
-     */
-    private String getMonth(String input){
-        int startIndex = input.indexOf(MONTH_SEPARATOR);
-        if (startIndex != -1){
-            startIndex += MONTH_SEPARATOR.length();
-            int endIndex = input.indexOf("/", startIndex);
-            if (endIndex == -1){
-                endIndex = input.length();
-            }
-            return input.substring(startIndex, endIndex).trim();
-        }
-        return null;
+    public Map<String, ArrayList<Expense>> getMonthlyExpenses() {
+        return monthlyExpenses;
     }
 }
