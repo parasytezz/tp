@@ -38,6 +38,11 @@ public class Expense implements Editable, Storeable {
         }
     }
 
+    /**
+     * Gets the current month in "yyyy-MM" format.
+     *
+     * @return The current month as a string.
+     */
     private String getCurrentMonth(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
@@ -45,7 +50,7 @@ public class Expense implements Editable, Storeable {
     /**
      * Returns a string representation of the expense.
      *
-     * @return A string in the format: [name, Cost = cost].
+     * @return A string in the format: [Name = name, Cost = $cost].
      */
     @Override
     public String toString() {
@@ -99,16 +104,31 @@ public class Expense implements Editable, Storeable {
         setCommandDescription(newCommandDescription);
     }
 
+    /**
+     * Sets the command description for this expense.
+     *
+     * @param description The command description to set.
+     */
     @Override
     public void setCommandDescription(String description) {
         this.commandDescription = description;
     }
 
+    /**
+     * Gets the command description for this expense.
+     *
+     * @return The command description of the expense.
+     */
     @Override
     public String getCommandDescription() {
         return commandDescription;
     }
 
+    /**
+     * Gets the storage path for this expense.
+     *
+     * @return The storage path as a string in the format "./data/expenses/expenses_<month>.txt".
+     */
     @Override
     public String getStoragePath() {
         return "./data/expenses/expenses_" + getMonth() + ".txt";
@@ -157,12 +177,17 @@ public class Expense implements Editable, Storeable {
     /**
      * Gets the cost of the expense.
      *
-     * @return The cost of the expense.
+     * @return The cost of the expense as a string.
      */
     public String getCost(){
         return cost;
     }
 
+    /**
+     * Sets the month for the expense. Defaults to the current month if input is null or empty.
+     *
+     * @param month The month as a string in "yyyy-MM" format.
+     */
     public void setMonth(String month) {
         if (month == null || month.isEmpty()) {
             this.month = getCurrentMonth();
@@ -171,6 +196,11 @@ public class Expense implements Editable, Storeable {
         }
     }
 
+    /**
+     * Gets the month for the expense.
+     *
+     * @return The month of the expense in "yyyy-MM" format.
+     */
     public String getMonth(){
         return month;
     }
