@@ -127,7 +127,7 @@ public class Expense implements Editable, Storeable {
     /**
      * Gets the storage path for this expense.
      *
-     * @return The storage path as a string in the format "./data/expenses/expenses_<month>.txt".
+     * @return The storage path as a string
      */
     @Override
     public String getStoragePath() {
