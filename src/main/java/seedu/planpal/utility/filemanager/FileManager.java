@@ -41,10 +41,14 @@ public class FileManager {
 
     /**
      * Saves a list of objects to the corresponding file in storage.
-     * Each object in the list must implement {@link Storeable}. The objects are saved in
-     * to the file using their command description.
+     * Each object in the list must implement {@link Storeable}. The objects are saved
+     * to the file using their command description. If there are two items before deletion,
+     * the entire list is saved; otherwise, the list is cleared.
      *
-     * @param list The list of objects to be saved. Each object must implement {@link Storeable}.
+     * @param list               The list of objects to be saved. Each object must implement {@link Storeable}.
+     * @param hasTwoBeforeDelete A flag indicating if there were two items before deletion,
+     *                           which affects whether the list is saved or cleared.
+     * @param <T>                The type of objects in the list, implementing {@link Storeable}.
      */
     public <T> void saveList(ArrayList<T> list, boolean hasTwoBeforeDelete) {
         T listElement = list.get(0);
@@ -84,9 +88,10 @@ public class FileManager {
      * which is determined by the file's name. System output during processing is suppressed to prevent
      * clutter during command execution.
      *
-     * @param <T> The type of the manager used to handle commands derived from the file's data.
-     * @param manager The manager instance for processing the commands.
-     * @param fileName The name of the file.
+     * @param <T>      The type of the manager used to handle commands derived from the file's data.
+     * @param manager  The manager instance for processing the commands.
+     * @param folderName The folder containing the file.
+     * @param fileName The name of the file to load and process.
      */
     public <T> void loadList(T manager, String folderName, String fileName) {
         PrintStream out = System.out;
@@ -129,6 +134,15 @@ public class FileManager {
         Ui.setMainStream(out);
     }
 
+    /**
+     * Loads and processes all files within a specified folder using the given manager.
+     * Each file must end with ".txt" and is processed by the appropriate parser based
+     * on its name. This function is intended for loading multiple lists from one folder.
+     *
+     * @param <T>       The type of the manager used to handle commands derived from the file's data.
+     * @param manager   The manager instance for processing the commands.
+     * @param folderName The name of the folder containing the files to load.
+     */
     public <T> void loadAllLists(T manager, String folderName) {
         File directory = new File(DATA_DIRECTORY + folderName + "/");
         if (!directory.exists() || !directory.isDirectory()) {
@@ -147,7 +161,13 @@ public class FileManager {
         }
     }
 
-
+    /**
+     * Saves a single string value to a specified file within the value directory.
+     * The function will ensure the directory structure exists, and if not, it will create it.
+     *
+     * @param fileName The name of the file where the value should be saved.
+     * @param value    The string value to save to the file.
+     */
     public void saveValue(String fileName, String value){
         String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
         createDirectory(storagePath);
@@ -158,6 +178,16 @@ public class FileManager {
         }
     }
 
+    /**
+     * Loads a single value from a specified file within a folder. If the file does not exist,
+     * it is created, and a default value is written to it. The function returns the value loaded
+     * from the file or the default value if the file was newly created.
+     *
+     * @param folderName The name of the folder containing the file.
+     * @param fileName   The name of the file from which to load the value.
+     * @param value      The default value to return and save if the file does not exist.
+     * @return The loaded value from the file or the default value if the file was created.
+     */
     public String loadValue(String folderName, String fileName, String value){
         String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + folderName + "/" + fileName;
         PrintStream out = System.out;
@@ -188,11 +218,26 @@ public class FileManager {
         return value;
     }
 
-    // Overloaded loadValue function with a default 0 value.
+    /**
+     * An overloaded method of loadValue, which loads a value from a specified file with a default value of "0".
+     * If the file does not exist, it is created with "0" as its content, and this value is returned.
+     *
+     * @param fileName   The name of the file from which to load the value.
+     * @param folderName The name of the folder containing the file.
+     * @return The loaded value from the file or "0" if the file was created.
+     */
     public String loadValue(String fileName, String folderName){
         return loadValue(fileName, folderName, "0");
     }
 
+    /**
+     * Loads all values from a specified folder within the value directory. Each file must end with ".txt".
+     * The function returns an ArrayList of strings in the format "fileName : value" for each file, where
+     * "fileName" is the name of the file and "value" is the content of the file.
+     *
+     * @param folderName The name of the folder containing the value files.
+     * @return An ArrayList of strings, each formatted as "fileName : value" representing each file's content.
+     */
     public ArrayList<String> loadAllValues(String folderName){
         ArrayList<String> valueList = new ArrayList<>();
         File directory = new File(DATA_DIRECTORY + VALUE_DIRECTORY + folderName + "/");

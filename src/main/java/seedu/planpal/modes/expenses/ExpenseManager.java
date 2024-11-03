@@ -26,10 +26,20 @@ public class ExpenseManager implements ListFunctions {
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
     private Map<String, String> monthlyBudget = new HashMap<>();
 
+    /**
+     * Retrieves the current month in the "yyyy-MM" format.
+     *
+     * @return The current month as a string in "yyyy-MM" format.
+     */
     private String getCurrentMonth(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
+    /**
+     * Prints a message advising to readjust spending habits if the total cost for the given month exceeds the budget.
+     *
+     * @param month The month for which the budget status is being checked.
+     */
     public void printExceededBudgetMessage(String month){
         double budgetValue = Double.parseDouble(monthlyBudget.get(month));
         if (budgetValue < getTotalCost(month)){
@@ -37,6 +47,13 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
+    /**
+     * Adds a new expense entry for the specified month based on the provided description.
+     * Throws an exception if the month lacks a budget.
+     *
+     * @param description The description of the expense to be added.
+     * @throws PlanPalExceptions If the description is empty or no budget is set for the month.
+     */
     public void addExpense(String description) throws PlanPalExceptions {
         if (description.isEmpty()){
             throw new EmptyDescriptionException();
@@ -54,14 +71,32 @@ public class ExpenseManager implements ListFunctions {
         savedExpenses.saveList(monthlyExpenses.get(targetMonth));
     }
 
+    /**
+     * Retrieves a list of expenses for a specified month.
+     *
+     * @param month The month for which expenses are being retrieved.
+     * @return An ArrayList of expenses for the specified month.
+     */
     public ArrayList<Expense> getMonthlyExpenses(String month) {
         return monthlyExpenses.getOrDefault(month, new ArrayList<>());
     }
 
+    /**
+     * Retrieves a list of expenses for the current month.
+     *
+     * @return An ArrayList of expenses for the current month.
+     */
     public ArrayList<Expense> getMonthlyExpenses() {
         return getMonthlyExpenses(getCurrentMonth());
     }
 
+    /**
+     * Displays the expense list and budget summary for a specified month. If no budget is set,
+     * an exception is thrown.
+     *
+     * @param input The input string containing the month information.
+     * @throws PlanPalExceptions If no budget is set for the specified month.
+     */
     public void viewExpenseList(String input) throws PlanPalExceptions {
         String month = getMonth(input);
         if (!monthlyBudget.containsKey(month) || monthlyBudget.get(month).equals("0")){
@@ -78,11 +113,22 @@ public class ExpenseManager implements ListFunctions {
         Ui.printLine();
     }
 
+    /**
+     * Displays the expense list and budget summary for the current month.
+     *
+     * @throws PlanPalExceptions If no budget is set for the current month.
+     */
     public void viewExpenseList() throws PlanPalExceptions {
         String monthInput = MONTH_SEPARATOR + getCurrentMonth();
         viewExpenseList(monthInput);
     }
 
+    /**
+     * Calculates the total cost of all expenses for a specified month.
+     *
+     * @param month The month for which the total cost is calculated.
+     * @return The total cost of expenses for the specified month.
+     */
     public double getTotalCost(String month){
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         double totalCost = 0.0;
@@ -96,10 +142,21 @@ public class ExpenseManager implements ListFunctions {
         return totalCost;
     }
 
+    /**
+     * Calculates the total cost of all expenses for the current month.
+     *
+     * @return The total cost of expenses for the current month.
+     */
     public double getTotalCost(){
         return getTotalCost(getCurrentMonth());
     }
 
+    /**
+     * Edits an existing expense entry in the specified month's list based on the provided query.
+     *
+     * @param query The query string specifying the expense to edit.
+     * @throws PlanPalExceptions If the query is empty or fails to find a matching expense.
+     */
     public void editExpense(String query) throws PlanPalExceptions {
         String month = getMonth(query);
         if (month == null){
@@ -111,6 +168,12 @@ public class ExpenseManager implements ListFunctions {
         savedExpenses.saveList(monthlyExpenses.get(month));
     }
 
+    /**
+     * Deletes an expense entry from the specified month's list based on the provided input.
+     *
+     * @param input The input specifying the expense to delete.
+     * @throws PlanPalExceptions If the input is empty or fails to delete the expense.
+     */
     public void deleteExpense(String input) throws PlanPalExceptions {
         if (input.isEmpty()) {
             throw new EmptyDescriptionException();
@@ -133,6 +196,12 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
+    /**
+     * Finds and displays expense entries matching the description in the specified month.
+     *
+     * @param description The description of the expense to find.
+     * @throws PlanPalExceptions If the description is empty or fails to find a match.
+     */
     public void findExpense(String description) throws PlanPalExceptions {
         String month = getMonth(description);
         if (month == null){
@@ -161,6 +230,14 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
+    /**
+     * Sets the budget for a specific month. If the budget is negative or cannot be parsed, an exception is thrown.
+     *
+     * @param budget    The budget value to set.
+     * @param month     The month for which the budget is being set. Uses the current month if null.
+     * @param isDefault A flag indicating if the budget setting should print a confirmation message.
+     * @throws PlanPalExceptions If the budget value is invalid.
+     */
     public void setBudget(String budget, String month, boolean isDefault) throws PlanPalExceptions{
         try {
             String targetMonth;
@@ -187,6 +264,13 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
+    /**
+     * Sets the budget for a specific month using a formatted input string.
+     * Extracts month and budget from the input and sets them accordingly.
+     *
+     * @param input The input string containing the budget and month.
+     * @throws PlanPalExceptions If the input is invalid.
+     */
     public void setBudget(String input) throws PlanPalExceptions{
         String month = getMonth(input);
         if (month == null){
@@ -196,6 +280,12 @@ public class ExpenseManager implements ListFunctions {
         setBudget(budget, month, true);
     }
 
+    /**
+     * Sets multiple budgets from a list of strings, each representing a budget for a month.
+     *
+     * @param budgetList The list of budget strings in the format "fileName: budget".
+     * @throws PlanPalExceptions If any budget setting encounters an error.
+     */
     public void setAllBudget(ArrayList<String> budgetList) throws PlanPalExceptions{
         try {
             for (String budget : budgetList){
@@ -210,14 +300,31 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
+    /**
+     * Retrieves the budget for a specific month.
+     *
+     * @param month The month for which the budget is retrieved.
+     * @return The budget for the specified month as a string.
+     */
     public String getBudget(String month){
         return monthlyBudget.get(month);
     }
 
+    /**
+     * Retrieves the budget for the current month.
+     *
+     * @return The budget for the current month as a string.
+     */
     public String getBudget() {
         return getBudget(getCurrentMonth());
     }
 
+    /**
+     * Extracts the month from the input string if it contains "/month:". If "/month:" is not found, returns null.
+     *
+     * @param input The input string potentially containing the month specification.
+     * @return The extracted month in "yyyy-MM" format or null if not found.
+     */
     private String getMonth(String input){
         int startIndex = input.indexOf(MONTH_SEPARATOR);
         if (startIndex != -1){
