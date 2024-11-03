@@ -27,7 +27,7 @@ public class FindExpenseTest {
     @Test
     public void validDescription_success() {
         try {
-            expenseManager.setBudget("1000");
+            expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.findExpense("trial1");
             assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1, Cost = $100]"));
@@ -39,7 +39,7 @@ public class FindExpenseTest {
     @Test
     public void noMatch_exceptionThrown() {
         try {
-            expenseManager.setBudget("1000");
+            expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:trial1 /cost:100");
             assertThrows(PlanPalExceptions.class, () -> expenseManager.findExpense("trial3"));
         } catch (PlanPalExceptions e) {
@@ -55,7 +55,7 @@ public class FindExpenseTest {
     @Test
     public void multipleMatches_success() {
         try {
-            expenseManager.setBudget("1000");
+            expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.addExpense("/name:trial1 duplicate /cost:150");
             expenseManager.findExpense("trial1");
@@ -69,7 +69,7 @@ public class FindExpenseTest {
     @Test
     public void caseInsensitive_success() {
         try {
-            expenseManager.setBudget("1000");
+            expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:TrialCase /cost:120");
             expenseManager.findExpense("trialcase");
             assertTrue(OUTPUT_STREAM.toString().contains("[Name = TrialCase, Cost = $120]"));
@@ -81,7 +81,7 @@ public class FindExpenseTest {
     @Test
     public void multipleKeywords_success() {
         try {
-            expenseManager.setBudget("1000");
+            expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.addExpense("/name:trial2 /cost:200");
             expenseManager.findExpense("trial1 trial2");

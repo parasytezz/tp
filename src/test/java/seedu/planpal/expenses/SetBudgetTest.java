@@ -29,8 +29,8 @@ public class SetBudgetTest {
     @Test
     public void validIntegerBudget_success() {
         try {
-            expenseManager.setBudget("500");
-            assertEquals("500", expenseManager.getBudget());
+            expenseManager.getBudgetManager().setBudget("500");
+            assertEquals("500", expenseManager.getBudgetManager().getBudget());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -39,8 +39,8 @@ public class SetBudgetTest {
     @Test
     public void validDoubleBudget_success() {
         try {
-            expenseManager.setBudget("250.75");
-            assertEquals("250.75", expenseManager.getBudget());
+            expenseManager.getBudgetManager().setBudget("250.75");
+            assertEquals("250.75", expenseManager.getBudgetManager().getBudget());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -48,24 +48,24 @@ public class SetBudgetTest {
 
     @Test
     public void invalidFormat_exceptionThrown() {
-        assertThrows(InvalidBudgetException.class, () -> expenseManager.setBudget("invalid"));
+        assertThrows(InvalidBudgetException.class, () -> expenseManager.getBudgetManager().setBudget("invalid"));
     }
 
     @Test
     public void negativeValue_exceptionThrown() {
-        assertThrows(NegativeBudgetException.class, () -> expenseManager.setBudget("-100"));
+        assertThrows(NegativeBudgetException.class, () -> expenseManager.getBudgetManager().setBudget("-100"));
     }
 
     @Test
     public void zeroBudget_throwsNoBudgetException() {
         assertThrows(NoBudgetException.class, () -> {
-            expenseManager.setBudget("0");
+            expenseManager.getBudgetManager().setBudget("0");
             expenseManager.addExpense("/name:trial /cost:10");
         });
     }
 
     @Test
     public void emptyBudget_exceptionThrown() {
-        assertThrows(PlanPalExceptions.class, () -> expenseManager.setBudget(""));
+        assertThrows(PlanPalExceptions.class, () -> expenseManager.getBudgetManager().setBudget(""));
     }
 }

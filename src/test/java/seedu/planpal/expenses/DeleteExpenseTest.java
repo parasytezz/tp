@@ -28,12 +28,12 @@ public class DeleteExpenseTest {
     @Test
     public void validIndex_success() {
         try {
-            expenseManager.setBudget("500");
+            expenseManager.getBudgetManager().setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.addExpense("/name:trial2 /cost:50");
             expenseManager.deleteExpense("1");
-            assertEquals(1, expenseManager.getMonthlyExpenses().size());
-            assertEquals(50.0, expenseManager.getTotalCost());
+            assertEquals(1, expenseManager.getMonthlyExpensesValues().size());
+            assertEquals(50.0, expenseManager.getTotalCost(expenseManager.getMonthlyExpenses()));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -42,7 +42,7 @@ public class DeleteExpenseTest {
     @Test
     public void invalidIndex_throwsException() {
         try {
-            expenseManager.setBudget("500");
+            expenseManager.getBudgetManager().setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             assertThrows(PlanPalExceptions.class, () -> expenseManager.deleteExpense("2"));
         } catch (PlanPalExceptions e) {
@@ -58,7 +58,7 @@ public class DeleteExpenseTest {
     @Test
     public void emptyDescription_throwsEmptyDescriptionException() {
         try {
-            expenseManager.setBudget("500");
+            expenseManager.getBudgetManager().setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             assertThrows(EmptyDescriptionException.class, () -> expenseManager.deleteExpense(""));
         } catch (PlanPalExceptions e) {
@@ -69,11 +69,12 @@ public class DeleteExpenseTest {
     @Test
     public void lastItemInList_success() {
         try {
-            expenseManager.setBudget("500");
+            expenseManager.getBudgetManager().setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.deleteExpense("1");
-            assertEquals(0, expenseManager.getMonthlyExpenses().size());
-            assertEquals(0.0, expenseManager.getTotalCost());
+            double totalCost = expenseManager.getTotalCost(expenseManager.getMonthlyExpenses());
+            assertEquals(0, expenseManager.getMonthlyExpensesValues().size());
+            assertEquals(0.0, totalCost);
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -82,7 +83,7 @@ public class DeleteExpenseTest {
     @Test
     public void negativeIndex_throwsException() {
         try {
-            expenseManager.setBudget("500");
+            expenseManager.getBudgetManager().setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             assertThrows(PlanPalExceptions.class, () -> expenseManager.deleteExpense("-1"));
         } catch (PlanPalExceptions e) {
@@ -93,7 +94,7 @@ public class DeleteExpenseTest {
     @Test
     public void nonNumericIndex_throwsException() {
         try {
-            expenseManager.setBudget("500");
+            expenseManager.getBudgetManager().setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             assertThrows(InvalidIndexException.class, () -> expenseManager.deleteExpense("abc"));
         } catch (PlanPalExceptions e) {
