@@ -33,4 +33,10 @@ public class ViewActivityListTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    public void viewEmptyList_success() {
+        activityManager.viewActivityList();
+        assertEquals("[]", activityManager.getActivityList().toString());
+    }
 }

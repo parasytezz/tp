@@ -246,7 +246,68 @@ The sequence diagram below illustrates the process for resolving the "add" comma
 The way the add command works for expense manager is similar to how it works for contact manager, with the only difference being the names used.
 
 ---
+## Mode: Activity Manager
+The class diagram below represents the Activity Manager system.
+![ActivityClassDiagram.drawio.png](Images%28DG%29%2FActivityClassDiagram.drawio.png)
 
+**Work in progress for v2.0**
+
+### Add Command
+The sequence diagram below illustrates the process for resolving the "add" command.
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+
+<u>Explanation:</u>  
+The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+
+### Delete Command
+The sequence diagram below illustrates the process for resolving the "add" command.
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+
+<u>Explanation:</u>  
+The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+
+### Edit Command
+The sequence diagram below illustrates the process for resolving the "add" command.
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+
+<u>Explanation:</u>  
+The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+
+### List Command
+The sequence diagram below illustrates the process for resolving the "add" command.
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+
+<u>Explanation:</u>  
+The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+
+### Find Command
+The sequence diagram below illustrates the process for resolving the "add" command.
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+
+<u>Explanation:</u>  
+The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+
+---
 ## Product scope
 ### Target user profile
 

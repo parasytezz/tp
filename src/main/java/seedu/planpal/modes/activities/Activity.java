@@ -39,11 +39,11 @@ public class Activity implements Editable, Storeable {
     /**
      * Returns a string representation of the activity.
      *
-     * @return A string in the format: [activity: name, activity type: activityType]
+     * @return A string in the format: [activity: name, activityType: activityType]
      */
     @Override
     public String toString() {
-        return "[activity = " + name + ", activity type = " + activityType + "]";
+        return "[activity = " + name + ", activityType = " + activityType + "]";
     }
 
     /**
@@ -104,10 +104,10 @@ public class Activity implements Editable, Storeable {
         }
         commandDescription = "";
         if (name != null) {
-            commandDescription += CATEGORY_SEPARATOR + "activity" + CATEGORY_VALUE_SEPARATOR + name + " ";
+            commandDescription += CATEGORY_SEPARATOR + "name" + CATEGORY_VALUE_SEPARATOR + name + " ";
         }
         if (activityType != null) {
-            commandDescription += CATEGORY_SEPARATOR + "activity type" + CATEGORY_VALUE_SEPARATOR + activityType + " ";
+            commandDescription += CATEGORY_SEPARATOR + "activityType" + CATEGORY_VALUE_SEPARATOR + activityType + " ";
         }
     }
 
