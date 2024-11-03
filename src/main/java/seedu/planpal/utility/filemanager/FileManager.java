@@ -158,8 +158,8 @@ public class FileManager {
         }
     }
 
-    public String loadValue(String fileName, String value){
-        String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
+    public String loadValue(String folderName, String fileName, String value){
+        String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + folderName + "/" + fileName;
         PrintStream out = System.out;
         Ui.setDummyStream();
 
@@ -189,8 +189,8 @@ public class FileManager {
     }
 
     // Overloaded loadValue function with a default 0 value.
-    public String loadValue(String fileName){
-        return loadValue(fileName, "0");
+    public String loadValue(String fileName, String folderName){
+        return loadValue(fileName, folderName, "0");
     }
 
     public ArrayList<String> loadAllValues(String folderName){
@@ -207,7 +207,7 @@ public class FileManager {
 
         for (File file : files) {
             if (file.isFile() && file.getName().endsWith(".txt")) {
-                valueList.add(file.getName() + " : " + loadValue(file.getName()));
+                valueList.add(file.getName() + " : " + loadValue(folderName, file.getName()));
             }
         }
         return valueList;

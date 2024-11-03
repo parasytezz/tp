@@ -17,7 +17,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExpenseManager implements ListFunctions {
-
+    private static final int BUDGET_SEGMENT = 2;
+    private static final String MONTH_SEPARATOR = "budget_";
+    private static final String TXT_SEPARATOR = ".txt";
     FileManager savedExpenses = new FileManager();
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
     private Map<String, String> monthlyBudget = new HashMap<>();
@@ -50,7 +52,7 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
-    public void addExpenseNew(String description) throws PlanPalExceptions {
+    public void addExpense(String description) throws PlanPalExceptions {
         if (description.isEmpty()){
             throw new EmptyDescriptionException();
         }
@@ -61,27 +63,13 @@ public class ExpenseManager implements ListFunctions {
         }
 
         String targetMonth = newExpense.getMonth();
-        if (!monthlyExpenses.containsKey(targetMonth)){
+        if (!monthlyBudget.containsKey(targetMonth)){
             throw new NoBudgetException();
         }
         monthlyExpenses.putIfAbsent(targetMonth, new ArrayList<>());
         addToList(monthlyExpenses.get(targetMonth), newExpense);
         printExceededBudgetMessage(targetMonth);
         savedExpenses.saveList(monthlyExpenses.get(targetMonth));
-    }
-
-    public void addExpense(String description) throws PlanPalExceptions {
-        if (budget == null || budget.equals("0")) {
-            throw new NoBudgetException();
-        }
-
-        if (description.isEmpty()){
-            throw new EmptyDescriptionException();
-        }
-
-        addToList(expenseList, new Expense(description));
-        printExceededBudgetMessage();
-        savedExpenses.saveList(expenseList);
     }
 
     public void viewExpenseList(){
@@ -190,7 +178,7 @@ public class ExpenseManager implements ListFunctions {
             savedExpenses.saveValue("budgets/budget_" + targetMonth + ".txt", budget);
             if (isDefault) {
                 Ui.print("For the month of " + targetMonth,
-                        "Budget has been set to: $" + getBudget());
+                        "Budget has been set to: $" + monthlyBudget.get(targetMonth));
             }
 
         } catch (NumberFormatException e) {
@@ -198,31 +186,28 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
-    // Override setBudget function to print value by default
+    // Overload setBudget function
     public void setBudget(String budget, String month) throws PlanPalExceptions{
         setBudget(budget, month, true);
     }
 
-    public void setBudget(String budget, boolean isDefault) throws PlanPalExceptions{
-        try {
-            double budgetValue = Double.parseDouble(budget);
-            if (budgetValue < 0){
-                throw new NegativeBudgetException();
-            }
-            this.budget = budget;
-            savedExpenses.saveValue("budgets/budget.txt", budget);
-            if (isDefault) {
-                Ui.print("Budget has been set to: $" + getBudget());
-            }
-
-        } catch (NumberFormatException e) {
-            throw new InvalidBudgetException();
-        }
+    // Overload setBudget function
+    public void setBudget(String budget) throws PlanPalExceptions{
+        setBudget(budget, null, true);
     }
 
-    // Override setBudget function to print value by default
-    public void setBudget(String budget) throws PlanPalExceptions{
-        setBudget(budget, true);
+    public void setAllBudget(ArrayList<String> budgetList) throws PlanPalExceptions{
+        try {
+            for (String budget : budgetList){
+                String[] budgetParts = budget.split(":", BUDGET_SEGMENT);
+                String fileName = budgetParts[0].trim();
+                String month = fileName.replace(MONTH_SEPARATOR,"").replace(TXT_SEPARATOR, "").trim();
+                budget = budgetParts[1].trim();
+                setBudget(budget, month, false);
+            }
+        } catch (Exception e) {
+            throw new PlanPalExceptions(e.getMessage());
+        }
     }
 
     public String getBudget() {
