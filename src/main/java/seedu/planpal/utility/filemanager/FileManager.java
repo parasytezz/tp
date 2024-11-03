@@ -192,4 +192,24 @@ public class FileManager {
     public String loadValue(String fileName){
         return loadValue(fileName, "0");
     }
+
+    public ArrayList<String> loadAllValues(String folderName){
+        ArrayList<String> valueList = new ArrayList<>();
+        File directory = new File(DATA_DIRECTORY + VALUE_DIRECTORY + folderName + "/");
+        if (!directory.exists() || !directory.isDirectory()) {
+            return valueList;
+        }
+
+        File[] files = directory.listFiles();
+        if (files == null) {
+            return valueList;
+        }
+
+        for (File file : files) {
+            if (file.isFile() && file.getName().endsWith(".txt")) {
+                valueList.add(file.getName() + " : " + loadValue(file.getName()));
+            }
+        }
+        return valueList;
+    }
 }

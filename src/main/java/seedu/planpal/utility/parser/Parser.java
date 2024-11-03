@@ -41,6 +41,7 @@ public class Parser {
         expenseManager.setBudget(fileManager.loadValue("budgets/budget.txt"), false);
         fileManager.loadAllLists(expenseManager, "expenses");
         fileManager.loadAllLists(contactManager, "contacts");
+        fileManager.loadAllLists(activityManager, "activities");
     }
 
     private String getCommand(String currentMode){

@@ -189,7 +189,8 @@ public class ExpenseManager implements ListFunctions {
             monthlyBudget.put(targetMonth, budget);
             savedExpenses.saveValue("budgets/budget_" + targetMonth + ".txt", budget);
             if (isDefault) {
-                Ui.print("Budget has been set to: $" + getBudget());
+                Ui.print("For the month of " + targetMonth,
+                        "Budget has been set to: $" + getBudget());
             }
 
         } catch (NumberFormatException e) {
