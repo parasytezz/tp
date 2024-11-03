@@ -21,7 +21,7 @@ public class ExpenseManager implements ListFunctions {
     private static final String BUDGET_SEPARATOR = "budget_";
     private static final String MONTH_SEPARATOR = "/month:";
     private static final String TXT_SEPARATOR = ".txt";
-    private static final String NUMERICS = "[^0-9-.]";
+    private static final String NON_NUMERICS = "[^0-9-.]";
     FileManager savedExpenses = new FileManager();
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
     private Map<String, String> monthlyBudget = new HashMap<>();
@@ -120,7 +120,7 @@ public class ExpenseManager implements ListFunctions {
         if (month == null){
             month = getCurrentMonth();
         }
-        String index = input.replaceAll(NUMERICS, "").trim();
+        String index = input.replaceAll(NON_NUMERICS, "").trim();
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
 
         try {
@@ -188,8 +188,11 @@ public class ExpenseManager implements ListFunctions {
     }
 
     public void setBudget(String input) throws PlanPalExceptions{
-        String budget = input.replaceAll(NUMERICS, "").trim();
         String month = getMonth(input);
+        if (month == null){
+            month = getCurrentMonth();
+        }
+        String budget = input.replaceAll(month,"").replaceAll(NON_NUMERICS, "").trim();
         setBudget(budget, month, true);
     }
 
