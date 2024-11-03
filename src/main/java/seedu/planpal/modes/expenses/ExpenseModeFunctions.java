@@ -7,6 +7,7 @@ import java.util.Map;
 
 public interface ExpenseModeFunctions {
     String MONTH_SEPARATOR = "/month:";
+    String NON_NUMERICS = "[^0-9-.]";
 
     /**
      * Retrieves the current month in the "yyyy-MM" format.

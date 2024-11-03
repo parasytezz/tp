@@ -15,7 +15,6 @@ public class BudgetManager implements ExpenseModeFunctions {
     private static final int BUDGET_SEGMENT = 2;
     private static final String BUDGET_SEPARATOR = "budget_";
     private static final String TXT_SEPARATOR = ".txt";
-    private static final String NON_NUMERICS = "[^0-9-.]";
     FileManager savedExpenses;
     private Map<String, String> monthlyBudget = new HashMap<>();
 

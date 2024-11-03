@@ -11,8 +11,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
-    private static final String MONTH_SEPARATOR = "/month:";
-    private static final String NON_NUMERICS = "[^0-9-.]";
     FileManager savedExpenses = new FileManager();
     BudgetManager budgetManager = new BudgetManager(savedExpenses);
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
