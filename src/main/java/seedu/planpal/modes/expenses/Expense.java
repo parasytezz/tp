@@ -5,16 +5,19 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an expense in the PlanPal application.
  */
 public class Expense implements Editable, Storeable {
-    private static final String STORAGE_PATH = "./data/expenses.txt";
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;
     private String cost;
     private String name;
+    private String month;
 
     /**
      * Constructs an Expense object from a command description.
@@ -29,15 +32,25 @@ public class Expense implements Editable, Storeable {
             throw new IllegalCommandException();
         }
         assert categories.length >= 2: "Illegal command executed in expenses";
+        setMonth(getCurrentMonth());
         for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
             processEditFunction(categories[categoryIndex]);
         }
     }
 
     /**
+     * Gets the current month in "yyyy-MM" format.
+     *
+     * @return The current month as a string.
+     */
+    private String getCurrentMonth(){
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+    }
+
+    /**
      * Returns a string representation of the expense.
      *
-     * @return A string in the format: [name, Cost = cost].
+     * @return A string in the format: [Name = name, Cost = $cost].
      */
     @Override
     public String toString() {
@@ -63,7 +76,9 @@ public class Expense implements Editable, Storeable {
             setCost(valueToEdit);
         } else if (category.equals("name")){
             setName(valueToEdit);
-        }else {
+        } else if (category.equals("month")){
+            setMonth(valueToEdit);
+        } else {
             System.out.println(category + " is not a valid category");
             throw new IllegalCommandException();
         }
@@ -89,19 +104,34 @@ public class Expense implements Editable, Storeable {
         setCommandDescription(newCommandDescription);
     }
 
+    /**
+     * Sets the command description for this expense.
+     *
+     * @param description The command description to set.
+     */
     @Override
     public void setCommandDescription(String description) {
         this.commandDescription = description;
     }
 
+    /**
+     * Gets the command description for this expense.
+     *
+     * @return The command description of the expense.
+     */
     @Override
     public String getCommandDescription() {
         return commandDescription;
     }
 
+    /**
+     * Gets the storage path for this expense.
+     *
+     * @return The storage path as a string
+     */
     @Override
     public String getStoragePath() {
-        return STORAGE_PATH;
+        return "./data/expenses/expenses_" + getMonth() + ".txt";
     }
 
     /**
@@ -147,9 +177,31 @@ public class Expense implements Editable, Storeable {
     /**
      * Gets the cost of the expense.
      *
-     * @return The cost of the expense.
+     * @return The cost of the expense as a string.
      */
     public String getCost(){
         return cost;
+    }
+
+    /**
+     * Sets the month for the expense. Defaults to the current month if input is null or empty.
+     *
+     * @param month The month as a string in "yyyy-MM" format.
+     */
+    public void setMonth(String month) {
+        if (month == null || month.isEmpty()) {
+            this.month = getCurrentMonth();
+        } else {
+            this.month = month;
+        }
+    }
+
+    /**
+     * Gets the month for the expense.
+     *
+     * @return The month of the expense in "yyyy-MM" format.
+     */
+    public String getMonth(){
+        return month;
     }
 }

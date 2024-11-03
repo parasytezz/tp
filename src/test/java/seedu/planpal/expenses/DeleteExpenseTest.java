@@ -32,7 +32,7 @@ public class DeleteExpenseTest {
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.addExpense("/name:trial2 /cost:50");
             expenseManager.deleteExpense("1");
-            assertEquals(1, expenseManager.getExpenseList().size());
+            assertEquals(1, expenseManager.getMonthlyExpenses().size());
             assertEquals(50.0, expenseManager.getTotalCost());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -72,7 +72,7 @@ public class DeleteExpenseTest {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.deleteExpense("1");
-            assertEquals(0, expenseManager.getExpenseList().size());
+            assertEquals(0, expenseManager.getMonthlyExpenses().size());
             assertEquals(0.0, expenseManager.getTotalCost());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());

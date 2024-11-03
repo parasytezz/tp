@@ -116,4 +116,35 @@ public class AddExpenseTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    public void multipleBudgetsAndExpenses_success() {
+        try {
+            expenseManager.setBudget("1000 /month:2024-10");
+            expenseManager.setBudget("1500 /month:2024-11");
+            expenseManager.addExpense("/name:trial1 /cost:200 /month:2024-10");
+            expenseManager.addExpense("/name:trial2 /cost:300 /month:2024-10");
+            expenseManager.addExpense("/name:trial3 /cost:100 /month:2024-11");
+            expenseManager.addExpense("/name:trial4 /cost:400 /month:2024-11");
+
+            // Check total for each month
+            assertEquals(500.0, expenseManager.getTotalCost("2024-10"));
+            assertEquals(500.0, expenseManager.getTotalCost("2024-11"));
+        } catch (PlanPalExceptions e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void multipleEntriesWithoutBudget_exceptionThrown() {
+        try {
+            expenseManager.setBudget("1000 /month:2024-10");
+            expenseManager.addExpense("/name:trial1 /cost:200 /month:2024-10");
+            assertThrows(NoBudgetException.class, () -> expenseManager.addExpense("/cost:400 /month:2024-11"));
+        } catch (PlanPalExceptions e) {
+            fail(e.getMessage());
+        }
+    }
+
+
 }
