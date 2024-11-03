@@ -5,6 +5,9 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
 import seedu.planpal.utility.filemanager.Storeable;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents an expense in the PlanPal application.
  */
@@ -15,6 +18,10 @@ public class Expense implements Editable, Storeable {
     private String cost;
     private String name;
     private String month;
+
+    private String getCurrentMonth(){
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
+    }
 
     /**
      * Constructs an Expense object from a command description.
@@ -32,6 +39,7 @@ public class Expense implements Editable, Storeable {
         for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
             processEditFunction(categories[categoryIndex]);
         }
+        setMonth(getCurrentMonth());
     }
 
     /**
@@ -156,7 +164,11 @@ public class Expense implements Editable, Storeable {
     }
 
     public void setMonth(String month) {
-        this.month = month;
+        if (month == null || month.isEmpty()) {
+            this.month = getCurrentMonth();
+        } else {
+            this.month = month;
+        }
     }
 
     public String getMonth(){

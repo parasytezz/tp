@@ -23,19 +23,23 @@ public class ExpenseManager implements ListFunctions {
     FileManager savedExpenses = new FileManager();
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
     private Map<String, String> monthlyBudget = new HashMap<>();
-    private ArrayList<Expense> expenseList = new ArrayList<>();
+    private ArrayList<Expense> overallExpenseList = new ArrayList<>();
     private String budget;
 
     private String getCurrentMonth(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
-    public ArrayList<Expense> getExpenseList() {
-        return expenseList;
+    public ArrayList<Expense> getOverallExpenseList() {
+        return overallExpenseList;
     }
 
     public ArrayList<Expense> getMonthlyExpenses(String month) {
         return monthlyExpenses.getOrDefault(month, new ArrayList<>());
+    }
+
+    public ArrayList<Expense> getMonthlyExpenses() {
+        return getMonthlyExpenses(getCurrentMonth());
     }
 
     public void printExceededBudgetMessage(){
@@ -58,40 +62,31 @@ public class ExpenseManager implements ListFunctions {
         }
 
         Expense newExpense = new Expense(description);
-        if (newExpense.getMonth() == null){
-            newExpense.setMonth(getCurrentMonth());
-        }
-
         String targetMonth = newExpense.getMonth();
-        if (!monthlyBudget.containsKey(targetMonth)){
+        if (!monthlyBudget.containsKey(targetMonth) || monthlyBudget.get(targetMonth).equals("0")){
             throw new NoBudgetException();
         }
+
         monthlyExpenses.putIfAbsent(targetMonth, new ArrayList<>());
         addToList(monthlyExpenses.get(targetMonth), newExpense);
         printExceededBudgetMessage(targetMonth);
         savedExpenses.saveList(monthlyExpenses.get(targetMonth));
     }
 
-    public void viewExpenseList(){
+    public void viewExpenseList(String month){
+        ArrayList<Expense> expenseList = monthlyExpenses.get(month);
+        monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         viewList(expenseList);
-        double budgetValue = Double.parseDouble(getBudget());
-        System.out.println("Total budget: $" + getBudget());
-        System.out.println("Total cost: $" + getTotalCost());
-        System.out.println("Remaining budget: $" + (budgetValue - getTotalCost()));
-        printExceededBudgetMessage();
+        double budgetValue = Double.parseDouble(monthlyBudget.get(month));
+        System.out.println("For the month of " + month);
+        System.out.println("    Total budget: $" + monthlyBudget.get(month));
+        System.out.println("    Total cost: $" + getTotalCost(month));
+        System.out.println("    Remaining budget: $" + (budgetValue - getTotalCost(month)));
         Ui.printLine();
     }
 
-    public double getTotalCost(){
-        double totalCost = 0.0;
-        for (Expense expense : expenseList){
-            String costInString = expense.getCost();
-            if (costInString == null){
-                costInString = "0";
-            }
-            totalCost += Double.parseDouble(costInString);
-        }
-        return totalCost;
+    public void viewExpenseList(){
+        viewExpenseList(getCurrentMonth());
     }
 
     public double getTotalCost(String month){
@@ -107,45 +102,45 @@ public class ExpenseManager implements ListFunctions {
         return totalCost;
     }
 
-    public void editExpense(String query) throws PlanPalExceptions {
-        editList(expenseList, query);
-        printExceededBudgetMessage();
-        savedExpenses.saveList(expenseList);
+    public double getTotalCost(){
+        return getTotalCost(getCurrentMonth());
     }
 
-    /**
-     * Deletes an existing expense from the contact list.
-     * The expense is retrieved from its description.
-     *
-     * @param index The description of the expense to be deleted. This must not be empty.
-     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} os thrown.
-     */
-    public void deleteExpense(String index) throws PlanPalExceptions {
+    public void editExpense(String query, String month) throws PlanPalExceptions {
+        monthlyExpenses.putIfAbsent(month, new ArrayList<>());
+        editList(monthlyExpenses.get(month), query);
+        printExceededBudgetMessage(month);
+        savedExpenses.saveList(monthlyExpenses.get(month));
+    }
+
+    public void editExpense(String query) throws PlanPalExceptions {
+        editExpense(query, getCurrentMonth());
+    }
+
+    public void deleteExpense(String index, String month) throws PlanPalExceptions {
+        monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         if (index.isEmpty()) {
             throw new EmptyDescriptionException();
         }
         assert index.length() != 0 : "Input must not be empty";
 
         try {
-            boolean hasTwoBeforeDelete = (expenseList.size() == 2);
-            deleteList(expenseList, index);
-            savedExpenses.saveList(expenseList, hasTwoBeforeDelete);
+
+            boolean hasTwoBeforeDelete = (monthlyExpenses.get(month).size() == 2);
+            deleteList(monthlyExpenses.get(month), index);
+            savedExpenses.saveList(monthlyExpenses.get(month), hasTwoBeforeDelete);
         } catch (PlanPalExceptions e) {
             System.out.println ("Failed to delete an expense: " + e.getMessage());
             throw e;
         }
     }
 
-    /**
-     * Finds expense in the expense list based on the provided description.
-     * The description can contain multiple names separated by spaces.
-     * If matching contacts are found, they are displayed to the user.
-     *
-     * @param description The description of the expense to find. This must not be empty.
-     * @throws PlanPalExceptions If the description is empty, an {@link EmptyDescriptionException} is thrown.
-     */
-    public void findExpense(String description) throws PlanPalExceptions {
+    public void deleteExpense(String index) throws PlanPalExceptions {
+        deleteExpense(index, getCurrentMonth());
+    }
 
+    public void findExpense(String description, String month) throws PlanPalExceptions {
+        monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         if (description.isEmpty()) {
             throw new EmptyDescriptionException();
         }
@@ -154,10 +149,14 @@ public class ExpenseManager implements ListFunctions {
         assert !description.isEmpty() : "Description must not be empty";
 
         try {
-            findInList(expenseList, description);
+            findInList(monthlyExpenses.get(month), description);
         } catch (PlanPalExceptions e) {
             throw e;
         }
+    }
+
+    public void findExpense(String description) throws PlanPalExceptions {
+        findExpense(description, getCurrentMonth());
     }
 
     public void setBudget(String budget, String month, boolean isDefault) throws PlanPalExceptions{
@@ -210,7 +209,11 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
+    public String getBudget(String month){
+        return monthlyBudget.get(month);
+    }
+
     public String getBudget() {
-        return budget;
+        return getBudget(getCurrentMonth());
     }
 }
