@@ -11,9 +11,9 @@ public class NoBudgetException extends PlanPalExceptions {
      * Constructs a new NoBudgetException with a specific error message.
      */
     public NoBudgetException() {
-        super("You have not set your budget! \n" +
-                "To do so, type: budget <value> \n" +
-                "Example: budget 100");
+        super("Either you have not set your budget or there is an invalid syntax! \n" +
+                "To set your budget, type: budget <value> /month: <monthValue> \n" +
+                "Example: budget 100 /month: june");
     }
 }
 

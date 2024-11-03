@@ -40,22 +40,24 @@ public class ExpenseParser extends Parser {
 
             switch (command) {
             case BUDGET_COMMAND:
-                expenseManager.setBudget(inputParts[1].trim(), null);
+                expenseManager.setBudget(inputParts[1].trim());
                 return true;
 
             case Parser.ADD_COMMAND:
-                description = inputParts[1].trim();
-                expenseManager.addExpense(description);
+                expenseManager.addExpense(inputParts[1].trim());
                 return true;
 
             case Parser.LIST_COMMAND:
-                expenseManager.viewExpenseList();
+                try {
+                    expenseManager.viewExpenseList(inputParts[1].trim());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    expenseManager.viewExpenseList();
+                }
                 return true;
 
             case Parser.EDIT_COMMAND:
                 try {
-                    String query = inputParts[1].trim();
-                    expenseManager.editExpense(query);
+                    expenseManager.editExpense(inputParts[1].trim());
                 } catch (NumberFormatException e) {
                     throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
                 }
@@ -66,8 +68,7 @@ public class ExpenseParser extends Parser {
                 return true;
 
             case Parser.FIND_COMMAND:
-                description = inputParts[1].trim();
-                expenseManager.findExpense(description);
+                expenseManager.findExpense(inputParts[1].trim());
                 return true;
 
             case Parser.EXIT_MODE_COMMAND:
@@ -86,5 +87,4 @@ public class ExpenseParser extends Parser {
         }
         return false;
     }
-
 }

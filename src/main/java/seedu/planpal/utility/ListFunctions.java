@@ -37,7 +37,7 @@ public interface ListFunctions {
      */
     default <T> void deleteList(ArrayList<T> list, String index) throws PlanPalExceptions {
         if (index.isEmpty()) {
-            throw new PlanPalExceptions("Description cannot be empty!");
+            throw new InvalidIndexException();
         }
         assert index.length() != 0 : "Input index must not be empty";
         int listIndex = 0;

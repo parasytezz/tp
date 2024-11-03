@@ -18,40 +18,21 @@ import java.util.Map;
 
 public class ExpenseManager implements ListFunctions {
     private static final int BUDGET_SEGMENT = 2;
-    private static final String MONTH_SEPARATOR = "budget_";
+    private static final String BUDGET_SEPARATOR = "budget_";
+    private static final String MONTH_SEPARATOR = "/month:";
     private static final String TXT_SEPARATOR = ".txt";
+    private static final String NUMERICS = "[^0-9-.]";
     FileManager savedExpenses = new FileManager();
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
     private Map<String, String> monthlyBudget = new HashMap<>();
-    private ArrayList<Expense> overallExpenseList = new ArrayList<>();
-    private String budget;
 
     private String getCurrentMonth(){
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
-    public ArrayList<Expense> getOverallExpenseList() {
-        return overallExpenseList;
-    }
-
-    public ArrayList<Expense> getMonthlyExpenses(String month) {
-        return monthlyExpenses.getOrDefault(month, new ArrayList<>());
-    }
-
-    public ArrayList<Expense> getMonthlyExpenses() {
-        return getMonthlyExpenses(getCurrentMonth());
-    }
-
-    public void printExceededBudgetMessage(){
-        double budgetValue = Double.parseDouble(getBudget());
-        if (budgetValue < getTotalCost()){
-            System.out.println("It's time to readjust your spending habits!");
-        }
-    }
-
     public void printExceededBudgetMessage(String month){
         double budgetValue = Double.parseDouble(monthlyBudget.get(month));
-        if (budgetValue < getTotalCost()){
+        if (budgetValue < getTotalCost(month)){
             System.out.println("It's time to readjust your spending habits!");
         }
     }
@@ -73,9 +54,21 @@ public class ExpenseManager implements ListFunctions {
         savedExpenses.saveList(monthlyExpenses.get(targetMonth));
     }
 
-    public void viewExpenseList(String month){
-        ArrayList<Expense> expenseList = monthlyExpenses.get(month);
+    public ArrayList<Expense> getMonthlyExpenses(String month) {
+        return monthlyExpenses.getOrDefault(month, new ArrayList<>());
+    }
+
+    public ArrayList<Expense> getMonthlyExpenses() {
+        return getMonthlyExpenses(getCurrentMonth());
+    }
+
+    public void viewExpenseList(String input) throws PlanPalExceptions {
+        String month = getMonth(input);
+        if (!monthlyBudget.containsKey(month) || monthlyBudget.get(month).equals("0")){
+            throw new NoBudgetException();
+        }
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
+        ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         viewList(expenseList);
         double budgetValue = Double.parseDouble(monthlyBudget.get(month));
         System.out.println("For the month of " + month);
@@ -85,8 +78,9 @@ public class ExpenseManager implements ListFunctions {
         Ui.printLine();
     }
 
-    public void viewExpenseList(){
-        viewExpenseList(getCurrentMonth());
+    public void viewExpenseList() throws PlanPalExceptions {
+        String monthInput = MONTH_SEPARATOR + getCurrentMonth();
+        viewExpenseList(monthInput);
     }
 
     public double getTotalCost(String month){
@@ -106,26 +100,30 @@ public class ExpenseManager implements ListFunctions {
         return getTotalCost(getCurrentMonth());
     }
 
-    public void editExpense(String query, String month) throws PlanPalExceptions {
+    public void editExpense(String query) throws PlanPalExceptions {
+        String month = getMonth(query);
+        if (month == null){
+            month = getCurrentMonth();
+        }
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         editList(monthlyExpenses.get(month), query);
         printExceededBudgetMessage(month);
         savedExpenses.saveList(monthlyExpenses.get(month));
     }
 
-    public void editExpense(String query) throws PlanPalExceptions {
-        editExpense(query, getCurrentMonth());
-    }
-
-    public void deleteExpense(String index, String month) throws PlanPalExceptions {
-        monthlyExpenses.putIfAbsent(month, new ArrayList<>());
-        if (index.isEmpty()) {
+    public void deleteExpense(String input) throws PlanPalExceptions {
+        if (input.isEmpty()) {
             throw new EmptyDescriptionException();
         }
-        assert index.length() != 0 : "Input must not be empty";
+
+        String month = getMonth(input);
+        if (month == null){
+            month = getCurrentMonth();
+        }
+        String index = input.replaceAll(NUMERICS, "").trim();
+        monthlyExpenses.putIfAbsent(month, new ArrayList<>());
 
         try {
-
             boolean hasTwoBeforeDelete = (monthlyExpenses.get(month).size() == 2);
             deleteList(monthlyExpenses.get(month), index);
             savedExpenses.saveList(monthlyExpenses.get(month), hasTwoBeforeDelete);
@@ -135,11 +133,11 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
-    public void deleteExpense(String index) throws PlanPalExceptions {
-        deleteExpense(index, getCurrentMonth());
-    }
-
-    public void findExpense(String description, String month) throws PlanPalExceptions {
+    public void findExpense(String description) throws PlanPalExceptions {
+        String month = getMonth(description);
+        if (month == null){
+            month = getCurrentMonth();
+        }
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         if (description.isEmpty()) {
             throw new EmptyDescriptionException();
@@ -149,14 +147,18 @@ public class ExpenseManager implements ListFunctions {
         assert !description.isEmpty() : "Description must not be empty";
 
         try {
-            findInList(monthlyExpenses.get(month), description);
+            String query = description.replace(MONTH_SEPARATOR,"")
+                    .replace(month,"")
+                    .replace("/","")
+                    .trim();
+            if (query.isEmpty()){
+                viewExpenseList(MONTH_SEPARATOR + month);
+                return;
+            }
+            findInList(monthlyExpenses.get(month), query);
         } catch (PlanPalExceptions e) {
             throw e;
         }
-    }
-
-    public void findExpense(String description) throws PlanPalExceptions {
-        findExpense(description, getCurrentMonth());
     }
 
     public void setBudget(String budget, String month, boolean isDefault) throws PlanPalExceptions{
@@ -185,14 +187,10 @@ public class ExpenseManager implements ListFunctions {
         }
     }
 
-    // Overload setBudget function
-    public void setBudget(String budget, String month) throws PlanPalExceptions{
+    public void setBudget(String input) throws PlanPalExceptions{
+        String budget = input.replaceAll(NUMERICS, "").trim();
+        String month = getMonth(input);
         setBudget(budget, month, true);
-    }
-
-    // Overload setBudget function
-    public void setBudget(String budget) throws PlanPalExceptions{
-        setBudget(budget, null, true);
     }
 
     public void setAllBudget(ArrayList<String> budgetList) throws PlanPalExceptions{
@@ -200,7 +198,7 @@ public class ExpenseManager implements ListFunctions {
             for (String budget : budgetList){
                 String[] budgetParts = budget.split(":", BUDGET_SEGMENT);
                 String fileName = budgetParts[0].trim();
-                String month = fileName.replace(MONTH_SEPARATOR,"").replace(TXT_SEPARATOR, "").trim();
+                String month = fileName.replace(BUDGET_SEPARATOR,"").replace(TXT_SEPARATOR, "").trim();
                 budget = budgetParts[1].trim();
                 setBudget(budget, month, false);
             }
@@ -215,5 +213,18 @@ public class ExpenseManager implements ListFunctions {
 
     public String getBudget() {
         return getBudget(getCurrentMonth());
+    }
+
+    private String getMonth(String input){
+        int startIndex = input.indexOf(MONTH_SEPARATOR);
+        if (startIndex != -1){
+            startIndex += MONTH_SEPARATOR.length();
+            int endIndex = input.indexOf("/", startIndex);
+            if (endIndex == -1){
+                endIndex = input.length();
+            }
+            return input.substring(startIndex, endIndex).trim();
+        }
+        return null;
     }
 }

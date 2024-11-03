@@ -72,7 +72,7 @@ public class DeleteExpenseTest {
             expenseManager.setBudget("500");
             expenseManager.addExpense("/name:trial1 /cost:100");
             expenseManager.deleteExpense("1");
-            assertEquals(0, expenseManager.getOverallExpenseList().size());
+            assertEquals(0, expenseManager.getMonthlyExpenses().size());
             assertEquals(0.0, expenseManager.getTotalCost());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());

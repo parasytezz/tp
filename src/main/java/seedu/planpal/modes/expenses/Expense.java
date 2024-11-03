@@ -19,10 +19,6 @@ public class Expense implements Editable, Storeable {
     private String name;
     private String month;
 
-    private String getCurrentMonth(){
-        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
-    }
-
     /**
      * Constructs an Expense object from a command description.
      *
@@ -36,10 +32,14 @@ public class Expense implements Editable, Storeable {
             throw new IllegalCommandException();
         }
         assert categories.length >= 2: "Illegal command executed in expenses";
+        setMonth(getCurrentMonth());
         for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
             processEditFunction(categories[categoryIndex]);
         }
-        setMonth(getCurrentMonth());
+    }
+
+    private String getCurrentMonth(){
+        return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
     /**
