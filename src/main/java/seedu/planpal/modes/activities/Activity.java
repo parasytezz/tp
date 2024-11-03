@@ -11,7 +11,7 @@ import java.lang.reflect.Field;
  * Represents an activity in the PlanPal application.
  */
 public class Activity implements Editable, Storeable {
-    private static final String STORAGE_PATH = "./data/activities.txt";
+    private static final String STORAGE_PATH = "./data/activities/activities.txt";
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;

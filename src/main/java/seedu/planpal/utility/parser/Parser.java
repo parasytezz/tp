@@ -39,9 +39,8 @@ public class Parser {
 
     private void loadFiles() throws PlanPalExceptions {
         expenseManager.setBudget(fileManager.loadValue("budgets/budget.txt"), false);
-        fileManager.loadList(contactManager, "contacts.txt");
-        fileManager.loadList(expenseManager, "expenses.txt");
-        fileManager.loadList(activityManager, "activities.txt");
+        fileManager.loadAllLists(expenseManager, "expenses");
+        fileManager.loadAllLists(contactManager, "contacts");
     }
 
     private String getCommand(String currentMode){

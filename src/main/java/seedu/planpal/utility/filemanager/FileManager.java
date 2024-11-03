@@ -88,12 +88,12 @@ public class FileManager {
      * @param manager The manager instance for processing the commands.
      * @param fileName The name of the file.
      */
-    public <T> void loadList(T manager, String fileName) {
+    public <T> void loadList(T manager, String folderName, String fileName) {
         PrintStream out = System.out;
         Ui.setDummyStream();
 
-        File file = new File(DATA_DIRECTORY + fileName);
-        File backupFile = new File(DATA_DIRECTORY + "backup_" + fileName);
+        File file = new File(DATA_DIRECTORY + folderName + "/" + fileName);
+        File backupFile = new File(DATA_DIRECTORY + folderName + "/" + fileName + "_backup");
 
         try {
             Files.copy(file.toPath(), backupFile.toPath());
@@ -128,6 +128,25 @@ public class FileManager {
         backupFile.delete();
         Ui.setMainStream(out);
     }
+
+    public <T> void loadAllLists(T manager, String folderName) {
+        File directory = new File(DATA_DIRECTORY + folderName + "/");
+        if (!directory.exists() || !directory.isDirectory()) {
+            return;
+        }
+
+        File[] files = directory.listFiles();
+        if (files == null) {
+            return;
+        }
+
+        for (File file : files) {
+            if (file.isFile() && file.getName().endsWith(".txt")) {
+                loadList(manager, folderName, file.getName());
+            }
+        }
+    }
+
 
     public void saveValue(String fileName, String value){
         String storagePath = DATA_DIRECTORY + VALUE_DIRECTORY + fileName;
