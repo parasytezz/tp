@@ -9,12 +9,14 @@ import seedu.planpal.utility.filemanager.Storeable;
  * Represents an expense in the PlanPal application.
  */
 public class Expense implements Editable, Storeable {
-    private static final String STORAGE_PATH = "./data/expenses.txt";
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;
     private String cost;
     private String name;
+    private String month;
+
+
 
     /**
      * Constructs an Expense object from a command description.
@@ -63,7 +65,9 @@ public class Expense implements Editable, Storeable {
             setCost(valueToEdit);
         } else if (category.equals("name")){
             setName(valueToEdit);
-        }else {
+        } else if (category.equals("month")){
+            setMonth(valueToEdit);
+        } else {
             System.out.println(category + " is not a valid category");
             throw new IllegalCommandException();
         }
@@ -101,7 +105,7 @@ public class Expense implements Editable, Storeable {
 
     @Override
     public String getStoragePath() {
-        return STORAGE_PATH;
+        return "./data/expenses/expenses_" + getMonth() + ".txt";
     }
 
     /**
@@ -151,5 +155,13 @@ public class Expense implements Editable, Storeable {
      */
     public String getCost(){
         return cost;
+    }
+
+    public void setMonth(String month) {
+        this.month = month;
+    }
+
+    public String getMonth(){
+        return month;
     }
 }
