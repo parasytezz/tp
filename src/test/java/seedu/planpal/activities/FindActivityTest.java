@@ -30,7 +30,7 @@ public class FindActivityTest {
             activityManager.addActivity("/name: groceries /activityType: necessity");
 
             activityManager.findActivity("swimming");
-            assertEquals("[activity = swimming, activity type = exercise]",
+            assertEquals("[activity = swimming, activityType = exercise]",
                     activityManager.getActivityList().get(0).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -45,9 +45,9 @@ public class FindActivityTest {
             activityManager.addActivity("/name: groceries /activityType: necessity");
 
             activityManager.findActivity("exercise");
-            assertEquals("[activity = swimming, activity type = exercise]",
+            assertEquals("[activity = swimming, activityType = exercise]",
                     activityManager.getActivityList().get(0).toString());
-            assertEquals("[activity = running, activity type = exercise]",
+            assertEquals("[activity = running, activityType = exercise]",
                     activityManager.getActivityList().get(1).toString());
 
         } catch (PlanPalExceptions e) {
