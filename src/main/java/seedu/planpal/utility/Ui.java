@@ -2,6 +2,8 @@ package seedu.planpal.utility;
 
 import seedu.planpal.modes.contacts.Contact;
 
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -111,5 +113,18 @@ public class Ui {
     public static void printCategoryNotFound() {
         System.out.println("Category not found.");
         System.out.println(LINE_SEPARATOR);
+    }
+
+    public static void setDummyStream(){
+        // Redirect System.out to a dummy stream (solution from gpt)
+        System.setOut(new PrintStream(new OutputStream() {
+            @Override
+            public void write(int b) {
+            }
+        }));
+    }
+
+    public static void setMainStream(PrintStream stream){
+        System.setOut(stream);
     }
 }

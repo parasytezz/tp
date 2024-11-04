@@ -1,10 +1,11 @@
-package seedu.planpal.utility.parser;
+package seedu.planpal.utility.parser.modeparsers;
 
 import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.parser.Parser;
 
 /**
  * Parses user input and executes commands within the PlanPal application.

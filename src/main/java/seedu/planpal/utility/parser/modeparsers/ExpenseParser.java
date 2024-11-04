@@ -1,16 +1,18 @@
-package seedu.planpal.utility.parser;
+package seedu.planpal.utility.parser.modeparsers;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.parser.Parser;
 
 /**
  * Parses user commands and delegates them to the appropriate methods in {@link ExpenseManager}.
  */
 public class ExpenseParser extends Parser {
     private static final int INPUT_SEGMENTS = 2;
+    private static final String BUDGET_COMMAND = "budget";
     private ExpenseManager expenseManager;
 
     /**
@@ -37,13 +39,28 @@ public class ExpenseParser extends Parser {
             String description;
 
             switch (command) {
+            case BUDGET_COMMAND:
+                expenseManager.getBudgetManager().setBudget(inputParts[1].trim());
+                return true;
+
             case Parser.ADD_COMMAND:
-                description = inputParts[1].trim();
-                expenseManager.addExpense(description);
+                expenseManager.addExpense(inputParts[1].trim());
                 return true;
 
             case Parser.LIST_COMMAND:
-                expenseManager.viewExpenseList();
+                try {
+                    expenseManager.viewExpenseList(inputParts[1].trim());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    expenseManager.viewExpenseList();
+                }
+                return true;
+
+            case Parser.EDIT_COMMAND:
+                try {
+                    expenseManager.editExpense(inputParts[1].trim());
+                } catch (NumberFormatException e) {
+                    throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
+                }
                 return true;
 
             case Parser.DELETE_COMMAND:
@@ -51,8 +68,7 @@ public class ExpenseParser extends Parser {
                 return true;
 
             case Parser.FIND_COMMAND:
-                description = inputParts[1].trim();
-                expenseManager.findExpense(description);
+                expenseManager.findExpense(inputParts[1].trim());
                 return true;
 
             case Parser.EXIT_MODE_COMMAND:
@@ -71,5 +87,4 @@ public class ExpenseParser extends Parser {
         }
         return false;
     }
-
 }

@@ -1,12 +1,15 @@
 package seedu.planpal.utility.parser;
 
+import seedu.planpal.exceptions.InvalidModeException;
 import seedu.planpal.modes.activities.ActivityManager;
 import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
-
+import seedu.planpal.utility.parser.modeparsers.ActivityParser;
+import seedu.planpal.utility.parser.modeparsers.ContactParser;
+import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 import java.util.Scanner;
 
 public class Parser {
@@ -34,10 +37,11 @@ public class Parser {
         this.activityManager = new ActivityManager();
     }
 
-    private void loadFiles(){
-        fileManager.loadList(contactManager, "contacts.txt");
-        fileManager.loadList(expenseManager, "expenses.txt");
-        fileManager.loadList(activityManager, "activities.txt");
+    private void loadFiles() throws PlanPalExceptions {
+        expenseManager.getBudgetManager().setAllBudget(fileManager.loadAllValues("budgets"));
+        fileManager.loadAllLists(expenseManager, "expenses");
+        fileManager.loadAllLists(contactManager, "contacts");
+        fileManager.loadAllLists(activityManager, "activities");
     }
 
     private String getCommand(String currentMode){
@@ -53,23 +57,33 @@ public class Parser {
         while (isProcessing) {
             switch (modeInput){
             case CONTACT_MANAGER:
-                String commandForContact = getCommand("CONTACT_MANAGER");
-                ContactParser contactParser = new ContactParser(contactManager);
-                isProcessing = contactParser.processCommand(commandForContact);
+                try {
+                    String commandForContact = getCommand("CONTACT_MANAGER");
+                    ContactParser contactParser = new ContactParser(contactManager);
+                    isProcessing = contactParser.processCommand(commandForContact);
+                } catch (PlanPalExceptions e) {
+                    Ui.print(e.getMessage());
+                }
                 break;
 
             case EXPENSE_MANAGER:
-                // do something
-                String commandForExpense = getCommand("EXPENSE_MANAGER");
-                ExpenseParser expenseParser = new ExpenseParser(expenseManager);
-                isProcessing = expenseParser.processCommand(commandForExpense);
+                try {
+                    String commandForExpense = getCommand("EXPENSE_MANAGER");
+                    ExpenseParser expenseParser = new ExpenseParser(expenseManager);
+                    isProcessing = expenseParser.processCommand(commandForExpense);
+                } catch (PlanPalExceptions e) {
+                    Ui.print(e.getMessage());
+                }
                 break;
 
             case ACTIVITY_MANAGER:
-                // do something
-                String commandForActivity = getCommand("ACTIVITY_MANAGER");
-                ActivityParser activityParser = new ActivityParser(activityManager);
-                isProcessing = activityParser.processCommand(commandForActivity);
+                try {
+                    String commandForActivity = getCommand("ACTIVITY_MANAGER");
+                    ActivityParser activityParser = new ActivityParser(activityManager);
+                    isProcessing = activityParser.processCommand(commandForActivity);
+                } catch (PlanPalExceptions e) {
+                    Ui.print(e.getMessage());
+                }
                 break;
 
             case BYE_COMMAND:
@@ -78,7 +92,7 @@ public class Parser {
                 break;
 
             default:
-                throw new PlanPalExceptions("Invalid mode");
+                throw new InvalidModeException();
             }
         }
         return false;

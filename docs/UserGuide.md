@@ -48,7 +48,7 @@ This section will focus on some of the key features of PlanPal and explain their
     - [Add contact](#adding-a-contact)
     - [List contact](#viewing-the-contact-list)
     - [Edit contact](#Editing-a-contact)
-    - Delete contact
+    - [Delete contact](#deleting-a-contact)
     - [Setting category](#Setting-category)
     - [Search contacts by category](#Search-contacts-by-category)
     - [Find contact](#finding-a-contact)
@@ -57,12 +57,12 @@ This section will focus on some of the key features of PlanPal and explain their
     - [List expenses](#viewing-the-expense-list)
     - [Delete expenses](#deleting-an-expense)
     - [Find expenses](#finding-an-expense)
-  - Activity Manager
+  - [Activity Manager](#activity-manager)
     - Add activity
-    - List activity
+    - [List activity](#viewing-the-activities-list)
     - Edit activity
     - Delete activity
-    - Find activity
+    - [Find activity](#finding-an-activity)
 
 ---
 ## Contact Manager
@@ -85,7 +85,9 @@ add /name: johnny /phone:12345678 /email:johnny@gmail.com
 _________________________________________________________
 Added successfully!
 _________________________________________________________
-[Name = johnny Phone = 12345678 Email = johnny@gmail.com]
+Currently in list:
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
+_________________________________________________________
 ```
 ---
 ## Viewing the Contact List
@@ -100,7 +102,31 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = johnny Phone = 12345678 Email = johnny@gmail.com]
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
+_________________________________________________________
+```
+---
+## Deleting a Contact
+The `delete` command allows users to delete an existing contact in the contact list.
+
+### Usage
+```
+delete <index> 
+```
+
+### Example
+The user wants to delete an existing contact that has an index of '2' in the contact list.
+```
+delete 2
+```
+
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Johnny, Phone = 12345678, Email = johnny@gmail.com]
 _________________________________________________________
 ```
 ---
@@ -120,6 +146,9 @@ edit 1 /name: Cassie
 _________________________________________________________
 Edited successfully!
 _________________________________________________________
+Currently in list:
+1. [Name = Cassie, Phone = 12345678, Email = johnny@gmail.com]
+_________________________________________________________
 ```
 ---
 ## Finding a Contact
@@ -137,8 +166,8 @@ find alice david
 ```
 _________________________________________________________
 Here is what I found:
-1. [Name = David Phone = null Email = null]
-2. [Name = Alice Phone = null Email = null]
+1. [Name = David, Phone = null, Email = null]
+2. [Name = Alice, Phone = null, Email = null]
 _________________________________________________________
 ```
 
@@ -333,7 +362,9 @@ add /name: transport /cost: 10
 _________________________________________________________
 Added successfully!
 _________________________________________________________
-[transport, cost = $10]
+Currently in list:
+1. [transport, cost = $10]
+_________________________________________________________
 ```
 ---
 ## Viewing the Expense List
@@ -389,6 +420,49 @@ _________________________________________________________
 Here is what I found:
 1. [utown lunch, cost = $5]
 2. [PGP lunch, cost = $4]
+_________________________________________________________
+```
+---
+
+## Activity Manager
+PlanPal will assist you in tracking your activities in your planner. The guide below will show you how to make use of the activity manager commands.
+
+---
+## Viewing the Activities list
+The `list` command allows users to view all their current expenses
+
+### Usage:
+```
+list
+```
+### Expected Output:
+```
+_________________________________________________________
+Below is the list:
+1. [Activity: running (exercise)]
+2. [Activity: swimming (exercise)]
+3. [Activity: groceries (necessities)]
+_________________________________________________________
+```
+---
+
+## Finding an Activity
+The `find` command allows users to find an expense from the list
+
+### Usage:
+```
+find <value>
+```
+### Example 1:
+```
+find exercise
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Activity: running (exercise)]
+2. [Activity: swimming (exercise)]
 _________________________________________________________
 ```
 ---
