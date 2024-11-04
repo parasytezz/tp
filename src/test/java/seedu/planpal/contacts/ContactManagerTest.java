@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.Contact;
 import seedu.planpal.modes.contacts.ContactManager;
-import seedu.planpal.utility.parser.modeparsers.ContactParser;
 
 
 import java.io.ByteArrayOutputStream;
