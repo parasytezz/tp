@@ -68,11 +68,13 @@ public class ActivityParser extends Parser {
 
             case BACK_UP_COMMAND:
                 BackUpManager.backupData();
-                throw new PlanPalExceptions("Backup Complete!");
+                Ui.print("Backup Complete!");
+                return true;
 
             case RESTORE_COMMAND:
                 BackUpManager.restoreData();
-                throw new PlanPalExceptions("Restore Complete!");
+                Ui.print("Restore Complete! Now re-enter into your mode!");
+                return false;
 
             default:
                 throw new IllegalCommandException();

@@ -40,7 +40,7 @@ public class Parser {
         this.activityManager = new ActivityManager();
     }
 
-    private void loadFiles() throws PlanPalExceptions {
+    protected void loadFiles() throws PlanPalExceptions {
         expenseManager.getBudgetManager().setAllBudget(fileManager.loadAllValues("budgets"));
         fileManager.loadAllLists(expenseManager, "expenses");
         fileManager.loadAllLists(contactManager, "contacts");
@@ -96,11 +96,15 @@ public class Parser {
 
             case BACK_UP_COMMAND:
                 BackUpManager.backupData();
-                throw new PlanPalExceptions("Backup Complete!");
+                Ui.print("Backup Complete!");
+                isProcessing = false;
+                break;
 
             case RESTORE_COMMAND:
                 BackUpManager.restoreData();
-                throw new PlanPalExceptions("Restore Complete!");
+                Ui.print("Restore Complete!");
+                isProcessing = false;
+                break;
 
             default:
                 throw new InvalidModeException();
