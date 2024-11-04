@@ -1,6 +1,5 @@
 package seedu.planpal.utility.filemanager;
 
-import io.github.cdimascio.dotenv.Dotenv;
 import net.lingala.zip4j.ZipFile;
 import net.lingala.zip4j.model.ZipParameters;
 import net.lingala.zip4j.model.enums.EncryptionMethod;
@@ -10,8 +9,7 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import java.io.File;
 
 public class BackUpManager {
-    private static final Dotenv dotenv = Dotenv.load();
-    private static final String PASSWORD = dotenv.get("PASSWORD");
+    private static final String PASSWORD = "iLoveCS2113";
     private static final String SOURCE_FOLDER = "./data/";
     private static final String BACKUP_FOLDER = "./backup_data/";
     private static final String EXTRACT_FOLDER = "./";
