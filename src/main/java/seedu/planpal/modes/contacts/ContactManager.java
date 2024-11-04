@@ -243,7 +243,7 @@ public class ContactManager implements ListFunctions {
             Contact editingContact = validateEdit(categories, contactId);
             updateCategory(editingContact, categories);
             Ui.print("successfully assigned categories to Contact id : " + (contactId + 1));
-        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+        } catch (NumberFormatException e) {
             CONTACT_LOGGER.warning("Invalid input.");
             throw new PlanPalExceptions("Invalid input.");
         }
@@ -280,6 +280,11 @@ public class ContactManager implements ListFunctions {
      * @param categories array of new categories of the contact
      */
     private void updateCategory(Contact editingContact, String[] categories) {
+        ArrayList<String> originalCategories = editingContact.getCategories();
+        for (String category : originalCategories) {
+            int removingCategoryID = categoryList.indexOf(category);
+            contactListByCategory.get(removingCategoryID).remove(editingContact);
+        }
         editingContact.clearCategories();
         if (categories == null) {
             return;
@@ -302,7 +307,7 @@ public class ContactManager implements ListFunctions {
     public void searchCategory(String description) {
         for (String category : categoryList) {
             if (category.equals(description)) {
-                Ui.printCat(category, contactListByCategory, categoryList);
+                Ui.printCategory(category, contactListByCategory, categoryList);
                 return;
             }
         }
