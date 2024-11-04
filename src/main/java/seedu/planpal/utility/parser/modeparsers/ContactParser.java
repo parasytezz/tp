@@ -47,7 +47,7 @@ public class ContactParser extends Parser {
             case Parser.SET_CATEGORY_COMMAND:
                 boolean inCategory = true;
                 while (inCategory) {
-                    inCategory = contactManager.handleCategory(Ui.getSetCategory().trim());
+                    inCategory = contactManager.handleCategory(Ui.getSetCategory());
                 }
                 return true;
 
