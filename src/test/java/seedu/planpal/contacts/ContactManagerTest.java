@@ -421,4 +421,42 @@ public class ContactManagerTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    public void category_invalidCommand_exceptionThrown() {
+        ContactManager manager = new ContactManager();
+        manager.handleCategory("ahhhhhhh");
+        String output = "_________________________________________________________\n" +
+                "Invalid command\n" +
+                "_________________________________________________________\n";
+        String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
+        assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+        OUTPUT_STREAM.reset();
+        manager.handleCategory("view   ");
+        output = "_________________________________________________________\n" +
+                "Invalid command\n" +
+                "_________________________________________________________\n";
+        trimmedExpectedOutput = output.replaceAll("\\s+", " ");
+        assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+    }
+
+    @Test
+    public void viewCategory_success() {
+        ContactManager manager = new ContactManager();
+        manager.handleCategory("view");
+        String output = "_________________________________________________________\n" +
+                "_________________________________________________________\n";
+        String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
+        assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+        assertTrue(manager.handleCategory("add emergency"));
+        assertTrue(manager.handleCategory("add family"));
+        OUTPUT_STREAM.reset();
+        assertTrue(manager.handleCategory("view"));
+        output = "_________________________________________________________\n" +
+                "emergency\n" +
+                "family\n" +
+                "_________________________________________________________\n";
+        trimmedExpectedOutput = output.replaceAll("\\s+", " ");
+        assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+    }
 }
