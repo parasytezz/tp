@@ -243,7 +243,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void addCategory_invalidCategoryName_exceptionThrown() {
+    public void addCategory_invalidCategoryName() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("add em/ergency");
         String output = "_________________________________________________________\n" +
@@ -260,7 +260,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void addCategory_emptyDescription_exceptionThrown() {
+    public void addCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("add");
         String output = "_________________________________________________________\n" +
@@ -291,7 +291,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void removeCategory_noMatches_exceptionThrown() {
+    public void removeCategory_noMatches() {
         ContactManager manager = new ContactManager();
         assertTrue(manager.handleCategory("add emergency"));
         assertTrue(manager.handleCategory("add family"));
@@ -305,7 +305,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void removeCategory_emptyDescription_exceptionThrown() {
+    public void removeCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("remove");
         String output = "_________________________________________________________\n" +
@@ -361,7 +361,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void editCategory_emptyDescription_exceptionThrown() {
+    public void editCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("edit");
         String output = "_________________________________________________________\n" +
@@ -375,7 +375,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void editCategory_invalidIndex_exceptionThrown() {
+    public void editCategory_invalidIndex() {
         try {
             ContactManager manager = new ContactManager();
             manager.handleCategory("add emergency");
@@ -395,13 +395,20 @@ public class ContactManagerTest {
             OUTPUT_STREAM.reset();
             manager.handleCategory("edit 2    emergency    ");
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+            OUTPUT_STREAM.reset();
+            manager.handleCategory("edit    emergency    ");
+            output = "_________________________________________________________\n" +
+                    "Invalid input.\n" +
+                    "_________________________________________________________\n";
+            trimmedExpectedOutput = output.replaceAll("\\s+", " ");
+            assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
     }
 
     @Test
-    public void editCategory_invalidCategory_exceptionThrown() {
+    public void editCategory_invalidCategory() {
         try {
             ContactManager manager = new ContactManager();
             manager.handleCategory("add emergency");
@@ -439,7 +446,7 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void category_invalidCommand_exceptionThrown() {
+    public void category_invalidCommand() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("ahhhhhhh");
         String output = "_________________________________________________________\n" +
@@ -475,4 +482,5 @@ public class ContactManagerTest {
         trimmedExpectedOutput = output.replaceAll("\\s+", " ");
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
     }
+
 }
