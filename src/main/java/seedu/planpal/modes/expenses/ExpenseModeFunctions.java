@@ -64,4 +64,44 @@ public interface ExpenseModeFunctions {
     default double getTotalCost(Map<String, ArrayList<Expense>> monthlyExpenses){
         return getTotalCost(getCurrentMonth(), monthlyExpenses);
     }
+
+    /**
+     * Calculates the proportions of different expense types within a list of expenses.
+     *
+     * @param expenses The list of expenses for which the type proportions are calculated.
+     *
+     * @return An ArrayList of strings, where each string represents an expense type and its proportion.
+     *
+     */
+    default ArrayList<String> getExpenseTypeProportions(ArrayList<Expense> expenses) {
+        ArrayList<ExpenseType> uniqueTypes = new ArrayList<>();
+        int totalExpenses = expenses.size();
+
+        for (Expense expense : expenses) {
+            ExpenseType type = expense.getType();
+            if (!uniqueTypes.contains(type)) {
+                uniqueTypes.add(type);
+            }
+        }
+
+        int[] typeCounts = new int[uniqueTypes.size()];
+        double[] typeProportions = new double[uniqueTypes.size()];
+
+        for (Expense expense : expenses) {
+            ExpenseType type = expense.getType();
+            int index = uniqueTypes.indexOf(type);
+            typeCounts[index]++;
+        }
+
+        for (int i = 0; i < uniqueTypes.size(); i++) {
+            typeProportions[i] = (typeCounts[i] * 100.0) / totalExpenses;
+        }
+
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < uniqueTypes.size(); i++) {
+            result.add(uniqueTypes.get(i) + ": " + String.format("%.2f", typeProportions[i]) + "%");
+        }
+
+        return result;
+    }
 }

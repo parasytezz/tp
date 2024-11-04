@@ -18,6 +18,7 @@ public class Expense implements Editable, Storeable {
     private String cost;
     private String name;
     private String month;
+    private ExpenseType type;
 
     /**
      * Constructs an Expense object from a command description.
@@ -31,7 +32,7 @@ public class Expense implements Editable, Storeable {
         if (categories.length == 1) {
             throw new IllegalCommandException();
         }
-        assert categories.length >= 2: "Illegal command executed in expenses";
+        assert categories.length >= 2 : "Illegal command executed in expenses";
         setMonth(getCurrentMonth());
         for (int categoryIndex = 1; categoryIndex < categories.length; categoryIndex++) {
             processEditFunction(categories[categoryIndex]);
@@ -43,18 +44,18 @@ public class Expense implements Editable, Storeable {
      *
      * @return The current month as a string.
      */
-    private String getCurrentMonth(){
+    private String getCurrentMonth() {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
     /**
      * Returns a string representation of the expense.
      *
-     * @return A string in the format: [Name = name, Cost = $cost].
+     * @return A string in the format: [Name = name, Cost = $cost, Type = type, Month = month].
      */
     @Override
     public String toString() {
-        return "[Name = " + name + ", Cost = $" + cost + "]";
+        return "[Name = " + name + ", Cost = $" + cost + ", Type = " + type + "]";
     }
 
     /**
@@ -72,11 +73,13 @@ public class Expense implements Editable, Storeable {
 
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
-        if (category.equals("cost")){
+        if (category.equals("cost")) {
             setCost(valueToEdit);
-        } else if (category.equals("name")){
+        } else if (category.equals("name")) {
             setName(valueToEdit);
-        } else if (category.equals("month")){
+        } else if (category.equals("type")) {
+            setType(valueToEdit);
+        } else if (category.equals("month")) {
             setMonth(valueToEdit);
         } else {
             System.out.println(category + " is not a valid category");
@@ -89,7 +92,7 @@ public class Expense implements Editable, Storeable {
      * Updates the command description when a specific category is modified.
      *
      * @param categoryToChange The category that needs to be updated.
-     * @param newValue The new value for the category.
+     * @param newValue         The new value for the category.
      */
     // Overloaded function
     public void setCommandDescription(String categoryToChange, String newValue) {
@@ -179,7 +182,7 @@ public class Expense implements Editable, Storeable {
      *
      * @return The cost of the expense as a string.
      */
-    public String getCost(){
+    public String getCost() {
         return cost;
     }
 
@@ -201,7 +204,29 @@ public class Expense implements Editable, Storeable {
      *
      * @return The month of the expense in "yyyy-MM" format.
      */
-    public String getMonth(){
+    public String getMonth() {
         return month;
+    }
+
+    /**
+     * Sets the type of the expense after validating the provided type.
+     *
+     * @param type The type as a string and must be FOOD, TRANSPORTATION, ENTERTAINMENT, or OTHER.
+     * @throws PlanPalExceptions If the type is invalid.
+     */
+    public void setType(String type) throws PlanPalExceptions {
+        if (!ExpenseType.isValidType(type)) {
+            throw new PlanPalExceptions("Invalid type. Valid Types are: FOOD, TRANSPORTATION, ENTERTAINMENT, OTHER");
+        }
+        this.type = ExpenseType.valueOf(type.toUpperCase());
+    }
+
+    /**
+     * Retrieves the type of the expense.
+     *
+     * @return The type of the expense as an ExpenseType enumeration.
+     */
+    public ExpenseType getType() {
+        return type;
     }
 }

@@ -72,7 +72,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     }
 
     /**
-     * Displays the expense list and budget summary for a specified month. If no budget is set,
+     * Displays the expense list, budget summary and expense type breakdown for a specified month. If no budget is set,
      * an exception is thrown.
      *
      * @param input The input string containing the month information.
@@ -81,7 +81,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     public void viewExpenseList(String input) throws PlanPalExceptions {
         String month = getMonth(input);
         if (!budgetManager.getMonthlyBudget().containsKey(month) ||
-                budgetManager.getMonthlyBudget().get(month).equals("0")){
+                budgetManager.getMonthlyBudget().get(month).equals("0")) {
             throw new NoBudgetException();
         }
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
@@ -92,6 +92,15 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         System.out.println("    Total budget: $" + budgetManager.getMonthlyBudget().get(month));
         System.out.println("    Total cost: $" + getTotalCost(month, monthlyExpenses));
         System.out.println("    Remaining budget: $" + (budgetValue - getTotalCost(month, monthlyExpenses)));
+
+        Ui.printLine();
+
+        ArrayList<String> typeProportions = getExpenseTypeProportions(expenseList);
+        System.out.println("Expense Type Proportions:");
+        for (String proportion : typeProportions) {
+            System.out.println("    " + proportion);
+        }
+
         Ui.printLine();
     }
 

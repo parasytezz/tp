@@ -28,9 +28,9 @@ public class FindExpenseTest {
     public void validDescription_success() {
         try {
             expenseManager.getBudgetManager().setBudget("1000");
-            expenseManager.addExpense("/name:trial1 /cost:100");
+            expenseManager.addExpense("/name:trial1 /cost:100 /type: other");
             expenseManager.findExpense("trial1");
-            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1, Cost = $100]"));
+            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1, Cost = $100, Type = OTHER]"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -40,7 +40,7 @@ public class FindExpenseTest {
     public void noMatch_exceptionThrown() {
         try {
             expenseManager.getBudgetManager().setBudget("1000");
-            expenseManager.addExpense("/name:trial1 /cost:100");
+            expenseManager.addExpense("/name:trial1 /cost:100 /type: other");
             assertThrows(PlanPalExceptions.class, () -> expenseManager.findExpense("trial3"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -56,11 +56,11 @@ public class FindExpenseTest {
     public void multipleMatches_success() {
         try {
             expenseManager.getBudgetManager().setBudget("1000");
-            expenseManager.addExpense("/name:trial1 /cost:100");
-            expenseManager.addExpense("/name:trial1 duplicate /cost:150");
+            expenseManager.addExpense("/name:trial1 /cost:100 /type: other");
+            expenseManager.addExpense("/name:trial1 duplicate /cost:150 /type: other");
             expenseManager.findExpense("trial1");
-            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1, Cost = $100]"));
-            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1 duplicate, Cost = $150]"));
+            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1, Cost = $100, Type = OTHER]"));
+            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1 duplicate, Cost = $150, Type = OTHER]"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -70,9 +70,9 @@ public class FindExpenseTest {
     public void caseInsensitive_success() {
         try {
             expenseManager.getBudgetManager().setBudget("1000");
-            expenseManager.addExpense("/name:TrialCase /cost:120");
+            expenseManager.addExpense("/name:TrialCase /cost:120 /type: other");
             expenseManager.findExpense("trialcase");
-            assertTrue(OUTPUT_STREAM.toString().contains("[Name = TrialCase, Cost = $120]"));
+            assertTrue(OUTPUT_STREAM.toString().contains("[Name = TrialCase, Cost = $120, Type = OTHER]"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -82,11 +82,11 @@ public class FindExpenseTest {
     public void multipleKeywords_success() {
         try {
             expenseManager.getBudgetManager().setBudget("1000");
-            expenseManager.addExpense("/name:trial1 /cost:100");
-            expenseManager.addExpense("/name:trial2 /cost:200");
+            expenseManager.addExpense("/name:trial1 /cost:100 /type: other");
+            expenseManager.addExpense("/name:trial2 /cost:200 /type: other");
             expenseManager.findExpense("trial1 trial2");
-            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1, Cost = $100]"));
-            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial2, Cost = $200]"));
+            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial1, Cost = $100, Type = OTHER]"));
+            assertTrue(OUTPUT_STREAM.toString().contains("[Name = trial2, Cost = $200, Type = OTHER]"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
