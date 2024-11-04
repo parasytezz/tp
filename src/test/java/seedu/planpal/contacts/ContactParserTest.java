@@ -3,18 +3,15 @@ package seedu.planpal.contacts;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.modes.contacts.Contact;
 import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.utility.parser.modeparsers.ContactParser;
 
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ContactParserTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();

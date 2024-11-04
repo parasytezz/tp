@@ -95,7 +95,7 @@ public class Ui {
      * @param categoryList ArrayList of Categories and their corresponding position in this array is their index
      */
     public static void printCategory(String category,
-                                    ArrayList<ArrayList<Contact>> contactListByCategory, ArrayList<String> categoryList) {
+                        ArrayList<ArrayList<Contact>> contactListByCategory, ArrayList<String> categoryList) {
         System.out.println("Contacts in category: " + category);
         if (contactListByCategory.get(categoryList.indexOf(category)).isEmpty()) {
             System.out.println("There is no contact in " + category);
