@@ -6,6 +6,7 @@ import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.filemanager.BackUpManager;
 import seedu.planpal.utility.filemanager.FileManager;
 import seedu.planpal.utility.parser.modeparsers.ActivityParser;
 import seedu.planpal.utility.parser.modeparsers.ContactParser;
@@ -13,6 +14,8 @@ import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 import java.util.Scanner;
 
 public class Parser {
+    protected static final String BACK_UP_COMMAND = "/b/";
+    protected static final String RESTORE_COMMAND = "/r/";
     protected static final String BYE_COMMAND = "bye";
     protected static final String ADD_COMMAND = "add";
     protected static final String DELETE_COMMAND = "delete";
@@ -90,6 +93,14 @@ public class Parser {
                 Ui.printByeMessage();
                 System.exit(0);
                 break;
+
+            case BACK_UP_COMMAND:
+                BackUpManager.backupData();
+                throw new PlanPalExceptions("Backup Complete!");
+
+            case RESTORE_COMMAND:
+                BackUpManager.restoreData();
+                throw new PlanPalExceptions("Restore Complete!");
 
             default:
                 throw new InvalidModeException();

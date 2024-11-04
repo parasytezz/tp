@@ -5,6 +5,7 @@ import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.filemanager.BackUpManager;
 import seedu.planpal.utility.parser.Parser;
 
 /**
@@ -43,11 +44,11 @@ public class ExpenseParser extends Parser {
                 expenseManager.getBudgetManager().setBudget(inputParts[1].trim());
                 return true;
 
-            case Parser.ADD_COMMAND:
+            case ADD_COMMAND:
                 expenseManager.addExpense(inputParts[1].trim());
                 return true;
 
-            case Parser.LIST_COMMAND:
+            case LIST_COMMAND:
                 try {
                     expenseManager.viewExpenseList(inputParts[1].trim());
                 } catch (ArrayIndexOutOfBoundsException e) {
@@ -55,7 +56,7 @@ public class ExpenseParser extends Parser {
                 }
                 return true;
 
-            case Parser.EDIT_COMMAND:
+            case EDIT_COMMAND:
                 try {
                     expenseManager.editExpense(inputParts[1].trim());
                 } catch (NumberFormatException e) {
@@ -63,21 +64,29 @@ public class ExpenseParser extends Parser {
                 }
                 return true;
 
-            case Parser.DELETE_COMMAND:
+            case DELETE_COMMAND:
                 expenseManager.deleteExpense(inputParts[1].trim());
                 return true;
 
-            case Parser.FIND_COMMAND:
+            case FIND_COMMAND:
                 expenseManager.findExpense(inputParts[1].trim());
                 return true;
 
-            case Parser.EXIT_MODE_COMMAND:
+            case EXIT_MODE_COMMAND:
                 break;
 
-            case Parser.BYE_COMMAND:
+            case BYE_COMMAND:
                 Ui.printByeMessage();
                 System.exit(0);
                 break;
+
+            case BACK_UP_COMMAND:
+                BackUpManager.backupData();
+                throw new PlanPalExceptions("Backup Complete!");
+
+            case RESTORE_COMMAND:
+                BackUpManager.restoreData();
+                throw new PlanPalExceptions("Restore Complete!");
 
             default:
                 throw new IllegalCommandException();

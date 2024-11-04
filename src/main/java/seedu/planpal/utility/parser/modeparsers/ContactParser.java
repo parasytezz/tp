@@ -5,6 +5,7 @@ import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.filemanager.BackUpManager;
 import seedu.planpal.utility.parser.Parser;
 
 /**
@@ -33,35 +34,35 @@ public class ContactParser extends Parser {
             String description;
 
             switch (command) {
-            case Parser.ADD_COMMAND:
+            case ADD_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.addContact(description);
                 return true;
                 // fallthrough
 
-            case Parser.DELETE_COMMAND:
+            case DELETE_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.deleteContact(description);
                 return true;
                 // fallthrough
-            case Parser.SET_CATEGORY_COMMAND:
+            case SET_CATEGORY_COMMAND:
                 boolean inCategory = true;
                 while (inCategory) {
                     inCategory = contactManager.handleCategory(Ui.getSetCategory().trim());
                 }
                 return true;
 
-            case Parser.SEARCH_CATEGORY_COMMAND:
+            case SEARCH_CATEGORY_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.searchCategory(description);
                 return true;
 
-            case Parser.LIST_COMMAND:
+            case LIST_COMMAND:
                 contactManager.viewContactList();
                 return true;
                 // fallthrough
 
-            case Parser.EDIT_COMMAND:
+            case EDIT_COMMAND:
                 try {
                     String query = inputParts[1].trim();
                     contactManager.editContact(query);
@@ -71,19 +72,27 @@ public class ContactParser extends Parser {
                 return true;
                 // fallthrough
 
-            case Parser.FIND_COMMAND:
+            case FIND_COMMAND:
                 String query = inputParts[1].trim();
                 contactManager.findContact(query);
                 return true;
                 // fallthrough
 
-            case Parser.EXIT_MODE_COMMAND:
+            case EXIT_MODE_COMMAND:
                 break;
 
-            case Parser.BYE_COMMAND:
+            case BYE_COMMAND:
                 Ui.printByeMessage();
                 System.exit(0);
                 break;
+
+            case BACK_UP_COMMAND:
+                BackUpManager.backupData();
+                throw new PlanPalExceptions("Backup Complete!");
+
+            case RESTORE_COMMAND:
+                BackUpManager.restoreData();
+                throw new PlanPalExceptions("Restore Complete!");
 
             default:
                 throw new IllegalCommandException();
