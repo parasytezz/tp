@@ -18,7 +18,7 @@ public class Contact implements Editable, Storeable {
     private String phone;
     private String email;
     private String commandDescription;
-    private ArrayList<String> categories;
+    private ArrayList<String> categories = new ArrayList<>();
     
     /**
      * Constructs a new Contact object by parsing the given description string. The description
@@ -124,9 +124,8 @@ public class Contact implements Editable, Storeable {
     // A string representation of a Contact
     @Override
     public String toString() {
-        return "[Name = " + name + ", Phone = " + phone + ", Email = "+ email + "]";
+        return "[Name = " + name + ", Phone = " + phone + ", Email = "+ email + ", Categories = " + categories + "]";
     }
-
 
     @Override
     public String getCommandDescription() {
@@ -143,15 +142,14 @@ public class Contact implements Editable, Storeable {
     }
 
     public void clearCategories() {
-        if (categories != null) {
-            categories.clear();
-        }
+        categories.clear();
     }
 
     public void editCategory(String category) {
-        if (categories == null) {
-            categories = new ArrayList<>();
-        }
         categories.add(category);
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
     }
 }

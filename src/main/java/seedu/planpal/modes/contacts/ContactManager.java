@@ -6,6 +6,7 @@ import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -137,15 +138,15 @@ public class ContactManager implements ListFunctions {
      */
     public boolean handleCategory(String description) {
         try {
-            if (description.startsWith("add ")) {
+            if (description.startsWith("add")) {
                 addCategory(description);
                 //            savedContacts.saveCategories(contactList, contactListByCategory);
                 return true;
-            } else if (description.startsWith("remove ")) {
+            } else if (description.startsWith("remove")) {
                 removeCategory(description);
                 //            savedContacts.saveCategories(contactList, contactListByCategory);
                 return true;
-            } else if (description.startsWith("edit ")) {
+            } else if (description.startsWith("edit")) {
                 editCategory(description);
                 //            savedContacts.saveCategories(contactList, contactListByCategory);
                 return true;
@@ -161,8 +162,8 @@ public class ContactManager implements ListFunctions {
         } catch (PlanPalExceptions e) {
             CONTACT_LOGGER.warning("Failed to set category: " + e.getMessage());
             Ui.print(e.getMessage());
-            return true;
         }
+        return true;
     }
 
     /**
@@ -171,13 +172,13 @@ public class ContactManager implements ListFunctions {
      * @param description The description of the command
      * @throws EmptyDescriptionException If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
-    private void addCategory(String description) throws EmptyDescriptionException {
-        String newCategory = description.replace("add ", "").trim();
-        Ui.print(description);
+    private void addCategory(String description) throws PlanPalExceptions {
+        String newCategory = description.replace("add", "").trim();
         if (newCategory.isEmpty()) {
-            CONTACT_LOGGER.warning("Category is empty. Throwing EmptyDescriptionException.");
             throw new EmptyDescriptionException();
-        } else {
+        } else if (newCategory.contains("/")) {
+            throw new PlanPalExceptions("/ is not allowed to be used in category name");
+        }else {
             contactListByCategory.add(new ArrayList<Contact>());
             categoryList.add(newCategory);
             Ui.print("successfully added Category : '" + newCategory + "'");
@@ -191,7 +192,7 @@ public class ContactManager implements ListFunctions {
      * @throws PlanPalExceptions If the input is invalid
      */
     private void removeCategory(String description) throws PlanPalExceptions {
-        String removingCategory = description.replace("remove ", "").trim();
+        String removingCategory = description.replace("remove", "").trim();
         if (removingCategory.isEmpty()) {
             CONTACT_LOGGER.warning("Category is empty. Throwing EmptyDescriptionException.");
             throw new EmptyDescriptionException();
@@ -199,9 +200,21 @@ public class ContactManager implements ListFunctions {
             CONTACT_LOGGER.warning("Category is not found.");
             throw new PlanPalExceptions(removingCategory + " is not a category");
         } else {
+            removeCategoryInContacts(removingCategory);
             contactListByCategory.remove(categoryList.indexOf(removingCategory));
             categoryList.remove(removingCategory);
             Ui.print("successfully deleted Category : '" + removingCategory + "'");
+        }
+    }
+
+    /**
+     * Helper function to handle removal of category in contacts
+     *
+     * @param category The category to be removed
+     */
+    private void removeCategoryInContacts(String category) {
+        for (Contact contact : contactList) {
+            contact.getCategories().remove(category);
         }
     }
 
@@ -213,21 +226,24 @@ public class ContactManager implements ListFunctions {
      */
     private void editCategory(String description) throws PlanPalExceptions {
         try {
-            String descriptionToEdit = description.replace("edit ", "").trim();
+            String descriptionToEdit = description.replace("edit", "").trim();
             String[] categories;
             int contactId;
-            if (descriptionToEdit.split(" ").length == 1) {
+            if (descriptionToEdit.trim().isEmpty()) {
+                throw new EmptyDescriptionException();
+            } else if (descriptionToEdit.split(" ").length == 1) {
                 contactId = Integer.parseInt(descriptionToEdit) - 1;
                 categories = null;
             } else {
                 String contactIdString = descriptionToEdit.substring(0, descriptionToEdit.indexOf(" ")).trim();
-                categories = descriptionToEdit.substring(descriptionToEdit.indexOf(" ")).trim().split("/");
+                String newCategories = descriptionToEdit.substring(descriptionToEdit.indexOf(" ")).trim();
+                categories = Arrays.stream(newCategories.split("/")).map(String::trim).toArray(String[]::new);
                 contactId = Integer.parseInt(contactIdString) - 1;
             }
             Contact editingContact = validateEdit(categories, contactId);
             updateCategory(editingContact, categories);
-            Ui.print("successfully assigned categories to Contact id : " + contactId);
-        } catch (NumberFormatException | StringIndexOutOfBoundsException e) {
+            Ui.print("successfully assigned categories to Contact id : " + (contactId + 1));
+        } catch (NumberFormatException e) {
             CONTACT_LOGGER.warning("Invalid input.");
             throw new PlanPalExceptions("Invalid input.");
         }
@@ -264,6 +280,11 @@ public class ContactManager implements ListFunctions {
      * @param categories array of new categories of the contact
      */
     private void updateCategory(Contact editingContact, String[] categories) {
+        ArrayList<String> originalCategories = editingContact.getCategories();
+        for (String category : originalCategories) {
+            int removingCategoryID = categoryList.indexOf(category);
+            contactListByCategory.get(removingCategoryID).remove(editingContact);
+        }
         editingContact.clearCategories();
         if (categories == null) {
             return;
@@ -286,11 +307,28 @@ public class ContactManager implements ListFunctions {
     public void searchCategory(String description) {
         for (String category : categoryList) {
             if (category.equals(description)) {
-                Ui.printCat(category, contactListByCategory, categoryList);
+                Ui.printCategory(category, contactListByCategory, categoryList);
                 return;
             }
         }
         Ui.printCategoryNotFound();
     }
 
+    /**
+     * return categoryList
+     * for testing use only
+     *
+     */
+    public ArrayList<String> getCategoryList() {
+        return categoryList;
+    }
+
+    /**
+     * return categoryListByCategory
+     * for testing use only
+     *
+     */
+    public ArrayList<ArrayList<Contact>> getContactListByCategory() {
+        return contactListByCategory;
+    }
 }

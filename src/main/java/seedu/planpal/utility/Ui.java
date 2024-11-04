@@ -90,17 +90,18 @@ public class Ui {
     /**
      * Displays contacts of particular type of category
      *
-     * @param cat category to search
-     * @param listByCat 2d ArrayList of Contact where i-th element in listByCat is the contacts in category of index i
-     * @param catList ArrayList of Categories and their corresponding position in this array is their index
+     * @param category category to search
+     * @param contactListByCategory 2d ArrayList of Contact where i-th element  is the contacts in category of index i
+     * @param categoryList ArrayList of Categories and their corresponding position in this array is their index
      */
-    public static void printCat(String cat, ArrayList<ArrayList<Contact>> listByCat, ArrayList<String> catList) {
-        System.out.println("Contacts in category: " + cat);
-        if (listByCat.get(catList.indexOf(cat)).isEmpty()) {
-            System.out.println("There is no contact in " + cat);
+    public static void printCategory(String category,
+                        ArrayList<ArrayList<Contact>> contactListByCategory, ArrayList<String> categoryList) {
+        System.out.println("Contacts in category: " + category);
+        if (contactListByCategory.get(categoryList.indexOf(category)).isEmpty()) {
+            System.out.println("There is no contact in " + category);
             System.out.println(LINE_SEPARATOR);
         } else {
-            for (Contact contact : listByCat.get(catList.indexOf(cat))) {
+            for (Contact contact : contactListByCategory.get(categoryList.indexOf(category))) {
                 System.out.println(contact);
             }
             System.out.println(LINE_SEPARATOR);
