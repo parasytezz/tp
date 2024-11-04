@@ -51,7 +51,7 @@ public class Expense implements Editable, Storeable {
     /**
      * Returns a string representation of the expense.
      *
-     * @return A string in the format: [Name = name, Cost = $cost].
+     * @return A string in the format: [Name = name, Cost = $cost, Type = type, Month = month].
      */
     @Override
     public String toString() {
@@ -208,6 +208,12 @@ public class Expense implements Editable, Storeable {
         return month;
     }
 
+    /**
+     * Sets the type of the expense after validating the provided type.
+     *
+     * @param type The type as a string and must be FOOD, TRANSPORTATION, ENTERTAINMENT, or OTHER.
+     * @throws PlanPalExceptions If the type is invalid.
+     */
     public void setType(String type) throws PlanPalExceptions {
         if (!ExpenseType.isValidType(type)) {
             throw new PlanPalExceptions("Invalid type. Valid Types are: FOOD, TRANSPORTATION, ENTERTAINMENT, OTHER");
@@ -215,6 +221,11 @@ public class Expense implements Editable, Storeable {
         this.type = ExpenseType.valueOf(type.toUpperCase());
     }
 
+    /**
+     * Retrieves the type of the expense.
+     *
+     * @return The type of the expense as an ExpenseType enumeration.
+     */
     public ExpenseType getType() {
         return type;
     }
