@@ -137,7 +137,8 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         if (month == null){
             month = getCurrentMonth();
         }
-        String index = input.replaceAll(NON_NUMERICS, "").trim();
+        String index = input.replaceAll(MONTH_SEPARATOR + month,"")
+                .replaceAll(NON_NUMERICS, "").trim();
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
 
         try {
