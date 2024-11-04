@@ -32,10 +32,14 @@ public class ContactManagerTest {
             manager.addContact("/name:Bob");
             manager.addContact("/name:Charlie");
             manager.addContact("/name:Johnny");
-            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]", manager.getContactList().get(0).toString());
-            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]", manager.getContactList().get(1).toString());
-            assertEquals("[Name = Charlie, Phone = null, Email = null, Categories = []]", manager.getContactList().get(2).toString());
-            assertEquals("[Name = Johnny, Phone = null, Email = null, Categories = []]", manager.getContactList().get(3).toString());
+            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(0).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(1).toString());
+            assertEquals("[Name = Charlie, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(2).toString());
+            assertEquals("[Name = Johnny, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(3).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -73,9 +77,12 @@ public class ContactManagerTest {
             manager.addContact("/name:Johnny");
 
             manager.deleteContact("1");
-            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]", manager.getContactList().get(0).toString());
-            assertEquals("[Name = Charlie, Phone = null, Email = null, Categories = []]", manager.getContactList().get(1).toString());
-            assertEquals("[Name = Johnny, Phone = null, Email = null, Categories = []]", manager.getContactList().get(2).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(0).toString());
+            assertEquals("[Name = Charlie, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(1).toString());
+            assertEquals("[Name = Johnny, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(2).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -161,7 +168,8 @@ public class ContactManagerTest {
             manager.addContact("/name:Charlie");
 
             manager.findContact("Alice");
-            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(0).toString());
 
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -177,9 +185,12 @@ public class ContactManagerTest {
             manager.addContact("/name:Bob");
 
             manager.findContact("Alice Bob");
-            assertEquals("[Name = Alice Lim, Phone = null, Email = null, Categories = []]", manager.getContactList().get(0).toString());
-            assertEquals("[Name = Alice Wong, Phone = null, Email = null, Categories = []]", manager.getContactList().get(1).toString());
-            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]", manager.getContactList().get(2).toString());
+            assertEquals("[Name = Alice Lim, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice Wong, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(1).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(2).toString());
 
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -307,27 +318,31 @@ public class ContactManagerTest {
     }
 
     @Test
-    public void editCategory_single_category_success() {
+    public void editCategory_singleCategory_success() {
         try {
             ContactManager manager = new ContactManager();
             manager.handleCategory("add emergency");
             manager.addContact("/name:Alice");
             manager.handleCategory("edit 1 emergency");
-            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [emergency]]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [emergency]]",
+                    manager.getContactList().get(0).toString());
             manager.handleCategory("edit 1    ");
-            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(0).toString());
             manager.addContact("/name:Bob");
             manager.handleCategory("edit 2 emergency");
-            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = [emergency]]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = [emergency]]",
+                    manager.getContactList().get(1).toString());
             manager.handleCategory("edit 2");
-            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]", manager.getContactList().get(1).toString());
+            assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(1).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
     }
 
     @Test
-    public void editCategory_multiple_category_success() {
+    public void editCategory_multipleCategory_success() {
         try {
             ContactManager manager = new ContactManager();
             manager.handleCategory("add emergency");
@@ -338,7 +353,8 @@ public class ContactManagerTest {
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [emergency, family, friend]]",
                     manager.getContactList().get(0).toString());
             manager.handleCategory("edit 1    ");
-            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]", manager.getContactList().get(0).toString());
+            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
+                    manager.getContactList().get(0).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
