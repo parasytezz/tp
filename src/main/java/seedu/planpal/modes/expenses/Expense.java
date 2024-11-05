@@ -29,7 +29,7 @@ public class Expense implements Editable, Storeable {
     public Expense(String description) throws PlanPalExceptions {
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
-        if (categories.length == 1) {
+        if (categories.length <= 1) {
             throw new IllegalCommandException();
         }
         assert categories.length >= 2 : "Illegal command executed in expenses";

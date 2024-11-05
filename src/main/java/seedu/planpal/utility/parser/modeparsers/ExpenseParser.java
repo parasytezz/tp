@@ -4,6 +4,7 @@ import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.ExpenseManager;
+import seedu.planpal.modes.expenses.ExpenseModeFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.BackUpManager;
 import seedu.planpal.utility.parser.Parser;
@@ -45,12 +46,17 @@ public class ExpenseParser extends Parser {
                 return true;
 
             case ADD_COMMAND:
+                description = inputParts[1].trim();
+                if (description.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+                    expenseManager.addRecurringExpense(ExpenseModeFunctions.removeRecurring(description));
+                    return true;
+                }
                 expenseManager.addExpense(inputParts[1].trim());
                 return true;
 
             case LIST_COMMAND:
                 try {
-                    expenseManager.viewExpenseList(inputParts[1].trim());
+                    expenseManager.viewExpenseList(inputParts[1]);
                 } catch (ArrayIndexOutOfBoundsException e) {
                     expenseManager.viewExpenseList();
                 }

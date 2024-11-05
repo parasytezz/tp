@@ -171,42 +171,6 @@ public class FileManager {
     }
 
     /**
-     * Loads and processes data from categories file using the given manager.
-     * This method reads the file line by line, utilizing a parser appropriate for the file's content,
-     * which is determined by the file's name. System output during processing is suppressed to prevent
-     * clutter during command execution.
-     *
-     * @param manager  The contact manager instance for processing the commands.
-     * @param folderName The folder containing the file.
-     * @param fileName The name of the file to load and process.
-     */
-    private void loadContactCategories(ContactManager manager, String folderName, String fileName) {
-        PrintStream out = System.out;
-        Ui.setDummyStream();
-
-        File file = new File(DATA_DIRECTORY + folderName + "/" + fileName);
-        File backupFile = new File(DATA_DIRECTORY + folderName + "/" + fileName + "_backup");
-
-        try {
-            Files.copy(file.toPath(), backupFile.toPath());
-        } catch (IOException e) {
-            Ui.print("Error creating backup file!");
-        }
-
-        int lineNumber = 0;
-        try (Scanner scanner = new Scanner(file)) {
-            while (scanner.hasNext()) {
-                lineNumber++;
-                manager.handleCategory(scanner.nextLine());
-            }
-        } catch (FileNotFoundException e) {
-            Ui.print("FILE NOT FOUND!");
-        }
-        backupFile.delete();
-        Ui.setMainStream(out);
-    }
-
-    /**
      * Saves a single string value to a specified file within the value directory.
      * The function will ensure the directory structure exists, and if not, it will create it.
      *
@@ -303,6 +267,7 @@ public class FileManager {
         return valueList;
     }
 
+    //@@author anlamm
     /**
      * Saves categories of contacts to the corresponding file in storage.
      *
@@ -327,6 +292,42 @@ public class FileManager {
         } catch (IOException e) {
             Ui.print("Error saving data!");
         }
+    }
+
+    /**
+     * Loads and processes data from categories file using the given manager.
+     * This method reads the file line by line, utilizing a parser appropriate for the file's content,
+     * which is determined by the file's name. System output during processing is suppressed to prevent
+     * clutter during command execution.
+     *
+     * @param manager  The contact manager instance for processing the commands.
+     * @param folderName The folder containing the file.
+     * @param fileName The name of the file to load and process.
+     */
+    private void loadContactCategories(ContactManager manager, String folderName, String fileName) {
+        PrintStream out = System.out;
+        Ui.setDummyStream();
+
+        File file = new File(DATA_DIRECTORY + folderName + "/" + fileName);
+        File backupFile = new File(DATA_DIRECTORY + folderName + "/" + fileName + "_backup");
+
+        try {
+            Files.copy(file.toPath(), backupFile.toPath());
+        } catch (IOException e) {
+            Ui.print("Error creating backup file!");
+        }
+
+        int lineNumber = 0;
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                lineNumber++;
+                manager.handleCategory(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            Ui.print("FILE NOT FOUND!");
+        }
+        backupFile.delete();
+        Ui.setMainStream(out);
     }
 
 

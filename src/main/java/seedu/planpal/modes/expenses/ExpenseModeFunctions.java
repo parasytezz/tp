@@ -7,6 +7,7 @@ import java.util.Map;
 
 public interface ExpenseModeFunctions {
     String MONTH_SEPARATOR = "/month:";
+    String RECURRING_TAG = "/recurring";
     String NON_NUMERICS = "[^0-9-.]";
 
     /**
@@ -35,6 +36,11 @@ public interface ExpenseModeFunctions {
             return input.substring(startIndex, endIndex).trim();
         }
         return null;
+    }
+
+    static String removeRecurring(String input){
+        assert input.contains(RECURRING_TAG): "This input should have recurring tag";
+        return input.replaceAll(RECURRING_TAG, "").trim();
     }
 
     /**

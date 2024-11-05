@@ -14,6 +14,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     FileManager savedExpenses = new FileManager();
     BudgetManager budgetManager = new BudgetManager(savedExpenses);
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
+    private ArrayList<RecurringExpense> recurringExpensesList = new ArrayList<>();
 
     /**
      * Prints a message advising to readjust spending habits if the total cost for the given month exceeds the budget.
@@ -52,6 +53,15 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         savedExpenses.saveList(monthlyExpenses.get(targetMonth));
     }
 
+    public void addRecurringExpense(String description) throws PlanPalExceptions {
+        if (description.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+        RecurringExpense newExpense = new RecurringExpense(description);
+        addToList(recurringExpensesList, newExpense);
+        savedExpenses.saveList(recurringExpensesList);
+    }
+
     /**
      * Retrieves a list of expenses for a specified month.
      *
@@ -71,6 +81,10 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         return getMonthlyExpensesValues(getCurrentMonth());
     }
 
+    public void viewRecurringList() throws PlanPalExceptions {
+        viewList(recurringExpensesList);
+    }
+
     /**
      * Displays the expense list, budget summary and expense type breakdown for a specified month. If no budget is set,
      * an exception is thrown.
@@ -79,11 +93,21 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
      * @throws PlanPalExceptions If no budget is set for the specified month.
      */
     public void viewExpenseList(String input) throws PlanPalExceptions {
+        if (input.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+
+        if (input.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+            viewRecurringList();
+            return;
+        }
+
         String month = getMonth(input);
         if (!budgetManager.getMonthlyBudget().containsKey(month) ||
                 budgetManager.getMonthlyBudget().get(month).equals("0")) {
             throw new NoBudgetException();
         }
+
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         viewList(expenseList);
@@ -210,5 +234,9 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
      */
     public Map<String, ArrayList<Expense>> getMonthlyExpenses() {
         return monthlyExpenses;
+    }
+
+    public ArrayList<RecurringExpense> getRecurringExpensesList() {
+        return recurringExpensesList;
     }
 }
