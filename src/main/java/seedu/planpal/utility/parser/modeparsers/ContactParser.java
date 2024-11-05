@@ -47,6 +47,7 @@ public class ContactParser extends Parser {
                 // fallthrough
             case SET_CATEGORY_COMMAND:
                 boolean inCategory = true;
+                Ui.printCategoryMenu();
                 while (inCategory) {
                     inCategory = contactManager.handleCategory(Ui.getSetCategory());
                 }
