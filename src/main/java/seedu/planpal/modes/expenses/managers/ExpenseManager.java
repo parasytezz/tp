@@ -18,8 +18,6 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     RecurringManager recurringManager = new RecurringManager(savedExpenses);
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
 
-
-
     /**
      * Prints a message advising to readjust spending habits if the total cost for the given month exceeds the budget.
      *
@@ -76,10 +74,6 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         return getMonthlyExpensesValues(getCurrentMonth());
     }
 
-    public void viewRecurringList() throws PlanPalExceptions {
-        viewList(recurringManager.getRecurringExpensesList());
-    }
-
     /**
      * Displays the expense list, budget summary and expense type breakdown for a specified month. If no budget is set,
      * an exception is thrown.
@@ -93,7 +87,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         }
 
         if (input.contains(ExpenseModeFunctions.RECURRING_TAG)) {
-            viewRecurringList();
+            recurringManager.viewRecurringList();
             return;
         }
 
@@ -161,6 +155,11 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new EmptyDescriptionException();
         }
 
+        if (input.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+            recurringManager.deleteRecurringExpense(input);
+            return;
+        }
+
         String month = getMonth(input);
         if (month == null){
             month = getCurrentMonth();
@@ -178,8 +177,6 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw e;
         }
     }
-
-
 
     /**
      * Finds and displays expense entries matching the description in the specified month.
@@ -233,6 +230,11 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         return monthlyExpenses;
     }
 
+    /**
+     * Retrieves the recurring manager instance associated with this expense manager.
+     *
+     * @return The recurring manager instance managing the recurring expenses.
+     */
     public RecurringManager getRecurringManager() {
         return recurringManager;
     }
