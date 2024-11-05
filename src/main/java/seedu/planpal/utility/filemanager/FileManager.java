@@ -128,7 +128,7 @@ public class FileManager {
             try {
                 Files.copy(backupFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);
             } catch (IOException ex) {
-                Ui.print("Error creating backup file!");
+                Ui.print("Error!");
             }
         } catch (FileNotFoundException e) {
             Ui.print("FILE NOT FOUND!");

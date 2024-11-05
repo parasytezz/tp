@@ -6,6 +6,8 @@ import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +17,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     BudgetManager budgetManager = new BudgetManager(savedExpenses);
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
     private ArrayList<RecurringExpense> recurringExpensesList = new ArrayList<>();
+
 
     /**
      * Prints a message advising to readjust spending habits if the total cost for the given month exceeds the budget.
@@ -47,10 +50,31 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new NoBudgetException();
         }
 
-        monthlyExpenses.putIfAbsent(targetMonth, new ArrayList<>());
+        addRecurringToMonthlyExpenses(targetMonth, this.monthlyExpenses);
         addToList(monthlyExpenses.get(targetMonth), newExpense);
         printExceededBudgetMessage(targetMonth);
         savedExpenses.saveList(monthlyExpenses.get(targetMonth));
+    }
+
+    public void addRecurringToMonthlyExpenses(String newMonth, Map<String, ArrayList<Expense>> monthlyExpenses)
+            throws PlanPalExceptions {
+        if (monthlyExpenses.get(newMonth) != null){
+            return;
+        }
+        PrintStream out = System.out;
+        Ui.setDummyStream();
+        monthlyExpenses.putIfAbsent(newMonth, new ArrayList<>());
+        for (RecurringExpense recurringExpense : recurringExpensesList){
+            String description =
+                    recurringExpense.getCommandDescription()
+                    .substring(ExpenseModeFunctions.RECURRING_TAG.length())
+                    .trim();
+            description += " " + MONTH_SEPARATOR + newMonth;
+            Expense expense = new Expense(description);
+            addToList(monthlyExpenses.get(newMonth), expense);
+            savedExpenses.saveList(monthlyExpenses.get(newMonth));
+        }
+        Ui.setMainStream(out);
     }
 
     public void addRecurringExpense(String description) throws PlanPalExceptions {
@@ -108,7 +132,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new NoBudgetException();
         }
 
-        monthlyExpenses.putIfAbsent(month, new ArrayList<>());
+        addRecurringToMonthlyExpenses(month, this.monthlyExpenses);
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         viewList(expenseList);
         double budgetValue = Double.parseDouble(budgetManager.getMonthlyBudget().get(month));
