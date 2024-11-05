@@ -66,6 +66,9 @@ public class Expense implements Editable, Storeable {
      */
     @Override
     public void processEditFunction(String input) throws PlanPalExceptions {
+        if (input.isEmpty()) {
+            throw new IllegalCommandException();
+        }
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
