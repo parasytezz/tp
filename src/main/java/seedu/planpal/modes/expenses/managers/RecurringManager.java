@@ -77,10 +77,22 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
         savedExpenses.saveList(recurringExpensesList);
     }
 
+    /**
+     * Displays the list of all recurring expenses.
+     * @throws PlanPalExceptions if unable to display the list.
+     */
     public void viewRecurringList() throws PlanPalExceptions {
         viewList(getRecurringExpensesList());
     }
 
+    /**
+     * Deletes a recurring expense identified by its description after removing the recurring tag.
+     * Throws an exception if the modified description is empty.
+     * Also handles specific behaviors if exactly two items were in the list before deletion.
+     *
+     * @param description The description including the recurring tag to identify the expense.
+     * @throws PlanPalExceptions if description is invalid or empty.
+     */
     public void deleteRecurringExpense(String description) throws PlanPalExceptions {
         String index = ExpenseModeFunctions.removeRecurring(description);
         if (index.isEmpty()) {
@@ -90,5 +102,35 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
         boolean hasTwoBeforeDelete = (recurringExpensesList.size() == 2);
         deleteList(recurringExpensesList, index);
         savedExpenses.saveList(recurringExpensesList, hasTwoBeforeDelete);
+    }
+
+    /**
+     * Edits a recurring expense in the list based on a provided description.
+     * It removes the recurring tag from the description, updates the corresponding item in the list,
+     * and then saves the updated list to the file.
+     *
+     * @param description The description of the recurring expense to edit, including the recurring tag.
+     * @throws PlanPalExceptions If the removal of the recurring tag results errors during editing.
+     */
+    public void editRecurringExpense(String description) throws PlanPalExceptions {
+        String query = ExpenseModeFunctions.removeRecurring(description);
+        editList(recurringExpensesList, query);
+        savedExpenses.saveList(recurringExpensesList);
+    }
+
+    /**
+     * Searches for a recurring expense in the list based on a provided description after removing the recurring tag.
+     * If the resulting query string is empty, it throws an exception to indicate invalid input.
+     *
+     * @param description The description including the recurring tag of the recurring expense to find.
+     * @throws PlanPalExceptions If the query string is empty or if the search encounters an error.
+     */
+    public void findRecurringExpense(String description) throws PlanPalExceptions {
+        String query = ExpenseModeFunctions.removeRecurring(description);
+        if (query.isEmpty()){
+            throw new EmptyDescriptionException();
+        }
+
+        findInList(recurringExpensesList, query);
     }
 }

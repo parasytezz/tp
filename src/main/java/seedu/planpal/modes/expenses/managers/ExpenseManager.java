@@ -134,6 +134,10 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
      * @throws PlanPalExceptions If the query is empty or fails to find a matching expense.
      */
     public void editExpense(String query) throws PlanPalExceptions {
+        if (query.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+            recurringManager.editRecurringExpense(query);
+            return;
+        }
         String month = getMonth(query);
         if (month == null){
             month = getCurrentMonth();
@@ -194,6 +198,10 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new EmptyDescriptionException();
         }
 
+        if (description.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+            recurringManager.findRecurringExpense(description);
+            return;
+        }
         assert description != null : "Description must not be null";
         assert !description.isEmpty() : "Description must not be empty";
 

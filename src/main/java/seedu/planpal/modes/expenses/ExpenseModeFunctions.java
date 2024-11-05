@@ -38,6 +38,13 @@ public interface ExpenseModeFunctions {
         return null;
     }
 
+    /**
+     * Removes the recurring tag from the input string.
+     * Assumes the input contains the recurring tag and will assert this before making replacements.
+     *
+     * @param input The string from which the recurring tag is to be removed.
+     * @return The modified string with the recurring tag removed and leading/trailing whitespace trimmed.
+     */
     static String removeRecurring(String input){
         assert input.contains(RECURRING_TAG): "This input should have recurring tag";
         return input.replaceAll(RECURRING_TAG, "").trim();
