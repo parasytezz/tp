@@ -1,13 +1,13 @@
-package seedu.planpal.modes.expenses;
+package seedu.planpal.modes.expenses.managers;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.exceptions.expenses.NoBudgetException;
+import seedu.planpal.modes.expenses.Expense;
+import seedu.planpal.modes.expenses.ExpenseModeFunctions;
 import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
-
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -15,8 +15,9 @@ import java.util.Map;
 public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     FileManager savedExpenses = new FileManager();
     BudgetManager budgetManager = new BudgetManager(savedExpenses);
+    RecurringManager recurringManager = new RecurringManager(savedExpenses);
     private Map<String, ArrayList<Expense>> monthlyExpenses = new HashMap<>();
-    private ArrayList<RecurringExpense> recurringExpensesList = new ArrayList<>();
+
 
 
     /**
@@ -50,40 +51,10 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new NoBudgetException();
         }
 
-        addRecurringToMonthlyExpenses(targetMonth, this.monthlyExpenses);
+        recurringManager.addRecurringToMonthlyExpenses(targetMonth, this.monthlyExpenses);
         addToList(monthlyExpenses.get(targetMonth), newExpense);
         printExceededBudgetMessage(targetMonth);
         savedExpenses.saveList(monthlyExpenses.get(targetMonth));
-    }
-
-    public void addRecurringToMonthlyExpenses(String newMonth, Map<String, ArrayList<Expense>> monthlyExpenses)
-            throws PlanPalExceptions {
-        if (monthlyExpenses.get(newMonth) != null){
-            return;
-        }
-        PrintStream out = System.out;
-        Ui.setDummyStream();
-        monthlyExpenses.putIfAbsent(newMonth, new ArrayList<>());
-        for (RecurringExpense recurringExpense : recurringExpensesList){
-            String description =
-                    recurringExpense.getCommandDescription()
-                    .substring(ExpenseModeFunctions.RECURRING_TAG.length())
-                    .trim();
-            description += " " + MONTH_SEPARATOR + newMonth;
-            Expense expense = new Expense(description);
-            addToList(monthlyExpenses.get(newMonth), expense);
-            savedExpenses.saveList(monthlyExpenses.get(newMonth));
-        }
-        Ui.setMainStream(out);
-    }
-
-    public void addRecurringExpense(String description) throws PlanPalExceptions {
-        if (description.isEmpty()){
-            throw new EmptyDescriptionException();
-        }
-        RecurringExpense newExpense = new RecurringExpense(description);
-        addToList(recurringExpensesList, newExpense);
-        savedExpenses.saveList(recurringExpensesList);
     }
 
     /**
@@ -106,7 +77,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
     }
 
     public void viewRecurringList() throws PlanPalExceptions {
-        viewList(recurringExpensesList);
+        viewList(recurringManager.getRecurringExpensesList());
     }
 
     /**
@@ -132,7 +103,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new NoBudgetException();
         }
 
-        addRecurringToMonthlyExpenses(month, this.monthlyExpenses);
+        recurringManager.addRecurringToMonthlyExpenses(month, this.monthlyExpenses);
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         viewList(expenseList);
         double budgetValue = Double.parseDouble(budgetManager.getMonthlyBudget().get(month));
@@ -208,6 +179,8 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         }
     }
 
+
+
     /**
      * Finds and displays expense entries matching the description in the specified month.
      *
@@ -260,7 +233,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         return monthlyExpenses;
     }
 
-    public ArrayList<RecurringExpense> getRecurringExpensesList() {
-        return recurringExpensesList;
+    public RecurringManager getRecurringManager() {
+        return recurringManager;
     }
 }

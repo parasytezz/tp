@@ -4,7 +4,7 @@ import seedu.planpal.exceptions.InvalidModeException;
 import seedu.planpal.modes.activities.ActivityManager;
 import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.modes.expenses.ExpenseManager;
+import seedu.planpal.modes.expenses.managers.ExpenseManager;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.BackUpManager;
 import seedu.planpal.utility.filemanager.FileManager;
