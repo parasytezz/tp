@@ -3,6 +3,7 @@ package seedu.planpal.utility;
 import java.util.ArrayList;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.InvalidIndexException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 
@@ -93,6 +94,10 @@ public interface ListFunctions {
         String[] toEdit = query.split("\\s+", 2);
         int index = Integer.parseInt(toEdit[0].trim());
         String[] newValues = toEdit[1].split("/");
+
+        if (newValues.length == 0){
+            throw new IllegalCommandException();
+        }
 
         if (index < 1 || index > list.size()) {
             throw new PlanPalExceptions(
