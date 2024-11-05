@@ -308,7 +308,7 @@ public class FileManager {
      *
      * @param contactList ArrayList of contacts
      * @param contactListByCategory 2d ArrayList of Contact where i-th element is the contacts in category of index i
-     * @param contactList ArrayList of all categories
+     * @param categoryList ArrayList of all categories
      */
     public void saveCategories(ArrayList<Contact> contactList,
                                ArrayList<ArrayList<Contact>> contactListByCategory, ArrayList<String> categoryList) {
@@ -320,7 +320,8 @@ public class FileManager {
             }
             for (ArrayList<Contact> contacts : contactListByCategory) {
                 for (Contact contact : contacts) {
-                    writer.write(EDIT_COMMAND + " " + (contactList.indexOf(contact) + 1)  + " " + categoryList.get(contactListByCategory.indexOf(contacts)) + "\n");
+                    writer.write(EDIT_COMMAND + " " + (contactList.indexOf(contact) + 1)  + " "
+                            + categoryList.get(contactListByCategory.indexOf(contacts)) + "\n");
                 }
             }
         } catch (IOException e) {

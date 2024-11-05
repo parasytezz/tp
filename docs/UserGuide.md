@@ -186,7 +186,7 @@ _________________________________________________________
 ```
 ### Expected Output if no contacts in category:
 ```
-Category options : ## currently do not support loading and saving ##
+Category options : 
 1. add Category type (e.g. add close friend)
 2. remove Category type (e.g. remove emergency)
 3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
@@ -206,7 +206,7 @@ _________________________________________________________
 _________________________________________________________
 successfully added Category : 'friend'
 _________________________________________________________
-Category options : ## currently do not support loading and saving ##
+Category options : 
 1. add Category type (e.g. add close friend)
 2. remove Category type (e.g. remove emergency)
 3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
@@ -224,7 +224,7 @@ remove friend
 _________________________________________________________
 friend is not a category
 _________________________________________________________
-Category options : ## currently do not support loading and saving ##
+Category options : 
 1. add Category type (e.g. add close friend)
 2. remove Category type (e.g. remove emergency)
 3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
@@ -236,7 +236,7 @@ Category options : ## currently do not support loading and saving ##
 _________________________________________________________
 successfully deleted Category : 'friend'
 _________________________________________________________
-Category options : ## currently do not support loading and saving ##
+Category options : 
 1. add Category type (e.g. add close friend)
 2. remove Category type (e.g. remove emergency)
 3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
@@ -254,7 +254,7 @@ edit 1 friend
 _________________________________________________________
 Invalid contact id
 _________________________________________________________
-Category options : ## currently do not support loading and saving ##
+Category options : 
 1. add Category type (e.g. add close friend)
 2. remove Category type (e.g. remove emergency)
 3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
@@ -266,7 +266,7 @@ Category options : ## currently do not support loading and saving ##
 _________________________________________________________
 friend is not a valid category
 _________________________________________________________
-Category options : ## currently do not support loading and saving ##
+Category options : 
 1. add Category type (e.g. add close friend)
 2. remove Category type (e.g. remove emergency)
 3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
@@ -296,7 +296,7 @@ view
 _________________________________________________________
 friend
 _________________________________________________________
-Category options : ## currently do not support loading and saving ##
+Category options : 
 1. add Category type (e.g. add close friend)
 2. remove Category type (e.g. remove emergency)
 3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
