@@ -14,6 +14,7 @@ public class Contact implements Editable, Storeable {
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private static final String STORAGE_PATH = "./data/contacts/contacts.txt";
+    private static final String CATEGORY_PATH = "./data/contacts/categories.txt";
     private String name;
     private String phone;
     private String email;
@@ -139,6 +140,10 @@ public class Contact implements Editable, Storeable {
     @Override
     public String getStoragePath() {
         return STORAGE_PATH;
+    }
+
+    public static String getCategoriesPath() {
+        return CATEGORY_PATH;
     }
 
     public void clearCategories() {

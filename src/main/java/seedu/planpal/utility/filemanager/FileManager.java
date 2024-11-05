@@ -1,6 +1,8 @@
 package seedu.planpal.utility.filemanager;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.modes.contacts.Contact;
+import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.parser.Parser;
 import seedu.planpal.utility.parser.ParserFactory;
@@ -24,6 +26,7 @@ import java.util.Scanner;
  */
 public class FileManager {
     private static final String ADD_COMMAND = "add";
+    private static final String EDIT_COMMAND = "edit";
     private static final String DATA_DIRECTORY = "./data/";
     private static final String VALUE_DIRECTORY = "values/";
 
@@ -155,10 +158,52 @@ public class FileManager {
         }
 
         for (File file : files) {
-            if (file.isFile() && file.getName().endsWith(".txt")) {
+            if (file.isFile() && file.getName().endsWith(".txt") && !file.getName().equals("categories.txt")) {
                 loadList(manager, folderName, file.getName());
             }
         }
+
+        for (File file : files) {
+            if (file.getName().equals("categories.txt") && folderName.equals("contacts")) {
+                loadContactCategories((ContactManager) manager, folderName, file.getName());
+            }
+        }
+    }
+
+    /**
+     * Loads and processes data from categories file using the given manager.
+     * This method reads the file line by line, utilizing a parser appropriate for the file's content,
+     * which is determined by the file's name. System output during processing is suppressed to prevent
+     * clutter during command execution.
+     *
+     * @param manager  The contact manager instance for processing the commands.
+     * @param folderName The folder containing the file.
+     * @param fileName The name of the file to load and process.
+     */
+    private void loadContactCategories(ContactManager manager, String folderName, String fileName) {
+        PrintStream out = System.out;
+        Ui.setDummyStream();
+
+        File file = new File(DATA_DIRECTORY + folderName + "/" + fileName);
+        File backupFile = new File(DATA_DIRECTORY + folderName + "/" + fileName + "_backup");
+
+        try {
+            Files.copy(file.toPath(), backupFile.toPath());
+        } catch (IOException e) {
+            Ui.print("Error creating backup file!");
+        }
+
+        int lineNumber = 0;
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNext()) {
+                lineNumber++;
+                manager.handleCategory(scanner.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            Ui.print("FILE NOT FOUND!");
+        }
+        backupFile.delete();
+        Ui.setMainStream(out);
     }
 
     /**
@@ -257,4 +302,32 @@ public class FileManager {
         }
         return valueList;
     }
+
+    /**
+     * Saves categories of contacts to the corresponding file in storage.
+     *
+     * @param contactList ArrayList of contacts
+     * @param contactListByCategory 2d ArrayList of Contact where i-th element is the contacts in category of index i
+     * @param categoryList ArrayList of all categories
+     */
+    public void saveCategories(ArrayList<Contact> contactList,
+                               ArrayList<ArrayList<Contact>> contactListByCategory, ArrayList<String> categoryList) {
+        String storagePath = Contact.getCategoriesPath();
+        createDirectory(storagePath);
+        try(FileWriter writer = new FileWriter(storagePath)) {
+            for (String category : categoryList) {
+                writer.write(ADD_COMMAND + " " + category + "\n");
+            }
+            for (ArrayList<Contact> contacts : contactListByCategory) {
+                for (Contact contact : contacts) {
+                    writer.write(EDIT_COMMAND + " " + (contactList.indexOf(contact) + 1)  + " "
+                            + categoryList.get(contactListByCategory.indexOf(contacts)) + "\n");
+                }
+            }
+        } catch (IOException e) {
+            Ui.print("Error saving data!");
+        }
+    }
+
+
 }
