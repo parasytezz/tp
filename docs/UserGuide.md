@@ -1,13 +1,11 @@
 # User Guide
 
+---
 ## Introduction
 
 ---
 
-
 PlanPal is a desktop application designed for international students studying in NUS. It functions as an all-in-one organizational tool, enabling users to manage contacts, track expenses, and schedule activities. The user interacts with the application using a CLI and is written in Java 17.
-
-
 
 ## Purpose of User Guide
 
@@ -17,39 +15,24 @@ The purpose of this guide is to show you how to get started on using this PlanPa
 ## Target Audience
 
 ---
-International students who are frugal and organized.
-
-## Quick Start
-
----
-{Give steps to get started quickly}
-
-1. Ensure that you have Java 17 or above installed.
-2. Down the latest version of `PlanPal` from [here](http://link.to/duke).
-
-## Quick Tutorial
-
----
-1. On start up, you should see the following screen:  
-   <img src="Images(UG)/MainScreen.png" alt="Main Screen" style="width:300px; margin-top: 10px; margin-bottom: 10px;">
-2. Next, select the mode you want to use. In this example, to use contacts, select 1.  
-   <img src="Images(UG)/ModeScreen.png" alt="Mode Screen" style="width:300px; margin-top: 10px; margin-bottom: 10px;">
-3. Enter the command as per the formats shown below.
-4. To go to another mode, type:`exit`. You should see the screen showing all available modes.
-5. To exit the program, type: `bye`.
-
----
-## Features
-This section will focus on some of the key features of PlanPal and explain their usage. We will go over several features, including the Contact, Expenses and Activity Manager functionalities.
+International students who are frugal and organized. It caters to the needs of these international students, allowing them to keep track of important contacts, activities, as well as manage their spending while in a foreign country.
 
 ### Table of Contents
+- [Quick start](#quick-start)
 - [Features](#Features)
+  - [Modes](#modes)
+  - [Exit](#exit)
   - [Contact Manager](#Contact-Manager)
     - [Add contact](#adding-a-contact)
     - [List contact](#viewing-the-contact-list)
     - [Edit contact](#Editing-a-contact)
     - [Delete contact](#deleting-a-contact)
     - [Setting category](#Setting-category)
+      - [add category](#1-add-category)
+      - [remove category](#2-remove-category)
+      - [edit categories of contact](#3-edit-categories-of-contact)
+      - [view categories](#4-view-categories)
+      - [quit category](#5-quit-category)
     - [Search contacts by category](#Search-contacts-by-category)
     - [Find contact](#finding-a-contact)
   - [Expense Manager](#expense-manager)
@@ -58,19 +41,47 @@ This section will focus on some of the key features of PlanPal and explain their
     - [Delete expenses](#deleting-an-expense)
     - [Find expenses](#finding-an-expense)
   - [Activity Manager](#activity-manager)
-    - Add activity
+    - [Add activity](#adding-an-activity)
     - [List activity](#viewing-the-activities-list)
-    - Edit activity
-    - Delete activity
     - [Find activity](#finding-an-activity)
+    - [Edit activity](#editing-an-activity)
+    - [Delete activity](#deleting-an-activity)
+
+---
+## Quick Start
+1. Ensure that you have Java 17 or above installed.
+2. Down the latest version of `PlanPal` from [here](http://link.to/duke).
+   Click on `PlanPal.jar` to automatically download the file. Place the file in a folder of your choice.
+3. Open the command terminal and navigate to the folder where `PlanPal.jar` is downloaded.
+4. Use the command `java -jar PlanPal.jar` to launch PlanPal
+   On start up, you should see the following screen:  
+   <img src="Images(UG)/MainScreen.png" alt="Main Screen" style="width:300px; margin-top: 10px; margin-bottom: 10px;">
+5. When you are finished using PlanPal, use the `bye` command to terminate the application. This will ensure that your data is stored correctly and is available for future access.
+
+---
+## Features
+This section will focus on some of the key features of PlanPal and explain their usage. We will go over several features, including the Contact, Expenses and Activity Manager functionalities.
+
+---
+## Modes
+Within PlanPal, there exists 3 modes, namely Contact Manager, Expense Manager, and Activity Manager.
+
+---
+1. To select the `mode` you want to use, enter a number ranging from 1 to 3. In this example, to use `Contacts`, enter 1 into the CLI.  
+   <img src="Images(UG)/ModeScreen.png" alt="Mode Screen" style="width:300px; margin-top: 10px; margin-bottom: 10px;">
+2. Functionalities for each `mode` will be expanded on below.
+
+---
+## Exit
+To go to another mode, type:`exit`. You should see the screen showing all available `modes`.
 
 ---
 ## Contact Manager
-PlanPal will assist you in tracking the Contacts in your planner. The guide below will show you how to make use of the contact manager commands.
+PlanPal will assist you in tracking the `Contacts` in your planner. The guide below will show you how to make use of the contact manager commands.
 
 ---
 ## Adding a Contact
-The `add` command allows users to add a contact with various categories
+The `add` command allows users to add a `Contact` with various categories.
 
 ### Usage:
 ```
@@ -91,7 +102,7 @@ _________________________________________________________
 ```
 ---
 ## Viewing the Contact List
-The `list` command allows users to view all their current contacts.
+The `list` command allows users to view all their current `Contacts`.
 
 ### Usage:
 ```
@@ -107,7 +118,7 @@ _________________________________________________________
 ```
 ---
 ## Deleting a Contact
-The `delete` command allows users to delete an existing contact in the contact list.
+The `delete` command allows users to delete an existing `Contact` in the contact list.
 
 ### Usage
 ```
@@ -115,7 +126,7 @@ delete <index>
 ```
 
 ### Example
-The user wants to delete an existing contact that has an index of '2' in the contact list.
+The user wants to delete an existing `Contact` that has an index of '2' in the contact list.
 ```
 delete 2
 ```
@@ -131,7 +142,7 @@ _________________________________________________________
 ```
 ---
 ## Editing a Contact
-The `edit` command allows users to find a contact from the list
+The `edit` command allows users to edit a `Contact` from the list.
 
 ### Usage:
 ```
@@ -152,7 +163,7 @@ _________________________________________________________
 ```
 ---
 ## Finding a Contact
-The `find` command allows users to find a contact from the list
+The `find` command allows users to find `Contacts` from the list.
 
 ### Usage:
 ```
@@ -170,10 +181,10 @@ Here is what I found:
 2. [Name = Alice, Phone = null, Email = null]
 _________________________________________________________
 ```
-
+---
 ## Setting category
-The 'category' command allows users to customize category in contacts.
-Currently, category does not support loading and saving, which means data will be lost once program is exit.
+The `category` command allows users to customize `category` in contacts.
+Currently, `category` does not support loading and saving, which means data will be lost once program is exit.
 
 ### Usage:
 ```
@@ -193,6 +204,7 @@ Category options :
 4. view Category lists (e.g. view)
 5. quit
 ```
+---
 ### 1. add category
 ### Example:
 ```
@@ -213,7 +225,7 @@ Category options :
 4. view Category lists (e.g. view)
 5. quit
 ```
-
+---
 ### 2. remove category
 ### Example:
 ```
@@ -243,7 +255,7 @@ Category options :
 4. view Category lists (e.g. view)
 5. quit
 ```
-
+---
 ### 3. edit categories of contact
 ### Example:
 ```
@@ -285,7 +297,7 @@ Category options : ## currently do not support loading and saving ##
 4. view Category lists (e.g. view)
 5. quit
 ```
-
+---
 ### 4. view categories
 ### Example:
 ```
@@ -303,17 +315,15 @@ Category options :
 4. view Category lists (e.g. view)
 5. quit
 ```
-
+---
 ### 5. quit category
 ### Example:
 ```
 quit
 ```
 ---
-
-
 ## Search contacts by category
-The 'search' command allows users to search contacts belonging to user-defined categories
+The `search` command allows users to search `Contacts` belonging to user-defined `category`.
 
 ### Usage:
 ```
@@ -341,13 +351,12 @@ Contacts in category: friend
 _________________________________________________________
 ```
 ---
----
 ## Expense Manager
-PlanPal will assist you in tracking your expenses in your planner. The guide below will show you how to make use of the expense manager commands.
+PlanPal will assist you in tracking your `Expenses` in your planner. The guide below will show you how to make use of the expense manager commands.
 
 ---
 ## Adding an Expense
-The `add` command allows users to add an expense with various categories
+The `add` command allows users to add an `Expense` with various categories.
 
 ### Usage:
 ```
@@ -368,7 +377,7 @@ _________________________________________________________
 ```
 ---
 ## Viewing the Expense List
-The `list` command allows users to view all their current expenses.
+The `list` command allows users to view all their current `expenses`.
 
 ### Usage:
 ```
@@ -386,7 +395,7 @@ _________________________________________________________
 ```
 ---
 ## Deleting an Expense
-The `delete` command allows users to delete an expense from the list
+The `delete` command allows users to delete an `expense` from the list.
 
 ### Usage:
 ```
@@ -404,7 +413,7 @@ _________________________________________________________
 ```
 ---
 ## Finding an Expense
-The `find` command allows users to find an expense from the list
+The `find` command allows users to find `expenses` from the list.
 
 ### Usage:
 ```
@@ -425,11 +434,14 @@ _________________________________________________________
 ---
 
 ## Activity Manager
-PlanPal will assist you in tracking your activities in your planner. The guide below will show you how to make use of the activity manager commands.
+PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of the activity manager commands.
+
+---
+## Adding an activity
 
 ---
 ## Viewing the Activities list
-The `list` command allows users to view all their current expenses
+The `list` command allows users to view all their current `activities`.
 
 ### Usage:
 ```
@@ -439,15 +451,14 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [Activity: running (exercise)]
-2. [Activity: swimming (exercise)]
-3. [Activity: groceries (necessities)]
+1. [activity: running, activityType: exercise]
+2. [activity: swimming, activityType: exercise]
+3. [activity: groceries, activityType: necessities]
 _________________________________________________________
 ```
 ---
-
-## Finding an Activity
-The `find` command allows users to find an expense from the list
+## Finding an activity
+The `find` command allows users to find `activities` from the list.
 
 ### Usage:
 ```
@@ -461,10 +472,34 @@ find exercise
 ```
 _________________________________________________________
 Here is what I found:
-1. [Activity: running (exercise)]
-2. [Activity: swimming (exercise)]
+1. [activity = running, activityType = exercise]
+2. [activity = swimming, activityType = exercise]
 _________________________________________________________
 ```
+---
+## Editing an activity
+The `edit` command allows users to edit an `activity` from the list.
+
+### Usage:
+```
+edit <index> /<category 1>: <value 1> /<category 2>: <value 2> ...
+```
+### Example 1
+```
+edit 1 /name: diving
+```
+### Expected Output:
+```
+_________________________________________________________
+Currently in list:
+1. [activity = diving, activityType = exercise]
+2. [activity = swimming, activityType = exercise]
+3. [activity = groceries, activityType = necessities]
+_________________________________________________________
+```
+---
+## Deleting an Activity
+
 ---
 
 ## FAQ
