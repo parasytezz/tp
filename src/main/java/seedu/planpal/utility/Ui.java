@@ -66,7 +66,7 @@ public class Ui {
      * Displays functions of category
      */
     public static String getSetCategory() {
-        System.out.println("Category options : ## currently do not support loading and saving ##");
+        System.out.println("Category options :");
         System.out.println("1. add Category type (e.g. add close friend)");
         System.out.println("2. remove Category type (e.g. remove emergency)");
         System.out.println("3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)");
