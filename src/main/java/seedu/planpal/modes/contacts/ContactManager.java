@@ -140,15 +140,15 @@ public class ContactManager implements ListFunctions {
         try {
             if (description.startsWith("add")) {
                 addCategory(description);
-                //            savedContacts.saveCategories(contactList, contactListByCategory);
+                savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
             } else if (description.startsWith("remove")) {
                 removeCategory(description);
-                //            savedContacts.saveCategories(contactList, contactListByCategory);
+                savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
             } else if (description.startsWith("edit")) {
                 editCategory(description);
-                //            savedContacts.saveCategories(contactList, contactListByCategory);
+                savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
             } else if (description.equals("view")) {
                 Ui.printCategoryList(categoryList);
