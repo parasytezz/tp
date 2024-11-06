@@ -1047,14 +1047,7 @@ bye
 | Viewing the contact list      | `list`                                                         | `list`                                                          |
 | Printing category functions   | `help`                                                         | `help`                                                          |
 | Quiting setting category mode | `quit`                                                         | `quit`                                                          |
-=======
-| **Description**          | **Command**                                                                                   | **Example**                                                                          |
-|:-------------------------|:----------------------------------------------------------------------------------------------|:-------------------------------------------------------------------------------------|
-| Adding a contact         | `add /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ...`          | `Copy to clipboardadd /name: johnny /phone:12345678 /email:johnny@gmail.com`         |
-| Viewing the contact list | `list`                                                                                        | `list`                                                                               | 
-| Deleting a contact       | `delete <index>`                                                                              | `delete 2`                                                                           |
-| Editing a contact        | `edit <index> /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ...` | `edit 1 /name: Cassie`                                                               |
-| Finding a contact        | `find <value>`                                                                                | `find alice david`                                                                   |
+
 
 ### Expense Manager
 | **Description**                             | **Command**                                                 | **Example**                                                      |
