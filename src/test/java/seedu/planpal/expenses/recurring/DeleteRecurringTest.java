@@ -87,12 +87,12 @@ public class DeleteRecurringTest {
     }
 
     @Test
-    public void deleteRecurringExpenseWithInvalidIndexFormat_Failure() {
+    public void deleteRecurringExpenseWithInvalidIndexFormat_failure() {
         try {
             expenseParser.processCommand("delete invalidIndex");
             fail("Exception not thrown for invalid index format");
         } catch (InvalidIndexException e) {
-                assertTrue(e.getMessage().contains("Invalid Index!"));
+            assertTrue(e.getMessage().contains("Invalid Index!"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
