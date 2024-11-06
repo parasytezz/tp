@@ -21,7 +21,6 @@ International students who are frugal and organized. It caters to the needs of t
 - [Quick start](#quick-start)
 - [Features](#Features)
   - [Modes](#modes)
-  - [Exit](#exit)
   - [Contact Manager](#Contact-Manager)
     - [Add contact](#adding-a-contact)
     - [List contact](#viewing-the-contact-list)
@@ -38,8 +37,9 @@ International students who are frugal and organized. It caters to the needs of t
     - [Search contacts by category](#Search-contacts-by-category)
     - [Find contact](#finding-a-contact)
   - [Expense Manager](#expense-manager)
+    - [Set Budget](#setting-a-budget)
     - [Add expenses](#adding-an-expense)
-    - [List expenses](#viewing-the-expense-list)
+    - [List expenses](#viewing-an-expense-list)
     - [Delete expenses](#deleting-an-expense)
     - [Find expenses](#finding-an-expense)
   - [Activity Manager](#activity-manager)
@@ -48,6 +48,12 @@ International students who are frugal and organized. It caters to the needs of t
     - [Find activity](#finding-an-activity)
     - [Edit activity](#editing-an-activity)
     - [Delete activity](#deleting-an-activity)
+  - [Auxiliary Commands](#auxiliary-commands-)
+    - [Backing Up Files](#backing-up-files)
+    - [Restoring Back-up Files](#restoring-back-up-files)
+    - ["Clearing" Screen](#clearing-screen)
+    - [Exiting Modes](#exiting-modes)
+    - [Leaving the Application](#leaving-the-application)
 
 ---
 ## Quick Start
@@ -72,12 +78,10 @@ Within PlanPal, there exists 3 modes, namely Contact Manager, Expense Manager, a
 1. To select the `mode` you want to use, enter a number ranging from 1 to 3. In this example, to use `Contacts`, enter 1 into the CLI.  
    <img src="Images(UG)/ModeScreen.png" alt="Mode Screen" style="width:300px; margin-top: 10px; margin-bottom: 10px;">
 2. Functionalities for each `mode` will be expanded on below.
+3. To exit any mode, use the `exit` command.
 
 ---
-## Exit
-To go to another mode, type:`exit`. You should see the screen showing all available `modes`.
 
----
 ## Contact Manager
 PlanPal will assist you in tracking the `Contacts` in your planner. The guide below will show you how to make use of the contact manager commands.
 
@@ -212,7 +216,7 @@ Category options :
 _________________________________________________________
 ```
 ---
-### 1. add category
+### 1. Add Category
 Example 1:
 ```
 add friend
@@ -244,7 +248,7 @@ Description cannot be empty!
 _________________________________________________________
 ```
 ---
-### 2. remove category
+### 2. Remove Category
 Example:
 ```
 remove friend
@@ -262,7 +266,7 @@ successfully deleted Category : 'friend'
 _________________________________________________________
 ```
 ---
-### 3. edit categories of contact
+### 3. Edit Categories of Contact
 Format
 ```
 edit {contact index} {category1/category2/...}
@@ -314,7 +318,7 @@ Description cannot be empty!
 _________________________________________________________
 ```
 ---
-### 4. view categories
+### 4. View Categories
 Example:
 ```
 view
@@ -327,7 +331,7 @@ Below is the list:
 _________________________________________________________
 ```
 ---
-### 5. view the contact list
+### 5. View the Contact List
 The `list` command allows users to view all their current `Contacts`.
 
 Usage:
@@ -343,7 +347,7 @@ Below is the list:
 _________________________________________________________
 ```
 ---
-### 6. print category functions
+### 6. Print Category Functions
 Usage:
 ```
 help
@@ -364,13 +368,13 @@ Category options :
 _________________________________________________________
 ```
 ---
-### 7. quit category
+### 7. Quit Category
 ### Example:
 ```
 quit
 ```
 ---
-## Search contacts by category
+## Search Contacts by Category
 The `search` command allows users to search `Contacts` belonging to user-defined `category`.
 
 ### Usage:
@@ -417,7 +421,7 @@ As a start, ALWAYS follow this sequence to prevent errors:
 
 **<ins>IMPORTANT NOTE</ins>**  
 There are 2 additional tags you need to take note of.  
-By default, the program assumes that you are working the current month and also NOT on the recurring list
+By default, the program assumes that you are working the current month and also NOT on the recurring list.  
 Adding these tags to any of your commands in this mode does the following:
 - `/recurring`: 
   - Tells the program to work on the recurring list of expenses. Does not support for budget.
@@ -822,15 +826,45 @@ _________________________________________________________
 ---
 
 ## Activity Manager
-PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of the activity manager commands.
+PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of 
+the activity manager commands.
 
 ---
 ## Adding an activity
 The `add` command allows users to add an activity to the `activities` list.
+If only the name of the activity is specified, the type of the activity will be set to `others` by default.
 
 ### Usage:
 ```
-add /name: <name> /activityType: <activityType> 
+add /name: <name> /type: <type> 
+```
+### Example 1:
+```
+add /name: running /type: exercise
+```
+
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [activity = running, type = exercise]
+_________________________________________________________
+```
+### Example 2:
+```
+add /name: sleep
+```
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [activity = running, type = exercise]
+2. [activity = sleep, type = others]
+_________________________________________________________
 ```
 
 ---
@@ -845,9 +879,9 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [activity: running, activityType: exercise]
-2. [activity: swimming, activityType: exercise]
-3. [activity: groceries, activityType: necessities]
+1. [activity: running, type: exercise]
+2. [activity: swimming, type: exercise]
+3. [activity: groceries, type: necessities]
 _________________________________________________________
 ```
 ---
@@ -866,8 +900,8 @@ find exercise
 ```
 _________________________________________________________
 Here is what I found:
-1. [activity = running, activityType = exercise]
-2. [activity = swimming, activityType = exercise]
+1. [activity = running, type = exercise]
+2. [activity = swimming, type = exercise]
 _________________________________________________________
 ```
 ---
@@ -886,24 +920,124 @@ edit 1 /name: diving
 ```
 _________________________________________________________
 Currently in list:
-1. [activity = diving, activityType = exercise]
-2. [activity = swimming, activityType = exercise]
-3. [activity = groceries, activityType = necessities]
+1. [activity = diving, type = exercise]
+2. [activity = swimming, type = exercise]
+3. [activity = groceries, type = necessities]
 _________________________________________________________
 ```
 ---
 ## Deleting an Activity
+The `delete` command allows users to delete an existing `activity` from the list, with
+reference to its index in the list.
+
+### Usage:
+```
+delete <index>
+```
+### Example 1:
+```
+delete 2
+```
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
+_________________________________________________________
+Currently in list:
+1. [activity = running, type = exercise]
+2. [activity = groceries, type = necessities]
+_________________________________________________________
+```
 
 ---
+## Auxiliary Commands  
+The commands below are not the main features of the 3 modes. However, they will make it more convenient for you when using the PlanPal application
 
-## FAQ
+---
+## Backing Up Files
+The `/b/` command can be used in either the **main menu** or the **mode screen**. It is able to store all your current files into a back-up folder in the event that you corrupted your data. This folder is also encrypted to ensure that your files are secured.
 
-**Q**: How do I transfer my data to another computer? 
+**<ins>IMPORTANT NOTE</ins>**
+- This function is not automated! Users have to use the command to create the back-up manually.
+- The constraint given for this project is to have data files that can be manipulated.
+- In no way are we going against this since the data is being loaded from files that can be edited. 
 
-**A**: {your answer here}
+### Usage:
+```
+/b/
+```
+---
+## Restoring Back-up Files
+The `/r/` command can be used in either the **main menu** or the **mode screen**. It restores your data files to the state of the previously saved back-up files.
+
+### Usage:
+```
+/r/
+```
+---
+## "Clearing" Screen
+The `clear` command can be used to simulate the clearing of the screen. It is done by printing multiple blank lines. This would help to reduce the clutter on your screen if you wish to do so.
+
+### Usage:
+```
+clear
+```
+---
+## Exiting Modes
+The `exit` command can be used to switch between different modes.
+
+### Usage:
+```
+exit
+```
+---
+## Leaving the Application
+The `bye` command can be used to shut down the program when you no longer need it.
+
+### Usage:
+```
+bye
+```
+---
 
 ## Command Summary
 
-{Give a 'cheat sheet' of commands here}
+### Auxiliary Commands
+| **Description**   | **Command** |
+|:------------------|:------------|
+| Back Up Files     | `/b/`       |
+| Restore Files     | `/r/`       |
+| Clear Screen      | `clear`     |
+| Exit Mode         | `exit`      |
+| Leave Application | `bye`       |
 
-* Add todo `todo n/TODO_NAME d/DEADLINE`
+
+### Contact Manager
+
+### Expense Manager
+| **Description**                            | **Command**                                                 | **Example**                                                      |
+|:-------------------------------------------|:------------------------------------------------------------|:-----------------------------------------------------------------|
+| Setting a Budget (default)                 | `budget <value>`                                            | `budget 1000`                                                    |
+| Setting a Budget (With `/month:` tag)      | `budget <value> <month>` <br/> `budget <month> </> <value>` | `budget 1000 /month: 2024-11`<br/> `budget /month:2024-11 /1000` |
+| Adding an Expense (default)                | `add /<field 1>: <value 1> ...`                             | `add /name: Lunch /cost: 10`                                     | 
+| Adding an Expense (with `/recurring` tag)  | `add /recurring /<field 1>: <value 1> ...`                  | `add /recurring /name: Spotify /cost: 10`                        |
+| Adding an Expense (with `/month:` tag)     | `add /month: <monthValue> /<field 1>: <value 1> ...`        | `add /month: 2024-11 /name: Spotify /cost: 10`                   |
+| Viewing an Expense (default)               | `list`                                                      | `list`                                                           |
+| Viewing an Expense (with `/recurring` tag) | `list /recurring`                                           | `list /recurring`                                                |
+| Viewing an Expense (with `/month:` tag)    | `list /month: <monthValue>`                                 | `list /month: 2024-11`                                           |
+| Editing an Expense (default)               | `edit <index> </field:> <value> ...`                        | `edit 1 /name: Dinner /cost: 20`                                 |
+| Editing an Expense (with `/recurring` tag) | `edit <index> </recurring> </field:> <value> ...`           | `edit 1 /recurring /name: Netflix /cost: 18.70`                  |
+| Editing an Expense (with `/month:` tag)    | `edit <index> </month:> <monthValue> </field:> <value> ...` | `edit 1 /month: 2024-11 /name: Breakfast /cost: 5.40`            |
+
+### Activity Manager
+| **Description**                       | **Command**                                                          | **Example**                          |
+|:--------------------------------------|:---------------------------------------------------------------------|:-------------------------------------|
+| Adding an activity                    | `add /name: <name> /type: <type>`                                    | `add /name: running /type: exercise` |
+| Adding an activity with just its name | `add /name: <name>`                                                  | `add /name: sleep`                   |
+| Viewing the activity list             | `list`                                                               | `list`                               | 
+| Finding an activity                   | `find <value>`                                                       | `find exercise`                      |
+| Editing an activity                   | `edit <index> /<category 1>: <value 1> /<category 2>: <value 2> ...` | `edit 1 /name: diving`               |
+| Deleting an activity                  | `delete <index>`                                                     | `delete 4`                           |
+
+
+
