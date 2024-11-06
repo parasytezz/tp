@@ -48,7 +48,12 @@ International students who are frugal and organized. It caters to the needs of t
     - [Find activity](#finding-an-activity)
     - [Edit activity](#editing-an-activity)
     - [Delete activity](#deleting-an-activity)
-  - [Auxiliary Commands]()
+  - [Auxiliary Commands](#auxiliary-commands-)
+    - [Backing Up Files](#backing-up-files)
+    - [Restoring Back-up Files](#restoring-back-up-files)
+    - ["Clearing" Screen](#clearing-screen)
+    - [Exiting Modes](#exiting-modes)
+    - [Leaving the Application](#leaving-the-application)
 
 ---
 ## Quick Start
