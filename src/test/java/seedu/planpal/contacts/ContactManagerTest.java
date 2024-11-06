@@ -350,7 +350,7 @@ public class ContactManagerTest {
             manager.handleCategory("add friend");
             manager.addContact("/name:Alice");
             manager.handleCategory("edit 1       emergency/      family   /        friend");
-            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [emergency, family, friend]]",
+            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [friend, emergency, family]]",
                     manager.getContactList().get(0).toString());
             manager.handleCategory("edit 1    ");
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
@@ -438,7 +438,7 @@ public class ContactManagerTest {
             manager.addContact("/name:Alice");
             manager.handleCategory("edit 1 emergency/family/friend");
             manager.handleCategory("remove family  ");
-            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [emergency, friend]]",
+            assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [friend, emergency]]",
                     manager.getContactList().get(0).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());

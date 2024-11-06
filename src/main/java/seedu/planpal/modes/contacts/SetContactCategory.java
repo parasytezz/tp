@@ -8,6 +8,8 @@ import seedu.planpal.utility.filemanager.FileManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.logging.Logger;
 
 public class SetContactCategory implements ListFunctions {
@@ -137,6 +139,7 @@ public class SetContactCategory implements ListFunctions {
         try {
             String descriptionToEdit = description.replace("edit", "").trim();
             String[] categories;
+            String[] uniqueCategories = {};
             int contactId;
             if (descriptionToEdit.trim().isEmpty()) {
                 throw new EmptyDescriptionException();
@@ -147,10 +150,12 @@ public class SetContactCategory implements ListFunctions {
                 String contactIdString = descriptionToEdit.substring(0, descriptionToEdit.indexOf(" ")).trim();
                 String newCategories = descriptionToEdit.substring(descriptionToEdit.indexOf(" ")).trim();
                 categories = Arrays.stream(newCategories.split("/")).map(String::trim).toArray(String[]::new);
+                Set<String> uniqueSet = new HashSet<>(Arrays.asList(categories));
+                uniqueCategories = uniqueSet.toArray(new String[0]);
                 contactId = Integer.parseInt(contactIdString) - 1;
             }
-            Contact editingContact = validateEdit(categories, contactId);
-            updateCategory(editingContact, categories);
+            Contact editingContact = validateEdit(uniqueCategories, contactId);
+            updateCategory(editingContact, uniqueCategories);
             Ui.print("successfully assigned categories to Contact id : " + (contactId + 1));
         } catch (NumberFormatException e) {
             contactLogger.warning("Invalid input.");

@@ -35,7 +35,7 @@ public class ContactParserTest {
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search emergency");
             String output = "Contacts in category: emergency\n" +
-                    "[Name = Alice, Phone = null, Email = null, Categories = [emergency, family, friend]]\n" +
+                    "[Name = Alice, Phone = null, Email = null, Categories = [friend, emergency, family]]\n" +
                     "_________________________________________________________\n";
             String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
@@ -62,7 +62,7 @@ public class ContactParserTest {
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search friend");
             output = "Contacts in category: friend\n" +
-                    "[Name = Bob, Phone = null, Email = null, Categories = [family, friend]]\n" +
+                    "[Name = Bob, Phone = null, Email = null, Categories = [friend, family]]\n" +
                     "[Name = Si Thu, Phone = null, Email = null, Categories = [friend]]\n" +
                     "[Name = yin shuang, Phone = null, Email = null, Categories = [friend]]\n" +
                     "_________________________________________________________\n";
@@ -119,7 +119,7 @@ public class ContactParserTest {
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search emergency");
             String output = "Contacts in category: emergency\n" +
-                    "[Name = Alice, Phone = null, Email = null, Categories = [emergency, family, friend]]\n" +
+                    "[Name = Alice, Phone = null, Email = null, Categories = [friend, emergency, family]]\n" +
                     "_________________________________________________________\n";
             String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
