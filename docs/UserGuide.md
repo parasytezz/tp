@@ -32,7 +32,9 @@ International students who are frugal and organized. It caters to the needs of t
       - [remove category](#2-remove-category)
       - [edit categories of contact](#3-edit-categories-of-contact)
       - [view categories](#4-view-categories)
-      - [quit category](#5-quit-category)
+      - [view the contact list](#5-view-the-contact-list)
+      - [print category functions](#6-print-category-functions)
+      - [quit category](#7-quit-category)
     - [Search contacts by category](#Search-contacts-by-category)
     - [Find contact](#finding-a-contact)
   - [Expense Manager](#expense-manager)
@@ -197,126 +199,172 @@ _________________________________________________________
 ```
 ### Expected Output if no contacts in category:
 ```
-Category options : 
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
+_________________________________________________________
+Category options :
+1. add Category type [ add {category} || e.g. add close friend ]
+2. remove Category type [ remove {category} || e.g. remove emergency ]
+3. edit Category of Contact [ edit {contact index} {category} || e.g. edit 1 friend ]
+4. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]
+5. view Category lists (e.g. view)
+6. view Contact list (e.g. list)
+7. print category functions (e.g. help)
+8. quit
+_________________________________________________________
 ```
 ---
 ### 1. add category
-### Example:
+Example 1:
 ```
 add friend
 ```
-### Expected output:
+Expected output if successfully added:
 ```
-_________________________________________________________
-add friend
-_________________________________________________________
 _________________________________________________________
 successfully added Category : 'friend'
 _________________________________________________________
-Category options : 
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
+```
+Example 2:
+```
+add /friend
+```
+Expected output if "/" is included:
+```
+_________________________________________________________
+/ is not allowed to be used in category name
+_________________________________________________________
+```
+Example 3:
+```
+add
+```
+Expected output if description is empty:
+```
+_________________________________________________________
+Description cannot be empty!
+_________________________________________________________
 ```
 ---
 ### 2. remove category
-### Example:
+Example:
 ```
 remove friend
 ```
-### Expected output if friend is not a category:
+Expected output if friend is not a category:
 ```
 _________________________________________________________
 friend is not a category
 _________________________________________________________
-Category options : 
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
 ```
-### Expected output if friend is a category:
+Expected output if friend is a category:
 ```
 _________________________________________________________
 successfully deleted Category : 'friend'
 _________________________________________________________
-Category options : 
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
 ```
 ---
 ### 3. edit categories of contact
-### Example:
+Format
+```
+edit {contact index} {category1/category2/...}
+```
+Example 1:
 ```
 edit 1 friend
 ```
-### Expected output if contact id is invalid:
-```
-_________________________________________________________
-Invalid contact id
-_________________________________________________________
-Category options : 
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
-```
-### Expected output if friend is not a category:
+Expected output if friend is not a category:
 ```
 _________________________________________________________
 friend is not a valid category
 _________________________________________________________
-Category options : 
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
 ```
-### Expected output for successfully edit:
+Expected output for successfully edit:
 ```
 _________________________________________________________
-successfully assigned categories to Contact id : 0
+successfully assigned categories to Contact id : 1
 _________________________________________________________
-Category options : ## currently do not support loading and saving ##
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
+```
+Example 2:
+```
+edit 0 friend
+```
+Expected output if contact id is invalid:
+```
+_________________________________________________________
+Invalid contact id
+_________________________________________________________
+```
+Example 3:
+```
+edit 1
+```
+Expected output if contact id is invalid:
+```
+_________________________________________________________
+successfully assigned categories to Contact id : 1
+_________________________________________________________
+```
+Example 4:
+```
+edit
+```
+Expected output if contact id is invalid:
+```
+_________________________________________________________
+Description cannot be empty!
+_________________________________________________________
 ```
 ---
 ### 4. view categories
-### Example:
+Example:
 ```
 view
 ```
-### Expected output:
+Expected output:
 ```
 _________________________________________________________
-friend
+Below is the list:
+1. friend
 _________________________________________________________
-Category options : 
-1. add Category type (e.g. add close friend)
-2. remove Category type (e.g. remove emergency)
-3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)
-4. view Category lists (e.g. view)
-5. quit
 ```
 ---
-### 5. quit category
+### 5. view the contact list
+The `list` command allows users to view all their current `Contacts`.
+
+Usage:
+```
+list
+```
+
+Expected Output:
+```
+_________________________________________________________
+Below is the list:
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
+_________________________________________________________
+```
+---
+### 6. print category functions
+Usage:
+```
+help
+```
+
+Expected Output:
+```
+_________________________________________________________
+Category options :
+1. add Category type [ add {category} || e.g. add close friend ]
+2. remove Category type [ remove {category} || e.g. remove emergency ]
+3. edit Category of Contact [ edit {contact index} {category} || e.g. edit 1 friend ]
+4. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]
+5. view Category lists (e.g. view)
+6. view Contact list (e.g. list)
+7. print category functions (e.g. help)
+8. quit
+_________________________________________________________
+```
+---
+### 7. quit category
 ### Example:
 ```
 quit
