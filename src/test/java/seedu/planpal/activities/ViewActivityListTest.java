@@ -25,9 +25,9 @@ public class ViewActivityListTest {
     @Test
     public void viewActivityList_success() {
         try {
-            activityManager.addActivity("/name: swimming /activityType: exercise");
+            activityManager.addActivity("/name: swimming /type: exercise");
             activityManager.viewActivityList();
-            assertEquals("[activity = swimming, activityType = exercise]",
+            assertEquals("[activity = swimming, type = exercise]",
                     activityManager.getActivityList().get(0).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
