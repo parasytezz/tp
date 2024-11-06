@@ -115,6 +115,14 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         }
 
         Ui.printLine();
+
+        ArrayList<String> costBreakdown = getExpenseTypeCostBreakdown(expenseList);
+        System.out.println("Expense Type Cost Breakdown:");
+        for (String breakdown : costBreakdown) {
+            System.out.println("    " + breakdown);
+        }
+
+        Ui.printLine();
     }
 
     /**
