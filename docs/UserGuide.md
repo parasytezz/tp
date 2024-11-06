@@ -538,6 +538,10 @@ By default, without any tags the following is assumed:
 - Month is the current month
 - It should NOT look for the recurring expense list.
 
+Viewing list also shows the user's spending information:
+- Spending proportion of that month for each expense type
+- Total amount of money spent in a given month for each expense type
+
 **<ins>IMPORTANT NOTE</ins>**
 - You should not use both `/recurring` and `/month:` tags together.
 - if used together, `/recurring` tag is prioritised  
@@ -616,7 +620,7 @@ Expense Type Cost Breakdown:
 _________________________________________________________
 ```
 ---
-## Editing an Expense list
+## Editing an Expense
 The `edit` command allows users to edit their expense list.  
 By default, without any tags the following is assumed:
 - Month is the current month
@@ -680,8 +684,147 @@ Currently in list:
 2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
 _________________________________________________________
 ```
+## Deleting an Expense
+The `delete` command allows users to delete an expense from the expense list and displays the remaining expenses for that month.
 
+By default, without any tags the following is assumed:
+- Month is the current month
+- It should NOT look for the recurring expense list.
+
+**<ins>IMPORTANT NOTE</ins>**
+- You should not use multiple `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised
+- if `/month:` tag is used together, the first month is prioritised
+
+### Usage 1 (default deletion without tags):
+```
+delete <index> 
+```
+### Example:
+```
+delete 1 
+```
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
+_________________________________________________________
+Currently in list:
+```
+### Usage 2 (with recurring tag):
+```
+edit <index> </recurring> 
+```
+### Example:
+```
+delete 1 /recurring 
+```
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
+_________________________________________________________
+Currently in list:
+```
+### Usage 3 (with month tag):
+```
+delete <index> </month:> <monthValue>
+```
+### Example:
+```
+delete 1 /month:2024-05
+```
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
+_________________________________________________________
+Currently in list:
+```
+## Finding an Expense
+The `find` command allows users to find an expense from the expense list based on any of the fields.
+
+By default, without any tags the following is assumed:
+- Month is the current month
+- It should NOT look for the recurring expense list.
+
+**<ins>IMPORTANT NOTE</ins>**
+- You should not use multiple `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised
+- if `/month:` tag is used together, the first month is prioritised
+- 
+### Usage 1 (default finding without tags):
+```
+find <query> 
+```
+### Example 1 (searching by name):
+```
+find dinner
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = tues dinner, Cost = $7, Type = FOOD]
+2. [Name = wed dinner, Cost = $6, Type = FOOD]
+_________________________________________________________
+```
+### Example 2 (searching by cost):
+```
+find 7
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = tues dinner, Cost = $7, Type = FOOD]
+2. [Name = wed lunch, Cost = $7, Type = FOOD]
+_________________________________________________________
+```
+### Example 3 (searching by type):
+```
+find transportation
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = grab, Cost = $10, Type = TRANSPORTATION]
+2. [Name = MRT, Cost = $2, Type = TRANSPORTATION]
+_________________________________________________________
+```
+### Usage 2 (with recurring tag):
+```
+find <query> </recurring> 
+```
+### Example:
+```
+find spotify /recurring 
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 3 (with month tag):
+```
+find <query> </month:> <monthValue>
+```
+### Example:
+```
+find lunch /month:2024-05
+```
+### Expected Output:
+```
+_________________________________________________________
+Here is what I found:
+1. [Name = lunch, Cost = $5, Type = FOOD]
+_________________________________________________________
+```
 ---
+
 ## Activity Manager
 PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of 
 the activity manager commands.
