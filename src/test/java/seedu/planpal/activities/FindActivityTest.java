@@ -25,12 +25,12 @@ public class FindActivityTest {
     @Test
     public void findActivity_validName_success() {
         try {
-            activityManager.addActivity("/name: swimming /activityType: exercise");
-            activityManager.addActivity("/name: running /activityType: exercise");
-            activityManager.addActivity("/name: groceries /activityType: necessity");
+            activityManager.addActivity("/name: swimming /type: exercise");
+            activityManager.addActivity("/name: running /type: exercise");
+            activityManager.addActivity("/name: groceries /type: necessity");
 
             activityManager.findActivity("swimming");
-            assertEquals("[activity = swimming, activityType = exercise]",
+            assertEquals("[activity = swimming, type = exercise]",
                     activityManager.getActivityList().get(0).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -40,14 +40,14 @@ public class FindActivityTest {
     @Test
     public void findActivity_multipleMatches_success() {
         try {
-            activityManager.addActivity("/name: swimming /activityType: exercise");
-            activityManager.addActivity("/name: running /activityType: exercise");
-            activityManager.addActivity("/name: groceries /activityType: necessity");
+            activityManager.addActivity("/name: swimming /type: exercise");
+            activityManager.addActivity("/name: running /type: exercise");
+            activityManager.addActivity("/name: groceries /type: necessity");
 
             activityManager.findActivity("exercise");
-            assertEquals("[activity = swimming, activityType = exercise]",
+            assertEquals("[activity = swimming, type = exercise]",
                     activityManager.getActivityList().get(0).toString());
-            assertEquals("[activity = running, activityType = exercise]",
+            assertEquals("[activity = running, type = exercise]",
                     activityManager.getActivityList().get(1).toString());
 
         } catch (PlanPalExceptions e) {
@@ -58,9 +58,9 @@ public class FindActivityTest {
     @Test
     public void findActivity_noMatches_exceptionThrown() {
         try {
-            activityManager.addActivity("/name: swimming /activityType: exercise");
-            activityManager.addActivity("/name: running /activityType: exercise");
-            activityManager.addActivity("/name: groceries /activityType: necessity");
+            activityManager.addActivity("/name: swimming /type: exercise");
+            activityManager.addActivity("/name: running /type: exercise");
+            activityManager.addActivity("/name: groceries /type: necessity");
 
             activityManager.findActivity("leisure");
             fail();
