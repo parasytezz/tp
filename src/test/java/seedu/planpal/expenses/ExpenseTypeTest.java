@@ -34,7 +34,7 @@ class ExpenseTypeTest {
     }
 
     @Test
-    void testSetExpenseType_ValidType() {
+    void testSetExpenseType_validType() {
         try {
             expense.setType("FOOD");
             assertEquals(ExpenseType.FOOD, expense.getType(), "The type should be FOOD");
@@ -53,13 +53,13 @@ class ExpenseTypeTest {
     }
 
     @Test
-    void testSetExpenseType_InvalidType() {
+    void testSetExpenseType_invalidType() {
         assertThrows(PlanPalExceptions.class, () -> expense.setType("INVALID_TYPE"),
                 "Invalid type should throw exception");
     }
 
     @Test
-    void testExpenseTypeIsValid_ValidType() {
+    void testExpenseTypeIsValid_validType() {
         assertTrue(ExpenseType.isValidType("FOOD"), "FOOD should be a valid type");
         assertTrue(ExpenseType.isValidType("TRANSPORTATION"), "TRANSPORTATION should be a valid type");
         assertTrue(ExpenseType.isValidType("ENTERTAINMENT"), "ENTERTAINMENT should be a valid type");
@@ -67,12 +67,12 @@ class ExpenseTypeTest {
     }
 
     @Test
-    void testExpenseTypeIsValid_InvalidType() {
+    void testExpenseTypeIsValid_invalidType() {
         assertFalse(ExpenseType.isValidType("INVALID_TYPE"), "INVALID_TYPE should not be a valid type");
     }
 
     @Test
-    void testExpenseToString_WithValidType() {
+    void testExpenseToString_withValidType() {
         try {
             expense.setType("FOOD");
             assertEquals("[Name = Test Expense, Cost = $100, Type = FOOD]", expense.toString());
@@ -115,7 +115,7 @@ class ExpenseTypeTest {
 
 
     @Test
-    void testGetExpenseTypeProportions_NoExpenses() {
+    void testGetExpenseTypeProportions_noExpenses() {
         ArrayList<String> proportions = expenseManager.getExpenseTypeProportions(new ArrayList<>());
 
         assertTrue(proportions.isEmpty(), "Proportions should be empty when there are no expenses");
@@ -135,14 +135,14 @@ class ExpenseTypeTest {
 
 
     @Test
-    void testGetExpenseTypeCostBreakdown_NoExpenses() {
+    void testGetExpenseTypeCostBreakdown_noExpenses() {
         ArrayList<String> breakdown = expenseManager.getExpenseTypeCostBreakdown(new ArrayList<>());
 
         assertTrue(breakdown.isEmpty(), "Cost breakdown should be empty when there are no expenses");
     }
 
     @Test
-    void testGetExpenseTypeCostBreakdown_SingleExpenseType() {
+    void testGetExpenseTypeCostBreakdown_singleExpenseType() {
         try {
             ArrayList<Expense> singleTypeExpenses = new ArrayList<>();
             singleTypeExpenses.add(new Expense("/name:Test Expense 1/cost:100/type:FOOD"));
@@ -158,7 +158,7 @@ class ExpenseTypeTest {
     }
 
     @Test
-    void testGetExpenseTypeProportions_SingleExpenseType() {
+    void testGetExpenseTypeProportions_singleExpenseType() {
         try {
             ArrayList<Expense> singleTypeExpenses = new ArrayList<>();
             singleTypeExpenses.add(new Expense("/name:Test Expense 1/cost:100/type:FOOD"));
@@ -174,7 +174,7 @@ class ExpenseTypeTest {
     }
 
     @Test
-    void testGetExpenseTypeProportions_EqualDistribution() {
+    void testGetExpenseTypeProportions_equalDistribution() {
         try {
             ArrayList<Expense> equalExpenses = new ArrayList<>();
             equalExpenses.add(new Expense("/name:Test Expense 1/cost:50/type:FOOD"));
