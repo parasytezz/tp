@@ -29,7 +29,7 @@ public class Expense implements Editable, Storeable {
     public Expense(String description) throws PlanPalExceptions {
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
-        if (categories.length == 1) {
+        if (categories.length <= 1) {
             throw new IllegalCommandException();
         }
         assert categories.length >= 2 : "Illegal command executed in expenses";
@@ -66,6 +66,9 @@ public class Expense implements Editable, Storeable {
      */
     @Override
     public void processEditFunction(String input) throws PlanPalExceptions {
+        if (input.isEmpty()) {
+            throw new IllegalCommandException();
+        }
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
