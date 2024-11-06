@@ -28,8 +28,10 @@ public class AddActivityTest {
             activityManager.addActivity("/name: yoga /type: exercise");
             activityManager.addActivity("/name: CS2113 TP /type: academics");
 
-            assertEquals("[activity = yoga, type = exercise]", activityManager.getActivityList().get(0).toString());
-            assertEquals("[activity = CS2113 TP, type = academics]", activityManager.getActivityList().get(1).toString());
+            assertEquals("[activity = yoga, type = exercise]",
+                    activityManager.getActivityList().get(0).toString());
+            assertEquals("[activity = CS2113 TP, type = academics]",
+                    activityManager.getActivityList().get(1).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -41,8 +43,10 @@ public class AddActivityTest {
             activityManager.addActivity("/name: swimming");
             activityManager.addActivity("/name: singing");
 
-            assertEquals("[activity = swimming, type = others", activityManager.getActivityList().get(0).toString());
-            assertEquals("[activity = singing, type = others", activityManager.getActivityList().get(1).toString());
+            assertEquals("[activity = swimming, type = others]",
+                    activityManager.getActivityList().get(0).toString());
+            assertEquals("[activity = singing, type = others]",
+                    activityManager.getActivityList().get(1).toString());
 
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
@@ -50,12 +54,22 @@ public class AddActivityTest {
     }
 
     @Test
-    public void addActivity_emptyInput_exceptionThrown() {
+    public void addActivity_emptyInput_exeptionThrown() {
+        try {
+            activityManager.addActivity("");
+            fail();
+        } catch (PlanPalExceptions e) {
+            assertEquals("Description cannot be empty!", e.getMessage());
+        }
+    }
+
+    @Test
+    public void addActivity_blankInput_exceptionThrown() {
         try {
             activityManager.addActivity(" ");
             fail();
         } catch (PlanPalExceptions e) {
-            assertEquals("TDescription cannot be empty!", e.getMessage());
+            assertEquals("You need a name for an activity.", e.getMessage());
         }
     }
 
@@ -72,10 +86,10 @@ public class AddActivityTest {
     @Test
     public void addActivity_missingType_exceptionThrown() {
         try {
-            activityManager.addActivity("/name: swimming /type: ");
+            activityManager.addActivity("/name: swimming /type:");
             fail();
         } catch (PlanPalExceptions e) {
-            assertEquals("The command is incomplete. Please provide a value for activityType", e.getMessage());
+            assertEquals("Activity type cannot be blank.", e.getMessage());
         }
     }
 
