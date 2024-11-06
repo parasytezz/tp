@@ -8,7 +8,7 @@ import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
 
 public class ActivityManager implements ListFunctions {
-    public static final String[] INFORMATION_CATEGORIES = {"name", "activityType"};
+    public static final String[] INFORMATION_CATEGORIES = {"name", "type"};
     FileManager savedActivities = new FileManager();
     private final ArrayList<Activity> activityList = new ArrayList<>();
 

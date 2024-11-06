@@ -16,7 +16,7 @@ public class Activity implements Editable, Storeable {
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;
     private String name;
-    private String activityType;
+    private String type;
 
     /**
      * Constructs an Activity object from a command description.
@@ -27,6 +27,9 @@ public class Activity implements Editable, Storeable {
     public Activity(String description) throws PlanPalExceptions {
         if (!description.contains("/name:")) {
             throw new PlanPalExceptions("You need a name for an activity.");
+        }
+        if (!description.contains("/type:")) {
+            type = "others";
         }
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
@@ -42,11 +45,11 @@ public class Activity implements Editable, Storeable {
     /**
      * Returns a string representation of the activity.
      *
-     * @return A string in the format: [activity: name, activityType: activityType]
+     * @return A string in the format: [activity: name, type: type]
      */
     @Override
     public String toString() {
-        return "[activity = " + name + ", activityType = " + activityType + "]";
+        return "[activity = " + name + ", type = " + type + "]";
     }
 
     /**
@@ -61,7 +64,7 @@ public class Activity implements Editable, Storeable {
             throw new IllegalCommandException();
         }
 
-        String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
+        String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR, 2);
         if (inputParts.length < 2) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
         }
@@ -73,7 +76,7 @@ public class Activity implements Editable, Storeable {
 
         if (category.equals("name")) {
             setName(valueToEdit);
-        } else if (category.equals("activityType")) {
+        } else if (category.equals("type")) {
             setActivityType(valueToEdit);
         } else {
             System.out.println(category + "is not a valid category.");
@@ -115,8 +118,8 @@ public class Activity implements Editable, Storeable {
         if (name != null) {
             commandDescription += CATEGORY_SEPARATOR + "name" + CATEGORY_VALUE_SEPARATOR + name + " ";
         }
-        if (activityType != null) {
-            commandDescription += CATEGORY_SEPARATOR + "activityType" + CATEGORY_VALUE_SEPARATOR + activityType + " ";
+        if (type != null) {
+            commandDescription += CATEGORY_SEPARATOR + "type" + CATEGORY_VALUE_SEPARATOR + type + " ";
         }
     }
 
@@ -151,14 +154,14 @@ public class Activity implements Editable, Storeable {
     /**
      * Sets the type of the activity.
      *
-     * @param activityType The type of the activity.
+     * @param type The type of the activity.
      * @throws PlanPalExceptions If the activityType is null or empty.
      */
-    public void setActivityType(String activityType) throws PlanPalExceptions {
-        if (activityType == null || activityType.isEmpty()) {
+    public void setActivityType(String type) throws PlanPalExceptions {
+        if (type == null || type.isEmpty()) {
             throw new PlanPalExceptions("Activity type cannot be blank.");
         }
-        this.activityType = activityType;
+        this.type = type;
     }
 
     /**
@@ -176,7 +179,7 @@ public class Activity implements Editable, Storeable {
      * @return activityType The type of the activity
      */
     public String getActivityType() {
-        return activityType;
+        return type;
     }
 }
 
