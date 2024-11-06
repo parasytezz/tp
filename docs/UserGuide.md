@@ -432,7 +432,8 @@ The `budget` command allows users to add a budget.
 By default, without the month being specified, it will assume that the month is the current month.  
 
 **<ins>IMPORTANT NOTE</ins>**
-- You CANNOT use `/recurring` tag for this function.  
+- You CANNOT use `/recurring` tag for this function.
+- You CANNOT use multiple `/month:` tags!
 
 ### Usage:
 ```
@@ -470,6 +471,9 @@ Currently, the fields that can be used are as follows:
 
 **<ins>IMPORTANT NOTE</ins>**  
 - If budget has not been set, you will not be able to add anything!
+- You should not use both `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised
+- if `/month:` tag is used together, the first month is prioritised
 
 ### Usage 1 (default addition without tags):
 ```
@@ -533,6 +537,7 @@ By default, without any tags the following is assumed:
 **<ins>IMPORTANT NOTE</ins>**
 - You should not use both `/recurring` and `/month:` tags together.
 - if used together, `/recurring` tag is prioritised  
+- if `/month:` tag is used together, the first month is prioritised  
 
 ### Usage 1 (default addition without tags):
 ```
@@ -614,8 +619,66 @@ By default, without any tags the following is assumed:
 - It should NOT look for the recurring expense list.
 
 **<ins>IMPORTANT NOTE</ins>**
-- You should not use both `/recurring` and `/month:` tags together.
-- if used together, `/recurring` tag is prioritised
+- You should not use multiple `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised  
+- if `/month:` tag is used together, the first month is prioritised
+
+### Usage 1 (default addition without tags):
+```
+edit <index> </field:> <value> ...
+```
+### Example:
+```
+edit 1 /name: Dinner /cost: 20
+```
+### Expected Output:
+```
+_________________________________________________________
+Edited successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Dinner, Cost = $20, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 2 (with recurring tag):
+```
+edit <index> </recurring> </field:> <value> ...
+```
+### Example:
+```
+edit 1 /recurring /name: Netflix /cost: 18.70
+```
+### Expected Output:
+```
+_________________________________________________________
+Edited successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Netflix, Cost = $18.70, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 3 (with month tag):
+```
+edit <index> </month:> <monthValue> </field:> <value> ...
+```
+### Example:
+```
+edit 1 /month: 2024-11 /name: Breakfast /cost: 5.40
+```
+### Expected Output:
+```
+_________________________________________________________
+Edited successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Breakfast, Cost = $5.40, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+
+
+
 
 
 ## Activity Manager
