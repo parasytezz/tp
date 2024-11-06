@@ -110,16 +110,23 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
 
         ArrayList<String> typeProportions = getExpenseTypeProportions(expenseList);
         System.out.println("Expense Type Proportions:");
-        for (String proportion : typeProportions) {
-            System.out.println("    " + proportion);
+        if (typeProportions.isEmpty()) {
+            System.out.println("No Expenses");
+        } else {
+            for (String proportion : typeProportions) {
+                System.out.println("    " + proportion);
+            }
         }
-
         Ui.printLine();
 
         ArrayList<String> costBreakdown = getExpenseTypeCostBreakdown(expenseList);
         System.out.println("Expense Type Cost Breakdown:");
-        for (String breakdown : costBreakdown) {
-            System.out.println("    " + breakdown);
+        if (costBreakdown.isEmpty()) {
+            System.out.println("No Expenses");
+        } else {
+            for (String breakdown : costBreakdown) {
+                System.out.println("    " + breakdown);
+            }
         }
 
         Ui.printLine();
