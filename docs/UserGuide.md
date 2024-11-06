@@ -680,22 +680,48 @@ Currently in list:
 2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
 _________________________________________________________
 ```
+
 ---
-
-
-
-
-
 ## Activity Manager
-PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of the activity manager commands.
+PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of 
+the activity manager commands.
 
 ---
 ## Adding an activity
 The `add` command allows users to add an activity to the `activities` list.
+If only the name of the activity is specified, the type of the activity will be set to `others` by default.
 
 ### Usage:
 ```
-add /name: <name> /activityType: <activityType> 
+add /name: <name> /type: <type> 
+```
+### Example 1:
+```
+add /name: running /type: exercise
+```
+
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [activity = running, type = exercise]
+_________________________________________________________
+```
+### Example 2:
+```
+add /name: sleep
+```
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [activity = running, type = exercise]
+2. [activity = sleep, type = others]
+_________________________________________________________
 ```
 
 ---
@@ -710,9 +736,9 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [activity: running, activityType: exercise]
-2. [activity: swimming, activityType: exercise]
-3. [activity: groceries, activityType: necessities]
+1. [activity: running, type: exercise]
+2. [activity: swimming, type: exercise]
+3. [activity: groceries, type: necessities]
 _________________________________________________________
 ```
 ---
@@ -731,8 +757,8 @@ find exercise
 ```
 _________________________________________________________
 Here is what I found:
-1. [activity = running, activityType = exercise]
-2. [activity = swimming, activityType = exercise]
+1. [activity = running, type = exercise]
+2. [activity = swimming, type = exercise]
 _________________________________________________________
 ```
 ---
@@ -751,13 +777,34 @@ edit 1 /name: diving
 ```
 _________________________________________________________
 Currently in list:
-1. [activity = diving, activityType = exercise]
-2. [activity = swimming, activityType = exercise]
-3. [activity = groceries, activityType = necessities]
+1. [activity = diving, type = exercise]
+2. [activity = swimming, type = exercise]
+3. [activity = groceries, type = necessities]
 _________________________________________________________
 ```
 ---
 ## Deleting an Activity
+The `delete` command allows users to delete an existing `activity` from the list, with
+reference to its index in the list.
+
+### Usage:
+```
+delete <index>
+```
+### Example 1:
+```
+delete 2
+```
+### Expected Output:
+```
+_________________________________________________________
+Deleted successfully!
+_________________________________________________________
+Currently in list:
+1. [activity = running, type = exercise]
+2. [activity = groceries, type = necessities]
+_________________________________________________________
+```
 
 ---
 ## Auxiliary Commands  
@@ -840,6 +887,14 @@ bye
 | Editing an Expense (with `/month:` tag)    | `edit <index> </month:> <monthValue> </field:> <value> ...` | `edit 1 /month: 2024-11 /name: Breakfast /cost: 5.40`            |
 
 ### Activity Manager
+| **Description**                       | **Command**                                                          | **Example**                          |
+|:--------------------------------------|:---------------------------------------------------------------------|:-------------------------------------|
+| Adding an activity                    | `add /name: <name> /type: <type>`                                    | `add /name: running /type: exercise` |
+| Adding an activity with just its name | `add /name: <name>`                                                  | `add /name: sleep`                   |
+| Viewing the activity list             | `list`                                                               | `list`                               | 
+| Finding an activity                   | `find <value>`                                                       | `find exercise`                      |
+| Editing an activity                   | `edit <index> /<category 1>: <value 1> /<category 2>: <value 2> ...` | `edit 1 /name: diving`               |
+| Deleting an activity                  | `delete <index>`                                                     | `delete 4`                           |
 
 
 
