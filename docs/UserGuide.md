@@ -451,11 +451,11 @@ By default, without any tags the following is assumed:
 
 Currently, the fields that can be used are as follows:
 
-| Field | Constraints                                                                                     |
-|-------|-------------------------------------------------------------------------------------------------|
-| name  | -                                                                                               |
-| cost  | Non negative double value                                                                       |
-| type  | Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
+| Field | Constraints                                                                                                                           |
+|-------|---------------------------------------------------------------------------------------------------------------------------------------|
+| name  | Name is set to null by default                                                                                                        |
+| cost  | Cost is set to null by default                                                                                                        |
+| type  | Type is set to OTHER by default <br/> Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
 
 **!!! If budget has not been set, you will not be able to add anything!**
 
@@ -465,7 +465,7 @@ add /<field 1>: <value 1> /<field 2>: <value 2> ...
 ```
 ### Example:
 ```
-add /name: Lunch /cost: 10
+add /name: Lunch /cost: 10 /type: food
 ```
 ### Expected Output:
 ```

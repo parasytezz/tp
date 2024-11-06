@@ -15,7 +15,7 @@ public class Expense implements Editable, Storeable {
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;
-    private String cost;
+    private String cost = "0";
     private String name;
     private String month;
     private ExpenseType type = ExpenseType.OTHER;
