@@ -62,16 +62,24 @@ public class Ui {
         print("Created a new storage at ", pathToStorage);
     }
 
+    public static void printCategoryMenu(){
+        print("Category options :",
+                "1. add Category type [ add {category} || e.g. add close friend ]",
+                "2. remove Category type [ remove {category} || e.g. remove emergency ]",
+                "3. edit Category of Contact [ edit {contact index} {category} || e.g. edit 1 friend ]",
+                "4. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]",
+                "5. view Category lists (e.g. view)",
+                "6. view Contact list (e.g. list)",
+                "7. print category functions (e.g. help)",
+                "8. quit"
+        );
+    }
+
     /**
      * Displays functions of category
      */
     public static String getSetCategory() {
-        System.out.println("Category options :");
-        System.out.println("1. add Category type (e.g. add close friend)");
-        System.out.println("2. remove Category type (e.g. remove emergency)");
-        System.out.println("3. edit Category of Contact (e.g. edit 1 friend/family, to delete all category: edit 1 /)");
-        System.out.println("4. view Category lists (e.g. view)");
-        System.out.println("5. quit");
+        System.out.print("Enter Command: ");
         Scanner in = new Scanner(System.in);
         return in.nextLine();
     }

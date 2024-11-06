@@ -5,6 +5,7 @@ import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.filemanager.BackUpManager;
 import seedu.planpal.utility.parser.Parser;
 
 public class ActivityParser extends Parser {
@@ -24,24 +25,24 @@ public class ActivityParser extends Parser {
             String description;
 
             switch (command) {
-            case Parser.ADD_COMMAND:
+            case ADD_COMMAND:
                 description = inputParts[1].trim();
                 activityManager.addActivity(description);
                 return true;
                 // fall through
 
-            case Parser.DELETE_COMMAND:
+            case DELETE_COMMAND:
                 description = inputParts[1].trim();
                 activityManager.deleteActivity(description);
                 return true;
                 // fall through
 
-            case Parser.LIST_COMMAND:
+            case LIST_COMMAND:
                 activityManager.viewActivityList();
                 return true;
                 // fall through
 
-            case Parser.EDIT_COMMAND:
+            case EDIT_COMMAND:
                 try {
                     String query = inputParts[1].trim();
                     activityManager.editActivity(query);
@@ -51,19 +52,29 @@ public class ActivityParser extends Parser {
                 return true;
                 // fall through
 
-            case Parser.FIND_COMMAND:
+            case FIND_COMMAND:
                 String query = inputParts[1].trim();
                 activityManager.findActivity(query);
                 return true;
                 // fall through
 
-            case Parser.EXIT_MODE_COMMAND:
+            case EXIT_MODE_COMMAND:
                 break;
 
-            case Parser.BYE_COMMAND:
+            case BYE_COMMAND:
                 Ui.printByeMessage();
                 System.exit(0);
                 break;
+
+            case BACK_UP_COMMAND:
+                BackUpManager.backupData();
+                Ui.print("Backup Complete!");
+                return true;
+
+            case RESTORE_COMMAND:
+                BackUpManager.restoreData();
+                Ui.print("Restore Complete! Now re-enter into your mode!");
+                return false;
 
             default:
                 throw new IllegalCommandException();

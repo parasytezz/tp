@@ -2,6 +2,7 @@ package seedu.planpal.modes.contacts;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
+import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
 
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-public class SetContactCategory {
+public class SetContactCategory implements ListFunctions {
     private ArrayList<Contact> contactList;
     private ArrayList<ArrayList<Contact>> contactListByCategory;
     private ArrayList<String> categoryList;
@@ -39,20 +40,29 @@ public class SetContactCategory {
             this.contactListByCategory = contactListByCategory;
             this.categoryList = categoryList;
             this.contactLogger = contactLogger;
-            if (description.startsWith("add")) {
+            if (description.startsWith("add") &&
+                    ( description.length() == 3 || description.charAt(3) == ' ')) {
                 addCategory(description);
                 savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
-            } else if (description.startsWith("remove")) {
+            } else if (description.startsWith("remove") &&
+                    ( description.length() == 6 || description.charAt(6) == ' ')) {
                 removeCategory(description);
                 savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
-            } else if (description.startsWith("edit")) {
+            } else if (description.startsWith("edit") &&
+                    ( description.length() == 4 || description.charAt(4) == ' ')) {
                 editCategory(description);
                 savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
             } else if (description.equals("view")) {
-                Ui.printCategoryList(categoryList);
+                viewList(categoryList);
+                return true;
+            } else if (description.equals("list")) {
+                viewList(contactList);
+                return true;
+            } else if (description.equals("help")) {
+                Ui.printCategoryMenu();
                 return true;
             } else if (description.equals("quit")) {
                 return false;

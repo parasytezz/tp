@@ -4,8 +4,9 @@ import seedu.planpal.exceptions.InvalidModeException;
 import seedu.planpal.modes.activities.ActivityManager;
 import seedu.planpal.modes.contacts.ContactManager;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.modes.expenses.ExpenseManager;
+import seedu.planpal.modes.expenses.managers.ExpenseManager;
 import seedu.planpal.utility.Ui;
+import seedu.planpal.utility.filemanager.BackUpManager;
 import seedu.planpal.utility.filemanager.FileManager;
 import seedu.planpal.utility.parser.modeparsers.ActivityParser;
 import seedu.planpal.utility.parser.modeparsers.ContactParser;
@@ -13,6 +14,8 @@ import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 import java.util.Scanner;
 
 public class Parser {
+    protected static final String BACK_UP_COMMAND = "/b/";
+    protected static final String RESTORE_COMMAND = "/r/";
     protected static final String BYE_COMMAND = "bye";
     protected static final String ADD_COMMAND = "add";
     protected static final String DELETE_COMMAND = "delete";
@@ -37,7 +40,7 @@ public class Parser {
         this.activityManager = new ActivityManager();
     }
 
-    private void loadFiles() throws PlanPalExceptions {
+    protected void loadFiles() throws PlanPalExceptions {
         expenseManager.getBudgetManager().setAllBudget(fileManager.loadAllValues("budgets"));
         fileManager.loadAllLists(expenseManager, "expenses");
         fileManager.loadAllLists(contactManager, "contacts");
@@ -89,6 +92,18 @@ public class Parser {
             case BYE_COMMAND:
                 Ui.printByeMessage();
                 System.exit(0);
+                break;
+
+            case BACK_UP_COMMAND:
+                BackUpManager.backupData();
+                Ui.print("Backup Complete!");
+                isProcessing = false;
+                break;
+
+            case RESTORE_COMMAND:
+                BackUpManager.restoreData();
+                Ui.print("Restore Complete!");
+                isProcessing = false;
                 break;
 
             default:

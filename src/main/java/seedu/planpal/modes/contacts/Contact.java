@@ -33,7 +33,7 @@ public class Contact implements Editable, Storeable {
     public Contact(String description) throws PlanPalExceptions {
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
-        if (categories.length == 1) {
+        if (categories.length <= 1) {
             throw new IllegalCommandException();
         }
         assert categories.length >= 2: "Illegal command executed in contact";
@@ -103,8 +103,9 @@ public class Contact implements Editable, Storeable {
      */
     @Override
     public void processEditFunction(String input) throws PlanPalExceptions {
-        assert input != null : "Input cannot be null";
-        assert !input.trim().isEmpty() : "Input cannot be empty";
+        if (input.isEmpty()) {
+            throw new IllegalCommandException();
+        }
 
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {

@@ -18,7 +18,7 @@ public class Expense implements Editable, Storeable {
     private String cost;
     private String name;
     private String month;
-    private ExpenseType type;
+    private ExpenseType type = ExpenseType.OTHER;
 
     /**
      * Constructs an Expense object from a command description.
@@ -29,7 +29,7 @@ public class Expense implements Editable, Storeable {
     public Expense(String description) throws PlanPalExceptions {
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
-        if (categories.length == 1) {
+        if (categories.length <= 1) {
             throw new IllegalCommandException();
         }
         assert categories.length >= 2 : "Illegal command executed in expenses";
@@ -66,6 +66,9 @@ public class Expense implements Editable, Storeable {
      */
     @Override
     public void processEditFunction(String input) throws PlanPalExceptions {
+        if (input.isEmpty()) {
+            throw new IllegalCommandException();
+        }
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
@@ -73,15 +76,20 @@ public class Expense implements Editable, Storeable {
 
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
-        if (category.equals("cost")) {
+        switch (category) {
+        case "cost":
             setCost(valueToEdit);
-        } else if (category.equals("name")) {
+            break;
+        case "name":
             setName(valueToEdit);
-        } else if (category.equals("type")) {
+            break;
+        case "type":
             setType(valueToEdit);
-        } else if (category.equals("month")) {
+            break;
+        case "month":
             setMonth(valueToEdit);
-        } else {
+            break;
+        default:
             System.out.println(category + " is not a valid category");
             throw new IllegalCommandException();
         }
