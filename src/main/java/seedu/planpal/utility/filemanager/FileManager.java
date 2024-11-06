@@ -121,9 +121,15 @@ public class FileManager {
             Ui.print(
                     "ERROR DETECTED: FILE IS CORRUPTED!!!",
                     "ERROR OCCURRED IN LINE " + lineNumber + " of " + file.getName() + " file",
-                    "Type of error: " + e.getMessage(),
                     "Restart the application and check the data file to prevent errors!"
             );
+
+            if (file.getName().startsWith("expenses")){
+                System.out.println("    This is an Expense File!");
+                System.out.println("    If you deleted your budget " +
+                        "or set it to 0 in the files, the error could be there!");
+                Ui.printLine();
+            }
 
             try {
                 Files.copy(backupFile.toPath(), file.toPath(), StandardCopyOption.REPLACE_EXISTING);

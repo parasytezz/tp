@@ -1,4 +1,4 @@
-package seedu.planpal.expenses;
+package seedu.planpal.expenses.budget;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
