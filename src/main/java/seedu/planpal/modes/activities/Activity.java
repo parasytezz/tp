@@ -21,7 +21,7 @@ public class Activity implements Editable, Storeable {
     /**
      * Constructs an Activity object from a command description.
      *
-     * @param description The command description containing name and activityType separated by categories.
+     * @param description The command description containing name and type separated by categories.
      * @throws PlanPalExceptions If the description is invalid or incomplete.
      */
     public Activity(String description) throws PlanPalExceptions {
@@ -156,7 +156,7 @@ public class Activity implements Editable, Storeable {
      * Sets the type of the activity.
      *
      * @param type The type of the activity.
-     * @throws PlanPalExceptions If the activityType is null or empty.
+     * @throws PlanPalExceptions If the type is null or empty.
      */
     public void setActivityType(String type) throws PlanPalExceptions {
         if (type == null || type.isEmpty()) {
@@ -177,7 +177,7 @@ public class Activity implements Editable, Storeable {
     /**
      * Gets the type of the activity
      *
-     * @return activityType The type of the activity
+     * @return type The type of the activity
      */
     public String getActivityType() {
         return type;
