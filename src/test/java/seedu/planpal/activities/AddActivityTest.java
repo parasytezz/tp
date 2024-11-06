@@ -54,7 +54,7 @@ public class AddActivityTest {
     }
 
     @Test
-    public void addActivity_emptyInput_exeptionThrown() {
+    public void addActivity_emptyInput_exceptionThrown() {
         try {
             activityManager.addActivity("");
             fail();
