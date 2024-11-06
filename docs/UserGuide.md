@@ -415,18 +415,24 @@ As a start, ALWAYS follow this sequence to prevent errors:
 3. View the list when needed using the `list` command.
 4. Exit the mode using the `exit` command.
 
-<ins>Note !!!</ins>  
+**<ins>IMPORTANT NOTE</ins>**  
 There are 2 additional tags you need to take note of.  
 By default, the program assumes that you are working the current month and also NOT on the recurring list
 Adding these tags to any of your commands in this mode does the following:
-- `/recurring`: Tells the program to work on the recurring list of expenses. Does not support for budget.
-- `/month:`: Tells the program to work on that month's properties (budgets and expenses). The format should be `/month: <value>`
+- `/recurring`: 
+  - Tells the program to work on the recurring list of expenses. Does not support for budget.
+  - It will only add items in the recurring expense list to **NEW** lists.
+- `/month:`: 
+  - Tells the program to work on that month's properties (budgets and expenses). 
+  - The format should be `/month: <monthValue>`
 
 ---
 ## Setting a Budget
 The `budget` command allows users to add a budget.  
 By default, without the month being specified, it will assume that the month is the current month.  
-You CANNOT use `/recurring` tag for this function.
+
+**<ins>IMPORTANT NOTE</ins>**
+- You CANNOT use `/recurring` tag for this function.  
 
 ### Usage:
 ```
@@ -462,7 +468,8 @@ Currently, the fields that can be used are as follows:
 | cost  | Cost is set to **$0** by default                                                                                                          |
 | type  | Type is set to **OTHER** by default <br/> Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
 
-**!!! If budget has not been set, you will not be able to add anything!**
+**<ins>IMPORTANT NOTE</ins>**  
+- If budget has not been set, you will not be able to add anything!
 
 ### Usage 1 (default addition without tags):
 ```
@@ -517,9 +524,98 @@ Currently in list:
 _________________________________________________________
 ```
 ---
+## Viewing an expense list
+The `list` command allows users to view their expense list.  
+By default, without any tags the following is assumed:
+- Month is the current month
+- It should NOT look for the recurring expense list.
 
+**<ins>IMPORTANT NOTE</ins>**
+- You should not use both `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised  
 
+### Usage 1 (default addition without tags):
+```
+list
+```
+### Example:
+```
+list
+```
+### Expected Output:
+```
+_________________________________________________________
+Below is the list:
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+For the month of 2024-11
+    Total budget: $1000
+    Total cost: $20.9
+    Remaining budget: $979.1
+_________________________________________________________
+Expense Type Proportions:
+    FOOD: 50.00%
+    ENTERTAINMENT: 50.00%
+_________________________________________________________
+Expense Type Cost Breakdown:
+    FOOD: $10.00
+    ENTERTAINMENT: $10.90
+```
+### Usage 2 (with recurring tag):
+```
+list /recurring
+```
+### Example:
+```
+list /recurring
+```
+### Expected Output:
+```
+_________________________________________________________
+Below is the list:
+1. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 3 (with month tag):
+```
+list /month: <monthValue>
+```
+### Example:
+```
+list /month: 2024-11
+```
+### Expected Output:
+```
+_________________________________________________________
+Below is the list:
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+For the month of 2024-11
+    Total budget: $1000
+    Total cost: $20.9
+    Remaining budget: $979.1
+_________________________________________________________
+Expense Type Proportions:
+    FOOD: 50.00%
+    ENTERTAINMENT: 50.00%
+_________________________________________________________
+Expense Type Cost Breakdown:
+    FOOD: $10.00
+    ENTERTAINMENT: $10.90
+_________________________________________________________
+```
+---
+## Editing an Expense list
+The `edit` command allows users to edit their expense list.  
+By default, without any tags the following is assumed:
+- Month is the current month
+- It should NOT look for the recurring expense list.
 
+**<ins>IMPORTANT NOTE</ins>**
+- You should not use both `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised
 
 
 ## Activity Manager
