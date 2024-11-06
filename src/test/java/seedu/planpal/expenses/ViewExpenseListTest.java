@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.modes.expenses.managers.ExpenseManager;
+import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -17,10 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 public class ViewExpenseListTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
     private ExpenseManager expenseManager;
+    private ExpenseParser expenseParser;
 
     @BeforeEach
     public void setUp() {
         expenseManager = new ExpenseManager();
+        expenseParser = new ExpenseParser(expenseManager);
         System.setOut(new PrintStream(OUTPUT_STREAM));
         OUTPUT_STREAM.reset();
     }
@@ -31,7 +34,7 @@ public class ViewExpenseListTest {
             expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:trial1 /cost:200");
             expenseManager.addExpense("/name:trial2 /cost:300");
-            expenseManager.viewExpenseList();
+            expenseParser.processCommand("list");
             double totalCost = expenseManager.getTotalCost(expenseManager.getMonthlyExpenses());
             assertEquals(500.0, totalCost);
             assertTrue(OUTPUT_STREAM.toString().contains("Remaining budget: $500.0"));
