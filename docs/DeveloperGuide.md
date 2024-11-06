@@ -254,25 +254,29 @@ The class diagram below represents the Activity Manager system.
 
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.
+![AddActivities.drawio.png](Images%28DG%29%2FAddActivities.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
-- `ExpenseParser` class is the `Parser` component
-- `ExpenseManager` class is the `Mode` component
+- `ActivityParser` class is the `Parser` component
+- `ActivityManager` class is the `Mode` component
 
 <u>Explanation:</u>  
-The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+The way the add command works for activity manager is similar to how it works for contact manager, with the only difference 
+being the names used, as well as an additional type to dictate activity type.
 
 ### Delete Command
 The sequence diagram below illustrates the process for resolving the "add" command.
+![DeleteActivties.drawio.png](Images%28DG%29%2FDeleteActivties.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
-- `ExpenseParser` class is the `Parser` component
-- `ExpenseManager` class is the `Mode` component
+- `ActivityParser` class is the `Parser` component
+- `ActivityManager` class is the `Mode` component
 
 <u>Explanation:</u>  
-The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+The way the delete command works for activity manager is similar to how it works for contact manager, with the only difference
+being the names used.
 
 ### Edit Command
 The sequence diagram below illustrates the process for resolving the "add" command.
