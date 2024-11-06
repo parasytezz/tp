@@ -3,6 +3,7 @@ package seedu.planpal.modes.expenses;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Map;
 
 public interface ExpenseModeFunctions {
@@ -14,7 +15,7 @@ public interface ExpenseModeFunctions {
      *
      * @return The current month as a string in "yyyy-MM" format.
      */
-    default String getCurrentMonth(){
+    default String getCurrentMonth() {
         return LocalDate.now().format(DateTimeFormatter.ofPattern("yyyy-MM"));
     }
 
@@ -24,12 +25,12 @@ public interface ExpenseModeFunctions {
      * @param input The input string potentially containing the month specification.
      * @return The extracted month in "yyyy-MM" format or null if not found.
      */
-    default String getMonth(String input){
+    default String getMonth(String input) {
         int startIndex = input.indexOf(MONTH_SEPARATOR);
-        if (startIndex != -1){
+        if (startIndex != -1) {
             startIndex += MONTH_SEPARATOR.length();
             int endIndex = input.indexOf("/", startIndex);
-            if (endIndex == -1){
+            if (endIndex == -1) {
                 endIndex = input.length();
             }
             return input.substring(startIndex, endIndex).trim();
@@ -43,12 +44,12 @@ public interface ExpenseModeFunctions {
      * @param month The month for which the total cost is calculated.
      * @return The total cost of expenses for the specified month.
      */
-    default double getTotalCost(String month, Map<String, ArrayList<Expense>> monthlyExpenses){
+    default double getTotalCost(String month, Map<String, ArrayList<Expense>> monthlyExpenses) {
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         double totalCost = 0.0;
-        for (Expense expense : expenseList){
+        for (Expense expense : expenseList) {
             String costInString = expense.getCost();
-            if (costInString == null){
+            if (costInString == null) {
                 costInString = "0";
             }
             totalCost += Double.parseDouble(costInString);
@@ -61,7 +62,7 @@ public interface ExpenseModeFunctions {
      *
      * @return The total cost of expenses for the current month.
      */
-    default double getTotalCost(Map<String, ArrayList<Expense>> monthlyExpenses){
+    default double getTotalCost(Map<String, ArrayList<Expense>> monthlyExpenses) {
         return getTotalCost(getCurrentMonth(), monthlyExpenses);
     }
 
@@ -69,9 +70,7 @@ public interface ExpenseModeFunctions {
      * Calculates the proportions of different expense types within a list of expenses.
      *
      * @param expenses The list of expenses for which the type proportions are calculated.
-     *
      * @return An ArrayList of strings, where each string represents an expense type and its proportion.
-     *
      */
     default ArrayList<String> getExpenseTypeProportions(ArrayList<Expense> expenses) {
         ArrayList<ExpenseType> uniqueTypes = new ArrayList<>();
@@ -103,5 +102,18 @@ public interface ExpenseModeFunctions {
         }
 
         return result;
+    }
+
+    default Map<ExpenseType, Double> getTotalCostByType(ArrayList<Expense> expenses) {
+        Map<ExpenseType, Double> totalCostByType = new HashMap<>();
+
+        for (Expense expense : expenses) {
+            ExpenseType type = expense.getType();
+            double cost = Double.parseDouble(expense.getCost());
+
+            totalCostByType.put(type, totalCostByType.getOrDefault(type, 0.0) + cost);
+        }
+
+        return totalCostByType;
     }
 }

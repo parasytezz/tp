@@ -73,15 +73,20 @@ public class Expense implements Editable, Storeable {
 
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
-        if (category.equals("cost")) {
+        switch (category) {
+        case "cost":
             setCost(valueToEdit);
-        } else if (category.equals("name")) {
+            break;
+        case "name":
             setName(valueToEdit);
-        } else if (category.equals("type")) {
+            break;
+        case "type":
             setType(valueToEdit);
-        } else if (category.equals("month")) {
+            break;
+        case "month":
             setMonth(valueToEdit);
-        } else {
+            break;
+        default:
             System.out.println(category + " is not a valid category");
             throw new IllegalCommandException();
         }

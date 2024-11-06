@@ -102,6 +102,14 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         }
 
         Ui.printLine();
+
+        Map<ExpenseType, Double> totalCostByType = getTotalCostByType(expenseList);
+        System.out.println("Total Cost by Expense Type:");
+        for (Map.Entry<ExpenseType, Double> entry : totalCostByType.entrySet()) {
+            System.out.printf("    %s: $%.2f%n", entry.getKey(), entry.getValue());
+        }
+
+        Ui.printLine();
     }
 
     /**
