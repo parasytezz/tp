@@ -31,7 +31,6 @@ public class Activity implements Editable, Storeable {
         if (!description.contains("/type:")) {
             type = "others";
         }
-
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
         if (categories.length <= 1) {
@@ -50,7 +49,7 @@ public class Activity implements Editable, Storeable {
      */
     @Override
     public String toString() {
-        return "[activity = " + name + ", activityType = " + type + "]";
+        return "[activity = " + name + ", type = " + type + "]";
     }
 
     /**
@@ -121,7 +120,7 @@ public class Activity implements Editable, Storeable {
             commandDescription += CATEGORY_SEPARATOR + "name" + CATEGORY_VALUE_SEPARATOR + name + " ";
         }
         if (type != null) {
-            commandDescription += CATEGORY_SEPARATOR + "activityType" + CATEGORY_VALUE_SEPARATOR + type + " ";
+            commandDescription += CATEGORY_SEPARATOR + "type" + CATEGORY_VALUE_SEPARATOR + type + " ";
         }
     }
 
