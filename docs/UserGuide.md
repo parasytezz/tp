@@ -1013,6 +1013,24 @@ bye
 
 
 ### Contact Manager
+| **Description**               | **Command**                                                    | **Example**                                                     |
+|:------------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------|
+| Adding a contact              | `add /name: <name> /type: <type>`                              | `add /name: PlanPal /phone: 12345678 /email: PlanPal@gmail.com` |
+| Deleting a contact            | `delete <index>`                                               | `delete 1`                                                      |
+| Viewing the contact list      | `list`                                                         | `list`                                                          | 
+| Finding an activity           | `find <value>`                                                 | `find Plan`                                                     |
+| Editing a contact             | `edit <index> /<field 1>: <value 1> /<field 2>: <value 2> ...` | `edit 1 /name: PlanPal_v1.0 /email: PlanPal_v1@gmail.com`       |
+| Search contacts by category   | `search <category>`                                            | `search friend`                                                 |
+| Setting contact category      | `category`                                                     | `category`                                                      |
+| #inside setting category mode |                                                                |
+| Adding category               | `add <category>`                                               | `add friend`                                                    |
+| Removing category             | `remove <category>`                                            | `remove friend`                                                 | 
+| Edit contact category         | `edit <contact index> <category 1>/<category 2>/...`           | `edit 1 friend/family`                                          |
+| Deleting contact category     | `edit <contact index>`                                         | `edit 1`                                                        |
+| Viewing category list         | `view`                                                         | `view`                                                          |
+| Viewing the contact list      | `list`                                                         | `list`                                                          |
+| Printing category functions   | `help`                                                         | `help`                                                          |
+| Quiting setting category mode | `quit`                                                         | `quit`                                                          |
 
 ### Expense Manager
 | **Description**                            | **Command**                                                 | **Example**                                                      |
