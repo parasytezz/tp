@@ -40,15 +40,15 @@ public class SetContactCategory implements ListFunctions {
             this.contactListByCategory = contactListByCategory;
             this.categoryList = categoryList;
             this.contactLogger = contactLogger;
-            if (description.startsWith("add")) {
+            if (description.startsWith("add") && ( description.length() == 3 || description.charAt(3) == ' ')) {
                 addCategory(description);
                 savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
-            } else if (description.startsWith("remove")) {
+            } else if (description.startsWith("remove") && ( description.length() == 6 || description.charAt(6) == ' ')) {
                 removeCategory(description);
                 savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
-            } else if (description.startsWith("edit")) {
+            } else if (description.startsWith("edit")&& ( description.length() == 4 || description.charAt(4) == ' ')) {
                 editCategory(description);
                 savedContacts.saveCategories(contactList, contactListByCategory, categoryList);
                 return true;
