@@ -16,6 +16,7 @@ import java.util.Scanner;
 public class Parser {
     protected static final String BACK_UP_COMMAND = "/b/";
     protected static final String RESTORE_COMMAND = "/r/";
+    protected static final String CLEAR_COMMAND = "clear";
     protected static final String BYE_COMMAND = "bye";
     protected static final String ADD_COMMAND = "add";
     protected static final String DELETE_COMMAND = "delete";
@@ -87,6 +88,11 @@ public class Parser {
                 } catch (PlanPalExceptions e) {
                     Ui.print(e.getMessage());
                 }
+                break;
+
+            case CLEAR_COMMAND:
+                Ui.clearScreen();
+                isProcessing = false;
                 break;
 
             case BYE_COMMAND:

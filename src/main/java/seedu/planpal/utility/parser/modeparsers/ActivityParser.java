@@ -29,18 +29,15 @@ public class ActivityParser extends Parser {
                 description = inputParts[1].trim();
                 activityManager.addActivity(description);
                 return true;
-                // fall through
 
             case DELETE_COMMAND:
                 description = inputParts[1].trim();
                 activityManager.deleteActivity(description);
                 return true;
-                // fall through
 
             case LIST_COMMAND:
                 activityManager.viewActivityList();
                 return true;
-                // fall through
 
             case EDIT_COMMAND:
                 try {
@@ -50,16 +47,19 @@ public class ActivityParser extends Parser {
                     throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
                 }
                 return true;
-                // fall through
 
             case FIND_COMMAND:
                 String query = inputParts[1].trim();
                 activityManager.findActivity(query);
                 return true;
-                // fall through
 
             case EXIT_MODE_COMMAND:
                 break;
+
+            case CLEAR_COMMAND:
+                Ui.printLine();
+                Ui.clearScreen();
+                return true;
 
             case BYE_COMMAND:
                 Ui.printByeMessage();

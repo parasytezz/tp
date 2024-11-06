@@ -414,32 +414,67 @@ As a start, ALWAYS follow this sequence to prevent errors:
 There are 2 additional tags you need to take note of.  
 By default, the program assumes that you are working the current month and also NOT on the recurring list
 Adding these tags to any of your commands in this mode does the following:
-- `/recurring`: Tells the program to work on the recurring list of expenses.
+- `/recurring`: Tells the program to work on the recurring list of expenses. Does not support for budget.
 - `/month:`: Tells the program to work on that month's properties (budgets and expenses). The format should be `/month: <value>`
 
 ---
 ## Setting a Budget
-The `budget` command allows users to add a budget.
+The `budget` command allows users to add a budget.  
+By default, without the month being specified, it will assume that the month is the current month.  
+You CANNOT use `/recurring` tag for this function.
 
 ### Usage:
 ```
-add /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
+budget <value>
+budget <value> <month>
+budget <month> </> <value>
 ```
 ### Example:
 ```
-add /name: transport /cost: 10
+budget 1000
+budget 1000 /month: 2024-11
+budget /month:2024-11 /1000
 ```
 ### Expected Output:
 ```
 _________________________________________________________
-Added successfully!
-_________________________________________________________
-Currently in list:
-1. [transport, cost = $10]
+For the month of 2024-11
+Budget has been set to: $1000
 _________________________________________________________
 ```
 ---
+## Adding an expense
+The `add` command allows users to add an expense to the expense list.  
+By default, without any tags the following is assumed:
+- Month is the current month
+- It is NOT a recurring expense.
 
+Currently, the fields that can be used are as follows:
+
+| Field | Constraints                                                                                     |
+|-------|-------------------------------------------------------------------------------------------------|
+| name  | -                                                                                               |
+| cost  | Non negative double value                                                                       |
+| type  | Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
+
+**!!! If budget has not been set, you will not be able to add anything!**
+
+### Usage 1 (default addition without tags):
+```
+add /<field 1>: <value 1> /<field 2>: <value 2> ... 
+```
+### Example:
+```
+add /name: Lunch /cost: 10
+```
+### Expected Output:
+```
+_________________________________________________________
+For the month of 2024-11
+Budget has been set to: $1000
+_________________________________________________________
+```
+---
 
 ## Activity Manager
 PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of the activity manager commands.
