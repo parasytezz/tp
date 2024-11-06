@@ -18,7 +18,7 @@ public class Expense implements Editable, Storeable {
     private String cost;
     private String name;
     private String month;
-    private ExpenseType type;
+    private ExpenseType type = ExpenseType.OTHER;
 
     /**
      * Constructs an Expense object from a command description.

@@ -3,7 +3,6 @@ package seedu.planpal.modes.expenses;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Map;
 
 public interface ExpenseModeFunctions {
@@ -117,16 +116,36 @@ public interface ExpenseModeFunctions {
         return result;
     }
 
-    default Map<ExpenseType, Double> getTotalCostByType(ArrayList<Expense> expenses) {
-        Map<ExpenseType, Double> totalCostByType = new HashMap<>();
+    /**
+     * Calculates the total cost of different expense types within a list of expenses.
+     *
+     * @param expenses The list of expenses for which the total for each type are calculated.
+     * @return An ArrayList of strings, where each string represents an expense type and its total cost.
+     */
+    default ArrayList<String> getExpenseTypeCostBreakdown(ArrayList<Expense> expenses) {
+        ArrayList<ExpenseType> uniqueTypes = new ArrayList<>();
+        ArrayList<Double> typeCosts = new ArrayList<>();
+
+        for (Expense expense : expenses) {
+            ExpenseType type = expense.getType();
+            if (!uniqueTypes.contains(type)) {
+                uniqueTypes.add(type);
+                typeCosts.add(0.0);
+            }
+        }
 
         for (Expense expense : expenses) {
             ExpenseType type = expense.getType();
             double cost = Double.parseDouble(expense.getCost());
-
-            totalCostByType.put(type, totalCostByType.getOrDefault(type, 0.0) + cost);
+            int index = uniqueTypes.indexOf(type);
+            typeCosts.set(index, typeCosts.get(index) + cost);
         }
 
-        return totalCostByType;
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < uniqueTypes.size(); i++) {
+            result.add(uniqueTypes.get(i) + ": $" + String.format("%.2f", typeCosts.get(i)));
+        }
+
+        return result;
     }
 }
