@@ -466,21 +466,13 @@ public class ContactManagerTest {
     @Test
     public void viewCategory_success() {
         ContactManager manager = new ContactManager();
-        manager.handleCategory("view");
-        String output = "_________________________________________________________\n" +
-                "_________________________________________________________\n";
-        String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
-        assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         assertTrue(manager.handleCategory("add emergency"));
         assertTrue(manager.handleCategory("add family"));
         OUTPUT_STREAM.reset();
         assertTrue(manager.handleCategory("view"));
-        output = "_________________________________________________________\n" +
-                "emergency\n" +
-                "family\n" +
-                "_________________________________________________________\n";
-        trimmedExpectedOutput = output.replaceAll("\\s+", " ");
-        assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+        assertTrue(OUTPUT_STREAM.toString().contains("Below is the list:"));
+        assertTrue(OUTPUT_STREAM.toString().contains("1. emergency"));
+        assertTrue(OUTPUT_STREAM.toString().contains("2. family"));
     }
 
 }

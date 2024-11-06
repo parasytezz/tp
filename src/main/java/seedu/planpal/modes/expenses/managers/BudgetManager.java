@@ -1,8 +1,9 @@
-package seedu.planpal.modes.expenses;
+package seedu.planpal.modes.expenses.managers;
 
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.exceptions.expenses.InvalidBudgetException;
 import seedu.planpal.exceptions.expenses.NegativeBudgetException;
+import seedu.planpal.modes.expenses.ExpenseModeFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
 

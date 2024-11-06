@@ -6,7 +6,7 @@ import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.exceptions.expenses.NoBudgetException;
 
-import seedu.planpal.modes.expenses.ExpenseManager;
+import seedu.planpal.modes.expenses.managers.ExpenseManager;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
