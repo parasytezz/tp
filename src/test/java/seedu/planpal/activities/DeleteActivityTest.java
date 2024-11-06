@@ -30,8 +30,8 @@ public class DeleteActivityTest {
             activityManager.addActivity(("/name: sleep /type: rest"));
 
             activityManager.deleteActivity("2");
-            assertEquals("[activity = yoga, type = exercise", activityManager.getActivityList().get(0).toString());
-            assertEquals("[activity = sleep, type = rest", activityManager.getActivityList().get(1).toString());
+            assertEquals("[activity = yoga, type = exercise]", activityManager.getActivityList().get(0).toString());
+            assertEquals("[activity = sleep, type = rest]", activityManager.getActivityList().get(1).toString());
         } catch(PlanPalExceptions e) {
             fail(e.getMessage());
         }
