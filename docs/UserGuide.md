@@ -402,9 +402,24 @@ _________________________________________________________
 ## Expense Manager
 PlanPal will assist you in tracking your `Expenses` in your planner. The guide below will show you how to make use of the expense manager commands.
 
+### Quick Guide
+This section provides a quick tutorial on how to use expense manager.  
+As a start, ALWAYS follow this sequence to prevent errors:
+1. Set the budget using the `budget` command. Without setting budget, you will not be able to add any expense to your list.
+2. Add expenses using the `add` command.
+3. View the list when needed using the `list` command.
+4. Exit the mode using the `exit` command.
+
+<ins>Note !!!</ins>  
+There are 2 additional tags you need to take note of.  
+By default, the program assumes that you are working the current month and also NOT on the recurring list
+Adding these tags to any of your commands in this mode does the following:
+- `/recurring`: Tells the program to work on the recurring list of expenses.
+- `/month:`: Tells the program to work on that month's properties (budgets and expenses). The format should be `/month: <value>`
+
 ---
-## Adding an Expense
-The `add` command allows users to add an `Expense` with various categories.
+## Setting a Budget
+The `budget` command allows users to add a budget.
 
 ### Usage:
 ```
@@ -424,62 +439,7 @@ Currently in list:
 _________________________________________________________
 ```
 ---
-## Viewing the Expense List
-The `list` command allows users to view all their current `expenses`.
 
-### Usage:
-```
-list
-```
-
-### Expected Output:
-```
-_________________________________________________________
-Below is the list:
-1. [transport, cost = $10]
-_________________________________________________________
-Total cost of all expenses is: $10.0
-_________________________________________________________
-```
----
-## Deleting an Expense
-The `delete` command allows users to delete an `expense` from the list.
-
-### Usage:
-```
-delete <index>
-```
-### Example 1:
-```
-delete 1
-```
-### Expected Output:
-```
-_________________________________________________________
-Deleted successfully!
-_________________________________________________________
-```
----
-## Finding an Expense
-The `find` command allows users to find `expenses` from the list.
-
-### Usage:
-```
-find <value>
-```
-### Example 1:
-```
-find lunch
-```
-### Expected Output:
-```
-_________________________________________________________
-Here is what I found:
-1. [utown lunch, cost = $5]
-2. [PGP lunch, cost = $4]
-_________________________________________________________
-```
----
 
 ## Activity Manager
 PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of the activity manager commands.
