@@ -25,8 +25,8 @@ public class EditActivityTest {
     @Test
     public void editActivity_validIndex_success() {
         try {
-            activityManager.addActivity("/name: swimming /activityType: exercise");
-            activityManager.addActivity("/name: running /activityType: exercise");
+            activityManager.addActivity("/name: swimming /type: exercise");
+            activityManager.addActivity("/name: running /type: exercise");
 
             activityManager.editActivity("1 /name: gym");
 
@@ -39,8 +39,8 @@ public class EditActivityTest {
     @Test
     public void editActivity_invalidIndex_exceptionThrown() {
         try {
-            activityManager.addActivity("/name: swimming /activityType: exercise");
-            activityManager.addActivity("/name: running /activityType: exercise");
+            activityManager.addActivity("/name: swimming /type: exercise");
+            activityManager.addActivity("/name: running /type: exercise");
 
             activityManager.editActivity("3 /name: gym");
             fail();
@@ -53,8 +53,8 @@ public class EditActivityTest {
     @Test
     public void editActivity_emptyQuery_exceptionThrown() {
         try {
-            activityManager.addActivity("/name: swimming /activityType: exercise");
-            activityManager.addActivity("/name: running /activityType: exercise");
+            activityManager.addActivity("/name: swimming /type: exercise");
+            activityManager.addActivity("/name: running /type: exercise");
 
             activityManager.editActivity("");
             fail();
