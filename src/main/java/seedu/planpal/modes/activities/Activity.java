@@ -157,7 +157,7 @@ public class Activity implements Editable, Storeable {
      */
     public void setActivityType(String activityType) throws PlanPalExceptions {
         if (activityType == null || activityType.isEmpty()) {
-            activityType = "Activity type cannot be blank.";
+            throw new PlanPalExceptions("Activity type cannot be blank.");
         }
         this.activityType = activityType;
     }
