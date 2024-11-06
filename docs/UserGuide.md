@@ -189,8 +189,7 @@ _________________________________________________________
 ```
 ---
 ## Setting category
-The `category` command allows users to customize `category` in contacts.
-Currently, `category` does not support loading and saving, which means data will be lost once program is exit.
+The `category` command allows users to enter setting category mode to customize `category` in contacts.
 
 ### Usage:
 ```
@@ -217,6 +216,9 @@ _________________________________________________________
 ```
 ---
 ### 1. Add Category
+The `add <category>` command allows users to add category 
+that can be assigned to contact for efficient contacts searching by category
+
 Example 1:
 ```
 add friend
@@ -249,6 +251,9 @@ _________________________________________________________
 ```
 ---
 ### 2. Remove Category
+The `remove <category>` command allows users to remove category. 
+This command will automatically remove the original assignment of this category to all contacts
+
 Example:
 ```
 remove friend
@@ -267,9 +272,12 @@ _________________________________________________________
 ```
 ---
 ### 3. Edit Categories of Contact
+The `edit <contact index> <category1/category2/...>` command allows users to assign
+categories to contact and to delete categories assigned to contact.
+
 Format
 ```
-edit {contact index} {category1/category2/...}
+edit <contact index> <category1/category2/...>
 ```
 Example 1:
 ```
@@ -319,6 +327,9 @@ _________________________________________________________
 ```
 ---
 ### 4. View Categories
+The `view` command allows users to view all categories that are existing 
+and can be assigned to contacts.
+
 Example:
 ```
 view
@@ -348,6 +359,8 @@ _________________________________________________________
 ```
 ---
 ### 6. Print Category Functions
+This command will provide guide to functions in setting category mode.
+
 Usage:
 ```
 help
@@ -369,6 +382,8 @@ _________________________________________________________
 ```
 ---
 ### 7. Quit Category
+This command allows users to quit the setting category mode.
+
 ### Example:
 ```
 quit
