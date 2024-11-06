@@ -399,20 +399,89 @@ Contacts in category: friend
 _________________________________________________________
 ```
 ---
+
+
+
+
+
 ## Expense Manager
 PlanPal will assist you in tracking your `Expenses` in your planner. The guide below will show you how to make use of the expense manager commands.
 
+### Quick Guide
+This section provides a quick tutorial on how to use expense manager.  
+As a start, ALWAYS follow this sequence to prevent errors:
+1. Set the budget using the `budget` command. Without setting budget, you will not be able to add any expense to your list.
+2. Add expenses using the `add` command.
+3. View the list when needed using the `list` command.
+4. Exit the mode using the `exit` command.
+
+**<ins>IMPORTANT NOTE</ins>**  
+There are 2 additional tags you need to take note of.  
+By default, the program assumes that you are working the current month and also NOT on the recurring list
+Adding these tags to any of your commands in this mode does the following:
+- `/recurring`: 
+  - Tells the program to work on the recurring list of expenses. Does not support for budget.
+  - It will only add items in the recurring expense list to **NEW** lists.
+- `/month:`: 
+  - Tells the program to work on that month's properties (budgets and expenses). 
+  - The format should be `/month: <monthValue>`
+
 ---
-## Adding an Expense
-The `add` command allows users to add an `Expense` with various categories.
+## Setting a Budget
+The `budget` command allows users to add a budget.  
+By default, without the month being specified, it will assume that the month is the current month.  
+
+**<ins>IMPORTANT NOTE</ins>**
+- You CANNOT use `/recurring` tag for this function.
+- You CANNOT use multiple `/month:` tags!
 
 ### Usage:
 ```
-add /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
+budget <value>
+budget <value> <month>
+budget <month> </> <value>
 ```
 ### Example:
 ```
-add /name: transport /cost: 10
+budget 1000
+budget 1000 /month: 2024-11
+budget /month:2024-11 /1000
+```
+### Expected Output:
+```
+_________________________________________________________
+For the month of 2024-11
+Budget has been set to: $1000
+_________________________________________________________
+```
+---
+## Adding an expense
+The `add` command allows users to add an expense to the expense list.  
+By default, without any tags the following is assumed:
+- Month is the current month
+- It is NOT a recurring expense.
+
+Currently, the fields that can be used are as follows:
+
+| Field | Constraints                                                                                                                               |
+|-------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| name  | Name is set to **null** by default                                                                                                        |
+| cost  | Cost is set to **$0** by default                                                                                                          |
+| type  | Type is set to **OTHER** by default <br/> Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
+
+**<ins>IMPORTANT NOTE</ins>**  
+- If budget has not been set, you will not be able to add anything!
+- You should not use both `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised
+- if `/month:` tag is used together, the first month is prioritised
+
+### Usage 1 (default addition without tags):
+```
+add /<field 1>: <value 1> /<field 2>: <value 2> /<field 3>: <value 3>... 
+```
+### Example:
+```
+add /name: Lunch /cost: 10 /type: food
 ```
 ### Expected Output:
 ```
@@ -420,66 +489,197 @@ _________________________________________________________
 Added successfully!
 _________________________________________________________
 Currently in list:
-1. [transport, cost = $10]
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+_________________________________________________________
+```
+### Usage 2 (with recurring tag):
+```
+add /recurring /<field 1>: <value 1> /<field 2>: <value 2> ... 
+```
+### Example:
+```
+add /recurring /name: Spotify /cost: 10.90 /type: entertainment
+```
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 3 (with month tag):
+```
+add /month: <monthValue> /<field 1>: <value 1> /<field 2>: <value 2> ... 
+```
+### Example:
+```
+add /month: 2024-11 /name: Spotify /cost: 10.90 /type: entertainment
+```
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
 _________________________________________________________
 ```
 ---
-## Viewing the Expense List
-The `list` command allows users to view all their current `expenses`.
+## Viewing an expense list
+The `list` command allows users to view their expense list.  
+By default, without any tags the following is assumed:
+- Month is the current month
+- It should NOT look for the recurring expense list.
 
-### Usage:
+**<ins>IMPORTANT NOTE</ins>**
+- You should not use both `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised  
+- if `/month:` tag is used together, the first month is prioritised  
+
+### Usage 1 (default addition without tags):
 ```
 list
 ```
-
+### Example:
+```
+list
+```
 ### Expected Output:
 ```
 _________________________________________________________
 Below is the list:
-1. [transport, cost = $10]
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
 _________________________________________________________
-Total cost of all expenses is: $10.0
+For the month of 2024-11
+    Total budget: $1000
+    Total cost: $20.9
+    Remaining budget: $979.1
 _________________________________________________________
+Expense Type Proportions:
+    FOOD: 50.00%
+    ENTERTAINMENT: 50.00%
+_________________________________________________________
+Expense Type Cost Breakdown:
+    FOOD: $10.00
+    ENTERTAINMENT: $10.90
 ```
----
-## Deleting an Expense
-The `delete` command allows users to delete an `expense` from the list.
-
-### Usage:
+### Usage 2 (with recurring tag):
 ```
-delete <index>
+list /recurring
 ```
-### Example 1:
+### Example:
 ```
-delete 1
+list /recurring
 ```
 ### Expected Output:
 ```
 _________________________________________________________
-Deleted successfully!
+Below is the list:
+1. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
 _________________________________________________________
 ```
----
-## Finding an Expense
-The `find` command allows users to find `expenses` from the list.
-
-### Usage:
+### Usage 3 (with month tag):
 ```
-find <value>
+list /month: <monthValue>
 ```
-### Example 1:
+### Example:
 ```
-find lunch
+list /month: 2024-11
 ```
 ### Expected Output:
 ```
 _________________________________________________________
-Here is what I found:
-1. [utown lunch, cost = $5]
-2. [PGP lunch, cost = $4]
+Below is the list:
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+For the month of 2024-11
+    Total budget: $1000
+    Total cost: $20.9
+    Remaining budget: $979.1
+_________________________________________________________
+Expense Type Proportions:
+    FOOD: 50.00%
+    ENTERTAINMENT: 50.00%
+_________________________________________________________
+Expense Type Cost Breakdown:
+    FOOD: $10.00
+    ENTERTAINMENT: $10.90
 _________________________________________________________
 ```
 ---
+## Editing an Expense list
+The `edit` command allows users to edit their expense list.  
+By default, without any tags the following is assumed:
+- Month is the current month
+- It should NOT look for the recurring expense list.
+
+**<ins>IMPORTANT NOTE</ins>**
+- You should not use multiple `/recurring` and `/month:` tags together.
+- if used together, `/recurring` tag is prioritised  
+- if `/month:` tag is used together, the first month is prioritised
+
+### Usage 1 (default addition without tags):
+```
+edit <index> </field:> <value> ...
+```
+### Example:
+```
+edit 1 /name: Dinner /cost: 20
+```
+### Expected Output:
+```
+_________________________________________________________
+Edited successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Dinner, Cost = $20, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 2 (with recurring tag):
+```
+edit <index> </recurring> </field:> <value> ...
+```
+### Example:
+```
+edit 1 /recurring /name: Netflix /cost: 18.70
+```
+### Expected Output:
+```
+_________________________________________________________
+Edited successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Netflix, Cost = $18.70, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 3 (with month tag):
+```
+edit <index> </month:> <monthValue> </field:> <value> ...
+```
+### Example:
+```
+edit 1 /month: 2024-11 /name: Breakfast /cost: 5.40
+```
+### Expected Output:
+```
+_________________________________________________________
+Edited successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Breakfast, Cost = $5.40, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+
+
+
+
 
 ## Activity Manager
 PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of the activity manager commands.

@@ -136,4 +136,10 @@ public class Ui {
     public static void setMainStream(PrintStream stream){
         System.setOut(stream);
     }
+
+    public static void clearScreen(){
+        for (int i = 0; i < 50; i++){
+            System.out.println(" ");
+        }
+    }
 }

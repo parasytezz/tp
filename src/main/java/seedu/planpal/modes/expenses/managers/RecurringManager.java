@@ -1,6 +1,7 @@
 package seedu.planpal.modes.expenses.managers;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.Expense;
 import seedu.planpal.modes.expenses.ExpenseModeFunctions;
@@ -69,8 +70,8 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
      * @throws EmptyDescriptionException If the provided description is empty.
      */
     public void addRecurringExpense(String description) throws PlanPalExceptions {
-        if (description.isEmpty()){
-            throw new EmptyDescriptionException();
+        if (description.isEmpty() || description.contains(MONTH_SEPARATOR)){
+            throw new IllegalCommandException();
         }
         RecurringExpense newExpense = new RecurringExpense(description);
         addToList(recurringExpensesList, newExpense);
@@ -94,7 +95,7 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
      * @throws PlanPalExceptions if description is invalid or empty.
      */
     public void deleteRecurringExpense(String description) throws PlanPalExceptions {
-        String index = ExpenseModeFunctions.removeRecurring(description);
+        String index = ExpenseModeFunctions.removeRecurringTag(description);
         if (index.isEmpty()) {
             throw new EmptyDescriptionException();
         }
@@ -113,7 +114,7 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
      * @throws PlanPalExceptions If the removal of the recurring tag results errors during editing.
      */
     public void editRecurringExpense(String description) throws PlanPalExceptions {
-        String query = ExpenseModeFunctions.removeRecurring(description);
+        String query = ExpenseModeFunctions.removeRecurringTag(description);
         editList(recurringExpensesList, query);
         savedExpenses.saveList(recurringExpensesList);
     }
@@ -126,7 +127,7 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
      * @throws PlanPalExceptions If the query string is empty or if the search encounters an error.
      */
     public void findRecurringExpense(String description) throws PlanPalExceptions {
-        String query = ExpenseModeFunctions.removeRecurring(description);
+        String query = ExpenseModeFunctions.removeRecurringTag(description);
         if (query.isEmpty()){
             throw new EmptyDescriptionException();
         }

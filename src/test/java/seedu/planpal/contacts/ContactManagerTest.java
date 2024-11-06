@@ -52,7 +52,7 @@ public class ContactManagerTest {
             manager.addContact("Alice");
             fail();
         } catch (PlanPalExceptions e) {
-            assertEquals("No such commands exist. Do check what I can do again", e.getMessage());
+            assertEquals("This command is ILLEGAL", e.getMessage());
         }
     }
 

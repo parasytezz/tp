@@ -50,7 +50,7 @@ public class ExpenseParser extends Parser {
                 if (description.contains(ExpenseModeFunctions.RECURRING_TAG)) {
                     expenseManager
                             .getRecurringManager()
-                            .addRecurringExpense(ExpenseModeFunctions.removeRecurring(description));
+                            .addRecurringExpense(ExpenseModeFunctions.removeRecurringTag(description));
                     return true;
                 }
                 expenseManager.addExpense(inputParts[1].trim());
@@ -82,6 +82,11 @@ public class ExpenseParser extends Parser {
 
             case EXIT_MODE_COMMAND:
                 break;
+
+            case CLEAR_COMMAND:
+                Ui.printLine();
+                Ui.clearScreen();
+                return true;
 
             case BYE_COMMAND:
                 Ui.printByeMessage();

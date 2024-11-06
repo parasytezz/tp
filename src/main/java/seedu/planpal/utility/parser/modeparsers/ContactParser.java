@@ -38,13 +38,12 @@ public class ContactParser extends Parser {
                 description = inputParts[1].trim();
                 contactManager.addContact(description);
                 return true;
-                // fallthrough
 
             case DELETE_COMMAND:
                 description = inputParts[1].trim();
                 contactManager.deleteContact(description);
                 return true;
-                // fallthrough
+
             case SET_CATEGORY_COMMAND:
                 boolean inCategory = true;
                 Ui.printCategoryMenu();
@@ -61,7 +60,6 @@ public class ContactParser extends Parser {
             case LIST_COMMAND:
                 contactManager.viewContactList();
                 return true;
-                // fallthrough
 
             case EDIT_COMMAND:
                 try {
@@ -71,16 +69,19 @@ public class ContactParser extends Parser {
                     throw new PlanPalExceptions("Invalid index format. Please provide a valid number.");
                 }
                 return true;
-                // fallthrough
 
             case FIND_COMMAND:
                 String query = inputParts[1].trim();
                 contactManager.findContact(query);
                 return true;
-                // fallthrough
 
             case EXIT_MODE_COMMAND:
                 break;
+
+            case CLEAR_COMMAND:
+                Ui.printLine();
+                Ui.clearScreen();
+                return true;
 
             case BYE_COMMAND:
                 Ui.printByeMessage();

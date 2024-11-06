@@ -23,6 +23,6 @@ public class IllegalCommandException extends PlanPalExceptions {
      */
     @Override
     public String getMessage() {
-        return "No such commands exist. Do check what I can do again";
+        return "This command is ILLEGAL";
     }
 }
