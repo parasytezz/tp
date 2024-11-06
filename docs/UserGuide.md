@@ -399,6 +399,11 @@ Contacts in category: friend
 _________________________________________________________
 ```
 ---
+
+
+
+
+
 ## Expense Manager
 PlanPal will assist you in tracking your `Expenses` in your planner. The guide below will show you how to make use of the expense manager commands.
 
@@ -451,17 +456,17 @@ By default, without any tags the following is assumed:
 
 Currently, the fields that can be used are as follows:
 
-| Field | Constraints                                                                                                                           |
-|-------|---------------------------------------------------------------------------------------------------------------------------------------|
-| name  | Name is set to null by default                                                                                                        |
-| cost  | Cost is set to null by default                                                                                                        |
-| type  | Type is set to OTHER by default <br/> Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
+| Field | Constraints                                                                                                                               |
+|-------|-------------------------------------------------------------------------------------------------------------------------------------------|
+| name  | Name is set to **null** by default                                                                                                        |
+| cost  | Cost is set to **$0** by default                                                                                                          |
+| type  | Type is set to **OTHER** by default <br/> Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
 
 **!!! If budget has not been set, you will not be able to add anything!**
 
 ### Usage 1 (default addition without tags):
 ```
-add /<field 1>: <value 1> /<field 2>: <value 2> ... 
+add /<field 1>: <value 1> /<field 2>: <value 2> /<field 3>: <value 3>... 
 ```
 ### Example:
 ```
@@ -470,11 +475,52 @@ add /name: Lunch /cost: 10 /type: food
 ### Expected Output:
 ```
 _________________________________________________________
-For the month of 2024-11
-Budget has been set to: $1000
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+_________________________________________________________
+```
+### Usage 2 (with recurring tag):
+```
+add /recurring /<field 1>: <value 1> /<field 2>: <value 2> ... 
+```
+### Example:
+```
+add /recurring /name: Spotify /cost: 10.90 /type: entertainment
+```
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+_________________________________________________________
+```
+### Usage 3 (with month tag):
+```
+add /month: <monthValue> /<field 1>: <value 1> /<field 2>: <value 2> ... 
+```
+### Example:
+```
+add /month: 2024-11 /name: Spotify /cost: 10.90 /type: entertainment
+```
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = Lunch, Cost = $10, Type = FOOD]
+2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
 _________________________________________________________
 ```
 ---
+
+
+
+
 
 ## Activity Manager
 PlanPal will assist you in tracking your `activities` in your planner. The guide below will show you how to make use of the activity manager commands.
