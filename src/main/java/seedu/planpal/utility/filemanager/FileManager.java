@@ -317,10 +317,8 @@ public class FileManager {
             Ui.print("Error creating backup file!");
         }
 
-        int lineNumber = 0;
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
-                lineNumber++;
                 manager.handleCategory(scanner.nextLine());
             }
         } catch (FileNotFoundException e) {
