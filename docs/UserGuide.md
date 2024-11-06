@@ -438,6 +438,12 @@ PlanPal will assist you in tracking your `activities` in your planner. The guide
 
 ---
 ## Adding an activity
+The `add` command allows users to add an activity to the `activities` list.
+
+### Usage:
+```
+add /name: <name> /activityType: <activityType> 
+```
 
 ---
 ## Viewing the Activities list

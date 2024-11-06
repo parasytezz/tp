@@ -1,5 +1,6 @@
 package seedu.planpal.modes.activities;
 
+import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
@@ -25,6 +26,9 @@ public class Activity implements Editable, Storeable {
      * @throws PlanPalExceptions If the description is invalid or incomplete.
      */
     public Activity(String description) throws PlanPalExceptions {
+        if (!description.contains("/name:")) {
+            throw new PlanPalExceptions("You need a name for an activity.");
+        }
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
         if (categories.length <= 1) {
@@ -68,9 +72,14 @@ public class Activity implements Editable, Storeable {
         String category = inputParts[0].trim();
         String valueToEdit = inputParts[1].trim();
 
-        assert category != null && !category.isEmpty() : "Category cannot be null";
-        assert valueToEdit != null && !valueToEdit.isEmpty() : "Value cannot be null";
-
+        if (category.equals("name")) {
+            setName(valueToEdit);
+        } else if (category.equals("activityType")) {
+            setActivityType(valueToEdit);
+        } else {
+            System.out.println(category + "is not a valid category.");
+            throw new IllegalCommandException();
+        }
         setCommandDescription(category, valueToEdit);
     }
 
@@ -148,7 +157,7 @@ public class Activity implements Editable, Storeable {
      */
     public void setActivityType(String activityType) throws PlanPalExceptions {
         if (activityType == null || activityType.isEmpty()) {
-            throw new PlanPalExceptions("Activity type cannot be blank.");
+            activityType = "Activity type cannot be blank.";
         }
         this.activityType = activityType;
     }
