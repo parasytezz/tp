@@ -27,11 +27,11 @@ public class ContactParserTest {
         try {
             ContactManager manager = new ContactManager();
             ContactParser contactParser = new ContactParser(manager);
-            manager.handleCategory("add emergency");
-            manager.handleCategory("add family");
-            manager.handleCategory("add friend");
+            manager.handleCategory("add emergency", System.out);
+            manager.handleCategory("add family", System.out);
+            manager.handleCategory("add friend", System.out);
             manager.addContact("/name:Alice");
-            manager.handleCategory("edit 1       emergency/      family   /        friend");
+            manager.handleCategory("edit 1       emergency/      family   /        friend", System.out);
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search emergency");
             String output = "Contacts in category: emergency\n" +
@@ -39,18 +39,18 @@ public class ContactParserTest {
                     "_________________________________________________________\n";
             String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
-            manager.handleCategory("edit 1    ");
+            manager.handleCategory("edit 1    ", System.out);
             manager.addContact("/name:Bob");
-            manager.handleCategory("edit 2  family   /        friend");
+            manager.handleCategory("edit 2  family   /        friend", System.out);
             manager.addContact("/name:Si Thu");
             manager.addContact("/name:Nathan");
             manager.addContact("/name:Gavin");
             manager.addContact("/name:yin shuang");
             manager.addContact("/name:Andy");
-            manager.handleCategory("edit 4    emergency  ");
-            manager.handleCategory("edit 3 friend");
-            manager.handleCategory("edit 5 emergency");
-            manager.handleCategory("edit 6 friend");
+            manager.handleCategory("edit 4    emergency  ", System.out);
+            manager.handleCategory("edit 3 friend", System.out);
+            manager.handleCategory("edit 5 emergency", System.out);
+            manager.handleCategory("edit 6 friend", System.out);
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search      emergency");
             output = "Contacts in category: emergency\n" +
@@ -78,23 +78,23 @@ public class ContactParserTest {
         try {
             ContactManager manager = new ContactManager();
             ContactParser contactParser = new ContactParser(manager);
-            manager.handleCategory("add emergency");
-            manager.handleCategory("add family");
-            manager.handleCategory("add friend");
+            manager.handleCategory("add emergency", System.out);
+            manager.handleCategory("add family", System.out);
+            manager.handleCategory("add friend", System.out);
             manager.addContact("/name:Alice");
-            manager.handleCategory("edit 1       emergency/      family   /        friend");
+            manager.handleCategory("edit 1       emergency/      family   /        friend", System.out);
             manager.addContact("/name:Bob");
-            manager.handleCategory("edit 2  family   /        friend");
+            manager.handleCategory("edit 2  family   /        friend", System.out);
             manager.addContact("/name:Si Thu");
             manager.addContact("/name:Nathan");
             manager.addContact("/name:Gavin");
             manager.addContact("/name:yin shuang");
             manager.addContact("/name:Andy");
-            manager.handleCategory("edit 4    emergency  ");
-            manager.handleCategory("edit 3 friend");
-            manager.handleCategory("edit 5 emergency");
-            manager.handleCategory("edit 6 friend");
-            manager.handleCategory("remove emergency    ");
+            manager.handleCategory("edit 4    emergency  ", System.out);
+            manager.handleCategory("edit 3 friend", System.out);
+            manager.handleCategory("edit 5 emergency", System.out);
+            manager.handleCategory("edit 6 friend", System.out);
+            manager.handleCategory("remove emergency    ", System.out);
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search emergency     ");
             String output = "Category not found.\n" +
@@ -111,11 +111,11 @@ public class ContactParserTest {
         try {
             ContactManager manager = new ContactManager();
             ContactParser contactParser = new ContactParser(manager);
-            manager.handleCategory("add emergency");
-            manager.handleCategory("add family");
-            manager.handleCategory("add friend");
+            manager.handleCategory("add emergency", System.out);
+            manager.handleCategory("add family", System.out);
+            manager.handleCategory("add friend", System.out);
             manager.addContact("/name:Alice");
-            manager.handleCategory("edit 1       emergency/      family   /        friend");
+            manager.handleCategory("edit 1       emergency/      family   /        friend", System.out);
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search emergency");
             String output = "Contacts in category: emergency\n" +
@@ -123,7 +123,7 @@ public class ContactParserTest {
                     "_________________________________________________________\n";
             String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
-            manager.handleCategory("edit 1    ");
+            manager.handleCategory("edit 1    ", System.out);
             OUTPUT_STREAM.reset();
             contactParser.processCommand("search      emergency");
             output = "Contacts in category: emergency\n" +

@@ -227,9 +227,9 @@ public class ContactManagerTest {
     @Test
     public void addCategory_success() {
         ContactManager manager = new ContactManager();
-        assertTrue(manager.handleCategory("add        emergency       "));
-        assertTrue(manager.handleCategory("add friend"));
-        assertTrue(manager.handleCategory("add family"));
+        assertTrue(manager.handleCategory("add        emergency       ", System.out));
+        assertTrue(manager.handleCategory("add friend", System.out));
+        assertTrue(manager.handleCategory("add family", System.out));
         ArrayList<String> expectedCategories = new ArrayList<>();
         ArrayList<ArrayList<Contact>> expectedContactListByCategory = new ArrayList<>();
         expectedCategories.add("emergency");
@@ -245,41 +245,41 @@ public class ContactManagerTest {
     @Test
     public void addCategory_invalidCategoryName() {
         ContactManager manager = new ContactManager();
-        manager.handleCategory("add em/ergency");
+        manager.handleCategory("add em/ergency", System.out);
         String output = "_________________________________________________________\n" +
                 "/ is not allowed to be used in category name\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         OUTPUT_STREAM.reset();
-        manager.handleCategory("add  / qouvblo");
+        manager.handleCategory("add  / qouvblo", System.out);
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         OUTPUT_STREAM.reset();
-        manager.handleCategory("add  qoue  wg w / wvwvblo");
+        manager.handleCategory("add  qoue  wg w / wvwvblo", System.out);
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
     }
 
     @Test
     public void addCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
-        manager.handleCategory("add");
+        manager.handleCategory("add", System.out);
         String output = "_________________________________________________________\n" +
                 "Description cannot be empty!\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         OUTPUT_STREAM.reset();
-        manager.handleCategory("add       ");
+        manager.handleCategory("add       ", System.out);
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
     }
 
     @Test
     public void removeCategory_success() {
         ContactManager manager = new ContactManager();
-        assertTrue(manager.handleCategory("add    emergency"));
-        assertTrue(manager.handleCategory("add friend  "));
-        assertTrue(manager.handleCategory("add    family  "));
-        assertTrue(manager.handleCategory("remove    friend    "));
+        assertTrue(manager.handleCategory("add    emergency", System.out));
+        assertTrue(manager.handleCategory("add friend  ", System.out));
+        assertTrue(manager.handleCategory("add    family  ", System.out));
+        assertTrue(manager.handleCategory("remove    friend    ", System.out));
         ArrayList<String> expectedCategories = new ArrayList<>();
         ArrayList<ArrayList<Contact>> expectedContactListByCategory = new ArrayList<>();
         expectedCategories.add("emergency");
@@ -293,10 +293,10 @@ public class ContactManagerTest {
     @Test
     public void removeCategory_noMatches() {
         ContactManager manager = new ContactManager();
-        assertTrue(manager.handleCategory("add emergency"));
-        assertTrue(manager.handleCategory("add family"));
+        assertTrue(manager.handleCategory("add emergency", System.out));
+        assertTrue(manager.handleCategory("add family", System.out));
         OUTPUT_STREAM.reset();
-        assertTrue(manager.handleCategory("remove    friend  "));
+        assertTrue(manager.handleCategory("remove    friend  ", System.out));
         String output = "_________________________________________________________\n" +
                 "friend is not a category\n" +
                 "_________________________________________________________\n";
@@ -307,13 +307,13 @@ public class ContactManagerTest {
     @Test
     public void removeCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
-        manager.handleCategory("remove");
+        manager.handleCategory("remove", System.out);
         String output = "_________________________________________________________\n" +
                 "Description cannot be empty!\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
-        manager.handleCategory("remove       ");
+        manager.handleCategory("remove       ", System.out);
         assertEquals(trimmedExpectedOutput+trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
     }
 
@@ -321,19 +321,19 @@ public class ContactManagerTest {
     public void editCategory_singleCategory_success() {
         try {
             ContactManager manager = new ContactManager();
-            manager.handleCategory("add emergency");
+            manager.handleCategory("add emergency", System.out);
             manager.addContact("/name:Alice");
-            manager.handleCategory("edit 1 emergency");
+            manager.handleCategory("edit 1 emergency", System.out);
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [emergency]]",
                     manager.getContactList().get(0).toString());
-            manager.handleCategory("edit 1    ");
+            manager.handleCategory("edit 1    ", System.out);
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
                     manager.getContactList().get(0).toString());
             manager.addContact("/name:Bob");
-            manager.handleCategory("edit 2 emergency");
+            manager.handleCategory("edit 2 emergency", System.out);
             assertEquals("[Name = Bob, Phone = null, Email = null, Categories = [emergency]]",
                     manager.getContactList().get(1).toString());
-            manager.handleCategory("edit 2");
+            manager.handleCategory("edit 2", System.out);
             assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
                     manager.getContactList().get(1).toString());
         } catch (PlanPalExceptions e) {
@@ -345,14 +345,14 @@ public class ContactManagerTest {
     public void editCategory_multipleCategory_success() {
         try {
             ContactManager manager = new ContactManager();
-            manager.handleCategory("add emergency");
-            manager.handleCategory("add family");
-            manager.handleCategory("add friend");
+            manager.handleCategory("add emergency", System.out);
+            manager.handleCategory("add family", System.out);
+            manager.handleCategory("add friend", System.out);
             manager.addContact("/name:Alice");
-            manager.handleCategory("edit 1       emergency/      family   /        friend");
+            manager.handleCategory("edit 1       emergency/      family   /        friend", System.out);
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [friend, emergency, family]]",
                     manager.getContactList().get(0).toString());
-            manager.handleCategory("edit 1    ");
+            manager.handleCategory("edit 1    ", System.out);
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
                     manager.getContactList().get(0).toString());
         } catch (PlanPalExceptions e) {
@@ -363,14 +363,14 @@ public class ContactManagerTest {
     @Test
     public void editCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
-        manager.handleCategory("edit");
+        manager.handleCategory("edit", System.out);
         String output = "_________________________________________________________\n" +
                 "Description cannot be empty!\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         OUTPUT_STREAM.reset();
-        manager.handleCategory("edit       ");
+        manager.handleCategory("edit       ", System.out);
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
     }
 
@@ -378,25 +378,25 @@ public class ContactManagerTest {
     public void editCategory_invalidIndex() {
         try {
             ContactManager manager = new ContactManager();
-            manager.handleCategory("add emergency");
-            manager.handleCategory("add family");
-            manager.handleCategory("add friend");
+            manager.handleCategory("add emergency", System.out);
+            manager.handleCategory("add family", System.out);
+            manager.handleCategory("add friend", System.out);
             manager.addContact("/name:Alice");
             OUTPUT_STREAM.reset();
-            manager.handleCategory("edit 0 emergency/family/friend");
+            manager.handleCategory("edit 0 emergency/family/friend", System.out);
             String output = "_________________________________________________________\n" +
                     "Invalid contact id\n" +
                     "_________________________________________________________\n";
             String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
             OUTPUT_STREAM.reset();
-            manager.handleCategory("edit -1 emergency    ");
+            manager.handleCategory("edit -1 emergency    ", System.out);
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
             OUTPUT_STREAM.reset();
-            manager.handleCategory("edit 2    emergency    ");
+            manager.handleCategory("edit 2    emergency    ", System.out);
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
             OUTPUT_STREAM.reset();
-            manager.handleCategory("edit    emergency    ");
+            manager.handleCategory("edit    emergency    ", System.out);
             output = "_________________________________________________________\n" +
                     "Invalid input.\n" +
                     "_________________________________________________________\n";
@@ -411,12 +411,12 @@ public class ContactManagerTest {
     public void editCategory_invalidCategory() {
         try {
             ContactManager manager = new ContactManager();
-            manager.handleCategory("add emergency");
-            manager.handleCategory("add family");
-            manager.handleCategory("add friend");
+            manager.handleCategory("add emergency", System.out);
+            manager.handleCategory("add family", System.out);
+            manager.handleCategory("add friend", System.out);
             manager.addContact("/name:Alice");
             OUTPUT_STREAM.reset();
-            manager.handleCategory("edit 1       family/     em  ergency  /        friend");
+            manager.handleCategory("edit 1       family/     em  ergency  /        friend", System.out);
             String output = "_________________________________________________________\n" +
                     "em ergency is not a valid category\n" +
                     "_________________________________________________________\n";
@@ -432,12 +432,12 @@ public class ContactManagerTest {
     public void removeCategoryInContact_success() {
         try {
             ContactManager manager = new ContactManager();
-            manager.handleCategory("add    emergency");
-            manager.handleCategory("add friend  ");
-            manager.handleCategory("add    family  ");
+            manager.handleCategory("add    emergency", System.out);
+            manager.handleCategory("add friend  ", System.out);
+            manager.handleCategory("add    family  ", System.out);
             manager.addContact("/name:Alice");
-            manager.handleCategory("edit 1 emergency/family/friend");
-            manager.handleCategory("remove family  ");
+            manager.handleCategory("edit 1 emergency/family/friend", System.out);
+            manager.handleCategory("remove family  ", System.out);
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = [friend, emergency]]",
                     manager.getContactList().get(0).toString());
         } catch (PlanPalExceptions e) {
@@ -448,14 +448,14 @@ public class ContactManagerTest {
     @Test
     public void category_invalidCommand() {
         ContactManager manager = new ContactManager();
-        manager.handleCategory("ahhhhhhh");
+        manager.handleCategory("ahhhhhhh", System.out);
         String output = "_________________________________________________________\n" +
                 "Invalid command\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         OUTPUT_STREAM.reset();
-        manager.handleCategory("view   ");
+        manager.handleCategory("view   ", System.out);
         output = "_________________________________________________________\n" +
                 "Invalid command\n" +
                 "_________________________________________________________\n";
@@ -466,10 +466,10 @@ public class ContactManagerTest {
     @Test
     public void viewCategory_success() {
         ContactManager manager = new ContactManager();
-        assertTrue(manager.handleCategory("add emergency"));
-        assertTrue(manager.handleCategory("add family"));
+        assertTrue(manager.handleCategory("add emergency", System.out));
+        assertTrue(manager.handleCategory("add family", System.out));
         OUTPUT_STREAM.reset();
-        assertTrue(manager.handleCategory("view"));
+        assertTrue(manager.handleCategory("view", System.out));
         assertTrue(OUTPUT_STREAM.toString().contains("Below is the list:"));
         assertTrue(OUTPUT_STREAM.toString().contains("1. emergency"));
         assertTrue(OUTPUT_STREAM.toString().contains("2. family"));

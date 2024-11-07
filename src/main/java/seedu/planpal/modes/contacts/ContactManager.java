@@ -5,6 +5,8 @@ import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.ListFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.FileManager;
+
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -132,15 +134,17 @@ public class ContactManager implements ListFunctions {
      * edit (edit categories of contact), view (view available categories), quit
      *
      * @param description The description of the command
+     * @param out
      * @return true if continue to handle category commands. Otherwise, false.
      */
-    public boolean handleCategory(String description) {
+    public boolean handleCategory(String description, PrintStream out) {
         boolean inSetting = true;
         try {
             inSetting = setContactCategory.handle(description, savedContacts, contactList,
                                                 contactListByCategory, categoryList, CONTACT_LOGGER);
         } catch (PlanPalExceptions e) {
             CONTACT_LOGGER.warning("Failed to set category: " + e.getMessage());
+            Ui.setMainStream(out);
             Ui.print(e.getMessage());
         }
         return inSetting;
