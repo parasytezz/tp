@@ -1033,7 +1033,7 @@ bye
 
 #### Main Contact Manager Mode  
 
-<small>
+<div style="font-size: 0.8em;">
 
 | Description                 | Command                                                        | Example                                                         |
 |-----------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
@@ -1045,13 +1045,13 @@ bye
 | Search contacts by category | `search <category>`                                            | `search friend`                                                 |
 | Setting contact category    | `category`                                                     | `category`                                                      |
 
-</small>
+</div>
 
 
 #### Inside Category Mode of Contact Manager  
 
 
-<small>
+<div style="font-size: 0.8em;">
 
 | Description                   | Command                                              | Example                |
 |-------------------------------|------------------------------------------------------|------------------------|
@@ -1064,13 +1064,13 @@ bye
 | Printing category functions   | `help`                                               | `help`                 |
 | Quiting setting category mode | `quit`                                               | `quit`                 |
 
-</small>
+</div>
 
 
 ### Expense Manager  
 
 
-<small>
+<div style="font-size: 0.8em;">
 
 | Description                                      | Command                                                         | Example                                                              |
 |--------------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------|
@@ -1092,11 +1092,11 @@ bye
 | Finding an Expense <br/>(with `/recurring` tag)  | `find query> </recurring>`                                      | `find spotify /recurring`                                            |
 | Finding an Expense <br/>(with `/month:` tag)     | `find <query> </month:> <monthValue>`                           | `find lunch /month:2024-05`                                          |
 
-</small>
+</div>
 
 ### Activity Manager  
 
-<small>
+<div style="font-size: 0.8em;">
 
 | **Description**                       | **Command**                                                          | **Example**                          |
 |---------------------------------------|----------------------------------------------------------------------|--------------------------------------|
@@ -1106,5 +1106,5 @@ bye
 | Finding an activity                   | `find <value>`                                                       | `find exercise`                      |
 | Editing an activity                   | `edit <index> /<category 1>: <value 1> /<category 2>: <value 2> ...` | `edit 1 /name: diving`               |
 | Deleting an activity                  | `delete <index>`                                                     | `delete 4`                           |
-
-</small>
+  
+</div>
