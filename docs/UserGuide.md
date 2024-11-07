@@ -21,7 +21,7 @@ International students who are frugal and organized. It caters to the needs of t
 - [Quick start](#quick-start)
 - [Features](#features)
   - [Modes](#modes)
-  - [Contact Manager](#contact-Manager)
+  - [Contact Manager](#contact-manager)
     - [Add contact](#adding-a-contact)
     - [List contact](#viewing-the-contact-list)
     - [Edit contact](#editing-a-contact)
@@ -54,6 +54,7 @@ International students who are frugal and organized. It caters to the needs of t
     - ["Clearing" Screen](#clearing-screen)
     - [Exiting Modes](#exiting-modes)
     - [Leaving the Application](#leaving-the-application)
+  - [Command Summary](#command-summary)
 
 ---
 ## Quick Start
