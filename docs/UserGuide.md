@@ -19,14 +19,15 @@ International students who are frugal and organized. It caters to the needs of t
 
 ### Table of Contents
 - [Quick start](#quick-start)
-- [Features](#Features)
+- [Features](#features)
   - [Modes](#modes)
-  - [Contact Manager](#Contact-Manager)
+  - [Contact Manager](#contact-Manager)
     - [Add contact](#adding-a-contact)
     - [List contact](#viewing-the-contact-list)
-    - [Edit contact](#Editing-a-contact)
+    - [Edit contact](#editing-a-contact)
     - [Delete contact](#deleting-a-contact)
-    - [Setting category](#Setting-category)
+    - [Find contact](#finding-a-contact)
+    - [Setting category](#setting-category)
       - [add category](#1-add-category)
       - [remove category](#2-remove-category)
       - [edit categories of contact](#3-edit-categories-of-contact)
@@ -34,8 +35,7 @@ International students who are frugal and organized. It caters to the needs of t
       - [view the contact list](#5-view-the-contact-list)
       - [print category functions](#6-print-category-functions)
       - [quit category](#7-quit-category)
-    - [Search contacts by category](#Search-contacts-by-category)
-    - [Find contact](#finding-a-contact)
+    - [Search contacts by category](#search-contacts-by-category)
   - [Expense Manager](#expense-manager)
     - [Set Budget](#setting-a-budget)
     - [Add expenses](#adding-an-expense)
@@ -48,13 +48,12 @@ International students who are frugal and organized. It caters to the needs of t
     - [Find activity](#finding-an-activity)
     - [Edit activity](#editing-an-activity)
     - [Delete activity](#deleting-an-activity)
-  - [Auxiliary Commands](#auxiliary-commands-)
+  - [Auxiliary Commands](#auxiliary-commands)
     - [Backing Up Files](#backing-up-files)
     - [Restoring Back-up Files](#restoring-back-up-files)
     - ["Clearing" Screen](#clearing-screen)
     - [Exiting Modes](#exiting-modes)
     - [Leaving the Application](#leaving-the-application)
-  - [Command Summary](#Command-Summary)
 
 ---
 ## Quick Start
@@ -966,7 +965,7 @@ _________________________________________________________
 ```
 
 ---
-## Auxiliary Commands  
+## Auxiliary Commands
 The commands below are not the main features of the 3 modes. However, they will make it more convenient for you when using the PlanPal application
 
 ---
@@ -1015,71 +1014,6 @@ The `bye` command can be used to shut down the program when you no longer need i
 bye
 ```
 ---
-
-## Command Summary
-
-### Auxiliary Commands
-| **Description**   | **Command** |
-|:------------------|:------------|
-| Back Up Files     | `/b/`       |
-| Restore Files     | `/r/`       |
-| Clear Screen      | `clear`     |
-| Exit Mode         | `exit`      |
-| Leave Application | `bye`       |
-
-
-### Contact Manager
-| **Description**               | **Command**                                                    | **Example**                                                     |
-|:------------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------|
-| Adding a contact              | `add /name: <name> /type: <type>`                              | `add /name: PlanPal /phone: 12345678 /email: PlanPal@gmail.com` |
-| Deleting a contact            | `delete <index>`                                               | `delete 1`                                                      |
-| Viewing the contact list      | `list`                                                         | `list`                                                          | 
-| Finding an activity           | `find <value>`                                                 | `find Plan`                                                     |
-| Editing a contact             | `edit <index> /<field 1>: <value 1> /<field 2>: <value 2> ...` | `edit 1 /name: PlanPal_v1.0 /email: PlanPal_v1@gmail.com`       |
-| Search contacts by category   | `search <category>`                                            | `search friend`                                                 |
-| Setting contact category      | `category`                                                     | `category`                                                      |
-| #inside setting category mode |                                                                |
-| Adding category               | `add <category>`                                               | `add friend`                                                    |
-| Removing category             | `remove <category>`                                            | `remove friend`                                                 | 
-| Edit contact category         | `edit <contact index> <category 1>/<category 2>/...`           | `edit 1 friend/family`                                          |
-| Deleting contact category     | `edit <contact index>`                                         | `edit 1`                                                        |
-| Viewing category list         | `view`                                                         | `view`                                                          |
-| Viewing the contact list      | `list`                                                         | `list`                                                          |
-| Printing category functions   | `help`                                                         | `help`                                                          |
-| Quiting setting category mode | `quit`                                                         | `quit`                                                          |
-
-
-### Expense Manager
-| **Description**                             | **Command**                                                 | **Example**                                                      |
-|:--------------------------------------------|:------------------------------------------------------------|:-----------------------------------------------------------------|
-| Setting a Budget (default)                  | `budget <value>`                                            | `budget 1000`                                                    |
-| Setting a Budget (With `/month:` tag)       | `budget <value> <month>` <br/> `budget <month> </> <value>` | `budget 1000 /month: 2024-11`<br/> `budget /month:2024-11 /1000` |
-| Adding an Expense (default)                 | `add /<field 1>: <value 1> ...`                             | `add /name: Lunch /cost: 10`                                     | 
-| Adding an Expense (with `/recurring` tag)   | `add /recurring /<field 1>: <value 1> ...`                  | `add /recurring /name: Spotify /cost: 10`                        |
-| Adding an Expense (with `/month:` tag)      | `add /month: <monthValue> /<field 1>: <value 1> ...`        | `add /month: 2024-11 /name: Spotify /cost: 10`                   |
-| Viewing an Expense (default)                | `list`                                                      | `list`                                                           |
-| Viewing an Expense (with `/recurring` tag)  | `list /recurring`                                           | `list /recurring`                                                |
-| Viewing an Expense (with `/month:` tag)     | `list </month:> <monthValue>`                               | `list /month: 2024-11`                                           |
-| Editing an Expense (default)                | `edit <index> </field:> <value> ...`                        | `edit 1 /name: Dinner /cost: 20`                                 |
-| Editing an Expense (with `/recurring` tag)  | `edit <index> </recurring> </field:> <value> ...`           | `edit 1 /recurring /name: Netflix /cost: 18.70`                  |
-| Editing an Expense (with `/month:` tag)     | `edit <index> </month:> <monthValue> </field:> <value> ...` | `edit 1 /month: 2024-11 /name: Breakfast /cost: 5.40`            |
-| Deleting an Expense (default)               | `delete <index>`                                            | `delete 1`                                                       |
-| Deleting an Expense (with `/recurring` tag) | `delete <index> </recurring>`                               | `delete 1 /recurring`                                            |
-| Deleting an Expense (with `/month:` tag)    | `delete <index> </month:> <monthValue>`                     | `delete 1 /month:2024-05`                                        |
-| Finding an Expense (default)                | `find query>`                                               | `find dinner`                                                    |
-| Finding an Expense (with `/recurring` tag)  | `find query> </recurring>`                                  | `find spotify /recurring`                                        |
-| Finding an Expense (with `/month:` tag)     | `find <query> </month:> <monthValue>`                       | `find lunch /month:2024-05`                                      |
-
-
-### Activity Manager
-| **Description**                       | **Command**                                                          | **Example**                          |
-|:--------------------------------------|:---------------------------------------------------------------------|:-------------------------------------|
-| Adding an activity                    | `add /name: <name> /type: <type>`                                    | `add /name: running /type: exercise` |
-| Adding an activity with just its name | `add /name: <name>`                                                  | `add /name: sleep`                   |
-| Viewing the activity list             | `list`                                                               | `list`                               | 
-| Finding an activity                   | `find <value>`                                                       | `find exercise`                      |
-| Editing an activity                   | `edit <index> /<category 1>: <value 1> /<category 2>: <value 2> ...` | `edit 1 /name: diving`               |
-| Deleting an activity                  | `delete <index>`                                                     | `delete 4`                           |
 
 
 
