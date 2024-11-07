@@ -325,7 +325,7 @@ public class FileManager {
 
         try (Scanner scanner = new Scanner(file)) {
             while (scanner.hasNext()) {
-                manager.handleCategory(scanner.nextLine());
+                manager.handleCategory(scanner.nextLine(), out);
             }
         } catch (FileNotFoundException e) {
             Ui.print("FILE NOT FOUND!");
