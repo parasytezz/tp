@@ -253,19 +253,37 @@ The sequence diagram below illustrates the process from adding a budget (to a mo
 - Budget is then saved to a budget txt file.
 
 ### Add Command
-The sequence diagram below illustrates the process for resolving the "add" command.  
+The sequence diagrams below illustrate the process for resolving the "add" command.  
 ![AddExpense.drawio.png](Images%28DG%29%2FAddExpense.drawio.png)  
-![AddExpenseRef1.drawio.png](Images%28DG%29%2FAddExpenseRef1.drawio.png)  
-![AddExpenseRef2.drawio.png](Images%28DG%29%2FAddExpenseRef2.drawio.png)
+<div style="display: flex; justify-content: space-around;">
+    <img src="Images%28DG%29%2FAddExpenseRef1.drawio.png" width="50%">
+    <img src="Images%28DG%29%2FAddExpenseRef2.drawio.png" width="50%">
+</div>  
 
-<u>Components Breakdown:</u>  
+<u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
 - `ExpenseParser` class is the `Parser` component
 - `ExpenseManager` class is the `Mode` component
+- `BudgetManager` class is created when ExpenseManager was constructed
 
 <u>Explanation:</u>  
-The way the add command works for expense manager is similar to how it works for contact manager, with the only difference being the names used.
+The way the add command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+- There is a check for recurring expenses
+- Addition of the recurring expense list when new expense list is created.
 
+### List Command
+The sequence diagram below illustrates the process for resolving the "list" command.
+
+![ViewExpensesDiagram.drawio.png](Images%28DG%29%2FViewExpensesDiagram.drawio.png)  
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `RecurringManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>  
+The way the list command works for expense manager is similar to how it works for contact manager. The key difference is that it will the recurring expense list if the user is viewing a new expense list without anything in it. (Refer to the ref frame in [add command](#add-command-1))
 ---
 ## Mode: Activity Manager
 The class diagram below represents the Activity Manager system.
