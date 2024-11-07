@@ -154,9 +154,6 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             return;
         }
         String month = getMonth(query);
-        if (month == null){
-            month = getCurrentMonth();
-        }
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         editList(monthlyExpenses.get(month), query);
         printExceededBudgetMessage(month);
@@ -180,9 +177,6 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         }
 
         String month = getMonth(input);
-        if (month == null){
-            month = getCurrentMonth();
-        }
         String index = input.replaceAll(MONTH_SEPARATOR + month,"")
                 .replaceAll(NON_NUMERICS, "").trim();
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
@@ -205,9 +199,6 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
      */
     public void findExpense(String description) throws PlanPalExceptions {
         String month = getMonth(description);
-        if (month == null){
-            month = getCurrentMonth();
-        }
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
         if (description.isEmpty()) {
             throw new EmptyDescriptionException();

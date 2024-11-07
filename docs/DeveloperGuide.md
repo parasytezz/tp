@@ -84,7 +84,7 @@ The class diagram below represents the contact book system
 ![ContactClassDiagram.drawio.png](Images%28DG%29/ContactClassDiagram.drawio.png)
 
 
-The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the Editable and Storeable interfaces, enabling contacts to be modified and stored.
+The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the `Editable` and `Storeable` interfaces, enabling contacts to be modified and stored.
 
 The `ContactManager` class in PlanPal manages a list of `Contact` objects. This class provides CRUD (Create, Read, Update, Delete) operations for handling contacts, along with advanced features for categorizing contacts. `ContactManager` implements the ListFunctions interface, allowing it to handle list-based operations in a structured way.
 
@@ -96,13 +96,13 @@ The `Storeable` interface standardizes essential storage-related functionalities
 
 <u>Methods</u>
 
-| Method          | Description                           |
-|-----------------|---------------------------------------|
-| addContact      | Adds a contact to the contact list    |
-| deleteContact   | Deletes a contact in the contact list |
-| viewContactList | View the current contact list         |
-| editContact     | Edit a contact in the list            |
-| findContact     | Find a contact in the contact list    |
+| Methods         | 
+|-----------------|
+| addContact      |
+| deleteContact   |
+| viewContactList |
+| editContact     |
+| findContact     |
 
 ## Commands
 
@@ -236,17 +236,78 @@ The class diagram below represents the Expense Manager system.
 
 **Work in progress for v2.0**
 
-### Add Command
-The sequence diagram below illustrates the process for resolving the "add" command.  
-![AddExpense.drawio.png](Images%28DG%29%2FAddExpense.drawio.png)
+### Set Budget Command
+The sequence diagram below illustrates the process from adding a budget (to a month).  
 
-<u>Components Breakdown:</u>  
+![SetBudgetDiagram.drawio.png](Images%28DG%29%2FSetBudgetDiagram.drawio.png)  
+
+<u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
 - `ExpenseParser` class is the `Parser` component
 - `ExpenseManager` class is the `Mode` component
+- `BudgetManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 2, representing expense manager, the user is then asked for a command in this mode.
+- When command to set budget is sent, the `ExpenseParser` processes this command.
+- BudgetManager is then used to set the budget.
+- During this process, it tries to find the month value and then using this value, the budget is set to that month.
+- Budget is then saved to a budget txt file.
+
+### Add Command
+The sequence diagrams below illustrate the process for resolving the "add" command.  
+![AddExpense.drawio.png](Images%28DG%29%2FAddExpense.drawio.png)  
+<div style="display: flex; justify-content: space-around;">
+    <img src="Images%28DG%29%2FAddExpenseRef1.drawio.png" width="50%">
+    <img src="Images%28DG%29%2FAddExpenseRef2.drawio.png" width="50%">
+</div>  
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `BudgetManager` class is created when ExpenseManager was constructed
 
 <u>Explanation:</u>  
-The way the add command works for expense manager is similar to how it works for contact manager, with the only difference being the names used.
+The way the add command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- Addition of the recurring expense list when new expense list is created.
+
+### List Command
+The sequence diagram below illustrates the process for resolving the "list" command.
+
+![ViewExpensesDiagram.drawio.png](Images%28DG%29%2FViewExpensesDiagram.drawio.png)  
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `RecurringManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>  
+The way the list command works for expense manager is similar to how it works for contact manager. The key difference are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- It will add the recurring expense list if the user is viewing a new expense list without anything in it. (Refer to the ref frame in [add command](#add-command-1))
+
+### Edit Command
+The sequence diagram below illustrates the process for resolving the "edit" command.  
+![EditExpense.drawio.png](Images%28DG%29%2FEditExpense.drawio.png)  
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `RecurringManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>  
+The way the edit command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- You are able to edit both the recurring expense list or the monthly list, depending on whichever is chosen.
+
+### Delete Command
+
+### Find Command
 
 ---
 ## Mode: Activity Manager
