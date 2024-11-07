@@ -387,24 +387,24 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 
 ## User Stories
 
-|Version| As a ... | I want to ...             | So that I can ...                                                                 |
-|--------|----------|---------------------------|-----------------------------------------------------------------------------------|
-|v1.0|NUS international student| see my list of contacts   | easily call home or look for emergency contacts when needed                       |
-|v1.0|NUS international student| add a contact             | expand my list of useful contacts                                                 |
-|v1.0|NUS international student| delete a contact          | remove a contact if I no longer need it                                           |
-|v1.0|NUS international student| edit a contact            | amend any mistakes when creating the contact or if the number has been changed    |
-|v1.0|NUS international student| save my contacts          | my contacts are still there when I exit and enter the application again           |                                                       |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student| see my list of activities | keep track of my schedule                                                         |
-|v2.0|NUS international student| add an activity           | expand my list of activities                                                      |
-|v2.0|NUS international student| delete an activity        | remove an activity when I have done it                                            |
-|v2.0|NUS international student| edit an activity          | amend any mistakes when creating the activity or if the activity has been changed |
-|v2.0|NUS international student| save my activities        | my activities are still there when I exit and enter the application again         |
+| Version | As a ...                  | I want to ...             | So that I can ...                                                                 |
+|---------|---------------------------|---------------------------|-----------------------------------------------------------------------------------|
+| v1.0    | NUS international student | see my list of contacts   | easily call home or look for emergency contacts when needed                       |
+| v1.0    | NUS international student | add a contact             | expand my list of useful contacts                                                 |
+| v1.0    | NUS international student | delete a contact          | remove a contact if I no longer need it                                           |
+| v1.0    | NUS international student | edit a contact            | amend any mistakes when creating the contact or if the number has been changed    |
+| v1.0    | NUS international student | save my contacts          | my contacts are still there when I exit and enter the application again           |                                                       |
+| v2.0    | NUS international student |                           |                                                                                   |
+| v2.0    | NUS international student |                           |                                                                                   |
+| v2.0    | NUS international student |                           |                                                                                   |
+| v2.0    | NUS international student |                           |                                                                                   |
+| v2.0    | NUS international student |                           |                                                                                   |
+| v2.0    | NUS international student |                           |                                                                                   |
+| v2.0    | NUS international student | see my list of activities | keep track of my schedule                                                         |
+| v2.0    | NUS international student | add an activity           | expand my list of activities                                                      |
+| v2.0    | NUS international student | delete an activity        | remove an activity when I have done it                                            |
+| v2.0    | NUS international student | edit an activity          | amend any mistakes when creating the activity or if the activity has been changed |
+| v2.0    | NUS international student | save my activities        | my activities are still there when I exit and enter the application again         |
 
 ---
 ## Non-Functional Requirements

@@ -1017,44 +1017,48 @@ bye
   
 ## Command Summary
 
-### Auxiliary Commands
-| **Description**   | **Command** |
-|-------------------|-------------|
-| Back Up Files     | `/b/`       |
-| Restore Files     | `/r/`       |
-| Clear Screen      | `clear`     |
-| Exit Mode         | `exit`      |
-| Leave Application | `bye`       |
+### Auxiliary Commands  
+
+| Description       | Command |
+|-------------------|---------|
+| Back Up Files     | `/b/`   |
+| Restore Files     | `/r/`   |
+| Clear Screen      | `clear` |
+| Exit Mode         | `exit`  |
+| Leave Application | `bye`   |
 
 
 ### Contact Manager
 
-#### Main Contact Manager Mode
-| **Description**               | **Command**                                                    | **Example**                                                     |
-|-------------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
-| Adding a contact              | `add /name: <name> /type: <type>`                              | `add /name: PlanPal /phone: 12345678 /email: PlanPal@gmail.com` |
-| Deleting a contact            | `delete <index>`                                               | `delete 1`                                                      |
-| Viewing the contact list      | `list`                                                         | `list`                                                          | 
-| Finding an activity           | `find <value>`                                                 | `find Plan`                                                     |
-| Editing a contact             | `edit <index> /<field 1>: <value 1> /<field 2>: <value 2> ...` | `edit 1 /name: PlanPal_v1.0 /email: PlanPal_v1@gmail.com`       |
-| Search contacts by category   | `search <category>`                                            | `search friend`                                                 |
-| Setting contact category      | `category`                                                     | `category`                                                      |  
+#### Main Contact Manager Mode  
+
+| Description                 | Command                                                        | Example                                                         |
+|-----------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
+| Adding a contact            | `add /name: <name> /type: <type>`                              | `add /name: PlanPal /phone: 12345678 /email: PlanPal@gmail.com` |
+| Deleting a contact          | `delete <index>`                                               | `delete 1`                                                      |
+| Viewing the contact list    | `list`                                                         | `list`                                                          | 
+| Finding an activity         | `find <value>`                                                 | `find Plan`                                                     |
+| Editing a contact           | `edit <index> /<field 1>: <value 1> /<field 2>: <value 2> ...` | `edit 1 /name: PlanPal_v1.0 /email: PlanPal_v1@gmail.com`       |
+| Search contacts by category | `search <category>`                                            | `search friend`                                                 |
+| Setting contact category    | `category`                                                     | `category`                                                      |  
   
-#### Inside Category Mode of Contact Manager
-| **Description**               | **Command**                                                    | **Example**                                                     |
-|-------------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
-| Adding category               | `add <category>`                                               | `add friend`                                                    |
-| Removing category             | `remove <category>`                                            | `remove friend`                                                 | 
-| Edit contact category         | `edit <contact index> <category 1>/<category 2>/...`           | `edit 1 friend/family`                                          |
-| Deleting contact category     | `edit <contact index>`                                         | `edit 1`                                                        |
-| Viewing category list         | `view`                                                         | `view`                                                          |
-| Viewing the contact list      | `list`                                                         | `list`                                                          |
-| Printing category functions   | `help`                                                         | `help`                                                          |
-| Quiting setting category mode | `quit`                                                         | `quit`                                                          |
+#### Inside Category Mode of Contact Manager  
+
+| Description                   | Command                                              | Example                |
+|-------------------------------|------------------------------------------------------|------------------------|
+| Adding category               | `add <category>`                                     | `add friend`           |
+| Removing category             | `remove <category>`                                  | `remove friend`        | 
+| Edit contact category         | `edit <contact index> <category 1>/<category 2>/...` | `edit 1 friend/family` |
+| Deleting contact category     | `edit <contact index>`                               | `edit 1`               |
+| Viewing category list         | `view`                                               | `view`                 |
+| Viewing the contact list      | `list`                                               | `list`                 |
+| Printing category functions   | `help`                                               | `help`                 |
+| Quiting setting category mode | `quit`                                               | `quit`                 |
 
 
-### Expense Manager
-| **Description**                             | **Command**                                                     | **Example**                                                          |
+### Expense Manager  
+
+| Description                                 | Command                                                         | Example                                                              |
 |---------------------------------------------|-----------------------------------------------------------------|----------------------------------------------------------------------|
 | Setting a Budget (default)                  | `budget <value>`                                                | `budget 1000`                                                        |
 | Setting a Budget (With `/month:` tag)       | - `budget <value> <month>` <br/> - `budget <month> </> <value>` | - `budget 1000 /month: 2024-11`<br/> - `budget /month:2024-11 /1000` |
@@ -1075,7 +1079,8 @@ bye
 | Finding an Expense (with `/month:` tag)     | `find <query> </month:> <monthValue>`                           | `find lunch /month:2024-05`                                          |
 
 
-### Activity Manager
+### Activity Manager  
+
 | **Description**                       | **Command**                                                          | **Example**                          |
 |---------------------------------------|----------------------------------------------------------------------|--------------------------------------|
 | Adding an activity                    | `add /name: <name> /type: <type>`                                    | `add /name: running /type: exercise` |
