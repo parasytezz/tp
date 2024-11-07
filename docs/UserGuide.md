@@ -27,13 +27,13 @@ International students who are frugal and organized. It caters to the needs of t
     - [Edit contact](#Editing-a-contact)
     - [Delete contact](#deleting-a-contact)
     - [Setting category](#Setting-category)
-      - [add category](#1-add-category)
-      - [remove category](#2-remove-category)
-      - [edit categories of contact](#3-edit-categories-of-contact)
-      - [view categories](#4-view-categories)
-      - [view the contact list](#5-view-the-contact-list)
-      - [print category functions](#6-print-category-functions)
-      - [quit category](#7-quit-category)
+      - [Add category](#1-add-category)
+      - [Remove category](#2-remove-category)
+      - [Edit categories of contact](#3-edit-categories-of-contact)
+      - [View categories](#4-view-categories)
+      - [View the contact list](#5-view-the-contact-list)
+      - [Print category functions](#6-print-category-functions)
+      - [Quit category](#7-quit-category)
     - [Search contacts by category](#Search-contacts-by-category)
     - [Find contact](#finding-a-contact)
   - [Expense Manager](#expense-manager)
@@ -1029,6 +1029,8 @@ bye
 
 
 ### Contact Manager
+
+#### Main Contact Manager Mode
 | **Description**               | **Command**                                                    | **Example**                                                     |
 |:------------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------|
 | Adding a contact              | `add /name: <name> /type: <type>`                              | `add /name: PlanPal /phone: 12345678 /email: PlanPal@gmail.com` |
@@ -1037,8 +1039,11 @@ bye
 | Finding an activity           | `find <value>`                                                 | `find Plan`                                                     |
 | Editing a contact             | `edit <index> /<field 1>: <value 1> /<field 2>: <value 2> ...` | `edit 1 /name: PlanPal_v1.0 /email: PlanPal_v1@gmail.com`       |
 | Search contacts by category   | `search <category>`                                            | `search friend`                                                 |
-| Setting contact category      | `category`                                                     | `category`                                                      |
-| #inside setting category mode |                                                                |
+| Setting contact category      | `category`                                                     | `category`                                                      |  
+  
+#### Inside Category Mode of Contact Manager
+| **Description**               | **Command**                                                    | **Example**                                                     |
+|:------------------------------|:---------------------------------------------------------------|:----------------------------------------------------------------|
 | Adding category               | `add <category>`                                               | `add friend`                                                    |
 | Removing category             | `remove <category>`                                            | `remove friend`                                                 | 
 | Edit contact category         | `edit <contact index> <category 1>/<category 2>/...`           | `edit 1 friend/family`                                          |
@@ -1050,25 +1055,25 @@ bye
 
 
 ### Expense Manager
-| **Description**                             | **Command**                                                 | **Example**                                                      |
-|:--------------------------------------------|:------------------------------------------------------------|:-----------------------------------------------------------------|
-| Setting a Budget (default)                  | `budget <value>`                                            | `budget 1000`                                                    |
-| Setting a Budget (With `/month:` tag)       | `budget <value> <month>` <br/> `budget <month> </> <value>` | `budget 1000 /month: 2024-11`<br/> `budget /month:2024-11 /1000` |
-| Adding an Expense (default)                 | `add /<field 1>: <value 1> ...`                             | `add /name: Lunch /cost: 10`                                     | 
-| Adding an Expense (with `/recurring` tag)   | `add /recurring /<field 1>: <value 1> ...`                  | `add /recurring /name: Spotify /cost: 10`                        |
-| Adding an Expense (with `/month:` tag)      | `add /month: <monthValue> /<field 1>: <value 1> ...`        | `add /month: 2024-11 /name: Spotify /cost: 10`                   |
-| Viewing an Expense (default)                | `list`                                                      | `list`                                                           |
-| Viewing an Expense (with `/recurring` tag)  | `list /recurring`                                           | `list /recurring`                                                |
-| Viewing an Expense (with `/month:` tag)     | `list </month:> <monthValue>`                               | `list /month: 2024-11`                                           |
-| Editing an Expense (default)                | `edit <index> </field:> <value> ...`                        | `edit 1 /name: Dinner /cost: 20`                                 |
-| Editing an Expense (with `/recurring` tag)  | `edit <index> </recurring> </field:> <value> ...`           | `edit 1 /recurring /name: Netflix /cost: 18.70`                  |
-| Editing an Expense (with `/month:` tag)     | `edit <index> </month:> <monthValue> </field:> <value> ...` | `edit 1 /month: 2024-11 /name: Breakfast /cost: 5.40`            |
-| Deleting an Expense (default)               | `delete <index>`                                            | `delete 1`                                                       |
-| Deleting an Expense (with `/recurring` tag) | `delete <index> </recurring>`                               | `delete 1 /recurring`                                            |
-| Deleting an Expense (with `/month:` tag)    | `delete <index> </month:> <monthValue>`                     | `delete 1 /month:2024-05`                                        |
-| Finding an Expense (default)                | `find query>`                                               | `find dinner`                                                    |
-| Finding an Expense (with `/recurring` tag)  | `find query> </recurring>`                                  | `find spotify /recurring`                                        |
-| Finding an Expense (with `/month:` tag)     | `find <query> </month:> <monthValue>`                       | `find lunch /month:2024-05`                                      |
+| **Description**                             | **Command**                                                     | **Example**                                                          |
+|:--------------------------------------------|:----------------------------------------------------------------|:---------------------------------------------------------------------|
+| Setting a Budget (default)                  | `budget <value>`                                                | `budget 1000`                                                        |
+| Setting a Budget (With `/month:` tag)       | - `budget <value> <month>` <br/> - `budget <month> </> <value>` | - `budget 1000 /month: 2024-11`<br/> - `budget /month:2024-11 /1000` |
+| Adding an Expense (default)                 | `add /<field 1>: <value 1> ...`                                 | `add /name: Lunch /cost: 10`                                         | 
+| Adding an Expense (with `/recurring` tag)   | `add /recurring /<field 1>: <value 1> ...`                      | `add /recurring /name: Spotify /cost: 10`                            |
+| Adding an Expense (with `/month:` tag)      | `add /month: <monthValue> /<field 1>: <value 1> ...`            | `add /month: 2024-11 /name: Spotify /cost: 10`                       |
+| Viewing an Expense (default)                | `list`                                                          | `list`                                                               |
+| Viewing an Expense (with `/recurring` tag)  | `list /recurring`                                               | `list /recurring`                                                    |
+| Viewing an Expense (with `/month:` tag)     | `list </month:> <monthValue>`                                   | `list /month: 2024-11`                                               |
+| Editing an Expense (default)                | `edit <index> </field:> <value> ...`                            | `edit 1 /name: Dinner /cost: 20`                                     |
+| Editing an Expense (with `/recurring` tag)  | `edit <index> </recurring> </field:> <value> ...`               | `edit 1 /recurring /name: Netflix /cost: 18.70`                      |
+| Editing an Expense (with `/month:` tag)     | `edit <index> </month:> <monthValue> </field:> <value> ...`     | `edit 1 /month: 2024-11 /name: Breakfast /cost: 5.40`                |
+| Deleting an Expense (default)               | `delete <index>`                                                | `delete 1`                                                           |
+| Deleting an Expense (with `/recurring` tag) | `delete <index> </recurring>`                                   | `delete 1 /recurring`                                                |
+| Deleting an Expense (with `/month:` tag)    | `delete <index> </month:> <monthValue>`                         | `delete 1 /month:2024-05`                                            |
+| Finding an Expense (default)                | `find query>`                                                   | `find dinner`                                                        |
+| Finding an Expense (with `/recurring` tag)  | `find query> </recurring>`                                      | `find spotify /recurring`                                            |
+| Finding an Expense (with `/month:` tag)     | `find <query> </month:> <monthValue>`                           | `find lunch /month:2024-05`                                          |
 
 
 ### Activity Manager

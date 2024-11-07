@@ -71,9 +71,6 @@ public class BudgetManager implements ExpenseModeFunctions {
      */
     public void setBudget(String input) throws PlanPalExceptions{
         String month = getMonth(input);
-        if (month == null){
-            month = getCurrentMonth();
-        }
         String budget = input.replaceAll(month,"").replaceAll(NON_NUMERICS, "").trim();
         setBudget(budget, month, true);
     }

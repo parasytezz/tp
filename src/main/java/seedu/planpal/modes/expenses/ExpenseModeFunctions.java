@@ -35,7 +35,7 @@ public interface ExpenseModeFunctions {
             }
             return input.substring(startIndex, endIndex).trim();
         }
-        return null;
+        return getCurrentMonth();
     }
 
     /**

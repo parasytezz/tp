@@ -84,7 +84,7 @@ The class diagram below represents the contact book system
 ![ContactClassDiagram.jpg](Images(DG)/ContactClassDiagram.jpg)
 
 
-The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the Editable and Storeable interfaces, enabling contacts to be modified and stored.
+The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the `Editable` and `Storeable` interfaces, enabling contacts to be modified and stored.
 
 The `ContactManager` class in PlanPal manages a list of `Contact` objects. This class provides CRUD (Create, Read, Update, Delete) operations for handling contacts, along with advanced features for categorizing contacts. `ContactManager` implements the ListFunctions interface, allowing it to handle list-based operations in a structured way.
 
@@ -96,13 +96,13 @@ The `Storeable` interface standardizes essential storage-related functionalities
 
 <u>Methods</u>
 
-| Method          | Description                           |
-|-----------------|---------------------------------------|
-| addContact      | Adds a contact to the contact list    |
-| deleteContact   | Deletes a contact in the contact list |
-| viewContactList | View the current contact list         |
-| editContact     | Edit a contact in the list            |
-| findContact     | Find a contact in the contact list    |
+| Methods         | 
+|-----------------|
+| addContact      |
+| deleteContact   |
+| viewContactList |
+| editContact     |
+| findContact     |
 
 ## Commands
 
@@ -233,9 +233,30 @@ The class diagram below represents the Expense Manager system.
 
 **Work in progress for v2.0**
 
+### Set Budget Command
+The sequence diagram below illustrates the process from adding a budget (to a month).  
+
+![SetBudgetDiagram.drawio.png](Images%28DG%29%2FSetBudgetDiagram.drawio.png)  
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `BudgetManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 2, representing expense manager, the user is then asked for a command in this mode.
+- When command to set budget is sent, the `ExpenseParser` processes this command.
+- BudgetManager is then used to set the budget.
+- During this process, it tries to find the month value and then using this value, the budget is set to that month.
+- Budget is then saved to a budget txt file.
+
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.  
-![AddExpense.drawio.png](Images%28DG%29%2FAddExpense.drawio.png)
+![AddExpense.drawio.png](Images%28DG%29%2FAddExpense.drawio.png)  
+![AddExpenseRef1.drawio.png](Images%28DG%29%2FAddExpenseRef1.drawio.png)  
+![AddExpenseRef2.drawio.png](Images%28DG%29%2FAddExpenseRef2.drawio.png)
 
 <u>Components Breakdown:</u>  
 - For simplicity, the `Ui` component has been taken out
