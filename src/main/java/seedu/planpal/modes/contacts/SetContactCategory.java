@@ -84,7 +84,7 @@ public class SetContactCategory implements ListFunctions {
      * @throws EmptyDescriptionException If the description is empty, an {@link EmptyDescriptionException} is thrown.
      */
     private void addCategory(String description) throws PlanPalExceptions {
-        String newCategory = description.replace("add", "").trim();
+        String newCategory = description.replaceFirst("add", "").trim();
         if (newCategory.isEmpty()) {
             throw new EmptyDescriptionException();
         } else if (newCategory.contains("/")) {
@@ -103,7 +103,7 @@ public class SetContactCategory implements ListFunctions {
      * @throws PlanPalExceptions If the input is invalid
      */
     private void removeCategory(String description) throws PlanPalExceptions {
-        String removingCategory = description.replace("remove", "").trim();
+        String removingCategory = description.replaceFirst("remove", "").trim();
         if (removingCategory.isEmpty()) {
             contactLogger.warning("Category is empty. Throwing EmptyDescriptionException.");
             throw new EmptyDescriptionException();
@@ -137,7 +137,7 @@ public class SetContactCategory implements ListFunctions {
      */
     private void editCategory(String description) throws PlanPalExceptions {
         try {
-            String descriptionToEdit = description.replace("edit", "").trim();
+            String descriptionToEdit = description.replaceFirst("edit", "").trim();
             String[] categories;
             String[] uniqueCategories = {};
             int contactId;
