@@ -174,6 +174,24 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 - The editList function edits the field at the stated index
 - Finally, contact file is saved in the savedContacts FileManager.
 
+### Find Command
+The sequence diagram below illustrates the process for resolving the "find" command.
+![FindContactDiagram.drawio.png](Images%28DG%29/FindContactDiagram.drawio.png)
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ContactParser` class is the `Parser` component
+- `ContactManager` class is the `Mode` component
+- There is no need for saving for list here.
+
+<u>Explanation:</u>
+- Before this command is executed, the user will have to choose their mode.
+- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
+- When command "find john" is sent, the processCommand function is executed.
+- Since the command is "find", findContact command is executed using the description "john".
+- This finds contacts containing the description "john" and adds them to an ArrayList of matching contacts.
+- Finally, the matching contacts are printed out for the user to see.
+
 ### Set Category Command
 The sequence diagram below illustrates the process for resolving the "category" command. 
 ContactManager is omitted from the diagram for simplicity.
@@ -207,26 +225,6 @@ The sequence diagram below illustrates the process for resolving the "search" co
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
 - When command "search {category}" is sent, the processCommand function is executed.
 - Since the command is "search {category}", a list of contacts that is assigned with the category is shown
-
-
-### Find Command
-The sequence diagram below illustrates the process for resolving the "find" command.
-![FindContactDiagram.drawio.png](Images%28DG%29/FindContactDiagram.drawio.png)
-
-<u>Components Breakdown:</u>
-- For simplicity, the `Ui` component has been taken out
-- `ContactParser` class is the `Parser` component
-- `ContactManager` class is the `Mode` component
-- There is no need for saving for list here.
-
-<u>Explanation:</u>
-- Before this command is executed, the user will have to choose their mode.
-- When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
-- When command "find john" is sent, the processCommand function is executed.
-- Since the command is "find", findContact command is executed using the description "john".
-- This finds contacts containing the description "john" and adds them to an ArrayList of matching contacts.
-- Finally, the matching contacts are printed out for the user to see.
-
 ---
 
 ## Mode: Expense Manager
@@ -308,6 +306,19 @@ The way the edit command works for expense manager is similar to how it works fo
 ### Delete Command
 
 ### Find Command
+The sequence diagram below illustrates the process for resolving the "edit" command.  
+![FindExpensesDiagram.drawio.png](Images%28DG%29/FindExpensesDiagram.drawio.png)
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `RecurringManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>  
+The way the edit command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- You are able to edit both the recurring expense list or the monthly list, depending on whichever is chosen.
 
 ---
 ## Mode: Activity Manager
