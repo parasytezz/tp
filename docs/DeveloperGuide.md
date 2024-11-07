@@ -4,7 +4,32 @@
 Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the behind-the-scenes work of our product. We hope this document proves informative and useful for your work!
 
 ## Table of Contents
-{to be inserted at a later date}
+- [Design & Implementation](#design--implementation)
+- [Ui](#ui)
+- [Parser](#parser)
+- [Mode: Contact Manager](#mode-contact-manager)
+  - [Add Command](#add-command)
+  - [Delete Command](#delete-command)
+  - [List Command](#list-command)
+  - [Edit Command](#edit-command)
+  - [Find Command](#find-command)
+  - [Set Category Command](#set-budget-command)
+  - [Search Command](#search-command)
+- [Mode: Expense Manager](#mode-expense-manager)
+  - [Set Budget Command](#set-budget-command)
+  - [Add Command](#add-command-1)
+  - [List Command](#list-command-1)
+  - [Edit Command](#edit-command-1)
+  - [Delete Command](#delete-command-)
+- [Mode: Activity Manager](#mode-activity-manager)
+  - [Add Command](#add-command-2)
+  - [Delete Command](#delete-command-1)
+  - [Edit Command](#edit-command-2)
+  - [List Command](#list-command-2)
+  - [Find Command](#find-command-2)
+- [Product Scope](#product-scope)
+- [User Stories](#user-stories)
+- [Non-Functional Requirements](#non-functional-requirements)
 
 ---
 
@@ -14,13 +39,6 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
 - Code adapted from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3).
 - Gradle - used for build automation
 - ChatGPT - codes from GPT has been commented in the code base
-
-## Setting up, getting started
-1. Java 17 is required for PlanPal to function properly, please make sure your device has Java 17 installed. If not, you may download it [here](). If you need further assistance installing Java 17, you may refer to the [Installation Guide.]()
-2. Once you have ascertained that your device has Java 17 installed, you may download the `.jar file` [here]().
-insert SS of release page
-
-Click on `PlanPal.jar` to automatically download the file. Place the file in a folder your choice.
 
 ---
 
@@ -45,6 +63,7 @@ For simplicity, the 3 different modes will be classified as `:Mode`.
 <u>Sequence Diagram for PlanPal</u>  
 ![MainProgramFlowDiagram.drawio.png](Images%28DG%29%2FMainProgramFlowDiagram.drawio.png)
 
+---
 
 ## Ui
 
@@ -70,6 +89,8 @@ The `Ui` component has the following key methods:
 This component was created as functionalities such as printing will be used in most of the classes in the PlanPal Application.  
 Consolidating all the print methods that are repeated reduces repetition in code and makes it easier to update when necessary.
 
+---
+
 ## Parser
 <u>Overview</u>  
 This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.  
@@ -79,6 +100,8 @@ This component handles the logic behind the application. The parser component co
 
 <u>Design Considerations</u>  
 The Parser class follows this structure as there are common commands between the different modes. Using inheritance prevents the repetition of code. Additionally, different parsers were created since different modes require different functionalities.
+
+---
 
 ## Mode: Contact Manager
 The class diagram below represents the contact book system
@@ -114,7 +137,6 @@ The class diagram below represents the contact book system
 | editContact     |
 | findContact     |
 
-## Commands
 
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.  
@@ -433,7 +455,7 @@ The sequence diagram below illustrates the process for resolving the "find" comm
 The way the find command works for activity manager is similar to how it works for contact manager.
 
 ---
-## Product scope
+## Product Scope
 ### Target user profile
 
 Our target user profile is international students studying in NUS.
