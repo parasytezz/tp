@@ -306,7 +306,7 @@ The way the edit command works for expense manager is similar to how it works fo
 ### Delete Command
 
 ### Find Command
-The sequence diagram below illustrates the process for resolving the "edit" command.  
+The sequence diagram below illustrates the process for resolving the "find" command.  
 ![FindExpensesDiagram.drawio.png](Images%28DG%29/FindExpensesDiagram.drawio.png)
 
 <u>Components Breakdown:</u>
@@ -316,9 +316,9 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 - `RecurringManager` class is created when ExpenseManager was constructed
 
 <u>Explanation:</u>  
-The way the edit command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+The way the find command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
 - There is a check for `/recurring` and `/month:` tag.
-- You are able to edit both the recurring expense list or the monthly list, depending on whichever is chosen.
+- You are able to find in both the recurring expense list or the monthly list, depending on whichever is chosen.
 
 ---
 ## Mode: Activity Manager
