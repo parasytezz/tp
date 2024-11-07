@@ -303,7 +303,20 @@ The way the edit command works for expense manager is similar to how it works fo
 - There is a check for `/recurring` and `/month:` tag.
 - You are able to edit both the recurring expense list or the monthly list, depending on whichever is chosen.
 
-### Delete Command
+### Delete Command  
+The sequence diagram below illustrates the process for resolving the "delete" command.  
+![DeleteExpense.drawio.png](Images%28DG%29%2FDeleteExpense.drawio.png) 
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `RecurringManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>  
+The way the delete command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- You are able to delete in both the recurring expense list or the monthly list, depending on whichever is chosen.
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.  
