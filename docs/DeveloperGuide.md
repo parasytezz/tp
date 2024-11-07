@@ -268,7 +268,7 @@ The sequence diagrams below illustrate the process for resolving the "add" comma
 
 <u>Explanation:</u>  
 The way the add command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
-- There is a check for recurring expenses
+- There is a check for `/recurring` and `/month:` tag.
 - Addition of the recurring expense list when new expense list is created.
 
 ### List Command
@@ -283,7 +283,29 @@ The sequence diagram below illustrates the process for resolving the "list" comm
 - `RecurringManager` class is created when ExpenseManager was constructed
 
 <u>Explanation:</u>  
-The way the list command works for expense manager is similar to how it works for contact manager. The key difference is that it will the recurring expense list if the user is viewing a new expense list without anything in it. (Refer to the ref frame in [add command](#add-command-1))
+The way the list command works for expense manager is similar to how it works for contact manager. The key difference are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- It will add the recurring expense list if the user is viewing a new expense list without anything in it. (Refer to the ref frame in [add command](#add-command-1))
+
+### Edit Command
+The sequence diagram below illustrates the process for resolving the "edit" command.  
+![EditExpense.drawio.png](Images%28DG%29%2FEditExpense.drawio.png)  
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `RecurringManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>  
+The way the edit command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- You are able to edit both the recurring expense list or the monthly list, depending on whichever is chosen.
+
+### Delete Command
+
+### Find Command
+
 ---
 ## Mode: Activity Manager
 The class diagram below represents the Activity Manager system.
