@@ -333,6 +333,4 @@ public class FileManager {
         backupFile.delete();
         Ui.setMainStream(out);
     }
-
-
 }

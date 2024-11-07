@@ -83,16 +83,23 @@ The class diagram below represents the contact book system
 <u>Class Diagram for Contact Manager</u>  
 ![ContactClassDiagram.drawio.png](Images%28DG%29/ContactClassDiagram.drawio.png)
 
+**General Classes**
+- The `PlanPal` class is the main entry point of the system, containing a `main(String[])` method to launch the application.
+- The `ParserFactory` class is a factory that provides different parsers (e.g., `ContactParser`) based on the input type.
+- The `Parser` class is an abstract class with methods to load and process commands from a file.
+- The `BackUpManager` class manages data backups, including backing up, restoring, and creating directories for backup files.
+- The `UI` class is responsible for displaying messages and menus to the user.
+- The `ListFunctions` interface defines methods for list operations like adding, deleting, and finding items.
+- The `FileManager` class handles saving and loading data to and from storage
+- The `Storable` interface defines methods for managing storage paths and command descriptions.
+- The `Editable` interface defines methods for editing command descriptions.
 
-The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the `Editable` and `Storeable` interfaces, enabling contacts to be modified and stored.
+**Contact Classes**
+- The `Contact` class represents a contact with attributes like name, phone, email, command description, and categories. It implements the Editable and Storable interfaces for editing and storage functionalities.
+- The `ContactParser` class handles contact-related commands, processing strings and interacting with the ContactManager.
+- The `ContactManager` class manages a list of contacts and categories, with methods to add, delete, edit, find, and search contacts and categories.
+- The `SetContactCategory` class manages contact categories, providing methods for adding, removing, and validating categories.
 
-The `ContactManager` class in PlanPal manages a list of `Contact` objects. This class provides CRUD (Create, Read, Update, Delete) operations for handling contacts, along with advanced features for categorizing contacts. `ContactManager` implements the ListFunctions interface, allowing it to handle list-based operations in a structured way.
-
-The `ListFunctions` interface in the PlanPal application provides generic CRUD (Create, Read, Update, Delete) operations for list management. It standardizes common list manipulations, enabling reusable, modular operations across various object types and components.
-
-The `Editable`interface provides a standardized way to modify objects within PlanPal by defining an editing method, processEditFunction, which takes new values and updates object attributes accordingly.
-
-The `Storeable` interface standardizes essential storage-related functionalities within PlanPal, ensuring that objects implementing it can be managed and stored in a consistent manner.
 
 <u>Methods</u>
 
@@ -125,6 +132,7 @@ The sequence diagram below illustrates the process for resolving the "add" comma
 
 ### Delete Command
 The sequence diagram below illustrates the process for resolving the "delete" command.
+
 ![DeleteContact.drawio.png](Images%28DG%29%2FDeleteContact.drawio.png)
 
 <u>Components Breakdown:</u>
@@ -176,6 +184,7 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
+
 ![FindContactDiagram.drawio.png](Images%28DG%29/FindContactDiagram.drawio.png)
 
 <u>Components Breakdown:</u>
@@ -216,11 +225,13 @@ ContactManager is omitted from the diagram for simplicity.
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Search Command
-The 'search' command allows users to search contacts belonging to user-defined categories
-
 The sequence diagram below illustrates the process for resolving the "search" command.
+
 ![SearchByCategory.drawio.png](Images%28DG%29%2FSearchByCategory.drawio.png)
+
 <u>Explanation:</u>
+
+The 'search' command allows users to search contacts belonging to user-defined categories
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
 - When command "search {category}" is sent, the processCommand function is executed.
@@ -230,9 +241,17 @@ The sequence diagram below illustrates the process for resolving the "search" co
 ## Mode: Expense Manager
 The class diagram below represents the Expense Manager system.
 
-{insert class diagram} 
+![ExpenseClassDiagram.png](Images%28DG%29/ExpenseClassDiagram.png)
 
-**Work in progress for v2.0**
+**Expense Classes**
+- The `Expense` class represents an individual expense with attributes like command description, cost, month, name, and type. It implements the Editable and Storable interfaces for editing and storage functionalities.
+- The `ExpenseType` class is an enumeration that categorizes expenses into different types.
+- The `ExpenseParser` class is responsible for parsing expense-related commands and delegating them to the `ExpenseManager`.
+- The `ExpenseManager` class manages and processes expenses, interacting with the `FileManager`, `BudgetManager`, and `RecurringManager`.
+- The `RecurringExpense` class represents an expense that recurs monthly.
+- The `RecurringManager` class manages recurring expenses, including adding, viewing, and removing them.
+- The `BudgetManager` class manages user budgets, including setting, retrieving, and clearing budgets.
+- The `ExpenseModeFunctions` interface defines methods for handling expense modes, such as current month and recurring expenses.
 
 ### Set Budget Command
 The sequence diagram below illustrates the process from adding a budget (to a month).  
@@ -323,10 +342,12 @@ The way the find command works for expense manager is similar to how it works fo
 ---
 ## Mode: Activity Manager
 The class diagram below represents the Activity Manager system.
+
 ![ActivityClassDiagram.drawio.png](Images%28DG%29%2FActivityClassDiagram.drawio.png)
 
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.
+
 ![AddActivities.drawio.png](Images%28DG%29%2FAddActivities.drawio.png)
 
 <u>Components Breakdown:</u>
@@ -340,6 +361,7 @@ being the names used, as well as an additional type to dictate activity type.
 
 ### Delete Command
 The sequence diagram below illustrates the process for resolving the "add" command.
+
 ![DeleteActivties.drawio.png](Images%28DG%29%2FDeleteActivties.drawio.png)
 
 <u>Components Breakdown:</u>
@@ -353,7 +375,10 @@ being the names used.
 
 ### Edit Command
 The sequence diagram below illustrates the process for resolving the "edit" command.
+
 ![EditActivity.drawio.png](Images%28DG%29%2FEditActivity.drawio.png)
+
+
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
 - `ActivityParser` class is the `Parser` component
@@ -364,7 +389,9 @@ The way the edit command works for activity manager is similar to how it works f
 
 ### List Command
 The sequence diagram below illustrates the process for resolving the "list" command.
+
 ![ViewActivity.drawio.png](Images%28DG%29%2FViewActivity.drawio.png)
+
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
 - `ActivityParser` class is the `Parser` component
@@ -375,7 +402,9 @@ The way the list command works for activity manager is similar to how it works f
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
+
 ![FindActivity.drawio.png](Images%28DG%29%2FFindActivity.drawio.png)
+
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
 - `ActivityParser` class is the `Parser` component
@@ -398,24 +427,28 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 
 ## User Stories
 
-|Version| As a ... | I want to ...             | So that I can ...                                                                 |
-|--------|----------|---------------------------|-----------------------------------------------------------------------------------|
-|v1.0|NUS international student| see my list of contacts   | easily call home or look for emergency contacts when needed                       |
-|v1.0|NUS international student| add a contact             | expand my list of useful contacts                                                 |
-|v1.0|NUS international student| delete a contact          | remove a contact if I no longer need it                                           |
-|v1.0|NUS international student| edit a contact            | amend any mistakes when creating the contact or if the number has been changed    |
-|v1.0|NUS international student| save my contacts          | my contacts are still there when I exit and enter the application again           |                                                       |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student|    |                                                                                   |
-|v2.0|NUS international student| see my list of activities | keep track of my schedule                                                         |
-|v2.0|NUS international student| add an activity           | expand my list of activities                                                      |
-|v2.0|NUS international student| delete an activity        | remove an activity when I have done it                                            |
-|v2.0|NUS international student| edit an activity          | amend any mistakes when creating the activity or if the activity has been changed |
-|v2.0|NUS international student| save my activities        | my activities are still there when I exit and enter the application again         |
+|Version| As a ... | I want to ...                                    | So that I can ...                                                                |
+|--------|----------|--------------------------------------------------|----------------------------------------------------------------------------------|
+|v1.0|NUS international student| see my list of contacts                          | easily call home or look for emergency contacts when needed                      |
+|v1.0|NUS international student| add a contact                                    | expand my list of useful contacts                                                |
+|v1.0|NUS international student| delete a contact                                 | remove a contact if I no longer need it                                          |
+|v1.0|NUS international student| edit a contact                                   | amend any mistakes when creating the contact or if the number has been changed   |
+|v1.0|NUS international student| save my contacts                                 | my contacts are still there when I exit and enter the application again          |                                                       |
+|v2.0|NUS international student| set a monthly budget                             | ensure that I do not spend more than a certain amount each month                 |
+|v2.0|NUS international student| add an expense                                   | keep track of what I am spending my money on                                     |
+|v2.0|NUS international student| delete an expense                                | remove inaccurate expenses                                                       |
+|v2.0|NUS international student| list expenses                                    | view all my current expenses                                                     |
+|v2.0|NUS international student| edit an expense                                  | change details regarding my past expenses                                        |
+|v2.0|NUS international student| find an expense                                  | view the expense I am looking for quickly                                        |
+|v2.0|NUS international student| classify expenses into types                     | keep track of what type of items I am spending money on                          |
+|v2.0|NUS international student| seperate expenses by month                       | keep track of monthly expenses                                                   |
+|v2.0|NUS international student| see a breakdown of my spending according to type | be more aware of my spending habits                                              |
+|v2.0|NUS international student| handle recurring expenses                        | keep track of monthly subscriptions conveniently                                 |
+|v2.0|NUS international student| see my list of activities                        | keep track of my schedule                                                        |
+|v2.0|NUS international student| add an activity                                  | expand my list of activities                                                     |
+|v2.0|NUS international student| delete an activity                               | remove an activity when I have done it                                           |
+|v2.0|NUS international student| edit an activity                                 | amend any mistakes when creating the activity or if the activity has been changed |
+|v2.0|NUS international student| save my activities                               | my activities are still there when I exit and enter the application again        |
 
 ---
 ## Non-Functional Requirements
