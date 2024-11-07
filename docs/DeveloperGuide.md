@@ -10,7 +10,10 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
 
 ## Acknowledgements
 
-{list here sources of all reused/adapted ideas, code, documentation, and third-party libraries -- include links to the original source as well}
+- [MVN REPOSITORY - Zip4j](https://mvnrepository.com/artifact/net.lingala.zip4j/zip4j/2.11.5) : Used for storing back up folder in an encrypted zip folder.
+- Code adapted from [AddressBook-Level3](https://github.com/se-edu/addressbook-level3).
+- Gradle - used for build automation
+- ChatGPT - codes from GPT has been commented in the code base
 
 ## Setting up, getting started
 1. Java 17 is required for PlanPal to function properly, please make sure your device has Java 17 installed. If not, you may download it [here](). If you need further assistance installing Java 17, you may refer to the [Installation Guide.]()
@@ -68,7 +71,7 @@ This component was created as functionalities such as printing will be used in m
 Consolidating all the print methods that are repeated reduces repetition in code and makes it easier to update when necessary.
 
 ## Parser
-<u>Overview</u>
+<u>Overview</u>  
 This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.  
 
 <u>Class Diagram for Parser Component</u>  
@@ -322,7 +325,20 @@ The way the edit command works for expense manager is similar to how it works fo
 - There is a check for `/recurring` and `/month:` tag.
 - You are able to edit both the recurring expense list or the monthly list, depending on whichever is chosen.
 
-### Delete Command
+### Delete Command  
+The sequence diagram below illustrates the process for resolving the "delete" command.  
+![DeleteExpense.drawio.png](Images%28DG%29%2FDeleteExpense.drawio.png) 
+
+<u>Components Breakdown:</u>
+- For simplicity, the `Ui` component has been taken out
+- `ExpenseParser` class is the `Parser` component
+- `ExpenseManager` class is the `Mode` component
+- `RecurringManager` class is created when ExpenseManager was constructed
+
+<u>Explanation:</u>  
+The way the delete command works for expense manager is similar to how it works for contact manager. The key differences are listed below:
+- There is a check for `/recurring` and `/month:` tag.
+- You are able to delete in both the recurring expense list or the monthly list, depending on whichever is chosen.
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.  
@@ -376,6 +392,7 @@ being the names used.
 ### Edit Command
 The sequence diagram below illustrates the process for resolving the "edit" command.
 
+
 ![EditActivity.drawio.png](Images%28DG%29%2FEditActivity.drawio.png)
 
 
@@ -392,6 +409,7 @@ The sequence diagram below illustrates the process for resolving the "list" comm
 
 ![ViewActivity.drawio.png](Images%28DG%29%2FViewActivity.drawio.png)
 
+
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
 - `ActivityParser` class is the `Parser` component
@@ -404,6 +422,7 @@ The way the list command works for activity manager is similar to how it works f
 The sequence diagram below illustrates the process for resolving the "find" command.
 
 ![FindActivity.drawio.png](Images%28DG%29%2FFindActivity.drawio.png)
+
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -427,6 +446,7 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 
 ## User Stories
 
+
 |Version| As a ... | I want to ...                                    | So that I can ...                                                                |
 |--------|----------|--------------------------------------------------|----------------------------------------------------------------------------------|
 |v1.0|NUS international student| see my list of contacts                          | easily call home or look for emergency contacts when needed                      |
@@ -449,6 +469,7 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 |v2.0|NUS international student| delete an activity                               | remove an activity when I have done it                                           |
 |v2.0|NUS international student| edit an activity                                 | amend any mistakes when creating the activity or if the activity has been changed |
 |v2.0|NUS international student| save my activities                               | my activities are still there when I exit and enter the application again        |
+
 
 ---
 ## Non-Functional Requirements
