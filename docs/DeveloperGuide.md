@@ -81,7 +81,7 @@ The Parser class follows this structure as there are common commands between the
 The class diagram below represents the contact book system
 
 <u>Class Diagram for Contact Manager</u>  
-![ContactClassDiagram.png](Images%28DG%29/ContactClassDiagram.png)
+![ContactClassDiagram.drawio.png](Images%28DG%29/ContactClassDiagram.drawio.png)
 
 
 The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the Editable and Storeable interfaces, enabling contacts to be modified and stored.
@@ -200,6 +200,8 @@ ContactManager is omitted from the diagram for simplicity.
 ### Search Command
 The 'search' command allows users to search contacts belonging to user-defined categories
 
+The sequence diagram below illustrates the process for resolving the "search" command.
+![SearchByCategory.drawio.png](Images%28DG%29%2FSearchByCategory.drawio.png)
 <u>Explanation:</u>
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
