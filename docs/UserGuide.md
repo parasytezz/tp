@@ -1028,7 +1028,7 @@ bye
 | Leave Application | `bye`   |
 
 
-### Contact Manager
+### Contact Manager  
 
 #### Main Contact Manager Mode  
 
