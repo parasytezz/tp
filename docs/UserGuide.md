@@ -1032,6 +1032,7 @@ bye
 
 #### Main Contact Manager Mode  
 
+
 | Description                 | Command                                                        | Example                                                         |
 |-----------------------------|----------------------------------------------------------------|-----------------------------------------------------------------|
 | Adding a contact            | `add /name: <name> /type: <type>`                              | `add /name: PlanPal /phone: 12345678 /email: PlanPal@gmail.com` |
