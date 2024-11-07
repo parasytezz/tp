@@ -81,7 +81,7 @@ The Parser class follows this structure as there are common commands between the
 The class diagram below represents the contact book system
 
 <u>Class Diagram for Contact Manager</u>  
-![ContactClassDiagram.jpg](Images(DG)/ContactClassDiagram.jpg)
+![ContactClassDiagram.png](Images%28DG%29/ContactClassDiagram.png)
 
 
 The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the Editable and Storeable interfaces, enabling contacts to be modified and stored.
@@ -209,8 +209,7 @@ The 'search' command allows users to search contacts belonging to user-defined c
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
-
-![FindContact.jpg](Images%28DG%29%2FFindContact.jpg)
+![FindContactDiagram.drawio.png](Images%28DG%29/FindContactDiagram.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
