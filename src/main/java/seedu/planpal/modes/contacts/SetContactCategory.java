@@ -32,7 +32,7 @@ public class SetContactCategory implements ListFunctions {
      *
      * @return true if continue to handle category commands. Otherwise, false.
      *
-     * @throws PlanPalExceptions
+     * @throws PlanPalExceptions if fail to handle the command
      */
     public boolean handle(String description, FileManager savedContacts, ArrayList<Contact> contactList, 
                           ArrayList<ArrayList<Contact>> contactListByCategory, ArrayList<String> categoryList, 

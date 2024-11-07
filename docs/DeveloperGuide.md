@@ -81,7 +81,7 @@ The Parser class follows this structure as there are common commands between the
 The class diagram below represents the contact book system
 
 <u>Class Diagram for Contact Manager</u>  
-![ContactClassDiagram.jpg](Images(DG)/ContactClassDiagram.jpg)
+![ContactClassDiagram.drawio.png](Images%28DG%29/ContactClassDiagram.drawio.png)
 
 
 The `Contact` class in PlanPal represents a user's contact, encapsulating details like name, phone, and email. It implements the `Editable` and `Storeable` interfaces, enabling contacts to be modified and stored.
@@ -144,7 +144,6 @@ The sequence diagram below illustrates the process for resolving the "delete" co
 The sequence diagram below illustrates the process for resolving the "list" command.  
 ![ViewContact.drawio.png](Images%28DG%29%2FViewContact.drawio.png)
 
-
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
 - `ContactParser` class is the `Parser` component
@@ -176,28 +175,33 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Set Category Command
-The sequence diagram below illustrates the process for resolving the "category" command.  
+The sequence diagram below illustrates the process for resolving the "category" command. 
+ContactManager is omitted from the diagram for simplicity.
 
-![SetCategory.drawio.png](Images%28DG%29%2FSetCategory.drawio.png)
+
+![SetContactCategory.drawio.png](Images%28DG%29%2FSetContactCategory.drawio.png)
 <u>Components Breakdown:</u>
 - `ContactParser` class is the `Parser` component
-- `ContactManager` class is the `Mode` component
+- `SetContactCategory` class is the `Mode` component
 
 <u>Explanation:</u>
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
-- When command "category" is sent, the processCommand function is executed.
-- Since the command is "category", a list of available functions about category setting will be shown
+- When command "category" is sent, the processCommand function is executed in ContactManager.
+- Then handle function is called in SetContactCategory.
 - "add {category}" can be used to add new category
 - "remove {category}" can be used to remove existing category
-- "edit {contact id} {category}" can be used to assign category to contact with specified id
+- "edit {contact id} {category1/category2/..}" can be used to assign category to contact with specified id
 - "view" is executed to show all existing categories
+- "list" is executed to show all existing contacts
 - "quit" is executed to quit setting category mode
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Search Command
 The 'search' command allows users to search contacts belonging to user-defined categories
 
+The sequence diagram below illustrates the process for resolving the "search" command.
+![SearchByCategory.drawio.png](Images%28DG%29%2FSearchByCategory.drawio.png)
 <u>Explanation:</u>
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
@@ -207,8 +211,7 @@ The 'search' command allows users to search contacts belonging to user-defined c
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
-
-![FindContact.jpg](Images%28DG%29%2FFindContact.jpg)
+![FindContactDiagram.drawio.png](Images%28DG%29/FindContactDiagram.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
@@ -311,8 +314,6 @@ The way the edit command works for expense manager is similar to how it works fo
 The class diagram below represents the Activity Manager system.
 ![ActivityClassDiagram.drawio.png](Images%28DG%29%2FActivityClassDiagram.drawio.png)
 
-**Work in progress for v2.0**
-
 ### Add Command
 The sequence diagram below illustrates the process for resolving the "add" command.
 ![AddActivities.drawio.png](Images%28DG%29%2FAddActivities.drawio.png)
@@ -340,37 +341,37 @@ The way the delete command works for activity manager is similar to how it works
 being the names used.
 
 ### Edit Command
-The sequence diagram below illustrates the process for resolving the "add" command.
-
+The sequence diagram below illustrates the process for resolving the "edit" command.
+![EditActivity.drawio.png](Images%28DG%29%2FEditActivity.drawio.png)
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
-- `ExpenseParser` class is the `Parser` component
-- `ExpenseManager` class is the `Mode` component
+- `ActivityParser` class is the `Parser` component
+- `ActivityManager` class is the `Mode` component
 
 <u>Explanation:</u>  
-The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+The way the edit command works for activity manager is similar to how it works for contact manager.
 
 ### List Command
-The sequence diagram below illustrates the process for resolving the "add" command.
-
+The sequence diagram below illustrates the process for resolving the "list" command.
+![ViewActivity.drawio.png](Images%28DG%29%2FViewActivity.drawio.png)
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
-- `ExpenseParser` class is the `Parser` component
-- `ExpenseManager` class is the `Mode` component
+- `ActivityParser` class is the `Parser` component
+- `ActivityManager` class is the `Mode` component
 
 <u>Explanation:</u>  
-The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+The way the list command works for activity manager is similar to how it works for contact manager.
 
 ### Find Command
-The sequence diagram below illustrates the process for resolving the "add" command.
-
+The sequence diagram below illustrates the process for resolving the "find" command.
+![FindActivity.drawio.png](Images%28DG%29%2FFindActivity.drawio.png)
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
-- `ExpenseParser` class is the `Parser` component
-- `ExpenseManager` class is the `Mode` component
+- `ActivityParser` class is the `Parser` component
+- `ActivityManager` class is the `Mode` component
 
 <u>Explanation:</u>  
-The way the add command works for activity manager is similar to how it works for contact manager, with the only difference being the names used.
+The way the find command works for activity manager is similar to how it works for contact manager.
 
 ---
 ## Product scope
@@ -380,20 +381,30 @@ Our target user profile is international students studying in NUS.
 
 ### Value proposition
 
-Studying in a foreign country can be disorienting and isolating, this application will help users keep track of the contacts and important details of the people they meet in NUS so that they can connect with others conveniently.
+Studying in a foreign country can be disorienting and isolating, this application will help users keep track of the contacts and important details of the people they meet in NUS so that they can connect with others conveniently. This application will also help them manage their spending while in a foreign country.
 
 ---
 
 ## User Stories
 
-|Version| As a ... | I want to ...             | So that I can ...                                                              |
-|--------|----------|---------------------------|--------------------------------------------------------------------------------|
-|v1.0|NUS international student| see my list of contacts   | easily call home or look for emergency contacts when needed                    |
-|v1.0|NUS international student| add a contact             | expand my list of useful contacts                                              |
-|v1.0|NUS international student| delete a contact          | remove a contact if I no longer need it                                        |
-|v1.0|NUS international student| edit a contact            | amend any mistakes when creating the contact or if the number has been changed |
-|v1.0|NUS international student| save my contacts          | my contacts are still there when I exit and enter the app again                |                                                       |
-|v2.0||  |                     |
+|Version| As a ... | I want to ...             | So that I can ...                                                                 |
+|--------|----------|---------------------------|-----------------------------------------------------------------------------------|
+|v1.0|NUS international student| see my list of contacts   | easily call home or look for emergency contacts when needed                       |
+|v1.0|NUS international student| add a contact             | expand my list of useful contacts                                                 |
+|v1.0|NUS international student| delete a contact          | remove a contact if I no longer need it                                           |
+|v1.0|NUS international student| edit a contact            | amend any mistakes when creating the contact or if the number has been changed    |
+|v1.0|NUS international student| save my contacts          | my contacts are still there when I exit and enter the application again           |                                                       |
+|v2.0|NUS international student|    |                                                                                   |
+|v2.0|NUS international student|    |                                                                                   |
+|v2.0|NUS international student|    |                                                                                   |
+|v2.0|NUS international student|    |                                                                                   |
+|v2.0|NUS international student|    |                                                                                   |
+|v2.0|NUS international student|    |                                                                                   |
+|v2.0|NUS international student| see my list of activities | keep track of my schedule                                                         |
+|v2.0|NUS international student| add an activity           | expand my list of activities                                                      |
+|v2.0|NUS international student| delete an activity        | remove an activity when I have done it                                            |
+|v2.0|NUS international student| edit an activity          | amend any mistakes when creating the activity or if the activity has been changed |
+|v2.0|NUS international student| save my activities        | my activities are still there when I exit and enter the application again         |
 
 ---
 ## Non-Functional Requirements
