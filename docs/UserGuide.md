@@ -59,8 +59,8 @@ International students who are frugal and organized. It caters to the needs of t
 ---
 ## Quick Start
 1. Ensure that you have Java 17 or above installed.
-2. Down the latest version of `PlanPal` from [here](http://link.to/duke).
-   Click on `PlanPal.jar` to automatically download the file. Place the file in a folder of your choice.
+2. Down the latest version of `PlanPal` from [here](https://github.com/AY2425S1-CS2113-W14-2/tp).
+   Find the latest release and download `PlanPal.jar`. Place the file in a folder of your choice.
 3. Open the command terminal and navigate to the folder where `PlanPal.jar` is downloaded.
 4. Use the command `java -jar PlanPal.jar` to launch PlanPal
    On start up, you should see the following screen:  
