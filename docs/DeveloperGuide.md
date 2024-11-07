@@ -176,22 +176,25 @@ The sequence diagram below illustrates the process for resolving the "edit" comm
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Set Category Command
-The sequence diagram below illustrates the process for resolving the "category" command.  
+The sequence diagram below illustrates the process for resolving the "category" command. 
+ContactManager is omitted from the diagram for simplicity.
 
-![SetCategory.drawio.png](Images%28DG%29%2FSetCategory.drawio.png)
+
+![SetContactCategory.drawio.png](Images%28DG%29%2FSetContactCategory.drawio.png)
 <u>Components Breakdown:</u>
 - `ContactParser` class is the `Parser` component
-- `ContactManager` class is the `Mode` component
+- `SetContactCategory` class is the `Mode` component
 
 <u>Explanation:</u>
 - Before this command is executed, the user will have to choose their mode.
 - When modeInput is 1, representing contact manager, the user is then asked for a command in this mode.
-- When command "category" is sent, the processCommand function is executed.
-- Since the command is "category", a list of available functions about category setting will be shown
+- When command "category" is sent, the processCommand function is executed in ContactManager.
+- Then handle function is called in SetContactCategory.
 - "add {category}" can be used to add new category
 - "remove {category}" can be used to remove existing category
-- "edit {contact id} {category}" can be used to assign category to contact with specified id
+- "edit {contact id} {category1/category2/..}" can be used to assign category to contact with specified id
 - "view" is executed to show all existing categories
+- "list" is executed to show all existing contacts
 - "quit" is executed to quit setting category mode
 - Finally, contact file is saved in the savedContacts FileManager.
 
