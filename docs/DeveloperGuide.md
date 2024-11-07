@@ -207,8 +207,7 @@ The 'search' command allows users to search contacts belonging to user-defined c
 
 ### Find Command
 The sequence diagram below illustrates the process for resolving the "find" command.
-
-![FindContact.jpg](Images%28DG%29%2FFindContact.jpg)
+![FindContactDiagram.drawio.png](Images%28DG%29/FindContactDiagram.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
