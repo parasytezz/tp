@@ -3,6 +3,7 @@ package seedu.planpal.modes.contacts;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
+import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.Storeable;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -107,6 +108,7 @@ public class Contact implements Editable, Storeable {
             throw new IllegalCommandException();
         }
 
+        Ui.validateTags(input);
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
