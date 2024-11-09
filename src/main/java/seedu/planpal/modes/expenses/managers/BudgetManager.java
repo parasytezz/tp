@@ -53,8 +53,10 @@ public class BudgetManager implements ExpenseModeFunctions {
             if (budgetValue < 0){
                 throw new NegativeBudgetException();
             }
+            budgetValue = Math.round(budgetValue * 100.0) / 100.0;
+            String budgetString = Double.toString(budgetValue);
 
-            monthlyBudget.put(targetMonth, budget);
+            monthlyBudget.put(targetMonth, budgetString);
             savedExpenses.saveValue("budgets/budget_" + targetMonth + ".txt", budget);
             if (isDefault) {
                 Ui.print("For the month of " + targetMonth,

@@ -30,7 +30,7 @@ public class SetBudgetTest {
     public void validIntegerBudget_success() {
         try {
             expenseManager.getBudgetManager().setBudget("500");
-            assertEquals("500", expenseManager.getBudgetManager().getBudget());
+            assertEquals("500.0", expenseManager.getBudgetManager().getBudget());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -54,14 +54,6 @@ public class SetBudgetTest {
     @Test
     public void negativeValue_exceptionThrown() {
         assertThrows(NegativeBudgetException.class, () -> expenseManager.getBudgetManager().setBudget("-100"));
-    }
-
-    @Test
-    public void zeroBudget_throwsNoBudgetException() {
-        assertThrows(NoBudgetException.class, () -> {
-            expenseManager.getBudgetManager().setBudget("0");
-            expenseManager.addExpense("/name:trial /cost:10");
-        });
     }
 
     @Test

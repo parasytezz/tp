@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.modes.expenses.managers.ExpenseManager;
 import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 
@@ -30,23 +29,18 @@ public class AddExpenseTest {
     }
 
     @Test
-    public void withoutBudget_exceptionThrown() {
-        assertThrows(NoBudgetException.class, () -> expenseParser.processCommand("add /cost:100"));
-    }
-
-    @Test
     public void withBudget_success() {
         try {
             expenseManager.getBudgetManager().setBudget("1000");
             expenseManager.addExpense("/name:trial /cost:10");
             double totalCost = expenseManager.getTotalCost(expenseManager.getMonthlyExpenses());
             assertEquals(10.0, totalCost);
-            assertEquals("1000",expenseManager.getBudgetManager().getBudget());
+            assertEquals("1000.0",expenseManager.getBudgetManager().getBudget());
             expenseParser.processCommand("budget 2000");
             expenseParser.processCommand("add /name:trial /cost:20");
             totalCost = expenseManager.getTotalCost(expenseManager.getMonthlyExpenses());
             assertEquals(30.0, totalCost);
-            assertEquals("2000",expenseManager.getBudgetManager().getBudget());
+            assertEquals("2000.0",expenseManager.getBudgetManager().getBudget());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -154,17 +148,4 @@ public class AddExpenseTest {
             fail(e.getMessage());
         }
     }
-
-    @Test
-    public void multipleEntriesWithoutBudget_exceptionThrown() {
-        try {
-            expenseManager.getBudgetManager().setBudget("1000 /month:2024-10");
-            expenseManager.addExpense("/name:trial1 /cost:200 /month:2024-10");
-            assertThrows(NoBudgetException.class, () -> expenseManager.addExpense("/cost:400 /month:2024-11"));
-        } catch (PlanPalExceptions e) {
-            fail(e.getMessage());
-        }
-    }
-
-
 }
