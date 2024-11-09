@@ -58,7 +58,8 @@ public class Contact implements Editable, Storeable {
         for (String cat : ContactManager.INFORMATION_CATEGORIES) {
             if (category.equals(cat)) {
                 isCategory = true;
-                if (category.equals("email") && !val.contains("@")) {
+                if (category.equals("email") &&
+                        !val.trim().matches("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$")) {
                     throw new PlanPalExceptions("email address is not valid");
                 }
                 try {
@@ -108,7 +109,7 @@ public class Contact implements Editable, Storeable {
         }
 
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
-        if (inputParts.length < 2) {
+        if (inputParts.length < 2 || inputParts[1].trim().isEmpty()) {
             throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
         }
 

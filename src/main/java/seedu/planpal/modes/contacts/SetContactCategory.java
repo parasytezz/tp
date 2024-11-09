@@ -66,7 +66,8 @@ public class SetContactCategory implements ListFunctions {
             } else if (description.equals("help")) {
                 Ui.printCategoryMenu();
                 return true;
-            } else if (description.equals("quit")) {
+            } else if (description.equals("exit")) {
+                Ui.printCategoryExit();
                 return false;
             } else {
                 contactLogger.warning("Failed to set category: invalid command");
