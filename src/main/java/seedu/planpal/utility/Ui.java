@@ -1,5 +1,6 @@
 package seedu.planpal.utility;
 
+import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.Contact;
 
 import java.io.OutputStream;
@@ -136,6 +137,20 @@ public class Ui {
     public static void clearScreen(){
         for (int i = 0; i < 50; i++){
             System.out.println(" ");
+        }
+    }
+
+    public static void validateTags(String input) throws PlanPalExceptions{
+        assert !input.isEmpty() : "Input should not be empty";
+        int colonCount = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ':') {
+                colonCount++;
+            }
+        }
+
+        if (colonCount > 1) {
+            throw new PlanPalExceptions("Are you missing a '/' somewhere?");
         }
     }
 

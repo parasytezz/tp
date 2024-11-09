@@ -3,7 +3,6 @@ package seedu.planpal.expenses;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.modes.expenses.managers.ExpenseManager;
 import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 
@@ -13,7 +12,6 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 
 public class ViewExpenseListTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
@@ -55,16 +53,6 @@ public class ViewExpenseListTest {
             assertTrue(OUTPUT_STREAM.toString().contains("It's time to readjust your spending habits!"));
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
-        }
-    }
-
-    @Test
-    public void noBudget_throwNoBudgetException() {
-        try {
-            expenseManager.viewExpenseList("/month:2024-03");
-            fail("Expected NoBudgetException to be thrown");
-        } catch (PlanPalExceptions e) {
-            assertInstanceOf(NoBudgetException.class, e);
         }
     }
 

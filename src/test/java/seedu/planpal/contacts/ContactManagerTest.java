@@ -2,6 +2,7 @@ package seedu.planpal.contacts;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.Contact;
 import seedu.planpal.modes.contacts.ContactManager;
@@ -12,8 +13,9 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 public class ContactManagerTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
@@ -58,13 +60,8 @@ public class ContactManagerTest {
 
     @Test
     public void addContact_invalidField_fail() {
-        try{
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name");
-            fail();
-        } catch (PlanPalExceptions e) {
-            assertEquals("The command is incomplete. Please provide a value for name", e.getMessage());
-        }
+        ContactManager manager = new ContactManager();
+        assertThrows(IllegalCommandException.class, () -> manager.addContact("/name"));
     }
 
     @Test

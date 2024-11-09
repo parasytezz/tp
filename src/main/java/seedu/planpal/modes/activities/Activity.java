@@ -3,6 +3,7 @@ package seedu.planpal.modes.activities;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
+import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.Storeable;
 
 import java.lang.reflect.Field;
@@ -65,9 +66,10 @@ public class Activity implements Editable, Storeable {
             throw new IllegalCommandException();
         }
 
+        Ui.validateTags(input);
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR, 2);
         if (inputParts.length < 2) {
-            throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
+            throw new IllegalCommandException();
         }
 
         assert inputParts.length >= 2 : "Input must contain category and value";
