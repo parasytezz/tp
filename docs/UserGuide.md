@@ -34,7 +34,7 @@ International students who are frugal and organized. It caters to the needs of t
       - [view categories](#4-view-categories)
       - [view the contact list](#5-view-the-contact-list)
       - [print category functions](#6-print-category-functions)
-      - [quit category](#7-quit-category)
+      - [exit category](#7-exit-category)
     - [Search contacts by category](#search-contacts-by-category)
   - [Expense Manager](#expense-manager)
     - [Set Budget](#setting-a-budget)
@@ -104,7 +104,7 @@ _________________________________________________________
 Added successfully!
 _________________________________________________________
 Currently in list:
-1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -120,7 +120,7 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -144,7 +144,7 @@ _________________________________________________________
 Deleted successfully!
 _________________________________________________________
 Currently in list:
-1. [Name = Johnny, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = Johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -165,12 +165,14 @@ _________________________________________________________
 Edited successfully!
 _________________________________________________________
 Currently in list:
-1. [Name = Cassie, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = Cassie, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
 ---
 ## Finding a Contact
 The `find` command allows users to find `Contacts` from the list.
+
+Remark : `find` cannot find contacts by category. Finding contact by category is accomplished using the `search` function in later content.
 
 ### Usage:
 ```
@@ -184,8 +186,8 @@ find alice david
 ```
 _________________________________________________________
 Here is what I found:
-1. [Name = David, Phone = null, Email = null]
-2. [Name = Alice, Phone = null, Email = null]
+1. [Name = David, Phone = null, Email = null, Categories = []]
+2. [Name = Alice, Phone = null, Email = null, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -198,53 +200,52 @@ category
 ```
 ### Expected Output:
 ```
-Category not found.
+_________________________________________________________
+Current Mode: setting category mode
 _________________________________________________________
 ```
-### Expected Output if no contacts in category:
+### Remark : Inside setting category mode, any command other than those specified by the following 7 commands will result in
+### Expected Output:
 ```
 _________________________________________________________
-Category options :
-1. add Category type [ add {category} || e.g. add close friend ]
-2. remove Category type [ remove {category} || e.g. remove emergency ]
-3. edit Category of Contact [ edit {contact index} {category} || e.g. edit 1 friend ]
-4. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]
-5. view Category lists (e.g. view)
-6. view Contact list (e.g. list)
-7. print category functions (e.g. help)
-8. quit
+invalid command
 _________________________________________________________
 ```
----
-### 1. Add Category
-The `add <category>` command allows users to add category 
-that can be assigned to contact for efficient contacts searching by category
 
-Example 1:
+The following 7 commands are the available commands in setting category mode.
+---
+### 1. Add Category (inside setting category mode)
+The `add <category>` command allows users to add category 
+that can be assigned to contact for efficient contacts searching by category.
+
+Remark : This command only works in setting category mode. 
+`add` outside setting category mode can perform a completely different function
+
+Example 1 (successfully added):
 ```
 add friend
 ```
-Expected output if successfully added:
+Expected output:
 ```
 _________________________________________________________
 successfully added Category : 'friend'
 _________________________________________________________
 ```
-Example 2:
+Example 2 ("/" is included):
 ```
 add /friend
 ```
-Expected output if "/" is included:
+Expected output:
 ```
 _________________________________________________________
 / is not allowed to be used in category name
 _________________________________________________________
 ```
-Example 3:
+Example 3 (empty description):
 ```
 add
 ```
-Expected output if description is empty:
+Expected output:
 ```
 _________________________________________________________
 Description cannot be empty!
@@ -254,6 +255,8 @@ _________________________________________________________
 ### 2. Remove Category
 The `remove <category>` command allows users to remove category. 
 This command will automatically remove the original assignment of this category to all contacts
+
+Remark : This command only works in setting category mode.
 
 Example:
 ```
@@ -373,21 +376,27 @@ _________________________________________________________
 Category options :
 1. add Category type [ add {category} || e.g. add close friend ]
 2. remove Category type [ remove {category} || e.g. remove emergency ]
-3. edit Category of Contact [ edit {contact index} {category} || e.g. edit 1 friend ]
-4. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]
-5. view Category lists (e.g. view)
-6. view Contact list (e.g. list)
-7. print category functions (e.g. help)
-8. quit
+3a. edit Category of Contact [ edit {contact index} {category1/category2/...} || e.g. edit 1 friend/family ]
+3b. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]
+4. view Category lists (e.g. view)
+5. view Contact list (e.g. list)
+6. print category functions (e.g. help)
+7. exit
 _________________________________________________________
 ```
 ---
-### 7. Quit Category
-This command allows users to quit the setting category mode.
+### 7. Exit Category
+This command allows users to exit the setting category mode.
 
 ### Example:
 ```
-quit
+exit
+```
+Expected Output:
+```
+_________________________________________________________
+exit category
+_________________________________________________________
 ```
 ---
 ## Search Contacts by Category
