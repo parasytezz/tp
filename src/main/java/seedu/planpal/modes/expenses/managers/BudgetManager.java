@@ -10,9 +10,10 @@ import seedu.planpal.utility.filemanager.FileManager;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 public class BudgetManager implements ExpenseModeFunctions {
-
+    private static final String MONTH_PATTERN = "\\d{4}-(0[1-9]|1[0-2])"; // from gpt
     private static final int BUDGET_SEGMENT = 2;
     private static final String BUDGET_SEPARATOR = "budget_";
     private static final String TXT_SEPARATOR = ".txt";
@@ -42,6 +43,9 @@ public class BudgetManager implements ExpenseModeFunctions {
             if (month == null) {
                 targetMonth = getCurrentMonth();
             } else {
+                if (!Pattern.matches(MONTH_PATTERN, month)) {
+                    throw new PlanPalExceptions("Month value should be in the following format: yyyy-MM");
+                }
                 targetMonth = month;
             }
 
