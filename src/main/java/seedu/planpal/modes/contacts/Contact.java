@@ -58,7 +58,7 @@ public class Contact implements Editable, Storeable {
         for (String cat : ContactManager.INFORMATION_CATEGORIES) {
             if (category.equals(cat)) {
                 isCategory = true;
-                if (category.equals("email") && !val.contains("@")) {
+                if (category.equals("email") && !val.trim().matches("^\\w+([.-]?\\w+)*@\\w+([.-]?\\w+)*(\\.\\w{2,3})+$")) {
                     throw new PlanPalExceptions("email address is not valid");
                 }
                 try {

@@ -88,12 +88,25 @@ PlanPal will assist you in tracking the `Contacts` in your planner. The guide be
 
 ---
 ## Adding a Contact
-The `add` command allows users to add a `Contact` with various categories.
+The `add` command allows users to add a `Contact` with various fields.
 
 ### Usage:
 ```
-add /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
+add /<field 1>: <value 1> /<field 2>: <value 2> /<field 3>: <value 3> ... 
 ```
+
+Remark : 
+
+email format : must consist of four parts
+
+character : `[a-zA-Z0-9_]` i.e. letters (uppercase and lowercase), digits (0-9), and underscores (_).
+
+1) username : begins with at least one word character, followed by more word characters or `.` or `-` or nothing (directly to part 2). 
+However, a `.` or `-` must follow by a word character. That is, the input string cannot begin with `.` or `-`; and cannot contain `..`, `--`, `.-` or `-.`. Example of valid string are `a.1-2-3`.
+2) `@`.
+3) email domain name : same rule as username (part 1).
+4) matches a `.` followed by two or three word characters, e.g., `.com`, `.edu`, `.us`, `.uk`, `.co`.
+
 ### Example:
 ```
 add /name: johnny /phone:12345678 /email:johnny@gmail.com
