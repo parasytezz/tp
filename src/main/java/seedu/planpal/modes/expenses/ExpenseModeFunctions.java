@@ -66,6 +66,7 @@ public interface ExpenseModeFunctions {
             }
             totalCost += Double.parseDouble(costInString);
         }
+        totalCost = Math.round(totalCost * 100.0) / 100.0;
         return totalCost;
     }
 
