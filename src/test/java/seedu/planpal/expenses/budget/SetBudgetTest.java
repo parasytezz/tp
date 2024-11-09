@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.exceptions.expenses.InvalidBudgetException;
 import seedu.planpal.exceptions.expenses.NegativeBudgetException;
-import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.modes.expenses.managers.ExpenseManager;
 
 import java.io.ByteArrayOutputStream;
