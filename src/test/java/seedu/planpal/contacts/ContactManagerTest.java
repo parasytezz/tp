@@ -246,8 +246,7 @@ public class ContactManagerTest {
     public void addCategory_invalidCategoryName() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("add em/ergency", System.out);
-        String output = "Current Mode: setting category mode\n" +
-                "_________________________________________________________\n" +
+        String output = "_________________________________________________________\n" +
                 "/ is not allowed to be used in category name\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -264,8 +263,7 @@ public class ContactManagerTest {
     public void addCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("add", System.out);
-        String output = "Current Mode: setting category mode\n" +
-                "_________________________________________________________\n" +
+        String output = "_________________________________________________________\n" +
                 "Description cannot be empty!\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -299,8 +297,7 @@ public class ContactManagerTest {
         assertTrue(manager.handleCategory("add family", System.out));
         OUTPUT_STREAM.reset();
         assertTrue(manager.handleCategory("remove    friend  ", System.out));
-        String output = "Current Mode: setting category mode\n" +
-                "_________________________________________________________\n" +
+        String output = "_________________________________________________________\n" +
                 "friend is not a category\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -311,8 +308,7 @@ public class ContactManagerTest {
     public void removeCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("remove", System.out);
-        String output = "Current Mode: setting category mode\n" +
-                "_________________________________________________________\n" +
+        String output = "_________________________________________________________\n" +
                 "Description cannot be empty!\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -368,8 +364,7 @@ public class ContactManagerTest {
     public void editCategory_emptyDescription() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("edit", System.out);
-        String output = "Current Mode: setting category mode\n" +
-                "_________________________________________________________\n" +
+        String output = "_________________________________________________________\n" +
                 "Description cannot be empty!\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -389,8 +384,7 @@ public class ContactManagerTest {
             manager.addContact("/name:Alice");
             OUTPUT_STREAM.reset();
             manager.handleCategory("edit 0 emergency/family/friend", System.out);
-            String output = "Current Mode: setting category mode\n" +
-                    "_________________________________________________________\n" +
+            String output = "_________________________________________________________\n" +
                     "Invalid contact id\n" +
                     "_________________________________________________________\n";
             String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -403,8 +397,7 @@ public class ContactManagerTest {
             assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
             OUTPUT_STREAM.reset();
             manager.handleCategory("edit    emergency    ", System.out);
-            output = "Current Mode: setting category mode\n" +
-                    "_________________________________________________________\n" +
+            output = "_________________________________________________________\n" +
                     "Invalid input.\n" +
                     "_________________________________________________________\n";
             trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -424,8 +417,7 @@ public class ContactManagerTest {
             manager.addContact("/name:Alice");
             OUTPUT_STREAM.reset();
             manager.handleCategory("edit 1       family/     em  ergency  /        friend", System.out);
-            String output = "Current Mode: setting category mode\n" +
-                    "_________________________________________________________\n" +
+            String output = "_________________________________________________________\n" +
                     "em ergency is not a valid category\n" +
                     "_________________________________________________________\n";
             String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
@@ -457,16 +449,14 @@ public class ContactManagerTest {
     public void category_invalidCommand() {
         ContactManager manager = new ContactManager();
         manager.handleCategory("ahhhhhhh", System.out);
-        String output = "Current Mode: setting category mode\n" +
-                "_________________________________________________________\n" +
+        String output = "_________________________________________________________\n" +
                 "Invalid command\n" +
                 "_________________________________________________________\n";
         String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         OUTPUT_STREAM.reset();
         manager.handleCategory("view   ", System.out);
-        output = "Current Mode: setting category mode\n" +
-                "_________________________________________________________\n" +
+        output = "_________________________________________________________\n" +
                 "Invalid command\n" +
                 "_________________________________________________________\n";
         trimmedExpectedOutput = output.replaceAll("\\s+", " ");
