@@ -72,7 +72,7 @@ public class Ui {
                 "4. view Category lists (e.g. view)",
                 "5. view Contact list (e.g. list)",
                 "6. print category functions (e.g. help)",
-                "7. quit"
+                "7. exit"
         );
     }
 
