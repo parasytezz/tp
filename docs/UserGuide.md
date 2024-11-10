@@ -148,9 +148,12 @@ The `add` command allows users to add a `Contact` with one or more of these cate
 
 ### Usage:
 ```
-add /<field 1>: <value 1> /<field 2>: <value 2> /<field 3>: <value 3> ... 
+add /name: <value 1> /phone: <value 2> /email: <value 3> 
 ```
 Remark : 
+
+Category can be edited using the `category` command. There are no other tags
+other than `name`, `phone`, `email` and `category` in Contact Manager.
 
 email format : must consist of four parts
 
@@ -359,8 +362,14 @@ _________________________________________________________
 ---
 ### 3. Edit Categories of Contact
 The `edit <contact index> <category1/category2/...>` command allows users to assign
-categories to contact and to delete categories assigned to contact.
-Contact Index must be valid in order to edit its category.
+a category to contact and to delete the category assigned to contact.
+
+Note: 
+1. To add a category to a contact, the category needs to be added first
+(refer to [here](#1-add-category-inside-setting-category-mode))
+2. All details in category will be replaced with the new
+category in this command, and <b>only one </b> category can be assigned to each
+contact.
 
 Format
 ```
@@ -383,8 +392,7 @@ friend is not a valid category
 _________________________________________________________
 ```
 <b> Note: If there is no category included in the command, the category will
-be edited to be blank. </b>
-<br /> 
+be edited to be blank. (See Example 2 below) </b>
 
 Example 2:
 ```
