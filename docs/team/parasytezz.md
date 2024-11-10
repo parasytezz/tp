@@ -41,8 +41,6 @@ PlanPal is a desktop application designed for international students studying in
         * Added Sequence Diagram for Edit Contact
         * Added Class Diagram for Activity Manager
         * Wrote main components and program flow.
-      
-3
 * Contributions to team-based tasks
 
 

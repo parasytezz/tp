@@ -923,7 +923,7 @@ the activity manager commands.
 ---
 ## Adding an activity
 The `add` command allows users to add an activity to the `activities` list.
-If only the name of the activity is specified, the type of the activity will be set to `others` by default.
+If only the name of the `activity` is specified, the type of the activity will be set to `others` by default.
 
 ### Usage:
 ```
@@ -1046,7 +1046,7 @@ The commands below are not the main features of the 3 modes. However, they will 
 
 **<ins>IMPORTANT NOTE</ins>**  
 The commands below ONLY WORKS in the following screens of PlanPal:
-- `Maim Menu`
+- `Main Menu`
 - `CONTACT_MANAGER`
 - `EXPENSE_MANAGER`
 - `ACTIVITY_MANAGER`
