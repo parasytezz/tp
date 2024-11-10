@@ -148,11 +148,15 @@ The `add` command allows users to add a `Contact` with one or more of these cate
 
 ### Usage:
 ```
-add /<field 1>: <value 1> /<field 2>: <value 2> /<field 3>: <value 3> ... 
+add /name: <value 1> /phone: <value 2> /email: <value 3> 
 ```
-Remark : 
+Remarks : 
 
-email format : must consist of four parts
+Category can <b>only be edited</b> using the `category` command. 
+
+There are no other tags other than `name`, `phone`, `email` and `category` in Contact Manager.
+
+Email format : must consist of four parts
 
 character : `[a-zA-Z0-9_]` i.e. letters (uppercase and lowercase), digits (0-9), and underscores (_).
 
@@ -252,9 +256,8 @@ _________________________________________________________
 ```
 ---
 ## Finding a Contact
-The `find` command allows users to find `Contacts` from the list. User can search of multiple words at a time and the input is not case-sensitive.
-
-Remark : `find` cannot find contacts by category. Finding contact by category is accomplished using the `search` function in later content.
+The `find` command allows users to find `Contacts` from the list. User can search of multiple words at a time and the
+input is not case-sensitive.
 
 ### Usage:
 ```
@@ -359,7 +362,14 @@ _________________________________________________________
 ---
 ### 3. Edit Categories of Contact
 The `edit <contact index> <category1/category2/...>` command allows users to assign
-categories to contact and to delete categories assigned to contact.
+a category to contact and to delete the category assigned to contact.
+
+Note: 
+1. To add a category to a contact, the category needs to be added first
+(refer to [here](#1-add-category-inside-setting-category-mode))
+2. All details in category will be replaced with the new
+category in this command, and <b>only one </b> category can be assigned to each
+contact.
 
 Format
 ```
@@ -369,19 +379,32 @@ Example 1:
 ```
 edit 1 friend
 ```
-Expected output if friend is not a category:
-```
-_________________________________________________________
-friend is not a valid category
-_________________________________________________________
-```
 Expected output for successfully edit:
 ```
 _________________________________________________________
 successfully assigned categories to Contact id : 1
 _________________________________________________________
 ```
+Expected output if friend is not a category:
+```
+_________________________________________________________
+friend is not a valid category
+_________________________________________________________
+```
+<b> Note: If there is no category included in the command, the category will
+be edited to be blank. (See Example 2 below) </b>
+
 Example 2:
+```
+edit 1
+```
+Expected output if contact id is valid:
+```
+_________________________________________________________
+successfully assigned categories to Contact id : 1
+_________________________________________________________
+```
+Example 3:
 ```
 edit 0 friend
 ```
@@ -391,16 +414,7 @@ _________________________________________________________
 Invalid contact id
 _________________________________________________________
 ```
-Example 3:
-```
-edit 1
-```
-Expected output if contact id is invalid:
-```
-_________________________________________________________
-successfully assigned categories to Contact id : 1
-_________________________________________________________
-```
+
 Example 4:
 ```
 edit

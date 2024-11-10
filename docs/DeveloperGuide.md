@@ -100,7 +100,7 @@ Consolidating all the print methods that are repeated reduces repetition in code
 <u>Overview</u>  
 This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.  
 
-<u>Class Diagram for Parser Component</u>  
+<u>Class Diagram for Parser Component</u>
 ![ParserClassDiagram.drawio.png](Images%28DG%29%2FParserClassDiagram.drawio.png)
 
 <u>Design Considerations</u>  
