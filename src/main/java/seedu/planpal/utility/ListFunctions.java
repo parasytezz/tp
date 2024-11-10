@@ -107,6 +107,9 @@ public interface ListFunctions {
 
         T element = list.get(index - 1);
 
+        if (newValues.length == 1){
+            throw new PlanPalExceptions("Nothing to edit!");
+        }
         if (element instanceof Editable) {
             for (int i = 1; i < newValues.length; i++) {
                 ((Editable) element).processEditFunction(newValues[i]);
