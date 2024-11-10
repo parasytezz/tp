@@ -1044,9 +1044,17 @@ _________________________________________________________
 ## Auxiliary Commands
 The commands below are not the main features of the 3 modes. However, they will make it more convenient for you when using the PlanPal application
 
+**<ins>IMPORTANT NOTE</ins>**  
+The commands below ONLY WORKS in the following screens of PlanPal:
+- `Maim Menu`
+- `CONTACT_MANAGER`
+- `EXPENSE_MANAGER`
+- `ACTIVITY_MANAGER`
+
+
 ---
 ## Backing Up Files
-The `/b/` command can be used in either the **main menu** or the **mode screen**. It is able to store all your current files into a back-up folder in the event that you corrupted your data. This folder is also encrypted to ensure that your files are secured.
+The `/b/` command is able to store all your current files into a back-up folder in the event that you corrupted your data. This folder is also encrypted to ensure that your files are secured.
 
 **<ins>IMPORTANT NOTE</ins>**
 - This function is not automated! Users have to use the command to create the back-up manually.
@@ -1059,7 +1067,7 @@ The `/b/` command can be used in either the **main menu** or the **mode screen**
 ```
 ---
 ## Restoring Back-up Files
-The `/r/` command can be used in either the **main menu** or the **mode screen**. It restores your data files to the state of the previously saved back-up files.
+The `/r/` command restores your data files to the state of the previously saved back-up files.
 
 ### Usage:
 ```
