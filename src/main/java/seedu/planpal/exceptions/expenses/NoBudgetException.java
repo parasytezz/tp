@@ -13,7 +13,7 @@ public class NoBudgetException extends PlanPalExceptions {
     public NoBudgetException() {
         super("Either you have not set your budget or there is an invalid syntax! \n" +
                 "To set your budget, type: budget <value> /month: <monthValue> \n" +
-                "Example: budget 100 /month: june");
+                "Example: budget 100 /month: 2024-06");
     }
 }
 

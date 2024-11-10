@@ -175,7 +175,8 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         }
 
         String month = getMonth(input);
-        String index = input.replaceAll(MONTH_SEPARATOR + month,"")
+        String index = input.replaceAll(month,"")
+                .replaceAll(MONTH_SEPARATOR,"")
                 .replaceAll(NON_NUMERICS, "").trim();
         monthlyExpenses.putIfAbsent(month, new ArrayList<>());
 

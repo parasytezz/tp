@@ -21,9 +21,6 @@ NUS International students who are frugal and organized. It caters to the needs 
 - [Quick start](#quick-start)
 - [Warnings](#warnings)
   - [Case-sensitive commands](#commands-are-case-sensitive)
-  - [Adding multiple same categories](#adding-multiple-of-the-same-category)
-  - [Missing `/`](#missing--when-entering-input)
-  - [Validity of email](#validity-of-email)
   - [Validity of phone number](#validity-of-phone-number)
 - [Features](#features)
   - [Modes](#modes)
@@ -86,33 +83,6 @@ For example:
 ![INVALID COMMAND.png](Images%28UG%29%2FINVALID%20COMMAND.png)
 
 Example of invalid command. This also applies to all other commands such as `add`, `edit`, etc.
-
----
-### Adding multiple of the same category
-Warning: PlanPal will only recognise the latest entered input for the category if it is entered more than once at a time.
-
-For example:
-![RepeatedCategory.png](Images%28UG%29%2FRepeatedCategory.png)
-
-Example of repeated category. Name of activity is updated to be surfing as it is the latest entered input. This applies to all other available categories and modes. 
-
----
-### Missing `/` when entering input
-Warning: PlanPal only recognises a category when a `/` is present. Hence, any category without a `/` will be considered to belong to the previous category
-
-For example:
-![MissingSlash.png](Images%28UG%29%2FMissingSlash.png)
-
-Example of missing `/`. `type` does not have a `/` before it and thus is considered to be part of activity `name`. This applies to all other modes.
-
----
-### Validity of email
-Warning: PlanPal only checks for the presence of  the `@` symbol when checking for a valid email.
-
-For example:
-![AddingEmail.png](Images%28UG%29%2FAddingEmail.png)
-
-Example of how your email should look. While the email entered above is invalid, please note that no verification is required as there are no security concerns. It's up to the user to ensure the email is entered correctly.
 
 ---
 ### Validity of phone number
@@ -1074,9 +1044,17 @@ _________________________________________________________
 ## Auxiliary Commands
 The commands below are not the main features of the 3 modes. However, they will make it more convenient for you when using the PlanPal application
 
+**<ins>IMPORTANT NOTE</ins>**  
+The commands below ONLY WORKS in the following screens of PlanPal:
+- `Maim Menu`
+- `CONTACT_MANAGER`
+- `EXPENSE_MANAGER`
+- `ACTIVITY_MANAGER`
+
+
 ---
 ## Backing Up Files
-The `/b/` command can be used in either the **main menu** or the **mode screen**. It is able to store all your current files into a back-up folder in the event that you corrupted your data. This folder is also encrypted to ensure that your files are secured.
+The `/b/` command is able to store all your current files into a back-up folder in the event that you corrupted your data. This folder is also encrypted to ensure that your files are secured.
 
 **<ins>IMPORTANT NOTE</ins>**
 - This function is not automated! Users have to use the command to create the back-up manually.
@@ -1089,7 +1067,7 @@ The `/b/` command can be used in either the **main menu** or the **mode screen**
 ```
 ---
 ## Restoring Back-up Files
-The `/r/` command can be used in either the **main menu** or the **mode screen**. It restores your data files to the state of the previously saved back-up files.
+The `/r/` command restores your data files to the state of the previously saved back-up files.
 
 ### Usage:
 ```

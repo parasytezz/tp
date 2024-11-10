@@ -1,7 +1,7 @@
 package seedu.planpal.modes.expenses.managers;
 
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.exceptions.expenses.InvalidBudgetException;
 import seedu.planpal.exceptions.expenses.NegativeBudgetException;
 import seedu.planpal.modes.expenses.ExpenseModeFunctions;
 import seedu.planpal.utility.Ui;
@@ -64,7 +64,7 @@ public class BudgetManager implements ExpenseModeFunctions {
             }
 
         } catch (NumberFormatException e) {
-            throw new InvalidBudgetException();
+            throw new IllegalCommandException();
         }
     }
 
