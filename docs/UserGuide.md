@@ -10,15 +10,21 @@ PlanPal is a desktop application designed for international students studying in
 ## Purpose of User Guide
 
 ---
-The purpose of this guide is to show you how to get started on using this PlanPal and to introduce you to the basics of using it. this includes getting to know the feature and syntax of the commands.
+The purpose of this guide is to show you how to get started on using this PlanPal and to introduce you to the basics of using it. This includes getting to know the feature and syntax of the commands.
 
 ## Target Audience
 
 ---
-International students who are frugal and organized. It caters to the needs of these international students, allowing them to keep track of important contacts, activities, as well as manage their spending while in a foreign country.
+NUS International students who are frugal and organized. It caters to the needs of these NUS international students, allowing them to keep track of important contacts, activities, as well as manage their spending while in a foreign country.
 
 ### Table of Contents
 - [Quick start](#quick-start)
+- [Warnings](#warnings)
+  - [Case-sensitive commands](#commands-are-case-sensitive)
+  - [Adding multiple same categories](#adding-multiple-of-the-same-category)
+  - [Missing `/`](#missing--when-entering-input)
+  - [Validity of email](#validity-of-email)
+  - [Validity of phone number](#validity-of-phone-number)
 - [Features](#features)
   - [Modes](#modes)
   - [Contact Manager](#contact-manager)
@@ -68,6 +74,56 @@ International students who are frugal and organized. It caters to the needs of t
 5. When you are finished using PlanPal, use the `bye` command to terminate the application. This will ensure that your data is stored correctly and is available for future access.
 
 ---
+
+## Warnings
+Due to the nature of PlanPal as  CLI-based application, please take care to avoid malformed commands to avoid undesirable performance of PlanPal. Some examples are shown below
+
+---
+### Commands are Case-Sensitive
+Warning: PlanPal will not recognize the command if it does not follow the specifications exactly
+
+For example:
+![INVALID COMMAND.png](Images%28UG%29%2FINVALID%20COMMAND.png)
+
+Example of invalid command. This also applies to all other commands such as `add`, `edit`, etc.
+
+---
+### Adding multiple of the same category
+Warning: PlanPal will only recognise the latest entered input for the category if it is entered more than once at a time.
+
+For example:
+![RepeatedCategory.png](Images%28UG%29%2FRepeatedCategory.png)
+
+Example of repeated category. Name of activity is updated to be surfing as it is the latest entered input. This applies to all other available categories and modes. 
+
+---
+### Missing `/` when entering input
+Warning: PlanPal only recognises a category when a `/` is present. Hence, any category without a `/` will be considered to belong to the previous category
+
+For example:
+![MissingSlash.png](Images%28UG%29%2FMissingSlash.png)
+
+Example of missing `/`. `type` does not have a `/` before it and thus is considered to be part of activity `name`. This applies to all other modes.
+
+---
+### Validity of email
+Warning: PlanPal only checks for the presence of  the `@` symbol when checking for a valid email.
+
+For example:
+![AddingEmail.png](Images%28UG%29%2FAddingEmail.png)
+
+Example of how your email should look. While the email entered above is invalid, please note that no verification is required as there are no security concerns. It's up to the user to ensure the email is entered correctly.
+
+---
+### Validity of phone number
+Warning: PlanPal allows for phone numbers of any length to be entered
+
+For example:
+![AddingPhone.png](Images%28UG%29%2FAddingPhone.png)
+
+Example of how your phone number should look like. Since phone numbers outside of Singapore may not have the standard 8-digits, any length of phone number will be allowed and it is up to the user to ensure the phone number is entered correctly.
+
+---
 ## Features
 This section will focus on some of the key features of PlanPal and explain their usage. We will go over several features, including the Contact, Expenses and Activity Manager functionalities.
 
@@ -88,13 +144,13 @@ PlanPal will assist you in tracking the `Contacts` in your planner. The guide be
 
 ---
 ## Adding a Contact
-The `add` command allows users to add a `Contact` with various categories.
+The `add` command allows users to add a `Contact` with one or more of these categories: `name`, `phone`, `email`, and `category`.
 
 ### Usage:
 ```
 add /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
 ```
-### Example:
+### Example 1:
 ```
 add /name: johnny /phone:12345678 /email:johnny@gmail.com
 ```
@@ -104,7 +160,21 @@ _________________________________________________________
 Added successfully!
 _________________________________________________________
 Currently in list:
-1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
+_________________________________________________________
+```
+
+### Example 2:
+```
+add /name: johnny
+```
+### Expected Output:
+```
+_________________________________________________________
+Added successfully!
+_________________________________________________________
+Currently in list:
+1. [Name = johnny, Phone = null, Email = null, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -120,7 +190,7 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -144,7 +214,7 @@ _________________________________________________________
 Deleted successfully!
 _________________________________________________________
 Currently in list:
-1. [Name = Johnny, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -165,12 +235,12 @@ _________________________________________________________
 Edited successfully!
 _________________________________________________________
 Currently in list:
-1. [Name = Cassie, Phone = 12345678, Email = johnny@gmail.com]
+1. [Name = Cassie, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
 ---
 ## Finding a Contact
-The `find` command allows users to find `Contacts` from the list.
+The `find` command allows users to find `Contacts` from the list. User can search of multiple words at a time and the input is not case-sensitive.
 
 ### Usage:
 ```
@@ -184,8 +254,8 @@ find alice david
 ```
 _________________________________________________________
 Here is what I found:
-1. [Name = David, Phone = null, Email = null]
-2. [Name = Alice, Phone = null, Email = null]
+1. [Name = David, Phone = null, Email = null, Categories = []]
+2. [Name = Alice, Phone = null, Email = null, Categories = []]
 _________________________________________________________
 ```
 ---
@@ -902,7 +972,7 @@ _________________________________________________________
 ```
 ---
 ## Finding an activity
-The `find` command allows users to find `activities` from the list.
+The `find` command allows users to find `activities` from the list. User can search of multiple words at a time and the input is not case-sensitive.
 
 ### Usage:
 ```
