@@ -1,5 +1,6 @@
 package seedu.planpal.modes.expenses;
 
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -66,7 +67,7 @@ public interface ExpenseModeFunctions {
             }
             totalCost += Double.parseDouble(costInString);
         }
-        return totalCost;
+        return Math.round(totalCost * 100.0) / 100.0;
     }
 
     /**

@@ -2,7 +2,6 @@ package seedu.planpal.modes.expenses.managers;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
-import seedu.planpal.exceptions.expenses.NoBudgetException;
 import seedu.planpal.modes.expenses.Expense;
 import seedu.planpal.modes.expenses.ExpenseModeFunctions;
 import seedu.planpal.utility.ListFunctions;
@@ -44,10 +43,7 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
 
         Expense newExpense = new Expense(description);
         String targetMonth = newExpense.getMonth();
-        if (!budgetManager.getMonthlyBudget().containsKey(targetMonth) ||
-                budgetManager.getMonthlyBudget().get(targetMonth).equals("0")){
-            throw new NoBudgetException();
-        }
+        budgetManager.getMonthlyBudget().putIfAbsent(targetMonth,"0");
 
         recurringManager.addRecurringToMonthlyExpenses(targetMonth, this.monthlyExpenses);
         addToList(monthlyExpenses.get(targetMonth), newExpense);
@@ -92,19 +88,21 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
         }
 
         String month = getMonth(input);
-        if (!budgetManager.getMonthlyBudget().containsKey(month) ||
-                budgetManager.getMonthlyBudget().get(month).equals("0")) {
-            throw new NoBudgetException();
-        }
+        budgetManager.getMonthlyBudget().putIfAbsent(month,"0");
 
         recurringManager.addRecurringToMonthlyExpenses(month, this.monthlyExpenses);
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
         viewList(expenseList);
         double budgetValue = Double.parseDouble(budgetManager.getMonthlyBudget().get(month));
+        double remainingBudget = budgetValue - getTotalCost(month, monthlyExpenses);
+        remainingBudget = Math.round(remainingBudget * 100.0) / 100.0;
         System.out.println("For the month of " + month);
-        System.out.println("    Total budget: $" + budgetManager.getMonthlyBudget().get(month));
+        System.out.println("    Total budget: $" + budgetValue);
         System.out.println("    Total cost: $" + getTotalCost(month, monthlyExpenses));
-        System.out.println("    Remaining budget: $" + (budgetValue - getTotalCost(month, monthlyExpenses)));
+        System.out.println("    Remaining budget: $" + remainingBudget);
+        if (remainingBudget < 0) {
+            System.out.println("    Be careful! You have exceeded the budget set!");
+        }
 
         Ui.printLine();
 

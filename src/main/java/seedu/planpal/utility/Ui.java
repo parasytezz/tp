@@ -1,5 +1,6 @@
 package seedu.planpal.utility;
 
+import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.Contact;
 
 import java.io.OutputStream;
@@ -66,12 +67,13 @@ public class Ui {
         print("Category options :",
                 "1. add Category type [ add {category} || e.g. add close friend ]",
                 "2. remove Category type [ remove {category} || e.g. remove emergency ]",
-                "3. edit Category of Contact [ edit {contact index} {category} || e.g. edit 1 friend ]",
-                "4. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]",
-                "5. view Category lists (e.g. view)",
-                "6. view Contact list (e.g. list)",
-                "7. print category functions (e.g. help)",
-                "8. quit"
+                "3a. edit Category of Contact " +
+                        "[ edit {contact index} {category1/category2/...} || e.g. edit 1 friend/family ]",
+                "3b. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]",
+                "4. view Category lists (e.g. view)",
+                "5. view Contact list (e.g. list)",
+                "6. print category functions (e.g. help)",
+                "7. exit"
         );
     }
 
@@ -82,17 +84,6 @@ public class Ui {
         System.out.print("Enter Command: ");
         Scanner in = new Scanner(System.in);
         return in.nextLine();
-    }
-
-    /**
-     * Displays list of categories
-     */
-    public static void printCategoryList(ArrayList<String> categoryList) {
-        System.out.println(LINE_SEPARATOR);
-        for (String category : categoryList) {
-            System.out.println(category);
-        }
-        System.out.println(LINE_SEPARATOR);
     }
 
     /**
@@ -124,6 +115,9 @@ public class Ui {
         System.out.println(LINE_SEPARATOR);
     }
 
+    /**
+     * Set stream to dummy stream so that output is not displayed
+     */
     public static void setDummyStream(){
         // Redirect System.out to a dummy stream (solution from gpt)
         System.setOut(new PrintStream(new OutputStream() {
@@ -133,6 +127,9 @@ public class Ui {
         }));
     }
 
+    /**
+     * Set stream to main stream so that output is displayed
+     */
     public static void setMainStream(PrintStream stream){
         System.setOut(stream);
     }
@@ -141,5 +138,33 @@ public class Ui {
         for (int i = 0; i < 50; i++){
             System.out.println(" ");
         }
+    }
+
+    public static void validateTags(String input) throws PlanPalExceptions{
+        assert !input.isEmpty() : "Input should not be empty";
+        int colonCount = 0;
+        for (int i = 0; i < input.length(); i++) {
+            if (input.charAt(i) == ':') {
+                colonCount++;
+            }
+        }
+
+        if (colonCount > 1) {
+            throw new PlanPalExceptions("Are you missing a '/' somewhere?");
+        }
+    }
+
+    /**
+     * Display when exiting setting category mode
+     */
+    public static void printCategoryExit() {
+        print("exit category");
+    }
+
+    /**
+     * Display when entering setting category mode
+     */
+    public static void printCategoryMode() {
+        System.out.println("\nCurrent Mode: setting category mode");
     }
 }

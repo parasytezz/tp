@@ -3,15 +3,18 @@ package seedu.planpal.modes.expenses;
 import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.utility.Editable;
+import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.filemanager.Storeable;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.regex.Pattern;
 
 /**
  * Represents an expense in the PlanPal application.
  */
 public class Expense implements Editable, Storeable {
+    private static final String MONTH_PATTERN = "\\d{4}-(0[1-9]|1[0-2])"; // from gpt
     private static final String CATEGORY_SEPARATOR = "/";
     private static final String CATEGORY_VALUE_SEPARATOR = ":";
     private String commandDescription;
@@ -69,9 +72,10 @@ public class Expense implements Editable, Storeable {
         if (input.isEmpty()) {
             throw new IllegalCommandException();
         }
+        Ui.validateTags(input);
         String[] inputParts = input.split(CATEGORY_VALUE_SEPARATOR);
         if (inputParts.length < 2) {
-            throw new PlanPalExceptions("The command is incomplete. Please provide a value for " + inputParts[0]);
+            throw new IllegalCommandException();
         }
 
         String category = inputParts[0].trim();
@@ -181,7 +185,7 @@ public class Expense implements Editable, Storeable {
             }
             this.cost = cost;
         } catch (NumberFormatException e) {
-            throw new PlanPalExceptions("The cost value cannot be evaluated!");
+            throw new IllegalCommandException();
         }
     }
 
@@ -199,10 +203,14 @@ public class Expense implements Editable, Storeable {
      *
      * @param month The month as a string in "yyyy-MM" format.
      */
-    public void setMonth(String month) {
+    public void setMonth(String month) throws PlanPalExceptions {
+
         if (month == null || month.isEmpty()) {
             this.month = getCurrentMonth();
         } else {
+            if (!Pattern.matches(MONTH_PATTERN, month)){
+                throw new PlanPalExceptions("Month value should be in the following format: yyyy-MM");
+            }
             this.month = month;
         }
     }

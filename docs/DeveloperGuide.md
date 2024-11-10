@@ -251,7 +251,7 @@ ContactManager is omitted from the diagram for simplicity.
 - "edit {contact id} {category1/category2/..}" can be used to assign category to contact with specified id
 - "view" is executed to show all existing categories
 - "list" is executed to show all existing contacts
-- "quit" is executed to quit setting category mode
+- "exit" is executed to exit setting category mode
 - Finally, contact file is saved in the savedContacts FileManager.
 
 ### Search Command
