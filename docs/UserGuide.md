@@ -150,12 +150,13 @@ The `add` command allows users to add a `Contact` with one or more of these cate
 ```
 add /name: <value 1> /phone: <value 2> /email: <value 3> 
 ```
-Remark : 
+Remarks : 
 
-Category can be edited using the `category` command. There are no other tags
-other than `name`, `phone`, `email` and `category` in Contact Manager.
+Category can <b>only be edited</b> using the `category` command. 
 
-email format : must consist of four parts
+There are no other tags other than `name`, `phone`, `email` and `category` in Contact Manager.
+
+Email format : must consist of four parts
 
 character : `[a-zA-Z0-9_]` i.e. letters (uppercase and lowercase), digits (0-9), and underscores (_).
 
@@ -255,9 +256,8 @@ _________________________________________________________
 ```
 ---
 ## Finding a Contact
-The `find` command allows users to find `Contacts` from the list. User can search of multiple words at a time and the input is not case-sensitive.
-
-Remark : `find` cannot find contacts by category. Finding contact by category is accomplished using the `search` function in later content.
+The `find` command allows users to find `Contacts` from the list. User can search of multiple words at a time and the
+input is not case-sensitive.
 
 ### Usage:
 ```
