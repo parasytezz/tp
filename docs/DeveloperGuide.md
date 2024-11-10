@@ -5,6 +5,9 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
 
 ## Table of Contents
 - [Design & Implementation](#design--implementation)
+  - [Architecture](#architecture)
+  - [Main Components](#main-components)
+  - [Program Flow](#program-flow)
 - [Ui](#ui)
 - [Parser](#parser)
 - [Mode: Contact Manager](#mode-contact-manager)
@@ -30,6 +33,8 @@ Welcome to the PlanPal Developer Guide! Thank you for taking an interest in the 
 - [Product Scope](#product-scope)
 - [User Stories](#user-stories)
 - [Non-Functional Requirements](#non-functional-requirements)
+- [Glossary](#glossary)
+- [Instructions for manual testing](#instructions-for-manual-testing)
 
 ---
 
@@ -475,7 +480,7 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 |v1.0|NUS international student| add a contact                                    | expand my list of useful contacts                                                |
 |v1.0|NUS international student| delete a contact                                 | remove a contact if I no longer need it                                          |
 |v1.0|NUS international student| edit a contact                                   | amend any mistakes when creating the contact or if the number has been changed   |
-|v1.0|NUS international student| save my contacts                                 | my contacts are still there when I exit and enter the application again          |                                                       |
+|v1.0|NUS international student| save my contacts                                 | my contacts are still there when I exit and enter the application again          |
 |v2.0|NUS international student| set a monthly budget                             | ensure that I do not spend more than a certain amount each month                 |
 |v2.0|NUS international student| add an expense                                   | keep track of what I am spending my money on                                     |
 |v2.0|NUS international student| delete an expense                                | remove inaccurate expenses                                                       |
@@ -499,10 +504,13 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 - Technical Requirements: Any mainstream OS, i.e. Windows, macOS or Linux, with Java 17 installed.
 - Project Scope Constraints: Data storage is only to be performed locally.
 - Quality Requirements: The application should be intuitive for a user with little experience with CLIs.
+---
 
 ## Glossary
 
 * *Contact* - Personal details and contact information of an individual
+* *Expenditure*
+* *Activity*
 
 ---
 
