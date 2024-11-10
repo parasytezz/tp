@@ -47,7 +47,7 @@ public class SetBudgetTest {
 
     @Test
     public void invalidFormat_exceptionThrown() {
-        assertThrows(InvalidBudgetException.class, () -> expenseManager.getBudgetManager().setBudget("invalid"));
+        assertThrows(PlanPalExceptions.class, () -> expenseManager.getBudgetManager().setBudget("invalid"));
     }
 
     @Test

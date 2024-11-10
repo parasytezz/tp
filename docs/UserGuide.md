@@ -21,9 +21,6 @@ NUS International students who are frugal and organized. It caters to the needs 
 - [Quick start](#quick-start)
 - [Warnings](#warnings)
   - [Case-sensitive commands](#commands-are-case-sensitive)
-  - [Adding multiple same categories](#adding-multiple-of-the-same-category)
-  - [Missing `/`](#missing--when-entering-input)
-  - [Validity of email](#validity-of-email)
   - [Validity of phone number](#validity-of-phone-number)
 - [Features](#features)
   - [Modes](#modes)
@@ -86,33 +83,6 @@ For example:
 ![INVALID COMMAND.png](Images%28UG%29%2FINVALID%20COMMAND.png)
 
 Example of invalid command. This also applies to all other commands such as `add`, `edit`, etc.
-
----
-### Adding multiple of the same category
-Warning: PlanPal will only recognise the latest entered input for the category if it is entered more than once at a time.
-
-For example:
-![RepeatedCategory.png](Images%28UG%29%2FRepeatedCategory.png)
-
-Example of repeated category. Name of activity is updated to be surfing as it is the latest entered input. This applies to all other available categories and modes. 
-
----
-### Missing `/` when entering input
-Warning: PlanPal only recognises a category when a `/` is present. Hence, any category without a `/` will be considered to belong to the previous category
-
-For example:
-![MissingSlash.png](Images%28UG%29%2FMissingSlash.png)
-
-Example of missing `/`. `type` does not have a `/` before it and thus is considered to be part of activity `name`. This applies to all other modes.
-
----
-### Validity of email
-Warning: PlanPal only checks for the presence of  the `@` symbol when checking for a valid email.
-
-For example:
-![AddingEmail.png](Images%28UG%29%2FAddingEmail.png)
-
-Example of how your email should look. While the email entered above is invalid, please note that no verification is required as there are no security concerns. It's up to the user to ensure the email is entered correctly.
 
 ---
 ### Validity of phone number
