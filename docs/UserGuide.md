@@ -360,6 +360,7 @@ _________________________________________________________
 ### 3. Edit Categories of Contact
 The `edit <contact index> <category1/category2/...>` command allows users to assign
 categories to contact and to delete categories assigned to contact.
+Contact Index must be valid in order to edit its category.
 
 Format
 ```
@@ -369,19 +370,33 @@ Example 1:
 ```
 edit 1 friend
 ```
-Expected output if friend is not a category:
-```
-_________________________________________________________
-friend is not a valid category
-_________________________________________________________
-```
 Expected output for successfully edit:
 ```
 _________________________________________________________
 successfully assigned categories to Contact id : 1
 _________________________________________________________
 ```
+Expected output if friend is not a category:
+```
+_________________________________________________________
+friend is not a valid category
+_________________________________________________________
+```
+<b> Note: If there is no category included in the command, the category will
+be edited to be blank. </b>
+<br /> 
+
 Example 2:
+```
+edit 1
+```
+Expected output if contact id is valid:
+```
+_________________________________________________________
+successfully assigned categories to Contact id : 1
+_________________________________________________________
+```
+Example 3:
 ```
 edit 0 friend
 ```
@@ -391,16 +406,7 @@ _________________________________________________________
 Invalid contact id
 _________________________________________________________
 ```
-Example 3:
-```
-edit 1
-```
-Expected output if contact id is invalid:
-```
-_________________________________________________________
-successfully assigned categories to Contact id : 1
-_________________________________________________________
-```
+
 Example 4:
 ```
 edit
