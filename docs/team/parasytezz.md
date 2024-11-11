@@ -1,8 +1,7 @@
 # Gavin Chua - Project Portfolio Page
 
 ## Project: PlanPal
-PlanPal is a desktop application designed for international students studying in NUS. It functions as an all-in-one organizational tool, enabling users to manage contacts, track expenses, and schedule activities. The user interacts with the application using a CLI and is written in Java 17.
-
+PlanPal is the ultimate companion designed to ease the transition for international students by offering a seamless way to organize contacts, manage expenses and integrate fully into a new environment.
 ### Summary of Contributions
 * **New Feature: `Edit Contacts`**
     * What it does: This feature allows users to edit contacts based on specified index and phrase queries.
@@ -43,7 +42,16 @@ PlanPal is a desktop application designed for international students studying in
         * Added Sequence Diagram for `Edit`, `List`, `Find` Activity
         * Added Class Diagram for `Activity Manager`
         * Wrote main components and program flow.
+      
+
 * Contributions to team-based tasks
+  * Necessary general code enhancements
+  * Debugging of codes (that are not under me)
+  * Maintaining the issue tracker
+
+
+* Review/mentoring contributions: 
+  * Helped teammate to debug when asked for help
 
 
 * Community

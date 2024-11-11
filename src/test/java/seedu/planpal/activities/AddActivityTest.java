@@ -2,22 +2,27 @@ package seedu.planpal.activities;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.activities.ActivityManager;
+import seedu.planpal.utility.parser.modeparsers.ActivityParser;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 public class AddActivityTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
     private ActivityManager activityManager;
+    private ActivityParser activityParser;
 
     @BeforeEach
     public void setUp() {
         activityManager = new ActivityManager();
+        activityParser = new ActivityParser(activityManager);
         System.setOut(new PrintStream(OUTPUT_STREAM));
         OUTPUT_STREAM.reset();
     }
@@ -32,6 +37,9 @@ public class AddActivityTest {
                     activityManager.getActivityList().get(0).toString());
             assertEquals("[activity = CS2113 TP, type = academics]",
                     activityManager.getActivityList().get(1).toString());
+            activityParser.processCommand("add /name: I love CS /type: fake news");
+            assertEquals("[activity = I love CS, type = fake news]",
+                    activityManager.getActivityList().get(2).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -47,7 +55,9 @@ public class AddActivityTest {
                     activityManager.getActivityList().get(0).toString());
             assertEquals("[activity = singing, type = others]",
                     activityManager.getActivityList().get(1).toString());
-
+            activityParser.processCommand("add /name: I love CS");
+            assertEquals("[activity = I love CS, type = others]",
+                    activityManager.getActivityList().get(2).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -56,40 +66,27 @@ public class AddActivityTest {
     @Test
     public void addActivity_emptyInput_exceptionThrown() {
         try {
-            activityManager.addActivity("");
-            fail();
-        } catch (PlanPalExceptions e) {
-            assertEquals("Description cannot be empty!", e.getMessage());
-        }
-    }
-
-    @Test
-    public void addActivity_blankInput_exceptionThrown() {
-        try {
-            activityManager.addActivity(" ");
-            fail();
-        } catch (PlanPalExceptions e) {
-            assertEquals("You need a name for an activity.", e.getMessage());
+            assertThrows(EmptyDescriptionException.class, () -> activityParser.processCommand("add"));
+        } catch (IllegalArgumentException e) {
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void addActivity_missingName_exceptionThrown() {
         try {
-            activityManager.addActivity("/name: /type: exercise");
-            fail();
-        } catch (PlanPalExceptions e) {
-            assertEquals("Name cannot be blank.", e.getMessage());
+            assertThrows(PlanPalExceptions.class, () -> activityParser.processCommand("add /name: /type: exercise"));
+        } catch (IllegalArgumentException e) {
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void addActivity_missingType_exceptionThrown() {
         try {
-            activityManager.addActivity("/name: swimming /type:");
-            fail();
-        } catch (PlanPalExceptions e) {
-            assertEquals("Activity type cannot be blank.", e.getMessage());
+            assertThrows(PlanPalExceptions.class, () -> activityParser.processCommand("add /name: swimming /type:"));
+        } catch (IllegalArgumentException e) {
+            fail(e.getMessage());
         }
     }
 
