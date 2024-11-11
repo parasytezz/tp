@@ -131,7 +131,7 @@ public interface ListFunctions {
         assert query != null : "Query should not be null";
         assert !query.trim().isEmpty() : "Query should not be empty";
 
-        String[] toFind = query.toLowerCase().split("\\s+");
+        String[] toFind = query.toLowerCase().split("[\\s:]+");
         ArrayList<T> matchedList = new ArrayList<>();
 
         ArrayList<String> patternsToRemove = new ArrayList<>(
