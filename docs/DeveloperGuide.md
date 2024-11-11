@@ -101,6 +101,7 @@ Consolidating all the print methods that are repeated reduces repetition in code
 This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.  
 
 <u>Class Diagram for Parser Component</u>
+
 ![ParserClassDiagram.drawio.png](Images%28DG%29%2FParserClassDiagram.drawio.png)
 
 <u>Design Considerations</u>  
@@ -112,12 +113,13 @@ The Parser class follows this structure as there are common commands between the
 The class diagram below represents the contact book system
 
 <u>Class Diagram for Contact Manager</u>  
+
 ![ContactClassDiagram.drawio.png](Images%28DG%29/ContactClassDiagram.drawio.png)
 
 **General Classes**
 - The `PlanPal` class is the main entry point of the system, containing a `main(String[])` method to launch the application.
 - The `ParserFactory` class is a factory that provides different parsers (e.g., `ContactParser`) based on the input type.
-- The `Parser` class is an abstract class with methods to load and process commands from a file.
+- The `Parser` class is a class with methods to load and process commands from a file.
 - The `BackUpManager` class manages data backups, including backing up, restoring, and creating directories for backup files.
 - The `UI` class is responsible for displaying messages and menus to the user.
 - The `ListFunctions` interface defines methods for list operations like adding, deleting, and finding items.
@@ -235,8 +237,8 @@ The sequence diagram below illustrates the process for resolving the "find" comm
 The sequence diagram below illustrates the process for resolving the "category" command. 
 ContactManager is omitted from the diagram for simplicity.
 
-
 ![SetContactCategory.drawio.png](Images%28DG%29%2FSetContactCategory.drawio.png)
+
 <u>Components Breakdown:</u>
 - `ContactParser` class is the `Parser` component
 - `SetContactCategory` class is the `Mode` component
@@ -467,7 +469,7 @@ Our target user profile is international students studying in NUS.
 
 ### Value proposition
 
-Studying in a foreign country can be disorienting and isolating, this application will help users keep track of the contacts and important details of the people they meet in NUS so that they can connect with others conveniently. This application will also help them manage their spending while in a foreign country.
+Studying abroad can often feel overwhelming, and building a support network is essential to feeling connected and settled. This application empowers users to organize and easily access contact information and key details about the people they meet at NUS, fostering meaningful connections and a sense of community. Additionally, the app provides tools to manage spending effectively, helping international students stay on top of their finances and focus on making the most of their time in a new country.
 
 ---
 
@@ -488,7 +490,7 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 |v2.0|NUS international student| edit an expense                                  | change details regarding my past expenses                                        |
 |v2.0|NUS international student| find an expense                                  | view the expense I am looking for quickly                                        |
 |v2.0|NUS international student| classify expenses into types                     | keep track of what type of items I am spending money on                          |
-|v2.0|NUS international student| seperate expenses by month                       | keep track of monthly expenses                                                   |
+|v2.0|NUS international student| separate expenses by month                       | keep track of monthly expenses                                                   |
 |v2.0|NUS international student| see a breakdown of my spending according to type | be more aware of my spending habits                                              |
 |v2.0|NUS international student| handle recurring expenses                        | keep track of monthly subscriptions conveniently                                 |
 |v2.0|NUS international student| see my list of activities                        | keep track of my schedule                                                        |
@@ -510,7 +512,7 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 
 * *Contact* - Personal details and contact information of an individual
 * *Expenditure*
-* *Activity*
+* *Activity* - Name of activity and its type
 
 ---
 
