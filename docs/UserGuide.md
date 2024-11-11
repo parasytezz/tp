@@ -589,8 +589,8 @@ Currently, the fields that can be used are as follows:
 **<ins>IMPORTANT NOTE</ins>**  
 - Even if budget is not set, you can still add expenses.
 - You can have negative budget since you are allowed to go into deficit.
-- You should not use both `/recurring` and `/month:` tags together.
-- if `/month:` tag is used together, the first month is prioritised
+- You should **NOT** use both `/recurring` and `/month:` tags together.
+- if `/month:` tags are used together (which should not happen), the last month is prioritised
 
 ### Usage 1 (default addition without tags):
 ```
@@ -657,8 +657,7 @@ Viewing list also shows the user's spending information:
 
 **<ins>IMPORTANT NOTE</ins>**
 - You should not use both `/recurring` and `/month:` tags together.
-- if used together, `/recurring` tag is prioritised  
-- if `/month:` tag is used together, the first month is prioritised  
+- if used together, `/recurring` tag is prioritised
 
 ### Usage 1 (default addition without tags):
 ```
