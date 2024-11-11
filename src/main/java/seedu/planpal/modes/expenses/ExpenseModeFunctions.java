@@ -27,10 +27,11 @@ public interface ExpenseModeFunctions {
      * @return The extracted month in "yyyy-MM" format or null if not found.
      */
     default String getMonth(String input) {
-        int startIndex = input.indexOf(MONTH_SEPARATOR);
+        String lowerCaseInput = input.toLowerCase();
+        int startIndex = lowerCaseInput.indexOf(MONTH_SEPARATOR);
         if (startIndex != -1) {
             startIndex += MONTH_SEPARATOR.length();
-            int endIndex = input.indexOf("/", startIndex);
+            int endIndex = lowerCaseInput.indexOf("/", startIndex);
             if (endIndex == -1) {
                 endIndex = input.length();
             }

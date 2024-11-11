@@ -74,7 +74,7 @@ public class Activity implements Editable, Storeable {
 
         assert inputParts.length >= 2 : "Input must contain category and value";
 
-        String category = inputParts[0].trim();
+        String category = inputParts[0].trim().toLowerCase();
         String valueToEdit = inputParts[1].trim();
 
         if (category.equals("name")) {

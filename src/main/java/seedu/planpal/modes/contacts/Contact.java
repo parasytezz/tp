@@ -117,7 +117,7 @@ public class Contact implements Editable, Storeable {
 
         assert inputParts.length >= 2 : "Input must contain category and value";
 
-        String category = inputParts[0].trim();
+        String category = inputParts[0].trim().toLowerCase();
         String valueToEdit = inputParts[1].trim();
 
         assert category != null && !category.isEmpty() : "Category cannot be null";
