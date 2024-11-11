@@ -361,12 +361,15 @@ _________________________________________________________
 friend is not a valid category
 _________________________________________________________
 ```
-<b> Note: If there is no category included in the command, the category will
-be edited to be blank. (See Example 2 below) </b>
+<b> Note: If there is no category included in the command, the contact will be assigned with no category, i.e. remove all categories assigned to the contact. (See Example 2 below) </b>
 
 Example 2:
 ```
 edit 1
+```
+or
+```
+edit 1 /
 ```
 Expected output if contact id is valid:
 ```
@@ -374,22 +377,22 @@ _________________________________________________________
 successfully assigned categories to Contact id : 1
 _________________________________________________________
 ```
-Example 3:
+Example 3 (contact id is invalid):
 ```
 edit 0 friend
 ```
-Expected output if contact id is invalid:
+Expected output:
 ```
 _________________________________________________________
 Invalid contact id
 _________________________________________________________
 ```
 
-Example 4:
+Example 4 (contact id is empty):
 ```
 edit
 ```
-Expected output if contact id is invalid:
+Expected output:
 ```
 _________________________________________________________
 Description cannot be empty!
