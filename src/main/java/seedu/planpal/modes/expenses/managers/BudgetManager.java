@@ -97,7 +97,8 @@ public class BudgetManager implements ExpenseModeFunctions {
                 setBudget(budget, month, false);
             }
         } catch (Exception e) {
-            throw new PlanPalExceptions(e.getMessage());
+            Ui.print("An error occurred in loading the budget files!",
+                    "Restart the application and check if you have edited anything wrongly!");
         }
     }
 
