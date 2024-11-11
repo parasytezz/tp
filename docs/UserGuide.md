@@ -94,6 +94,16 @@ For example:
 Example of how your phone number should look like. Since phone numbers outside of Singapore may not have the standard 8-digits, any length of phone number will be allowed and it is up to the user to ensure the phone number is entered correctly.
 
 ---
+
+### Invalid inputs
+Warning: Inputs in PlanPal should not contain any `:` or `/`. Due to the fact they are used in determining the category, using `:` or `/` in your inputs may lead to unsatisfactory results when using PlanPal.
+
+For example:
+![InvalidInput.png](Images%28UG%29%2FInvalidInput.png)
+![InvalidInput2.png](Images%28UG%29%2FInvalidInput2.png)
+Example of invalid inputs. Since `/` and `:` is used in determining category, it detects that there is a second category within the name with a missing `/`. If there is a need to use a separator, please use any symbol other than `/` and `:`.
+
+---
 ## Features
 This section will focus on some of the key features of PlanPal and explain their usage. We will go over several features, including the Contact, Expenses and Activity Manager functionalities.
 
