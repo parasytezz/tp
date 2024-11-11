@@ -467,7 +467,7 @@ Our target user profile is international students studying in NUS.
 
 ### Value proposition
 
-Studying in a foreign country can be disorienting and isolating, this application will help users keep track of the contacts and important details of the people they meet in NUS so that they can connect with others conveniently. This application will also help them manage their spending while in a foreign country.
+Studying abroad can often feel overwhelming, and building a support network is essential to feeling connected and settled. This application empowers users to organize and easily access contact information and key details about the people they meet at NUS, fostering meaningful connections and a sense of community. Additionally, the app provides tools to manage spending effectively, helping international students stay on top of their finances and focus on making the most of their time in a new country.
 
 ---
 
@@ -488,7 +488,7 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 |v2.0|NUS international student| edit an expense                                  | change details regarding my past expenses                                        |
 |v2.0|NUS international student| find an expense                                  | view the expense I am looking for quickly                                        |
 |v2.0|NUS international student| classify expenses into types                     | keep track of what type of items I am spending money on                          |
-|v2.0|NUS international student| seperate expenses by month                       | keep track of monthly expenses                                                   |
+|v2.0|NUS international student| separate expenses by month                       | keep track of monthly expenses                                                   |
 |v2.0|NUS international student| see a breakdown of my spending according to type | be more aware of my spending habits                                              |
 |v2.0|NUS international student| handle recurring expenses                        | keep track of monthly subscriptions conveniently                                 |
 |v2.0|NUS international student| see my list of activities                        | keep track of my schedule                                                        |
