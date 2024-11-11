@@ -69,7 +69,8 @@ public class Ui {
                 "2. remove Category type [ remove {category} || e.g. remove emergency ]",
                 "3a. edit Category of Contact " +
                         "[ edit {contact index} {category1/category2/...} || e.g. edit 1 friend/family ]",
-                "3b. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]",
+                "3b. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ]" +
+                        " or [ edit {contact index} || e.g. edit 1 ])",
                 "4. view Category lists (e.g. view)",
                 "5. view Contact list (e.g. list)",
                 "6. print category functions (e.g. help)",
