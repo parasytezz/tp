@@ -97,4 +97,16 @@ public class FindExpenseTest {
             fail(e.getMessage());
         }
     }
+
+    @Test
+    public void ignoreBrackets_noMatches() {
+        try {
+            expenseManager.getBudgetManager().setBudget("1000");
+            expenseManager.addExpense("/name:trial1 /cost:100 /type: other");
+            assertThrows(PlanPalExceptions.class, () -> expenseParser.processCommand("find trial3"));
+
+        } catch (PlanPalExceptions e) {
+            fail(e.getMessage());
+        }
+    }
 }
