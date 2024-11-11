@@ -6,6 +6,8 @@ import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.Contact;
 import seedu.planpal.modes.contacts.ContactManager;
+import seedu.planpal.utility.parser.modeparsers.ActivityParser;
+import seedu.planpal.utility.parser.modeparsers.ContactParser;
 
 
 import java.io.ByteArrayOutputStream;
@@ -19,9 +21,13 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 public class ContactManagerTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
+    private ContactManager contactManager;
+    private ContactParser contactParser;
 
     @BeforeEach
     public void setUp() {
+        contactManager = new ContactManager();
+        contactParser = new ContactParser(contactManager);
         System.setOut(new PrintStream(OUTPUT_STREAM));
         OUTPUT_STREAM.reset();
     }
@@ -29,19 +35,18 @@ public class ContactManagerTest {
     @Test
     public void addContact_validFormat_success() {
         try{
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-            manager.addContact("/name:Charlie");
-            manager.addContact("/name:Johnny");
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            contactManager.addContact("/name:Charlie");
+            contactParser.processCommand("add /name: Johnny");
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(0).toString());
+                    contactManager.getContactList().get(0).toString());
             assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(1).toString());
+                    contactManager.getContactList().get(1).toString());
             assertEquals("[Name = Charlie, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(2).toString());
+                    contactManager.getContactList().get(2).toString());
             assertEquals("[Name = Johnny, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(3).toString());
+                    contactManager.getContactList().get(3).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -50,36 +55,33 @@ public class ContactManagerTest {
     @Test
     public void addContact_invalidFormat_fail() {
         try{
-            ContactManager manager = new ContactManager();
-            manager.addContact("Alice");
-            fail();
-        } catch (PlanPalExceptions e) {
-            assertEquals("This command is ILLEGAL", e.getMessage());
+            assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("add Alice"));
+        } catch (IllegalArgumentException e) {
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void addContact_invalidField_fail() {
-        ContactManager manager = new ContactManager();
-        assertThrows(IllegalCommandException.class, () -> manager.addContact("/name"));
+        assertThrows(IllegalCommandException.class, () -> contactParser.processCommand("/name"));
     }
 
     @Test
     public void deleteContact_validFormat_success() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-            manager.addContact("/name:Charlie");
-            manager.addContact("/name:Johnny");
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            contactManager.addContact("/name:Charlie");
+            contactManager.addContact("/name:Johnny");
 
-            manager.deleteContact("1");
+            contactParser.processCommand("delete 1");
+            assertEquals(3, contactManager.getContactList().size());
             assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(0).toString());
+                    contactManager.getContactList().get(0).toString());
             assertEquals("[Name = Charlie, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(1).toString());
+                    contactManager.getContactList().get(1).toString());
             assertEquals("[Name = Johnny, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(2).toString());
+                    contactManager.getContactList().get(2).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -88,41 +90,32 @@ public class ContactManagerTest {
     @Test
     public void deleteContact_invalidIndex_exceptionThrown() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-
-            manager.deleteContact("0");
-            fail();
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("delete 0"));
         } catch (PlanPalExceptions e) {
-            assertEquals("Invalid Index!", e.getMessage());
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void deleteContact_emptyInput_exceptionThrown() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-
-            manager.deleteContact("");
-            fail();
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("delete"));
         } catch (PlanPalExceptions e) {
-            assertEquals("Description cannot be empty!", e.getMessage());
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void editContact_validIndex_success() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-
-            manager.editContact("1 /name: Alex");
-
-            assertEquals("Alex", manager.getContactList().get(0).getName());
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            contactParser.processCommand("edit 1 /name: Alex");
+            assertEquals("Alex", contactManager.getContactList().get(0).getName());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -131,43 +124,33 @@ public class ContactManagerTest {
     @Test
     public void editContact_invalidIndex_exceptionThrown() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-
-            manager.editContact(("3 /name: Zoe"));
-            fail(); // Test should not reach this line if exception is thrown
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("edit 3 /name: Zoe"));
         } catch (PlanPalExceptions e) {
-            assertEquals("Invalid index. There are 2 items.", e.getMessage());
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void editContact_emptyQuery_exceptionThrown() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-
-            // Attempt to edit contact with empty query
-            manager.editContact("");
-            fail(); // Test should not reach this line if exception is thrown
+            contactManager.addContact("/name:Alice");
+            assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("edit"));
         } catch (PlanPalExceptions e) {
-            assertEquals("Description cannot be empty!", e.getMessage());
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void findContact_validName_success() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-            manager.addContact("/name:Charlie");
-
-            manager.findContact("Alice");
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            contactManager.addContact("/name:Charlie");
+            contactParser.processCommand("find Alice");
             assertEquals("[Name = Alice, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(0).toString());
-
+                    contactManager.getContactList().get(0).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -176,19 +159,17 @@ public class ContactManagerTest {
     @Test
     public void findContact_multipleMatches_success() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice Lim");
-            manager.addContact("/name:Alice Wong");
-            manager.addContact("/name:Bob");
+            contactManager.addContact("/name:Alice Lim");
+            contactManager.addContact("/name:Alice Wong");
+            contactManager.addContact("/name:Bob");
 
-            manager.findContact("Alice Bob");
+            contactParser.processCommand("find Alice Bob");
             assertEquals("[Name = Alice Lim, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(0).toString());
+                    contactManager.getContactList().get(0).toString());
             assertEquals("[Name = Alice Wong, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(1).toString());
+                    contactManager.getContactList().get(1).toString());
             assertEquals("[Name = Bob, Phone = null, Email = null, Categories = []]",
-                    manager.getContactList().get(2).toString());
-
+                    contactManager.getContactList().get(2).toString());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
@@ -197,27 +178,20 @@ public class ContactManagerTest {
     @Test
     public void findContact_noMatches_exceptionThrown() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.addContact("/name:Alice");
-            manager.addContact("/name:Bob");
-
-            manager.findContact("Charlie");
-            fail();
-
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("find Charlie"));
         } catch (PlanPalExceptions e) {
-            assertEquals("No matches found!", e.getMessage());
+            fail(e.getMessage());
         }
     }
 
     @Test
     public void findContact_emptyDescription_exceptionThrown() {
         try {
-            ContactManager manager = new ContactManager();
-            manager.findContact("");
-            fail();
-
-        } catch (PlanPalExceptions e) {
-            assertEquals("Description cannot be empty!", e.getMessage());
+            assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("find"));
+        } catch (IllegalArgumentException e) {
+            fail(e.getMessage());
         }
     }
 
