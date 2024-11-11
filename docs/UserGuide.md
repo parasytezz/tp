@@ -179,6 +179,14 @@ Below is the list:
 1. [Name = johnny, Phone = 12345678, Email = johnny@gmail.com, Categories = []]
 _________________________________________________________
 ```
+Format:
+```
+_________________________________________________________
+Below is the list:
+1. [Name = <name>, Phone = <phone>, Email = <email>, Categories = [<category1>, <category2>, ...]]
+_________________________________________________________
+```
+
 ---
 ## Deleting a Contact
 The `delete` command allows users to delete an existing `Contact` in the contact list.
