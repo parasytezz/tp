@@ -855,7 +855,8 @@ Currently in list:
 The `find` command allows users to find an expense from the expense list based on any of the fields.
 
 By default, without any tags the following is assumed:
-- Month is the current month
+- Month is the current month (eg. if today's date is 1 November, the current month is 2024-11)
+- A "/month:" field in a previous command does not affect the current find command.
 - It should NOT look for the recurring expense list.
 
 **<ins>IMPORTANT NOTE</ins>**
