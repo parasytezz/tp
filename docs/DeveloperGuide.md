@@ -511,7 +511,11 @@ Studying abroad can often feel overwhelming, and building a support network is e
 ## Glossary
 
 * *Contact* - Personal details and contact information of an individual
-* *Expenditure*
+* *Expense* - An item that stores cost value
+* *Recurring Expense* 
+  * An expense that is added when **ALL** the following conditions are fulfilled:
+    * A **NEW** expense list is being created
+    * The month of the new list is **NOT** before the current month.
 * *Activity* - Name of activity and its type
 
 ---
