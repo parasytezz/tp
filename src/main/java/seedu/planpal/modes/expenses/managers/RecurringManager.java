@@ -48,9 +48,12 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
         if (monthlyExpenses.get(newMonth) != null){
             return;
         }
+        monthlyExpenses.putIfAbsent(newMonth, new ArrayList<>());
+        if (isBeforeCurrentMonth(newMonth)) {
+            return;
+        }
         PrintStream out = System.out;
         Ui.setDummyStream();
-        monthlyExpenses.putIfAbsent(newMonth, new ArrayList<>());
         try {
             for (RecurringExpense recurringExpense : recurringExpensesList){
                 String description =

@@ -1,6 +1,7 @@
 package seedu.planpal.modes.expenses.managers;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.Expense;
 import seedu.planpal.modes.expenses.ExpenseModeFunctions;
@@ -82,13 +83,23 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new EmptyDescriptionException();
         }
 
-        if (input.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+        String lowerCaseInput = input.toLowerCase();
+        if (lowerCaseInput.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+            if (!input.contains(ExpenseModeFunctions.RECURRING_TAG)){
+                throw new PlanPalExceptions("To view recurring, your tag should be: /recurring");
+            }
             recurringManager.viewRecurringList();
             return;
         }
 
         String month = getMonth(input);
         budgetManager.getMonthlyBudget().putIfAbsent(month,"0");
+        String invalidInputChecker = input.replaceAll(ExpenseModeFunctions.RECURRING_TAG, "")
+                .replaceAll(month, "")
+                .replaceAll(MONTH_SEPARATOR,"").trim();
+        if (!invalidInputChecker.isEmpty()){
+            throw new IllegalCommandException();
+        }
 
         recurringManager.addRecurringToMonthlyExpenses(month, this.monthlyExpenses);
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);

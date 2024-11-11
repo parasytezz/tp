@@ -1,7 +1,10 @@
 package seedu.planpal.modes.expenses;
 
 
+import seedu.planpal.exceptions.PlanPalExceptions;
+
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Map;
@@ -149,5 +152,15 @@ public interface ExpenseModeFunctions {
         }
 
         return result;
+    }
+
+    default boolean isBeforeCurrentMonth(String month) throws PlanPalExceptions {
+        try {
+            YearMonth givenMonth = YearMonth.parse(month, DateTimeFormatter.ofPattern("yyyy-MM"));
+            YearMonth currentMonth = YearMonth.now();
+            return givenMonth.isBefore(currentMonth);
+        } catch (Exception e) {
+            throw new PlanPalExceptions(e.getMessage());
+        }
     }
 }
