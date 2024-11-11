@@ -3,9 +3,11 @@ package seedu.planpal.utility.filemanager;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.Contact;
 import seedu.planpal.modes.contacts.ContactManager;
+import seedu.planpal.modes.expenses.ExpenseModeFunctions;
 import seedu.planpal.utility.Ui;
 import seedu.planpal.utility.parser.Parser;
 import seedu.planpal.utility.parser.ParserFactory;
+import seedu.planpal.utility.parser.modeparsers.ExpenseParser;
 
 
 import java.io.File;
@@ -114,7 +116,17 @@ public class FileManager {
             while (scanner.hasNext()) {
                 lineNumber++;
                 Parser parser = ParserFactory.getParser(file.getName(), manager);
-                parser.processCommand(scanner.nextLine());
+                String nextLine = scanner.nextLine();
+                if (parser instanceof ExpenseParser){
+                    String fileIdentifier = file.getName()
+                            .replace(".txt","")
+                            .replace("expenses_","");
+                    if (!nextLine.contains(ExpenseModeFunctions.MONTH_SEPARATOR + fileIdentifier)
+                            && !fileIdentifier.equals("recurring")){
+                        throw new PlanPalExceptions("ERROR LOADING EXPENSE FILE!");
+                    }
+                }
+                parser.processCommand(nextLine);
             }
         } catch (PlanPalExceptions e) {
             Ui.setMainStream(out);
