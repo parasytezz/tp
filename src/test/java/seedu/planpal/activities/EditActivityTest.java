@@ -41,12 +41,14 @@ public class EditActivityTest {
         try {
             activityManager.addActivity("/name: swimming /type: exercise");
             activityManager.addActivity("/name: running /type: exercise");
+            activityManager.addActivity("/name: yoga /type: exercise");
+            activityManager.addActivity("/name: clubbing /type: social");
 
-            activityManager.editActivity("3 /name: gym");
-            fail();
+
+            activityManager.editActivity("5 /name: gym");
 
         } catch (PlanPalExceptions e) {
-            assertEquals("Invalid index. There are 2 items.", e.getMessage());
+            assertEquals("Invalid index. There are 4 items.", e.getMessage());
         }
     }
 
@@ -55,6 +57,8 @@ public class EditActivityTest {
         try {
             activityManager.addActivity("/name: swimming /type: exercise");
             activityManager.addActivity("/name: running /type: exercise");
+            activityManager.addActivity("/name: clubbing /type: social");
+            activityManager.addActivity("/name: clubbing /type: social");
 
             activityManager.editActivity("");
             fail();

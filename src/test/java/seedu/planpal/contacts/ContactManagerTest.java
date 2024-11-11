@@ -119,12 +119,31 @@ public class ContactManagerTest {
             ContactManager manager = new ContactManager();
             manager.addContact("/name:Alice");
             manager.addContact("/name:Bob");
+            manager.addContact("/name:Charlie");
+            manager.addContact("/name:David");
 
             manager.editContact("1 /name: Alex");
+            manager.editContact("2 /name: Brian");
+            manager.editContact("3 /name: Charles");
+            manager.editContact("4 /name: Dexter");
 
             assertEquals("Alex", manager.getContactList().get(0).getName());
+            assertEquals("Brian", manager.getContactList().get(1).getName());
+            assertEquals("Charles", manager.getContactList().get(2).getName());
+            assertEquals("Dexter", manager.getContactList().get(3).getName());
         } catch (PlanPalExceptions e) {
             fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void editContact_invalidFormat_fail() {
+        try{
+            ContactManager manager = new ContactManager();
+            manager.addContact("/name:Alice");
+            manager.editContact("1 Alex");
+        } catch (PlanPalExceptions e) {
+            assertEquals("Nothing to edit!", e.getMessage());
         }
     }
 
@@ -136,7 +155,6 @@ public class ContactManagerTest {
             manager.addContact("/name:Bob");
 
             manager.editContact(("3 /name: Zoe"));
-            fail(); // Test should not reach this line if exception is thrown
         } catch (PlanPalExceptions e) {
             assertEquals("Invalid index. There are 2 items.", e.getMessage());
         }

@@ -10,7 +10,6 @@ import seedu.planpal.utility.parser.Parser;
 
 public class ActivityParser extends Parser {
     private static final int INPUT_SEGMENTS = 2;
-    private static final int ADD_SEGMENTS = 2;
     private final ActivityManager activityManager;
 
     public ActivityParser(ActivityManager activityManager) {
@@ -84,5 +83,4 @@ public class ActivityParser extends Parser {
         }
         return false;
     }
-
 }

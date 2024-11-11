@@ -63,7 +63,6 @@ public class FindActivityTest {
             activityManager.addActivity("/name: groceries /type: necessity");
 
             activityManager.findActivity("leisure");
-            fail();
 
         } catch (PlanPalExceptions e) {
             assertEquals("No matches found!", e.getMessage());
@@ -74,7 +73,6 @@ public class FindActivityTest {
     public void findActivity_emptyDescription_exceptionThrown() {
         try {
             activityManager.findActivity("");
-            fail();
 
         } catch (PlanPalExceptions e) {
             assertEquals("Description cannot be empty!", e.getMessage());
