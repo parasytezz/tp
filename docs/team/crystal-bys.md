@@ -12,11 +12,15 @@ PlanPal is the ultimate companion designed to ease the transition for internatio
   - Add, delete and edit activities: implemented functions to add, delete and edit an activity
 - **Contributions to the UG**: 
   - Deleting a contact
-  - Adding an activity **(TO BE DONE)**
-  - Deleting an activity **(TO BE DONE)**
-  - Editing an activity **(TO BE DONE)**
+  - Adding an activity 
+  - Deleting an activity 
+  - Editing an activity 
+  - Command Summary for Activity Manager
+  - Tidied up the section on Contact Category after PED
 - **Contributions to the DG**
   - Sequence diagram of Delete Contact
+  - Sequence diagram of Adding and Deleting Activity.
+  - Tidied up Parser Diagram
 - **Contributions to the team-based tasks**:
   - Maintaining the issue tracker
 - **Review/mentoring contributions**: 

@@ -510,7 +510,7 @@ Studying in a foreign country can be disorienting and isolating, this applicatio
 
 * *Contact* - Personal details and contact information of an individual
 * *Expenditure*
-* *Activity*
+* *Activity* - Name of activity and its type
 
 ---
 
