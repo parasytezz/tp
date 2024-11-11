@@ -88,31 +88,25 @@ public interface ExpenseModeFunctions {
      */
     default ArrayList<String> getExpenseTypeProportions(ArrayList<Expense> expenses) {
         ArrayList<ExpenseType> uniqueTypes = new ArrayList<>();
-        int totalExpenses = expenses.size();
+        ArrayList<Double> typeCosts = new ArrayList<>();
+        double totalSpending = 0.0;
 
         for (Expense expense : expenses) {
             ExpenseType type = expense.getType();
+            double cost = Double.parseDouble(expense.getCost());
             if (!uniqueTypes.contains(type)) {
                 uniqueTypes.add(type);
+                typeCosts.add(0.0);
             }
-        }
-
-        int[] typeCounts = new int[uniqueTypes.size()];
-        double[] typeProportions = new double[uniqueTypes.size()];
-
-        for (Expense expense : expenses) {
-            ExpenseType type = expense.getType();
             int index = uniqueTypes.indexOf(type);
-            typeCounts[index]++;
-        }
-
-        for (int i = 0; i < uniqueTypes.size(); i++) {
-            typeProportions[i] = (typeCounts[i] * 100.0) / totalExpenses;
+            typeCosts.set(index, typeCosts.get(index) + cost);
+            totalSpending += cost;
         }
 
         ArrayList<String> result = new ArrayList<>();
         for (int i = 0; i < uniqueTypes.size(); i++) {
-            result.add(uniqueTypes.get(i) + ": " + String.format("%.2f", typeProportions[i]) + "%");
+            double proportion = (typeCosts.get(i) * 100.0) / totalSpending;
+            result.add(uniqueTypes.get(i) + ": " + String.format("%.2f", proportion) + "%");
         }
 
         return result;

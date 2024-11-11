@@ -108,9 +108,9 @@ class ExpenseTypeTest {
 
         assertEquals(3, proportions.size(), "There should be 3 different expense types");
 
-        assertTrue(proportions.contains("FOOD: 50.00%"), "FOOD should be 50.00%");
-        assertTrue(proportions.contains("TRANSPORTATION: 25.00%"), "TRANSPORTATION should be 25.00%");
-        assertTrue(proportions.contains("ENTERTAINMENT: 25.00%"), "ENTERTAINMENT should be 25.00%");
+        assertTrue(proportions.contains("FOOD: 54.55%"), "FOOD should be 50.00%");
+        assertTrue(proportions.contains("TRANSPORTATION: 27.27%"), "TRANSPORTATION should be 25.00%");
+        assertTrue(proportions.contains("ENTERTAINMENT: 18.18%"), "ENTERTAINMENT should be 25.00%");
     }
 
 
@@ -186,6 +186,24 @@ class ExpenseTypeTest {
             assertTrue(proportions.contains("FOOD: 33.33%"), "FOOD should be 33.33%");
             assertTrue(proportions.contains("TRANSPORTATION: 33.33%"), "TRANSPORTATION should be 33.33%");
             assertTrue(proportions.contains("ENTERTAINMENT: 33.33%"), "ENTERTAINMENT should be 33.33%");
+        } catch (PlanPalExceptions e) {
+            fail("Exception should not be thrown for equal distribution of expenses");
+        }
+    }
+
+    @Test
+    void testGetExpenseTypeProportions_unequalDistribution() {
+        try {
+            ArrayList<Expense> equalExpenses = new ArrayList<>();
+            equalExpenses.add(new Expense("/name:Test Expense 1/cost:30/type:FOOD"));
+            equalExpenses.add(new Expense("/name:Test Expense 2/cost:50/type:TRANSPORTATION"));
+            equalExpenses.add(new Expense("/name:Test Expense 3/cost:10/type:ENTERTAINMENT"));
+
+            ArrayList<String> proportions = expenseManager.getExpenseTypeProportions(equalExpenses);
+
+            assertTrue(proportions.contains("FOOD: 33.33%"), "FOOD should be 33.33%");
+            assertTrue(proportions.contains("TRANSPORTATION: 55.56%"), "TRANSPORTATION should be 55.56%");
+            assertTrue(proportions.contains("ENTERTAINMENT: 11.11%"), "ENTERTAINMENT should be 11.11%");
         } catch (PlanPalExceptions e) {
             fail("Exception should not be thrown for equal distribution of expenses");
         }

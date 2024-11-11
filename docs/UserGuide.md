@@ -669,21 +669,27 @@ list
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = Lunch, Cost = $10, Type = FOOD]
-2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+1. [Name = lunch, Cost = $10, Type = FOOD]
+2. [Name = gift, Cost = $20, Type = OTHER]
+3. [Name = grab, Cost = $15, Type = TRANSPORTATION]
+4. [Name = train, Cost = $8, Type = TRANSPORTATION]
+5. [Name = cake, Cost = $15, Type = FOOD]
 _________________________________________________________
 For the month of 2024-11
-    Total budget: $1000
-    Total cost: $20.9
-    Remaining budget: $979.1
+    Total budget: $1000.0
+    Total cost: $68.0
+    Remaining budget: $932.0
 _________________________________________________________
 Expense Type Proportions:
-    FOOD: 50.00%
-    ENTERTAINMENT: 50.00%
+    FOOD: 36.76%
+    OTHER: 29.41%
+    TRANSPORTATION: 33.82%
 _________________________________________________________
 Expense Type Cost Breakdown:
-    FOOD: $10.00
-    ENTERTAINMENT: $10.90
+    FOOD: $25.00
+    OTHER: $20.00
+    TRANSPORTATION: $23.00
+_________________________________________________________
 ```
 ### Usage 2 (with recurring tag):
 ```
@@ -697,7 +703,11 @@ list /recurring
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+1. [Name = lunch, Cost = $10, Type = FOOD]
+2. [Name = gift, Cost = $20, Type = OTHER]
+3. [Name = grab, Cost = $15, Type = TRANSPORTATION]
+4. [Name = train, Cost = $8, Type = TRANSPORTATION]
+5. [Name = cake, Cost = $15, Type = FOOD]
 _________________________________________________________
 ```
 ### Usage 3 (with month tag):
@@ -706,27 +716,31 @@ list /month: <monthValue>
 ```
 ### Example:
 ```
-list /month: 2024-11
+list /month: 2024-12
 ```
 ### Expected Output:
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = Lunch, Cost = $10, Type = FOOD]
-2. [Name = Spotify, Cost = $10.90, Type = ENTERTAINMENT]
+1. [Name = car rental, Cost = $80, Type = TRANSPORTATION]
+2. [Name = dinner, Cost = $20, Type = FOOD]
+3. [Name = movie, Cost = $10, Type = ENTERTAINMENT]
+4. [Name = concert, Cost = $20, Type = ENTERTAINMENT]
 _________________________________________________________
-For the month of 2024-11
-    Total budget: $1000
-    Total cost: $20.9
-    Remaining budget: $979.1
+For the month of 2024-12
+    Total budget: $900.0
+    Total cost: $130.0
+    Remaining budget: $770.0
 _________________________________________________________
 Expense Type Proportions:
-    FOOD: 50.00%
-    ENTERTAINMENT: 50.00%
+    TRANSPORTATION: 61.54%
+    FOOD: 15.38%
+    ENTERTAINMENT: 23.08%
 _________________________________________________________
 Expense Type Cost Breakdown:
-    FOOD: $10.00
-    ENTERTAINMENT: $10.90
+    TRANSPORTATION: $80.00
+    FOOD: $20.00
+    ENTERTAINMENT: $30.00
 _________________________________________________________
 ```
 ---
