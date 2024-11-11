@@ -1,6 +1,7 @@
 package seedu.planpal.utility;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
 import seedu.planpal.exceptions.IllegalCommandException;
@@ -133,8 +134,18 @@ public interface ListFunctions {
         String[] toFind = query.toLowerCase().split("\\s+");
         ArrayList<T> matchedList = new ArrayList<>();
 
+        ArrayList<String> patternsToRemove = new ArrayList<>(
+                Arrays.asList("[name = ", ", cost = $", ", type = ", "]",
+                        "[activity = ", ", phone = ", ", email = ", "categories = ")
+                );
+
         for (T value: list) {
             String valueString = value.toString().toLowerCase();
+
+            for (String pattern : patternsToRemove) {
+                valueString = valueString.replace(pattern, "");
+            }
+
             for (String element : toFind) {
                 if (valueString.contains(element)) {
                     matchedList.add(value);
