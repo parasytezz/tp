@@ -101,6 +101,7 @@ Consolidating all the print methods that are repeated reduces repetition in code
 This component handles the logic behind the application. The parser component consists of the parent `Parser` Class and 3 children that inherits the `Parser` Class. These 3 children are used when the respective modes are in play.  
 
 <u>Class Diagram for Parser Component</u>
+
 ![ParserClassDiagram.drawio.png](Images%28DG%29%2FParserClassDiagram.drawio.png)
 
 <u>Design Considerations</u>  
@@ -112,12 +113,13 @@ The Parser class follows this structure as there are common commands between the
 The class diagram below represents the contact book system
 
 <u>Class Diagram for Contact Manager</u>  
+
 ![ContactClassDiagram.drawio.png](Images%28DG%29/ContactClassDiagram.drawio.png)
 
 **General Classes**
 - The `PlanPal` class is the main entry point of the system, containing a `main(String[])` method to launch the application.
 - The `ParserFactory` class is a factory that provides different parsers (e.g., `ContactParser`) based on the input type.
-- The `Parser` class is an abstract class with methods to load and process commands from a file.
+- The `Parser` class is a class with methods to load and process commands from a file.
 - The `BackUpManager` class manages data backups, including backing up, restoring, and creating directories for backup files.
 - The `UI` class is responsible for displaying messages and menus to the user.
 - The `ListFunctions` interface defines methods for list operations like adding, deleting, and finding items.
@@ -235,8 +237,8 @@ The sequence diagram below illustrates the process for resolving the "find" comm
 The sequence diagram below illustrates the process for resolving the "category" command. 
 ContactManager is omitted from the diagram for simplicity.
 
-
 ![SetContactCategory.drawio.png](Images%28DG%29%2FSetContactCategory.drawio.png)
+
 <u>Components Breakdown:</u>
 - `ContactParser` class is the `Parser` component
 - `SetContactCategory` class is the `Mode` component
