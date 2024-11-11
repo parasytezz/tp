@@ -42,7 +42,16 @@ PlanPal is the ultimate companion designed to ease the transition for internatio
         * Added Sequence Diagram for `Edit`, `List`, `Find` Activity
         * Added Class Diagram for `Activity Manager`
         * Wrote main components and program flow.
+      
+
 * Contributions to team-based tasks
+  * Necessary general code enhancements
+  * Debugging of codes (that are not under me)
+  * Maintaining the issue tracker
+
+
+* Review/mentoring contributions: 
+  * Helped teammate to debug when asked for help
 
 
 * Community
