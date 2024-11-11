@@ -82,7 +82,11 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
             throw new EmptyDescriptionException();
         }
 
-        if (input.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+        String lowerCaseInput = input.toLowerCase();
+        if (lowerCaseInput.contains(ExpenseModeFunctions.RECURRING_TAG)) {
+            if (!input.contains(ExpenseModeFunctions.RECURRING_TAG)){
+                throw new PlanPalExceptions("To view recurring, your tag should be: /recurring");
+            }
             recurringManager.viewRecurringList();
             return;
         }
