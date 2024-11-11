@@ -160,7 +160,7 @@ public interface ExpenseModeFunctions {
             YearMonth givenMonth = YearMonth.parse(month, DateTimeFormatter.ofPattern("yyyy-MM"));
             YearMonth currentMonth = YearMonth.now();
             return givenMonth.isBefore(currentMonth);
-        } catch (DateTimeParseException e) {
+        } catch (Exception e) {
             throw new PlanPalExceptions(e.getMessage());
         }
     }

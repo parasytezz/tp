@@ -1,6 +1,7 @@
 package seedu.planpal.modes.expenses.managers;
 
 import seedu.planpal.exceptions.EmptyDescriptionException;
+import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.expenses.Expense;
 import seedu.planpal.modes.expenses.ExpenseModeFunctions;
@@ -93,6 +94,12 @@ public class ExpenseManager implements ListFunctions, ExpenseModeFunctions {
 
         String month = getMonth(input);
         budgetManager.getMonthlyBudget().putIfAbsent(month,"0");
+        String invalidInputChecker = input.replaceAll(ExpenseModeFunctions.RECURRING_TAG, "")
+                .replaceAll(month, "")
+                .replaceAll(MONTH_SEPARATOR,"").trim();
+        if (!invalidInputChecker.isEmpty()){
+            throw new IllegalCommandException();
+        }
 
         recurringManager.addRecurringToMonthlyExpenses(month, this.monthlyExpenses);
         ArrayList<Expense> expenseList = monthlyExpenses.get(month);
