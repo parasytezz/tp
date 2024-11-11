@@ -6,7 +6,6 @@ import seedu.planpal.exceptions.IllegalCommandException;
 import seedu.planpal.exceptions.PlanPalExceptions;
 import seedu.planpal.modes.contacts.Contact;
 import seedu.planpal.modes.contacts.ContactManager;
-import seedu.planpal.utility.parser.modeparsers.ActivityParser;
 import seedu.planpal.utility.parser.modeparsers.ContactParser;
 
 
