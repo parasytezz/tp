@@ -36,10 +36,12 @@ PlanPal is a desktop application designed for international students studying in
         * Wrote purpose of User Guide.
         * Wrote table of contents, main features and Contact overview.
         * Wrote V1.0 User Stories
+        * Wrote V2.0 User Stories for all `Activity` functions
     * **Developer Guide:**
         * Wrote introduction to project, table of contents and setting up of project.
-        * Added Sequence Diagram for Edit Contact
-        * Added Class Diagram for Activity Manager
+        * Added Sequence Diagram for `Edit` Contact
+        * Added Sequence Diagram for `Edit`, `List`, `Find` Activity
+        * Added Class Diagram for `Activity Manager`
         * Wrote main components and program flow.
 * Contributions to team-based tasks
 
