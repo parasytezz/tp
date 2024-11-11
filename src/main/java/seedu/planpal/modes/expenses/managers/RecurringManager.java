@@ -51,15 +51,20 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
         PrintStream out = System.out;
         Ui.setDummyStream();
         monthlyExpenses.putIfAbsent(newMonth, new ArrayList<>());
-        for (RecurringExpense recurringExpense : recurringExpensesList){
-            String description =
-                    recurringExpense.getCommandDescription()
-                            .substring(ExpenseModeFunctions.RECURRING_TAG.length())
-                            .trim();
-            description += " " + MONTH_SEPARATOR + newMonth;
-            Expense expense = new Expense(description);
-            addToList(monthlyExpenses.get(newMonth), expense);
-            savedExpenses.saveList(monthlyExpenses.get(newMonth));
+        try {
+            for (RecurringExpense recurringExpense : recurringExpensesList){
+                String description =
+                        recurringExpense.getCommandDescription()
+                                .substring(ExpenseModeFunctions.RECURRING_TAG.length())
+                                .trim();
+                description += " " + MONTH_SEPARATOR + newMonth;
+                Expense expense = new Expense(description);
+                addToList(monthlyExpenses.get(newMonth), expense);
+                savedExpenses.saveList(monthlyExpenses.get(newMonth));
+            }
+        } catch (Exception e) {
+            Ui.setMainStream(out);
+            throw new PlanPalExceptions(e.getMessage());
         }
         Ui.setMainStream(out);
     }

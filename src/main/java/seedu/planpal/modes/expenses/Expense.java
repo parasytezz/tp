@@ -78,7 +78,7 @@ public class Expense implements Editable, Storeable {
             throw new IllegalCommandException();
         }
 
-        String category = inputParts[0].trim();
+        String category = inputParts[0].trim().toLowerCase();
         String valueToEdit = inputParts[1].trim();
         switch (category) {
         case "cost":

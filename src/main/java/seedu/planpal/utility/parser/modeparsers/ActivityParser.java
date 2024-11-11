@@ -21,7 +21,7 @@ public class ActivityParser extends Parser {
     public boolean processCommand(String input) throws PlanPalExceptions {
         try {
             String[] inputParts = input.split(" ", INPUT_SEGMENTS);
-            String command = inputParts[0].trim();
+            String command = inputParts[0].trim().toLowerCase();
             String description;
 
             switch (command) {
