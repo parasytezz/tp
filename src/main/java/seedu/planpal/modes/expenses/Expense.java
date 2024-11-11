@@ -30,6 +30,9 @@ public class Expense implements Editable, Storeable {
      * @throws PlanPalExceptions If the description is invalid or incomplete.
      */
     public Expense(String description) throws PlanPalExceptions {
+        if (!description.contains(ExpenseModeFunctions.MONTH_SEPARATOR)){
+            description += (" " + ExpenseModeFunctions.MONTH_SEPARATOR + getCurrentMonth());
+        }
         setCommandDescription(description);
         String[] categories = description.split(CATEGORY_SEPARATOR);
         if (categories.length <= 1) {
