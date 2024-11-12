@@ -315,6 +315,16 @@ _________________________________________________________
 Description cannot be empty!
 _________________________________________________________
 ```
+Example 3 (category already exists):
+```
+add
+```
+Expected output:
+```
+_________________________________________________________
+Category already exists
+_________________________________________________________
+```
 ---
 ### 2. Remove Category
 The `remove <category>` command allows users to remove category. 

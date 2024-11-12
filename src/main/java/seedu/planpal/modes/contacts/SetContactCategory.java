@@ -90,7 +90,9 @@ public class SetContactCategory implements ListFunctions {
             throw new EmptyDescriptionException();
         } else if (newCategory.contains("/")) {
             throw new PlanPalExceptions("/ is not allowed to be used in category name");
-        }else {
+        } else if (categoryList.contains(newCategory)) {
+            throw new PlanPalExceptions("Category already exists");
+        } else {
             contactListByCategory.add(new ArrayList<Contact>());
             categoryList.add(newCategory);
             Ui.print("successfully added Category : '" + newCategory + "'");
