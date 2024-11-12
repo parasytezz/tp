@@ -133,9 +133,13 @@ character : `[a-zA-Z0-9_]` i.e. letters (uppercase and lowercase), digits (0-9),
 
 1) username : begins with at least one word character, followed by more word characters or `.` or `-` or nothing (directly to part 2). 
 However, a `.` or `-` must follow by a word character. That is, the input string cannot begin with `.` or `-`; and cannot contain `..`, `--`, `.-` or `-.`. Example of valid string are `a.1-2-3`.
+
 2) `@`.
+
 3) email domain name : same rule as username (part 1).
+
 4) matches a `.` followed by two or three word characters, e.g., `.com`, `.edu`, `.us`, `.uk`, `.co`.
+
 
 ### Example 1:
 ```
