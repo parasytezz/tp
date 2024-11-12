@@ -407,7 +407,7 @@ being the names used, as well as an additional type to dictate activity type.
 ### Delete Command
 The sequence diagram below illustrates the process for resolving the "add" command.
 
-![DeleteActivties.drawio.png](Images%28DG%29%2FDeleteActivties.drawio.png)
+![DeleteActivities.drawio.png](Images%28DG%29%2FDeleteActivties.drawio.png)
 
 <u>Components Breakdown:</u>
 - For simplicity, the `Ui` component has been taken out
