@@ -184,7 +184,7 @@ Format:
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = <name>, Phone = <phone>, Email = <email>, Categories = [<category1>, <category2>, ...]]
+1. [Name = <name>, Phone = <phone>, Email = <email>, Categories = [<category1>, ...]]
 _________________________________________________________
 ```
 
@@ -218,7 +218,7 @@ The `edit` command allows users to edit a `Contact` from the list.
 
 ### Usage:
 ```
-edit <index> /<category 1>: <value 1> /<category 2>: <value 2> /<category 3>: <value 3> ... 
+edit <index> /<category 1>: <value 1> /<category 2>: <value 2>... 
 ```
 ### Example 1:
 ```
@@ -453,7 +453,7 @@ Format:
 ```
 _________________________________________________________
 Below is the list:
-1. [Name = <name>, Phone = <phone>, Email = <email>, Categories = [<category1>, <category2>, ...]]
+1. [Name = <name>, Phone = <phone>, Email = <email>, Categories = [<category1>...]]
 _________________________________________________________
 ```
 
@@ -467,19 +467,7 @@ help
 ```
 
 Expected Output:
-```
-_________________________________________________________
-Category options :
-1. add Category type [ add {category} || e.g. add close friend ]
-2. remove Category type [ remove {category} || e.g. remove emergency ]
-3a. edit Category of Contact [ edit {contact index} {category1/category2/...} || e.g. edit 1 friend/family ]
-3b. delete all Category of Contact ([ edit {contact index} /  || e.g. edit 1 / ] or [ edit {contact index} || e.g. edit 1 ])
-4. view Category lists (e.g. view)
-5. view Contact list (e.g. list)
-6. print category functions (e.g. help)
-7. exit
-_________________________________________________________
-```
+![Help.png](Images%28UG%29%2FHelp.png)
 ---
 ### 7. Exit Category
 This command allows users to exit the setting category mode.
