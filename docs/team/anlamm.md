@@ -26,7 +26,7 @@ PlanPal is the ultimate companion designed to ease the transition for internatio
 
 - **Contributions to the DG**:
     - setting category
-    - Search by category\
+    - Search by category
 
 
 - **Contributions to the team-based tasks**:

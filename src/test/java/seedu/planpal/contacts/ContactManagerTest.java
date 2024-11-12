@@ -189,7 +189,31 @@ public class ContactManagerTest {
     public void findContact_emptyDescription_exceptionThrown() {
         try {
             assertThrows(PlanPalExceptions.class, () -> contactParser.processCommand("find"));
+            assertThrows(PlanPalExceptions.class, () -> contactManager.findContact(""));
         } catch (IllegalArgumentException e) {
+            fail(e.getMessage());
+        }
+    }
+
+    @Test
+    public void viewContact() {
+        try{
+            contactManager.addContact("/name:Alice");
+            contactManager.addContact("/name:Bob");
+            contactManager.addContact("/name:Charlie");
+            contactParser.processCommand("add /name: Johnny");
+            String output = "_________________________________________________________\n" +
+                            "Below is the list:\n" +
+                            "1. [Name = Alice, Phone = null, Email = null, Categories = []]\n" +
+                            "2. [Name = Bob, Phone = null, Email = null, Categories = []]\n" +
+                            "3. [Name = Charlie, Phone = null, Email = null, Categories = []]\n" +
+                            "4. [Name = Johnny, Phone = null, Email = null, Categories = []]\n" +
+                            " _________________________________________________________ ";
+            String trimmedOutput = output.replaceAll("\\s+", " ");;
+            OUTPUT_STREAM.reset();
+            contactManager.viewContactList();
+            assertEquals(trimmedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+        } catch (PlanPalExceptions e) {
             fail(e.getMessage());
         }
     }
@@ -240,6 +264,19 @@ public class ContactManagerTest {
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
         OUTPUT_STREAM.reset();
         manager.handleCategory("add       ", System.out);
+        assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
+    }
+
+    @Test
+    public void addCategory_repeatDescription() {
+        ContactManager manager = new ContactManager();
+        manager.handleCategory("add hi", System.out);
+        String output = "_________________________________________________________\n" +
+                "Category already exists\n" +
+                "_________________________________________________________\n";
+        String trimmedExpectedOutput = output.replaceAll("\\s+", " ");
+        OUTPUT_STREAM.reset();
+        manager.handleCategory("add hi", System.out);
         assertEquals(trimmedExpectedOutput, OUTPUT_STREAM.toString().replaceAll("\\s+", " "));
     }
 

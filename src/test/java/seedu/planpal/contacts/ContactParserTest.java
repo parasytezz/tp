@@ -13,6 +13,7 @@ import java.io.PrintStream;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+
 public class ContactParserTest {
     private static final ByteArrayOutputStream OUTPUT_STREAM = new ByteArrayOutputStream();
 
@@ -135,5 +136,4 @@ public class ContactParserTest {
             fail(e.getMessage());
         }
     }
-
 }
