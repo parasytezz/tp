@@ -8,25 +8,21 @@ PlanPal is the ultimate companion designed to ease the transition for internatio
 * Code Contributed: [Link to Code](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=w14-2&sort=groupTitle&sortWithin=title&timeframe=commit&mergegroup=&groupSelect=groupByRepos&breakdown=true&checkedFileTypes=docs~functional-code~test-code~other&since=2024-09-20&tabOpen=true&tabType=zoom&zA=parasytezz&zR=AY2425S1-CS2113-W14-2%2Ftp%5Bmaster%5D&zACS=90.54285714285714&zS=2024-09-20&zFS=w14-2&zU=2024-10-28&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
 
 
-* **New Feature: `Edit Contacts`**
+* **Feature: `Edit Contacts`**
     * What it does: This feature allows users to edit contacts based on specified index and phrase queries.
     * Justification: It enhances the usability by enabling efficient change in contact components in case user makes a mistake or part of the person's contact is changed.
-    * Highlights: This feature integrates with existing contact management functions and supports future enhancements.
 
-* **New Feature: `Find Activities`**
+* **Feature: `Find Activities`**
     * What it does: This feature allows users to find activities based on specific keyword or phrase queries.
     * Justification: It enhances usability by enabling efficient activity retrieval, allowing users to quickly access information from lengthy lists.
-    * Highlights: This feature integrates with existing activity management functions and supports future enhancements.
 
-* **New Feature: `List Activities`**
+* **Feature: `List Activities`**
     * What it does: This feature allows users to delete a specific activity from their expense list based on the index selected.
     * Justification: It enhances usability by enabling the user to remove activities that have been tracked incorrectly or is not needed anymore.
-    * Highlights: This feature integrates with existing expense management functions and supports future enhancements.
 
-* **New Feature: `Edit Activities`**
+* **Feature: `Edit Activities`**
     * What it does: This feature allows users to edit a specific activity from their activity list based on the index selected.
     * Justification: It enhances the usability by enabling efficient change in activity components in case user makes a mistake or part of the person's activity is changed.
-    * Highlights: This feature integrates with existing contact management functions and supports future enhancements.
 
     
 * **Documentation:**
