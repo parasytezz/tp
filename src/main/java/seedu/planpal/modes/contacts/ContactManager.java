@@ -146,6 +146,7 @@ public class ContactManager implements ListFunctions {
             CONTACT_LOGGER.warning("Failed to set category: " + e.getMessage());
             Ui.setMainStream(out);
             Ui.print(e.getMessage());
+            Ui.setDummyStream();
         }
         return inSetting;
     }
