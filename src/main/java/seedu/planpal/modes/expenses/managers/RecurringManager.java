@@ -49,7 +49,7 @@ public class RecurringManager implements ExpenseModeFunctions, ListFunctions {
             return;
         }
         monthlyExpenses.putIfAbsent(newMonth, new ArrayList<>());
-        if (isBeforeCurrentMonth(newMonth) || newMonth.equals(getCurrentMonth())) {
+        if (isBeforeCurrentMonth(newMonth)) {
             return;
         }
         PrintStream out = System.out;
