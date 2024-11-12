@@ -505,7 +505,9 @@ Studying abroad can often feel overwhelming, and building a support network is e
 
 - Technical Requirements: Any mainstream OS, i.e. Windows, macOS or Linux, with Java 17 installed.
 - Project Scope Constraints: Data storage is only to be performed locally.
-- Quality Requirements: The application should be intuitive for a user with little experience with CLIs.
+- Quality Requirements: The application should be intuitive for a user with little experience with CLIs.  
+
+
 ---
 
 ## Glossary
