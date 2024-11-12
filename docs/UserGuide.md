@@ -258,6 +258,10 @@ _________________________________________________________
 ## Setting category
 The `category` command allows users to enter setting category mode to customize `category` in contacts.
 
+Stored category data will be loaded automatically once enter contact mode. Once there is categories data corruption, 
+error and subsequent adding, editing statements will be shown. 
+After that, categories.txt will restore data from the backup file (with no error) automatically to prevent error in the next loading of the program.
+
 ### Usage:
 ```
 category
