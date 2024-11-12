@@ -80,18 +80,21 @@ Due to the nature of PlanPal as  CLI-based application, please take care to avoi
 Warning: PlanPal allows for phone numbers of any length to be entered
 
 For example:
+
 ![AddingPhone.png](Images%28UG%29%2FAddingPhone.png)
 
-Example of how your phone number should look like. Since phone numbers outside of Singapore may not have the standard 8-digits, any length of phone number will be allowed and it is up to the user to ensure the phone number is entered correctly.
+Example of how your phone number should look like. Since phone numbers outside of Singapore may not have the standard 8-digits, any length of phone number will be allowed, and it is up to the user to ensure the phone number is entered correctly.
 
 ---
 
 ### Invalid inputs
 Warning: Inputs in PlanPal should not contain any `:` or `/`. Due to the fact they are used in determining the category, using `:` or `/` in your inputs may lead to unsatisfactory results when using PlanPal.
 
-For example:  
+For example:
+
 ![InvalidInput.png](Images%28UG%29%2FInvalidInput.png)
 ![InvalidInput2.png](Images%28UG%29%2FInvalidInput2.png)
+
 Example of invalid inputs. Since `/` and `:` is used in determining category, it detects that there is a second category within the name with a missing `/`. If there is a need to use a separator, please use any symbol other than `/` and `:`.
 
 ---
@@ -531,7 +534,7 @@ PlanPal will assist you in tracking your `Expenses` in your planner. The guide b
 ### Quick Guide
 This section provides a quick tutorial on how to use expense manager.  
 As a start, ALWAYS follow this sequence to prevent errors:
-1. Set the budget using the `budget` command. Planpal will still allow you to add expenses even when no budget is set / budget is negative. This is intentional since you can be in a deficit in real life.
+1. Set the budget using the `budget` command. PlanPal will still allow you to add expenses even when no budget is set / budget is negative. This is intentional since you can be in a deficit in real life.
 2. Add expenses using the `add` command.
 3. View the list when needed using the `list` command.
 4. Exit the mode using the `exit` command.
@@ -820,7 +823,8 @@ _________________________________________________________
 The `delete` command allows users to delete an expense from the expense list and displays the remaining expenses for that month.
 
 By default, without any tags the following is assumed:
-- Month is the current month
+- Month is the current month (e.g. if today's date is 1 November 2024, the current month is 2024-11)
+- A "/month:" field in a previous command does not affect the current delete command.
 - It should NOT look for the recurring expense list.
 
 **<ins>IMPORTANT NOTE</ins>**
@@ -875,7 +879,7 @@ Currently in list:
 The `find` command allows users to find an expense from the expense list based on any of the fields.
 
 By default, without any tags the following is assumed:
-- Month is the current month (eg. if today's date is 1 November, the current month is 2024-11)
+- Month is the current month (e.g. if today's date is 1 November 2024, the current month is 2024-11)
 - A "/month:" field in a previous command does not affect the current find command.
 - It should NOT look for the recurring expense list.
 
