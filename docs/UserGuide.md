@@ -20,8 +20,8 @@ NUS International students who are frugal and organized. It caters to the needs 
 ### Table of Contents
 - [Quick start](#quick-start)
 - [Warnings](#warnings)
-  - [Case-sensitive commands](#commands-are-case-sensitive)
   - [Validity of phone number](#validity-of-phone-number)
+  - [Invalid Inputs](#invalid-inputs)
 - [Features](#features)
   - [Modes](#modes)
   - [Contact Manager](#contact-manager)
@@ -74,15 +74,6 @@ NUS International students who are frugal and organized. It caters to the needs 
 
 ## Warnings
 Due to the nature of PlanPal as  CLI-based application, please take care to avoid malformed commands to avoid undesirable performance of PlanPal. Some examples are shown below
-
----
-### Commands are Case-Sensitive
-Warning: PlanPal will not recognize the command if it does not follow the specifications exactly
-
-For example:
-![INVALID COMMAND.png](Images%28UG%29%2FINVALID%20COMMAND.png)
-
-Example of invalid command. This also applies to all other commands such as `add`, `edit`, etc.
 
 ---
 ### Validity of phone number
@@ -534,7 +525,7 @@ PlanPal will assist you in tracking your `Expenses` in your planner. The guide b
 ### Quick Guide
 This section provides a quick tutorial on how to use expense manager.  
 As a start, ALWAYS follow this sequence to prevent errors:
-1. Set the budget using the `budget` command. Without setting budget, you will not be able to add any expense to your list.
+1. Set the budget using the `budget` command. Planpal will still allow you to add expenses even when no budget is set / budget is negative. This is intentional since you can be in a deficit in real life.
 2. Add expenses using the `add` command.
 3. View the list when needed using the `list` command.
 4. Exit the mode using the `exit` command.
@@ -545,7 +536,9 @@ By default, the program assumes that you are working the current month and also 
 Adding these tags to any of your commands in this mode does the following:
 - `/recurring`: 
   - Tells the program to work on the recurring list of expenses. Does not support for budget.
-  - It will only add items in the recurring expense list to **NEW** lists.
+  - It will only add items in the recurring expense list if **ALL** the following conditions are fulfilled:
+    - A **NEW** list is being created
+    - The month of the new list is **NOT** before the current month.
 - `/month:`: 
   - Tells the program to work on that month's properties (budgets and expenses). 
   - The format should be `/month: <monthValue>`
@@ -575,7 +568,7 @@ budget /month:2024-11 /1000
 ```
 _________________________________________________________
 For the month of 2024-11
-Budget has been set to: $1000
+Budget has been set to: $1000.0
 _________________________________________________________
 ```
 ---
@@ -594,10 +587,10 @@ Currently, the fields that can be used are as follows:
 | type  | Type is set to **OTHER** by default <br/> Only these values are allowed: <br/>- FOOD<br/>- TRANSPORTATION<br/>- ENTERTAINMENT<br/>- OTHER |
 
 **<ins>IMPORTANT NOTE</ins>**  
-- If budget has not been set, you will not be able to add anything!
-- You should not use both `/recurring` and `/month:` tags together.
-- if used together, `/recurring` tag is prioritised
-- if `/month:` tag is used together, the first month is prioritised
+- Even if budget is not set, you can still add expenses.
+- You can have negative budget since you are allowed to go into deficit.
+- You should **NOT** use both `/recurring` and `/month:` tags together.
+- if `/month:` tags are used together (which should not happen), the last month is prioritised
 
 ### Usage 1 (default addition without tags):
 ```
@@ -664,8 +657,7 @@ Viewing list also shows the user's spending information:
 
 **<ins>IMPORTANT NOTE</ins>**
 - You should not use both `/recurring` and `/month:` tags together.
-- if used together, `/recurring` tag is prioritised  
-- if `/month:` tag is used together, the first month is prioritised  
+- if used together, `/recurring` tag is prioritised
 
 ### Usage 1 (default addition without tags):
 ```
@@ -827,8 +819,6 @@ By default, without any tags the following is assumed:
 
 **<ins>IMPORTANT NOTE</ins>**
 - You should not use multiple `/recurring` and `/month:` tags together.
-- if used together, `/recurring` tag is prioritised
-- if `/month:` tag is used together, the first month is prioritised
 
 ### Usage 1 (default deletion without tags):
 ```

@@ -7,24 +7,39 @@ PlanPal is the ultimate companion designed to ease the transition for internatio
 - **Code contributed**: [Link to Code](https://nus-cs2113-ay2425s1.github.io/tp-dashboard/?search=c2linaung&breakdown=true&sort=groupTitle%20dsc&sortWithin=title&since=2024-09-20&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 - **Enhancements implemented**:
-  - Loading of list files: Enhanced to ensure application still works with corrupted data
-  - Adding of expenses and contacts: Implemented function to add expenses and contacts to their respective lists.
-  - Viewing of expenses and contacts: Implemented function to view all expenses and contacts in their respective lists.
-  - Implemented Ui that handles the choosing of modes: Allows users to choose their mode of operation and then return back to main screen when "exit" command is entered.
-  - Setting of budget in expense lists **(TO BE DONE)**
-  - Editing of expense list **(TO BE DONE)**
+- **Feature:** Loading of files
+  - What it does: Loads all the stored data files into the application whenever necessary. Able to handle corrupted data
+  - Justification: Saving and Loading of storage is essential for any application to even be considered an application.
+- **Feature:** Recurring Expenses
+  - What it does: Save certain expenses as recurring. These expenses will be added automatically whenever user creates a new expense list.
+  - Justification: Users will no longer need to add repeated expenses manually whenever they create a new expense list
+- **Feature:** Expense Manager (add, list, edit) + Budget Manager
+  - What it does: Basic adding, viewing and editing of expense list. Additionally, budget setting was also implemented
+  - Justification: Sets up the basis of expense manager, allowing expansion in future versions.
+- **Feature:** Back up and Restore of files
+  - What it does: Back up and restore files manually whenever the data files become corrupted.
+  - Justification: Users may corrupt the data files to the point of no return. This functionality helps to protect their data from being corrupted.
+
 - **Contributions to the UG**: 
   - Quick Tutorial
-  - ALL add functions
-  - ALL list functions
-  - Setting of budget in expense list (TO BE DONE)
-  - Editing of budget in expense list (TO BE DONE)
+  - Contact Manager: Adding a Contact
+  - Contact Manager: Viewing the Contact List
+  - Expense Manager: Setting of Budget
+  - Expense Manager: Adding an Expense
+  - Expense Manager: Viewing an Expense List
+  - Expense Manager: Editing an Expense
+  - Auxiliary Commands
+  - Commands Summary
 - **Contributions to the DG**: 
   - Architecture Diagram
   - Program Flow
   - Ui & Parser
   - Contact Manager: Add & List commands
-  - Expense Manager: Add command
+  - Expense Manager: Set Budget Command
+  - Expense Manager: Add Command
+  - Expense Manager: Edit Command
+  - Expense Manager: List Command
+  - Expense Manager: Find Command
 - **Contributions to the team-based tasks**: 
   - Set up the main code base so that everyone starts with a proper structure.
   - Debugging of codes (that are not under me)

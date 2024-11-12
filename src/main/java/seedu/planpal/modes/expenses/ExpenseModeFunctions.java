@@ -34,7 +34,7 @@ public interface ExpenseModeFunctions {
         int startIndex = lowerCaseInput.indexOf(MONTH_SEPARATOR);
         if (startIndex != -1) {
             startIndex += MONTH_SEPARATOR.length();
-            int endIndex = lowerCaseInput.indexOf("/", startIndex);
+            int endIndex = input.indexOf("/", startIndex);
             if (endIndex == -1) {
                 endIndex = input.length();
             }
